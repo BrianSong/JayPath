@@ -2,7 +2,7 @@
 
 A UML class diagram reflecting the "model" for that iteration only.
 Use a software to draw this (e.g. draw.io) and save the diagram as an image.
-Upload the image and link it in here using this sintax.
+Upload the image and link it in here using this sintax.  
 ![](oose.jpg)
 
 # Wireframe
