@@ -10,7 +10,7 @@ Choosing what courses to take for a coming semester and not knowing how to plan 
 ## Potential Clients
 > Who are affected by this problem (and would benefit from the proposed solution)? I.e. the potential users of the software you are going to build.
 
-Undergraduate CS students at Johns Hopkins University who are taking courses and planning to graduate at a desirable time.
+Undergraduate students at Johns Hopkins University who are taking courses and planning to graduate at a desirable time.
 
 ## Proposed Solution
 > Write a few sentences that describes how a software solution will solve the problem described above.
@@ -24,6 +24,8 @@ A web-based application will be used to solve this problem. Our application take
 ### Must have
 
 As a student, I want to input my major, the courses I have taken, and the number of semesters I have left so that I can view a schedule tailored to my needs.  
+As a student, I want to input my major and courses taken so that the application knows my current progress.
+As a student, I want to see a list of courses that I'm eligible for in the next semester so that I can choose between them.
 As a student, I want to choose an area I would like to focus on so that I can take courses I am more interested in.  
 As a student, I want to view the suggested course sequence so that I know what to take each semester.  
 As a student, I want to determine the number of courses I want to take each semester so that I can evenly distribute remaining courses to each semester.  
