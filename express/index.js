@@ -15,7 +15,7 @@ let db = new sqlite3.Database('../db/courses.db', (err) => {
   console.log('Connected to the courses database.');
 });
 
-db.run('CREATE TABLE courses(CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)');
+db.run('CREATE TABLE IF NOT EXISTS courses(CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)');
 
 buildDB();
 db.close((err) => {
@@ -107,28 +107,14 @@ function validateCourse(course){
 
 function buildDB() {
   // hardcode for the first iteration
-  // let db = new sqlite3.Database('../db/courses.db');
-
-  // let courseInfo = ['CourseNumber', 'CourseTitle', 'Credits',
-  // 'Instructor', 'DaysOfWeek', 'StartTimeEndTime', 'Track'];
-
-  // // construct the insert statement with multiple placeholders
-  // // based on the number of rows
-  // let placeholders = courseInfo.map((language) => '(?)').join(',');
-  // let sql = 'INSERT INTO courses(name) VALUES ' + placeholders;
-   
-  // // output the INSERT statement
-  // console.log(sql);
-   
-  // db.run(sql, courseInfo, function(err) {
-  //   if (err) {
-  //     return console.error(err.message);
-  //   }
-  //   console.log(`CourseInfo inserted ${this.changes}`);
-  // });
-
-  // close the database connection
-  // db.close();
+  // CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT, 
+  // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
+  db.run('INSERT INTO courses(CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) VALUES(?, ?, ?, ?, ?, ?, ?)', ['601', 'OOSE', 3, 'Avi', 'TT', '12', 'Software'], (err) => {
+    if(err) {
+      return console.log(err.message); 
+    }
+    console.log('TEST: Add a course}');
+  })
 }
 
 // PORT
