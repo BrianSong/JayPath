@@ -8,11 +8,11 @@ app.use(express.json());
 app.use(cors());
 
 // open the database
-let db = new sqlite3.Database("../db/courses.db", err => {
+let db = new sqlite3.Database("../db/JayPath.db", err => {
   if (err) {
     console.error(err.message);
   }
-  console.log("Connected to the courses database.");
+  console.log("Connected to the courses database for initilization!");
 });
 
 db.run(
@@ -20,20 +20,15 @@ db.run(
 );
 
 buildDB();
+
 db.close(err => {
   if (err) {
     console.error(err.message);
   }
-  console.log("Close the courses connection.");
+  console.log("Close the courses database connection for initilization!");
 });
 
-// const courses = [
-//   {id : 1, name:'course1', field:'NLP'},
-//   {id : 2, name:'course2', field:'SYSTEM'},
-//   {id : 3, name:'course3', field:'SWE'}
-// ];
-
-const courses = [];
+let courses = [];
 
 app.get("/", (req, res) => {
   res.send("Hello World!!");
@@ -55,41 +50,34 @@ app.get("/api/:field/courses", (req, res) => {
   //      }
   //  }
 
-  // // Open database
-  // let db = new sqlite3.Database("../db/courses.db", err => {
-  //   if (err) {
-  //     console.error(err.message);
-  //   }
-  //   console.log("Connected to the courses database.");
-  // });
+  // Open database
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
 
-  // // Extract course according to the focus area and sent it back to the front end for displaying.
-  // let sql = `SELECT * FROM courses WHERE Track = ?`;
-  // db.each(sql, [field], (err, course) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   let currCourse = {
-  //     CourseNumber: `${course.CourseNumber}`,
-  //     CourseTitle: `${course.CourseTitle}`,
-  //     Credits: `${course.Credits}`,
-  //     Instructor: `${course.Instructor}`,
-  //     DaysOfWeek: `${course.DaysOfWeek}`,
-  //     StartTimeEndTime: `${course.StartTimeEndTime}`,
-  //     Track: `${course.Track}`
-  //   };
-  //   courses.push(currCourse);
-  // });
-  // res.send(courses);
-  // res.status(404).send("Focus Area Doesn't Exist!");
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql, [String(field)], (err, course) => {
+    if (err) {
+      throw err;
+    }
+    course.forEach(course => {
+      courses.push(course);
+    });
+  });
 
-  // // Close database
-  // db.close(err => {
-  //   if (err) {
-  //     console.error(err.message);
-  //   }
-  //   console.log("Close the courses connection.");
-  // });
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+
+    res.send(courses);
+  });
 });
 
 app.post("/api/courses", (req, res) => {
@@ -151,7 +139,7 @@ function buildDB() {
   // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
   db.run(
     "INSERT INTO courses(CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) VALUES(?, ?, ?, ?, ?, ?, ?)",
-    ["601", "OOSE", 3, "Avi", "TT", "12", "Software"],
+    ["601", "OOSE", 3, "Avi", "TT", "12", "software"],
     err => {
       if (err) {
         return console.log(err.message);
