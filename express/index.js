@@ -138,8 +138,33 @@ function buildDB() {
   // hardcode for the first iteration
   // CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT,
   // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
-  db.run(
-    "INSERT OR REPLACE INTO courses VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
+  // db.run(
+  //   "INSERT OR REPLACE INTO courses VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
+
+
+
+  let courseInfo = [
+     [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"],
+     [1, "601", "databases", 3, "Avi", "TT", "12", "software"]
+  ];
+
+  // create the statement for the insertion of just ONE record
+  let queryInfo = 
+     "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) " +
+     "VALUES (?, ?, ? ,?, ?, ?, ? ,?)";
+
+  // 'prepare' returns a 'statement' object which allows us to 
+  // bind the same query to different parameters each time we run it
+  let statement = db.prepare(queryInfo);
+
+  // run the query over and over for each inner array
+  for (var i = 0; i < courseInfo.length; i++) {
+      statement.run(courseInfo[i], function (err) {
+          if (err) throw err;
+      });
+  }
+  statement.finalize();
+
 }
 
 // PORT
