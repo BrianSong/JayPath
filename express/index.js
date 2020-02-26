@@ -135,17 +135,13 @@ function validateCourse(course) {
 }
 
 function buildDB() {
-  // hardcode for the first iteration
-  // CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT,
-  // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
-  // db.run(
-  //   "INSERT OR REPLACE INTO courses VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
+  // hardcode for the first iteration: add courses manually
+  // plan to retrive courses from SIS API in the following iteration
 
-
-
+  // Track: big data, computational biology, nlp, Robotics, Information securities
   let courseInfo = [
-     [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"],
-     [1, "601", "databases", 3, "Avi", "TT", "12", "software"]
+     [0, "601", "OOSE", 3, "Avi", "TT", "12", "bigdata"],
+     [1, "601", "databases", 3, "Sara", "TT", "9", "bigdata"]
   ];
 
   // create the statement for the insertion of just ONE record
