@@ -108,7 +108,7 @@ class NLP extends Component {
     }
 
     callAPI() {
-        fetch('http://localhost:5000/api/test')
+        fetch('http://localhost:5000/api/nlp/courses')
             .then(res => res.text())
             .then(res => this.setState({apiResponse: res}))
             .catch(err => err)
@@ -129,6 +129,7 @@ class NLP extends Component {
                 }}>
                 Welcome to Natural Language Processing!
             </h1>
+
             </div>
         );
     }

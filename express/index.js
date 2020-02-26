@@ -24,6 +24,7 @@ app.get("/api/test", (req, res) => {
 });
 
 app.get("/api/:field/courses", (req, res) => {
+  courses = [];
   const field = String(req.params.field);
 
   // Open database
@@ -116,7 +117,6 @@ function initilization() {
     }
     console.log("Connected to the courses database for initilization!");
   });
-
   db.run(
     "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)"
   );
@@ -134,7 +134,7 @@ function initilization() {
       "D. Yarowsky",
       "TTh",
       "3:00PM - 4:15PM",
-      "big_data"
+      "bd"
     ],
     [
       1,
@@ -144,7 +144,7 @@ function initilization() {
       "V. Braverman",
       "TTh",
       "12:00PM - 1:15PM",
-      "big_data"
+      "bd"
     ],
     [
       2,
@@ -154,7 +154,7 @@ function initilization() {
       "S. Ghorbani Khaledi",
       "MW",
       "12:00PM - 1:15PM",
-      "big_data"
+      "bd"
     ],
     [
       3,
@@ -164,7 +164,7 @@ function initilization() {
       "S. Salzberg",
       "TTh",
       "3:00PM - 4:15PM",
-      "computational_biology"
+      "cb"
     ],
     [
       4,
@@ -174,7 +174,7 @@ function initilization() {
       "R. Taylor",
       "TTh",
       "1:30PM - 2:45PM",
-      "computational_biology"
+      "cb"
     ],
     [
       5,
@@ -184,7 +184,7 @@ function initilization() {
       "B. Langmead",
       "TTh",
       "12:00PM - 1:15PM",
-      "computational_biology"
+      "cb"
     ],
     [
       6,
@@ -224,7 +224,7 @@ function initilization() {
       "S. Leonard",
       "TTh",
       "4:30PM - 5:45PM",
-      "robotics"
+      "r"
     ],
     [
       10,
@@ -234,7 +234,7 @@ function initilization() {
       "R. Taylor",
       "TTh",
       "1:30PM - 2:45PM",
-      "robotics"
+      "r"
     ],
     [
       11,
@@ -244,7 +244,7 @@ function initilization() {
       "G. Hager",
       "TTh",
       "9:00AM - 10:15AM",
-      "robotics"
+      "r"
     ],
     [
       12,
@@ -254,7 +254,7 @@ function initilization() {
       "L. Ding",
       "M",
       "6:00PM - 8:30PM",
-      "information_securities"
+      "is"
     ],
     [
       13,
@@ -264,7 +264,7 @@ function initilization() {
       "C. Monson",
       "F",
       "1:30PM - 4:00PM",
-      "information_securities"
+      "is"
     ],
     [
       14,
@@ -274,7 +274,7 @@ function initilization() {
       "R. Johnston",
       "MW",
       "3:00PM - 4:15PM",
-      "information_securities"
+      "is"
     ]
   ];
 
