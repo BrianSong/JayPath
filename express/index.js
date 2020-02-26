@@ -16,11 +16,12 @@ let db = new sqlite3.Database("../db/JayPath.db", err => {
 });
 
 db.run(
-  "CREATE TABLE IF NOT EXISTS courses(CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)"
+  "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)"
 );
 
 buildDB();
 
+// close the database
 db.close(err => {
   if (err) {
     console.error(err.message);
@@ -138,15 +139,9 @@ function buildDB() {
   // CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT,
   // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
   db.run(
-    "INSERT INTO courses(CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) VALUES(?, ?, ?, ?, ?, ?, ?)",
-    ["601", "OOSE", 3, "Avi", "TT", "12", "software"],
-    err => {
-      if (err) {
-        return console.log(err.message);
-      }
-      console.log("TEST: Add a course.");
-    }
-  );
+    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+    [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
+
 }
 
 // PORT
