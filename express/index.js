@@ -2,9 +2,28 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 const cors = require("cors");
+const sqlite3 = require('sqlite3').verbose();
 
 app.use(express.json());
 app.use(cors());
+
+// open the database
+let db = new sqlite3.Database('../db/courses.db', (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to the courses database.');
+});
+
+db.run('CREATE TABLE courses(CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)');
+
+buildDB();
+db.close((err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Close the courses connection.');
+});
 
 const courses = [
     {id : 1, name:'course1', field:'NLP'},
@@ -85,6 +104,32 @@ function validateCourse(course){
     return Joi.validate(course, schema);
 }
 
+
+function buildDB() {
+  // hardcode for the first iteration
+  // let db = new sqlite3.Database('../db/courses.db');
+
+  // let courseInfo = ['CourseNumber', 'CourseTitle', 'Credits',
+  // 'Instructor', 'DaysOfWeek', 'StartTimeEndTime', 'Track'];
+
+  // // construct the insert statement with multiple placeholders
+  // // based on the number of rows
+  // let placeholders = courseInfo.map((language) => '(?)').join(',');
+  // let sql = 'INSERT INTO courses(name) VALUES ' + placeholders;
+   
+  // // output the INSERT statement
+  // console.log(sql);
+   
+  // db.run(sql, courseInfo, function(err) {
+  //   if (err) {
+  //     return console.error(err.message);
+  //   }
+  //   console.log(`CourseInfo inserted ${this.changes}`);
+  // });
+
+  // close the database connection
+  // db.close();
+}
 
 // PORT
 const port = process.env.PORT || 5000;
