@@ -7,9 +7,9 @@ app.use(express.json());
 app.use(cors());
 
 const courses = [
-    {id : 1, name:'course1'},
-    {id : 2, name:'course2'},
-    {id : 3, name:'course3'},
+    {id : 1, name:'course1', field:'NLP'},
+    {id : 2, name:'course2', field:'SYSTEM'},
+    {id : 3, name:'course3', field:'SWE'}
 ];
 
 app.get('/', (req, res) => {
@@ -22,6 +22,16 @@ app.get('/api/courses', (req, res) => {
 
 app.get('/api/test', (req, res) => {
    res.send('Test API is Working!');
+});
+
+app.get('/api/:field/courses', (req, res) => {
+   const field = String(req.params.field);
+   for (let i = 0; i < courses.length; i++){
+       if(courses[i].field == field){
+            res.send(courses[i])
+       }
+   }
+   res.status(404).send("Focus Area Doesn't Exist!");
 });
 
 app.post('/api/courses', (req, res)=>{
