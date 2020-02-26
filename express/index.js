@@ -139,9 +139,7 @@ function buildDB() {
   // CourseNumber TEXT, CourseTitle TEXT, Credits TEXT, Instructor TEXT,
   // DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT
   db.run(
-    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-    [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
-
+    "INSERT OR REPLACE INTO courses VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [0, "601", "OOSE", 3, "Avi", "TT", "12", "software"]);
 }
 
 // PORT
