@@ -1,3 +1,80 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+
+
+.button1 {
+  height:100px;
+  width:180px;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* Green */
+  border-radius: 50%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+}
+
+.button2 {
+  height:100px;
+  width:180px;
+  background-color: white;
+  color: black;
+  border: 2px solid yellow; /* Green */
+  border-radius: 50%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+}
+
+.button3 {
+  height:100px;
+  width:180px;
+  background-color: white;
+  color: black;
+  border: 2px solid orange; /* Green */
+  border-radius: 50%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+}
+
+.button4 {
+  height:100px;
+  width:180px;
+  background-color: white;
+  color: black;
+  border: 2px solid blue; /* Green */
+  border-radius: 50%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+}
+
+.button5 {
+  height:100px;
+  width:180px;
+  background-color: white;
+  color: black;
+  border: 2px solid red; /* Green */
+  border-radius: 50%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+}
+
 .App {
   text-align: center;
 }
