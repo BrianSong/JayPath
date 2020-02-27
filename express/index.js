@@ -46,6 +46,16 @@ app.get("/api/:field/courses", (req, res) => {
     });
   });
 
+  let sql_1 = `SELECT * FROM courses WHERE Track = "core";`;
+  db.all(sql_1, [], (err, course) => {
+    if (err) {
+      throw err;
+    }
+    course.forEach(course => {
+      courses.push(course);
+    });
+  });
+
   // Close database
   db.close(err => {
     if (err) {
@@ -275,6 +285,116 @@ function initilization() {
       "MW",
       "3:00PM - 4:15PM",
       "is"
+    ],
+    [
+      15,
+      "EN.601.220",
+      "Intermediate Programming",
+      4,
+      "D. Hovemeyer",
+      "MWF",
+      "12:00PM - 1:15PM",
+      "core"
+    ],
+    [
+      16,
+      "EN.500.112",
+      "Gateway Computing: JAVA",
+      3,
+      "S. More",
+      "MWF",
+      "9:00AM - 9:50AM",
+      "core"
+    ],
+    [
+      17,
+      "EN.601.104",
+      "Computer Ethics",
+      1,
+      "T. Leschke",
+      "W",
+      "4:30PM - 6:30PM",
+      "core"
+    ],
+    [
+      18,
+      "EN.601.226",
+      "Data Structures",
+      4,
+      "J. Selinski",
+      "MWF",
+      "1:30PM - 2:45PM",
+      "core"
+    ],
+    [
+      19,
+      "EN.601.229",
+      "Computer System Fundamentals",
+      3,
+      "P. Koehn",
+      "MWF",
+      "10:00AM - 10:50AM",
+      "core"
+    ],
+    [
+      20,
+      "EN.601.231",
+      "Automata & Computation Theory",
+      3,
+      "S. Kosaraju",
+      "TTh",
+      "9:00AM - 10:15AM",
+      "core"
+    ],
+    [
+      21,
+      "EN.601.433",
+      "Intro Algorithms",
+      3,
+      "M. Dinitz",
+      "TTh",
+      "12:00PM - 1:15PM",
+      "core"
+    ],
+    [
+      22,
+      "EN.553.171",
+      "Discrete Mathematics",
+      4,
+      "B. Castello",
+      "MWF, Th",
+      "10:00AM - 10:50AM, 9:00AM - 9:50AM",
+      "core"
+    ],
+    [
+      23,
+      "EN.553.420",
+      "Intro to Probability",
+      4,
+      "J. Wierman",
+      "MWF, Th",
+      "1:30PM - 2:20PM, 10:30AM - 11:20AM",
+      "core"
+    ],
+    [
+      24,
+      "EN.553.430",
+      "Introduction to Statistics",
+      4,
+      "D. Athreya",
+      "MWF, Th",
+      "1:30PM - 2:45PM, 9:00AM - 9:50AM",
+      "core"
+    ],
+    [
+      25,
+      "AS.110.201",
+      "Linear Algebra",
+      4,
+      "J. Han",
+      "MWF, Th",
+      "10:00AM - 10:50AM, 1:30PM - 2:20",
+      "core"
     ]
   ];
 
