@@ -21,4 +21,4 @@ We have established a basic web application framework where according to user's 
 
 ## What we need to work on.
 -- We are in the process of applying for SIS api. After permission we are going to connect it to our database.  
--- Need to work on the algorithm and get more input from the user in addition to focus areas and return a complete list of courses. The recommended three courses and eleven core courses for each track now are just a basic demo of how we can get user data and give relevant response from the server.
+-- Need to work on the algorithm and get more input from the user in addition to focus areas and return a complete list of courses. The recommended three track courses and eleven core courses for each track now are just a basic demo of how we can get user data and give relevant response from the server.
