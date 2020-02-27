@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 import './App.css';
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
         this.setState({number: event.target.value});
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         fetch("http://localhost:5000/api/courses/" + this.state.number)
             .then(res => res.json())
             .then(data => this.setState({apiResponse: data.name}))
@@ -46,54 +46,64 @@ class App extends Component {
     }
 
     handleClick(event) {
-        
-    }
 
+    }
 
 
     render() {
         return (
             <Router>
-        
-        <Switch>
-          <Route exact path="/">
-          <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                {this.state.question}
-            </h1>
-            <div style={{ 
-                marginLeft: "auto", 
-                display: "flex", 
-                justifyContent: "center",}}>
-                <Link to="/r"><button class="button1" type="button">Robotics</button></Link>
-                <Link to="/bd"><button class="button4" type="button">Big Data</button></Link>
-                <Link to="/is"><button class="button5" type="button">Information Security</button></Link>
-                <Link to="/cb"><button class="button3" type="button">Computational Biology</button></Link>
-                <Link to="/nlp"><button class="button2" type="button">Natural Language Processing</button></Link>
-            </div>
-        </div>
-          </Route>
-          <Route path="/nlp">
-            <NLP />
-          </Route>
-          <Route path="/r">
-            <ROB />
-          </Route>
-          <Route path="/bd">
-            <BD />
-          </Route>
-          <Route path="/is">
-            <IS />
-          </Route>
-          <Route path="/cb">
-            <CB />
-          </Route>
-        </Switch>
-        </Router>
+
+                <Switch>
+                    <Route exact path="/">
+                        <div>
+                            <h1 style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                {this.state.question}
+                            </h1>
+                            <div style={{
+                                marginLeft: "auto",
+                                display: "flex",
+                                justifyContent: "center",
+                            }}>
+                                <Link to="/r">
+                                    <button class="button1" type="button">Robotics</button>
+                                </Link>
+                                <Link to="/bd">
+                                    <button class="button4" type="button">Big Data</button>
+                                </Link>
+                                <Link to="/is">
+                                    <button class="button5" type="button">Information Security</button>
+                                </Link>
+                                <Link to="/cb">
+                                    <button class="button3" type="button">Computational Biology</button>
+                                </Link>
+                                <Link to="/nlp">
+                                    <button class="button2" type="button">Natural Language Processing</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </Route>
+                    <Route path="/nlp">
+                        <NLP/>
+                    </Route>
+                    <Route path="/r">
+                        <ROB/>
+                    </Route>
+                    <Route path="/bd">
+                        <BD/>
+                    </Route>
+                    <Route path="/is">
+                        <IS/>
+                    </Route>
+                    <Route path="/cb">
+                        <CB/>
+                    </Route>
+                </Switch>
+            </Router>
         );
     }
 }
@@ -104,15 +114,18 @@ class NLP extends Component {
         super(prop);
         this.state = {
             apiResponse: "",
+            schedule: []
         };
     }
 
     callAPI() {
+        console.log("fetching from api");
         fetch('http://localhost:5000/api/nlp/courses')
-            .then(res => res.text())
-            .then(res => this.setState({apiResponse: res}))
-            .catch(err => err)
+            .then(res => res.json())
+            .then(res => this.setState({schedule: res})
+            ).catch(err => err);
     }
+
 
     componentDidMount() {
         this.callAPI();
@@ -120,16 +133,19 @@ class NLP extends Component {
 
 
     render() {
+        const listItems = this.state.schedule.map((d) => <li key={d.CourseTitle}>{d.CourseTitle}</li>);
         return (
             <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                Welcome to Natural Language Processing!
-            </h1>
-
+                    Welcome to Natural Language Processing!
+                </h1>
+                <div>
+                    {listItems}
+                </div>
             </div>
         );
     }
@@ -159,13 +175,13 @@ class CB extends Component {
     render() {
         return (
             <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                Welcome to Computational Biology!
-            </h1>
+                    Welcome to Computational Biology!
+                </h1>
             </div>
         );
     }
@@ -195,15 +211,15 @@ class IS extends Component {
     render() {
         return (
             <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                Welcome to Information Securities!
-            </h1>
+                    Welcome to Information Securities!
+                </h1>
             </div>
-            
+
         );
     }
 
@@ -232,15 +248,15 @@ class ROB extends Component {
     render() {
         return (
             <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                Welcome to Robotics!
-            </h1>
+                    Welcome to Robotics!
+                </h1>
             </div>
-            
+
         );
     }
 
@@ -269,15 +285,15 @@ class BD extends Component {
     render() {
         return (
             <div>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                Welcome to Big Data!
-            </h1>
+                    Welcome to Big Data!
+                </h1>
             </div>
-            
+
         );
     }
 
