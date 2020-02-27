@@ -2,48 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a56939c9-6483-478f-ab53-b7c2122a1444" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/JayPath.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/JayPath.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/.bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/.bin/node-pre-gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/appveyor.yml" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/appveyor.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/bin/node-pre-gyp" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/bin/node-pre-gyp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/bin/node-pre-gyp.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/bin/node-pre-gyp.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/contributing.md" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/contributing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/clean.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/configure.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/configure.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/info.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/info.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/install.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/install.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/node-pre-gyp.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/node-pre-gyp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/package.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/package.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/pre-binding.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/pre-binding.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/publish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/rebuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/rebuild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/reinstall.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/reinstall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/reveal.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/reveal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/testbinary.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/testbinary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/testpackage.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/testpackage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/unpublish.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/unpublish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/abi_crosswalk.json" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/abi_crosswalk.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/compile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/handle_gyp_opts.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/handle_gyp_opts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/napi.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/napi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/nw-pre-gyp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/nw-pre-gyp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/nw-pre-gyp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/nw-pre-gyp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/s3_setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/s3_setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/versioning.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/lib/util/versioning.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/express/node_modules/node-pre-gyp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/express/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/express/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,14 +31,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6948501">
+    <splitter split-orientation="horizontal" split-proportion="0.45033556">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/express/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="266">
-                  <caret line="26" column="15" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+                <state relative-caret-position="323">
+                  <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -87,7 +47,7 @@
             <entry file="file://$PROJECT_DIR$/client/src/App.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="893">
-                  <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
+                  <caret line="122" column="44" selection-start-line="122" selection-start-column="44" selection-end-line="122" selection-end-column="44" />
                   <folding>
                     <element signature="e#0#41#0" expanded="true" />
                     <element signature="n#CB#0" />
@@ -106,13 +66,13 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/client/src/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="950">
-                  <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
+                <state relative-caret-position="437">
+                  <caret line="247" column="5" lean-forward="true" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
                   <folding>
                     <element signature="e#0#41#0" expanded="true" />
+                    <element signature="n#NLP#0" />
                     <element signature="n#CB#0" />
                     <element signature="n#IS#0" />
-                    <element signature="n#ROB#0" />
                     <element signature="n#BD#0" />
                   </folding>
                 </state>
@@ -123,14 +83,19 @@
       </split-second>
     </splitter>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>text</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/src/App.js" />
         <option value="$PROJECT_DIR$/express/index.js" />
+        <option value="$PROJECT_DIR$/client/src/App.js" />
       </list>
     </option>
   </component>
@@ -219,7 +184,7 @@
       <workItem from="1582684351597" duration="80000" />
       <workItem from="1582684472457" duration="2498000" />
       <workItem from="1582692765025" duration="1783000" />
-      <workItem from="1582757887338" duration="2664000" />
+      <workItem from="1582757887338" duration="6547000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1582684655530</created>
@@ -242,17 +207,31 @@
       <option name="project" value="LOCAL" />
       <updated>1582693732548</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Re-initialize response array for every get request">
+      <created>1582761268318</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1582761268318</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added course list in NLP page">
+      <created>1582767052883</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1582767052883</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7025000" />
+    <option name="totallyTimeSpent" value="10908000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12684564" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.26213592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -265,7 +244,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.14664805" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.1452514" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.15782122" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -293,7 +272,9 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="??" />
     <MESSAGE value="Added focus Area API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added focus Area API" />
+    <MESSAGE value="Re-initialize response array for every get request" />
+    <MESSAGE value="Added course list in NLP page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added course list in NLP page" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/client/package.json">
@@ -319,24 +300,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/App.js">
+    <entry file="file://$PROJECT_DIR$/express/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="n#CB#0" />
-            <element signature="n#IS#0" />
-            <element signature="n#ROB#0" />
-            <element signature="n#BD#0" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/index.js">
+    <entry file="file://$PROJECT_DIR$/client/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="26" column="15" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+        <state relative-caret-position="437">
+          <caret line="247" column="5" lean-forward="true" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="n#NLP#0" />
+            <element signature="n#CB#0" />
+            <element signature="n#IS#0" />
+            <element signature="n#BD#0" />
+          </folding>
         </state>
       </provider>
     </entry>

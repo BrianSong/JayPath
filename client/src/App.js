@@ -157,13 +157,14 @@ class CB extends Component {
         super(prop);
         this.state = {
             apiResponse: "",
+            schedule: []
         };
     }
 
     callAPI() {
-        fetch('http://localhost:5000/api/test')
-            .then(res => res.text())
-            .then(res => this.setState({apiResponse: res}))
+        fetch('http://localhost:5000/api/cb/courses')
+            .then(res => res.json())
+            .then(res => this.setState({schedule: res}))
             .catch(err => err)
     }
 
@@ -173,6 +174,7 @@ class CB extends Component {
 
 
     render() {
+        const listItems = this.state.schedule.map((d) => <li key={d.CourseTitle}>{d.CourseTitle}</li>);
         return (
             <div>
                 <h1 style={{
@@ -182,6 +184,7 @@ class CB extends Component {
                 }}>
                     Welcome to Computational Biology!
                 </h1>
+                <div>{listItems}</div>
             </div>
         );
     }
@@ -193,13 +196,14 @@ class IS extends Component {
         super(prop);
         this.state = {
             apiResponse: "",
+            schedule: []
         };
     }
 
     callAPI() {
-        fetch('http://localhost:5000/api/test')
-            .then(res => res.text())
-            .then(res => this.setState({apiResponse: res}))
+        fetch('http://localhost:5000/api/is/courses')
+            .then(res => res.json())
+            .then(res => this.setState({schedule:res}))
             .catch(err => err)
     }
 
@@ -209,6 +213,7 @@ class IS extends Component {
 
 
     render() {
+        const listItems = this.state.schedule.map((d) => <li key={d.CourseTitle}>{d.CourseTitle}</li>);
         return (
             <div>
                 <h1 style={{
@@ -218,6 +223,7 @@ class IS extends Component {
                 }}>
                     Welcome to Information Securities!
                 </h1>
+                <div>{listItems}</div>
             </div>
 
         );
@@ -230,13 +236,14 @@ class ROB extends Component {
         super(prop);
         this.state = {
             apiResponse: "",
+            schedule:[]
         };
     }
 
     callAPI() {
-        fetch('http://localhost:5000/api/test')
-            .then(res => res.text())
-            .then(res => this.setState({apiResponse: res}))
+        fetch('http://localhost:5000/api/r/courses')
+            .then(res => res.json())
+            .then(res => this.setState({schedule: res}))
             .catch(err => err)
     }
 
@@ -246,6 +253,7 @@ class ROB extends Component {
 
 
     render() {
+        const listItems = this.state.schedule.map((d) => <li key={d.CourseTitle}>{d.CourseTitle}</li>);
         return (
             <div>
                 <h1 style={{
@@ -255,6 +263,7 @@ class ROB extends Component {
                 }}>
                     Welcome to Robotics!
                 </h1>
+                <div>{listItems}</div>
             </div>
 
         );
@@ -267,13 +276,14 @@ class BD extends Component {
         super(prop);
         this.state = {
             apiResponse: "",
+            schedule:[]
         };
     }
 
     callAPI() {
-        fetch('http://localhost:5000/api/test')
-            .then(res => res.text())
-            .then(res => this.setState({apiResponse: res}))
+        fetch('http://localhost:5000/api/bd/courses')
+            .then(res => res.json())
+            .then(res => this.setState({schedule: res}))
             .catch(err => err)
     }
 
@@ -283,6 +293,7 @@ class BD extends Component {
 
 
     render() {
+        const listItems = this.state.schedule.map((d) => <li key={d.CourseTitle}>{d.CourseTitle}</li>);
         return (
             <div>
                 <h1 style={{
@@ -292,6 +303,7 @@ class BD extends Component {
                 }}>
                     Welcome to Big Data!
                 </h1>
+                <div>{listItems}</div>
             </div>
 
         );
