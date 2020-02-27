@@ -21,6 +21,8 @@ After cloning our project, first go to the ./express folder. This is our express
 
 The same procedure applies to the ./client folder, which is where the React.js frontend locates. The only difference is that you need to use `npm start` to start the frontend.
 
+Note: The errors that are the most likely to be encountered are sqlite3 or react-scripts are missing. If that's the case you can run `npm i react-scripts` in ./client and `npm i sqlite3` in ./express.
+
 ## What we have accomplished in Iteration 1
 
 We have established a basic web application framework which can retrive all eleven cs core courses and math prerequisite courses, plus recommend three track courses to the user according to user's choice of his/her focus area in computer science. We managed to successfully build a sqlite database, a basic frontend with React and a server with Node.js where each part can communicate with one another.
