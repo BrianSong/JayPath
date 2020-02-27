@@ -144,7 +144,7 @@ class NLP extends Component {
           {" Credit:"}
           {d.Credits}
           {" Instructor:"}
-          {d.Instructor} {d.DaysOfWeek} {d.StartTimeEndTime}
+          {d.Instructor}
         </li>
       );
     });
@@ -195,7 +195,7 @@ class CB extends Component {
           {" Credit:"}
           {d.Credits}
           {" Instructor:"}
-          {d.Instructor} {d.DaysOfWeek} {d.StartTimeEndTime}
+          {d.Instructor}
         </li>
       );
     });
@@ -246,7 +246,7 @@ class IS extends Component {
           {" Credit:"}
           {d.Credits}
           {" Instructor:"}
-          {d.Instructor} {d.DaysOfWeek} {d.StartTimeEndTime}
+          {d.Instructor}
         </li>
       );
     });
@@ -297,7 +297,7 @@ class ROB extends Component {
           {" Credit:"}
           {d.Credits}
           {" Instructor:"}
-          {d.Instructor} {d.DaysOfWeek} {d.StartTimeEndTime}
+          {d.Instructor}
         </li>
       );
     });
@@ -348,7 +348,7 @@ class BD extends Component {
           {" Credit:"}
           {d.Credits}
           {" Instructor:"}
-          {d.Instructor} {d.DaysOfWeek} {d.StartTimeEndTime}
+          {d.Instructor}
         </li>
       );
     });
