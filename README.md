@@ -16,3 +16,9 @@ After cloning our project, first go to the ./express folder. This is our express
 
 The same procedure applies to the ./client folder, which is where the React.js frontend locates. The only difference is that you need to use `npm start` to start the frontend.
 
+## What we have accomplished in Iteration 1
+We have established a basic web application framework where according to user's choice of his/her focus area in computer science, the application can get three related courses from the server and recommends to the user. We managed to successfully build a sqlite database, a basic frontend with React and a server with Node.js where each part can communicate with one another.
+
+## What we need to work on.
+-- We are in the process of applying for SIS api. After permission we are going to connect it to our database.
+-- Need to work on the algorithm and get more input from the user in addition to focus areas and return a complete list of courses. The recommended three courses for each track now are just a basic demo of how we can get user data and give relevant response from the server.
