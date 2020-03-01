@@ -26,3 +26,15 @@ Upload the image and link it in here using this sintax.
 - Build a server with Node.js; set up needed APIs.
 - Contact with the Registrar to obtain SIS api read permission.
 - Store courses in database.
+
+# Retrospective
+
+- have/have not delivered
+- challenges
+- plan for improvement in it2
+
+In terms of development on the front end, familiarizing ourselves with Javascript and React was the major challenge encountered. The quick tutorial on the 
+React official website helped us a lot by walking us through a tic-tac-toe game implementation, illustrating the pros and cons of different designs and 
+providing a general overview what React developers should epxect. Since the output for this iteration is relatively simple, we were able to deliver all that was needed. Upon acquiring inputs from the user, our implementation fetches data from the backend and redirects user to different pages based the specific 
+input values. For subsequent iterations, we will build upon the current framework by allowing more inputs from the user, constructing a calendar view 
+for the course recommendations, and most importantly posting data to the backend to accomodate a variety of user inputs. 

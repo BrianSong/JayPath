@@ -10,12 +10,12 @@ Choosing what courses to take for a coming semester and not knowing how to plan 
 ## Potential Clients
 > Who are affected by this problem (and would benefit from the proposed solution)? I.e. the potential users of the software you are going to build.
 
-Undergraduate students at Johns Hopkins University who are taking courses and planning to graduate at a desirable time.
+Undergraduate students at Johns Hopkins University who are taking courses and planning to explore various academic interests.
 
 ## Proposed Solution
 > Write a few sentences that describes how a software solution will solve the problem described above.
 
-A web-based application will be used to solve this problem. Our application takes inputs from users (e.g., major, year of study, courses they have taken, interested areas of focus, expected graduation year) and connects with the university’s degree audit system as well as the course registration system to fetch program requirements and course information, and then it will use our built-in intelligence algorithm to recommend an optimal course schedules for each upcoming semester through a calendar view. 
+A web-based application will be used to solve this problem. Our application takes inputs from users (e.g., major, year of study, courses already taken, areas of focus, expected graduation year) and connects with the university’s degree audit system as well as the course registration system to fetch program requirements and course information, and then it will use our built-in intelligence algorithm to find course schedules that fit best to the user's need and display each through a calendar view. 
 
 ## Functional Requirements
 > List the (functional) requirements that software needs to have in order to solve the problem stated above. It is useful to write the requirements in form of **User Stories** and group them into those that are essential (must have), and those which are non-essential (but nice to have).
@@ -23,10 +23,9 @@ A web-based application will be used to solve this problem. Our application take
 
 ### Must have
 
-As a student, I want to input my major, the courses I have taken, and the number of semesters I have left so that I can view a schedule tailored to my needs.  
-As a student, I want to input my major and courses taken so that the application knows my current progress.
-As a student, I want to see a list of courses that I'm eligible for in the next semester so that I can choose between them.
-As a student, I want to choose an area I would like to focus on so that I can take courses I am more interested in.  
+As a student, I want to input my major and focus area so that I can view a schedule tailored to my needs.  
+As a student, I want to input the courses I have taken so that the application knows my current progress.
+As a student, I want to see multiple recommended schedules so that I get the flexibility to choose between them. 
 As a student, I want to view the suggested course sequence so that I know what to take each semester.  
 As a student, I want to determine the number of courses I want to take each semester so that I can evenly distribute remaining courses to each semester.  
 As an admin, I want to add/delete courses based on school offerings so that students can obtain correct schedules.  
@@ -52,4 +51,4 @@ As a student, I want to be able to import and extract course schedules as files 
 ## Software Architecture
 > Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to the Client-Server software architecture? 
 
-This will be a web application, and it  would conform to the Client-Server software architecture. The client (student) sends his/her background information (majors/minors, courses taken, focus areas) through the web interface (front end) to the server and the server sends responses (recommended course plan) to the client (student) based on information stored in the database (graduation requirement, course prerequisites, course availability and course history). 
+This will be a web application, and it  would conform to the Client-Server software architecture. The client (student) sends his/her background information (major/minor, courses taken, focus areas) through the web interface (front end) to the server and the server sends responses (recommended course plans) to the client (student) based on information stored in the database (graduation requirement, course prerequisites, course availability and course history). 
