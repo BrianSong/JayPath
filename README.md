@@ -29,5 +29,4 @@ We have established a basic web application framework which can retrive all elev
 
 ## What we need to work on.
 
--- We are in the process of applying for SIS api. After permission we are going to connect it to our database.  
 -- Need to work on the algorithm and get more input from the user in addition to focus areas and return a complete list of courses which also include other upper-level cs courses. The recommended three track courses and eleven core courses for each track now are just a rough draft of the schedule of how we can get user data and give relevant response from the server.
