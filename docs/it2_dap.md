@@ -5,9 +5,9 @@ On the first page, the user is asked to input the courses he/she has taken.
 ![](it2_p1v1.jpg)
 ![](it2_p1v2.jpg)
 ![](it2_p1v3.jpg)
-Once all courses are added, the user clicks on "That's it", which would redirected him/her to the page below. 
+Once all courses are added, the user clicks on "That's it", which would then redirect him/her to the following page. 
 ![](it2_p2.jpg)
-The user clicks on one of the buttons and is then taken to the final recommendation page.   
+The user clicks on one of the focus areans and is then taken to the final recommendation page.   
 ![](it2_p3.jpg)
 
 
