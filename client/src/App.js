@@ -6,22 +6,60 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <CoursesTaken />
+          </Route>
+          <Route exact path="/focus_area">
+            <FocusArea />
+          </Route>
+          <Route exact path="/nlp">
+            <NLP />
+          </Route>
+          <Route exact path="/r">
+            <ROB />
+          </Route>
+          <Route exact path="/bd">
+            <BD />
+          </Route>
+          <Route exact path="/is">
+            <IS />
+          </Route>
+          <Route exact path="/cb">
+            <CB />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
+
+
+class CoursesTaken extends Component {
+  constructor(prop) {
+    super(prop);
     this.state = {
-      question: "What is your focus area in computer science?",
-      apiResponse: "",
-      number: "",
-      data: []
+      question: "What courses have you taken?",
+      value: "", // for display in the input box
+      allCourses: ["hello", "bye"], 
+      myCourses: []
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   callAPI() {
-    fetch("http://localhost:5000/api/test")
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }))
+    console.log("fetching from api");
+    fetch("http://localhost:5000/api/nlp/courses") // to be changed
+      .then(res => res.json())
+      .then(res => this.setState({ allCourses: res }))
       .catch(err => err);
   }
 
@@ -30,88 +68,136 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ number: event.target.value });
+    this.setState({value: event.target.value}); // prints input out by setting values to the changes
   }
 
   handleSubmit(event) {
-    fetch("http://localhost:5000/api/courses/" + this.state.number)
-      .then(res => res.json())
-      .then(data => this.setState({ apiResponse: data.name }));
+    alert('Successfully added ' + this.state.value + '!');
+    this.setState(state => {
+      const myCourses = state.myCourses.concat(state.value);
+      return {
+        value:"",
+        myCourses,
+      };
+    });
     event.preventDefault();
   }
 
-  handleClick(event) {}
-
   render() {
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <div>
-              <h1
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                {this.state.question}
-              </h1>
-              <div
-                style={{
-                  marginLeft: "auto",
-                  display: "flex",
-                  justifyContent: "center"
-                }}
-              >
-                <Link to="/r">
-                  <button class="button1" type="button">
-                    Robotics
-                  </button>
-                </Link>
-                <Link to="/bd">
-                  <button class="button4" type="button">
-                    Big Data
-                  </button>
-                </Link>
-                <Link to="/is">
-                  <button class="button5" type="button">
-                    Information Security
-                  </button>
-                </Link>
-                <Link to="/cb">
-                  <button class="button3" type="button">
-                    Computational Biology
-                  </button>
-                </Link>
-                <Link to="/nlp">
-                  <button class="button2" type="button">
-                    Natural Language Processing
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </Route>
-          <Route path="/nlp">
-            <NLP />
-          </Route>
-          <Route path="/r">
-            <ROB />
-          </Route>
-          <Route path="/bd">
-            <BD />
-          </Route>
-          <Route path="/is">
-            <IS />
-          </Route>
-          <Route path="/cb">
-            <CB />
-          </Route>
-        </Switch>
-      </Router>
+      return (
+        <div class="center">
+          <h1
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {this.state.question}
+          </h1>
+          <form onSubmit={this.handleSubmit} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}>
+            <input type="text" value={this.state.value} size="60" onChange={this.handleChange}/>
+            <Link to="/focus_area">
+              <button class="button0" type="button" align="right">
+                That's it
+              </button>
+          </Link>
+          </form>
+          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
+          
+        </div>
     );
   }
 }
+
+
+class Dropdown extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      question: "What is your focus area in computer science?",
+      schedule: []
+    };
+  }
+
+  callAPI() {
+    console.log("fetching from api");
+    fetch("http://localhost:5000/api/nlp/courses") //to be changed
+      .then(res => res.json())
+      .then(res => this.setState({ schedule: res }))
+      .catch(err => err);
+  }
+
+  componentDidMount() {
+    this.callAPI();
+  }
+
+
+}
+
+class FocusArea extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      question: "What is your focus area in computer science?"
+      // later on may want to add componentDidMount() to read focus areas from the DB
+    };
+  }
+
+  render() {
+    return (
+      <div class="center">
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {this.state.question}
+        </h1>
+        <div
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+        <Link to="/r">
+          <button class="button1" type="button">
+            Robotics
+          </button>
+        </Link>
+        <Link to="/bd">
+          <button class="button4" type="button">
+            Big Data
+          </button>
+        </Link>
+        <Link to="/is">
+          <button class="button5" type="button">
+            Information Security
+          </button>
+        </Link>
+        <Link to="/cb">
+          <button class="button3" type="button">
+            Computational Biology
+          </button>
+        </Link>
+        <Link to="/nlp">
+          <button class="button2" type="button">
+            Natural Language Processing
+          </button>
+        </Link>
+        </div>
+      </div>
+    );
+  }
+}
+
 
 class NLP extends Component {
   constructor(prop) {
@@ -149,7 +235,7 @@ class NLP extends Component {
       );
     });
     return (
-      <div>
+      <div class="center1">
         <h1
           style={{
             display: "flex",
@@ -169,7 +255,6 @@ class CB extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      apiResponse: "",
       schedule: []
     };
   }
