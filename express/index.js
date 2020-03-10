@@ -10,6 +10,7 @@ app.use(cors());
 initilization();
 
 let courses = [];
+let courseStatus = new Map();
 
 app.get("/", (req, res) => {
   res.send("Hello World!!");
@@ -135,6 +136,9 @@ function initilization() {
   // plan to retrive courses from SIS API in the following iteration
 
   // Track: big data, computational biology, nlp, Robotics, Information securities
+
+  // TODO: Instead of hardcode like this, create all the course using the course class
+  // TODO: Each course now will has a listOfPre attribuate
   let courseInfo = [
     [
       0,
@@ -423,6 +427,9 @@ function initilization() {
     console.log("Close the courses database connection for initilization!");
   });
 }
+
+// TODO: A function that will be called everytime when the user enter some new courses that he/she has taken
+function updateStatus() {}
 
 // PORT
 const port = process.env.PORT || 5000;
