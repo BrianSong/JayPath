@@ -57,7 +57,7 @@ class CoursesTaken extends Component {
 
   callAPI() {
     console.log("fetching from api");
-    fetch("http://localhost:5000/api/nlp/courses") // to be changed
+    fetch("http://localhost:5000/api/courses") // to be changed
       .then(res => res.json())
       .then(res => this.setState({ allCourses: res }))
       .catch(err => err);
@@ -84,6 +84,26 @@ class CoursesTaken extends Component {
   }
 
   render() {
+
+    const courseLists = this.state.allCourses.map(d => {
+              return (
+                <li>
+                  {d.CourseNumber}
+                  {": "}
+                  {d.CourseTitle}
+                  {" Credit:"}
+                  {d.Credits}
+                  {" Instructor:"}
+                  {d.Instructor}
+                </li>
+              );
+            });
+            const optionList = this.state.allCourses.map(it => 
+              <option>
+                {it.CourseTitle}
+              </option>
+              );
+
       return (
         <div class="center">
           <h1
@@ -108,6 +128,16 @@ class CoursesTaken extends Component {
           </Link>
           </form>
           <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
+
+          <label>
+    Choose a course from this list:
+    <input list="courses" name="myBrowser" autoComplete = "on"/>  
+</label>   
+<datalist id="courses">
+  {optionList}
+</datalist> 
+         
+          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
           
         </div>
     );
