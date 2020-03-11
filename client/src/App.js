@@ -63,6 +63,16 @@ class CoursesTaken extends Component {
       .catch(err => err);
   }
 
+  sendAPI(data) {
+    console.log("posting to api");
+    fetch("http://localhost:5000/api/nlp/courses", {
+      method: 'POST',
+      mode: 'CORS',
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+    .catch(err => err);
+  }
+
   componentDidMount() {
     this.callAPI();
   }
@@ -137,7 +147,7 @@ class CoursesTaken extends Component {
 </label>    */}
          
 <Link to="/focus_area">
-              <button class="button0" type="button" align="right">
+              <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button" align="right">
                 That's it
               </button>
           </Link>
