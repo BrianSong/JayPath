@@ -83,6 +83,7 @@ class CoursesTaken extends Component {
     event.preventDefault();
   }
 
+
   render() {
 
     const courseLists = this.state.allCourses.map(d => {
@@ -120,25 +121,26 @@ class CoursesTaken extends Component {
               justifyContent: "center",
               alignItems: "center"
             }}>
-            <input type="text" value={this.state.value} size="60" onChange={this.handleChange}/>
-            <Link to="/focus_area">
+            <label> Choose your course from the list:
+            {/* <input type="text" value={this.state.value} size="60" onChange={this.handleChange}/> */}
+            <select id="courses" value={this.state.value} onChange = {this.handleChange}>
+  {optionList}
+</select> 
+<input type="submit" value="I've taken it!" />
+</label>
+          </form>
+          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
+
+          {/* <label>
+    Choose a course from this list:
+   <input list="courses" id="prereq" autoComplete = "on"/>  
+</label>    */}
+         
+<Link to="/focus_area">
               <button class="button0" type="button" align="right">
                 That's it
               </button>
           </Link>
-          </form>
-          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
-
-          <label>
-    Choose a course from this list:
-    <input list="courses" name="myBrowser" autoComplete = "on"/>  
-</label>   
-<datalist id="courses">
-  {optionList}
-</datalist> 
-         
-          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
-          
         </div>
     );
   }
