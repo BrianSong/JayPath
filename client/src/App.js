@@ -65,13 +65,17 @@ class CoursesTaken extends Component {
 
   sendAPI(data) {
     console.log("posting to api");
-    fetch("http://localhost:5000/api/nlp/courses", {
+    fetch('http://localhost:5000/api/user_info', {
       method: 'POST',
-      mode: 'CORS',
       body: JSON.stringify(data)
     }).then(res => res.json())
-    .catch(err => err);
+    .then(data => console.log("Success", data))
+    .catch(err => console.log("Error:", err));
   }
+
+  // showData(data) {
+  //   console.log(JSON.stringify(data))
+  // }
 
   componentDidMount() {
     this.callAPI();
@@ -95,25 +99,12 @@ class CoursesTaken extends Component {
 
 
   render() {
-
-    const courseLists = this.state.allCourses.map(d => {
-              return (
-                <li>
-                  {d.CourseNumber}
-                  {": "}
-                  {d.CourseTitle}
-                  {" Credit:"}
-                  {d.Credits}
-                  {" Instructor:"}
-                  {d.Instructor}
-                </li>
-              );
-            });
-            const optionList = this.state.allCourses.map(it => 
+      const optionList = this.state.allCourses.map(it => 
               <option>
                 {it.CourseTitle}
               </option>
               );
+        console.log("OPTION:",optionList)
 
       return (
         <div class="center">
@@ -131,12 +122,14 @@ class CoursesTaken extends Component {
               justifyContent: "center",
               alignItems: "center"
             }}>
-            <label> Choose your course from the list:
-            {/* <input type="text" value={this.state.value} size="60" onChange={this.handleChange}/> */}
+            <label style={{color:"blue"}}> <i class="iconfont">&#xe600;</i>Choose your course from the list below
+            <div>
             <select id="courses" value={this.state.value} onChange = {this.handleChange}>
+            <option value="">Select Your Courses </option>
   {optionList}
 </select> 
-<input type="submit" value="I've taken it!" />
+</div>
+<input class = "button_t" type="submit" value="I've taken it!" />
 </label>
           </form>
           <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
@@ -145,41 +138,45 @@ class CoursesTaken extends Component {
     Choose a course from this list:
    <input list="courses" id="prereq" autoComplete = "on"/>  
 </label>    */}
-         
+ 
+
 <Link to="/focus_area">
-              <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button" align="right">
-                That's it
+              <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
+                THAT'S IT!
               </button>
+              <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
+
+
         </div>
+        
     );
   }
 }
 
 
-class Dropdown extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        question: "What is your focus area in computer science?",
-        schedule: []
-      };
-    }
+
+// class Dropdown extends Component {
+//     constructor(prop) {
+//       super(prop);
+//       this.state = {
+//         question: "What is your focus area in computer science?",
+//         schedule: []
+//       };
+//     }
   
-    callAPI() {
-      console.log("fetching from api");
-      fetch("http://localhost:5000/api/nlp/courses") //to be changed
-        .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
-        .catch(err => err);
-    }
+//     callAPI() {
+//       console.log("fetching from api");
+//       fetch("http://localhost:5000/api/nlp/courses") //to be changed
+//         .then(res => res.json())
+//         .then(res => this.setState({ schedule: res }))
+//         .catch(err => err);
+//     }
   
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-  
-  }
+//     componentDidMount() {
+//       this.callAPI();
+//     }
+//   }
   
   class FocusArea extends Component {
     constructor(prop) {
