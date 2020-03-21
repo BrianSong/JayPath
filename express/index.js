@@ -56,7 +56,8 @@ app.get("/api/:field/courses", (req, res) => {
     course.forEach(course => {
       // check coursestatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
-        let pre = course.Prerequisite;
+        let pre_original = course.Prerequisite;
+        let pre = pre_original.split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus.get(pre[i]) == 0) {
@@ -79,7 +80,8 @@ app.get("/api/:field/courses", (req, res) => {
     course.forEach(course => {
       // check coursestatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
-        let pre = course.Prerequisite;
+        let pre_original = course.Prerequisite;
+        let pre = pre_original.split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus.get(pre[i]) == 0) {
