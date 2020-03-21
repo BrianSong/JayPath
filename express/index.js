@@ -150,11 +150,34 @@ app.post("/api/user_info", (req, res) => {
   // update coursestatus
   // suppose we get the string[] list of courses taken from frontend
   // TODO: need to connect to front end
-  let taken = [15, 16, 18];
-  for (var i = 0; i < taken.length; i++) {
-    coursestatus[taken[i]] == 1;
-  }
-  res.send("Courses added!");
+  // req - id
+  let course_to_add = req.body;
+  // Open and connect to database
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
+
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses WHERE Track = ?;`;
+
+  db.get(sql, [course_to_add], (err, row) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    coursestatus[row.id] == 1;
+  });
+
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    res.send(courses);  // send the result to frontend
+  });
 });
 
 function validateCourse(course) {
