@@ -7,6 +7,8 @@ const sqlite3 = require("sqlite3").verbose();
 app.use(express.json());
 app.use(cors());
 
+let courseInfo = [];
+
 initilization();
 
 let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
@@ -46,7 +48,7 @@ app.get("/api/:field/courses", (req, res) => {
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
   let sql = `SELECT * FROM courses WHERE Track = ?;`;
-  
+
   db.all(sql, [field], (err, course) => {
     if (err) {
       throw err;
@@ -54,7 +56,7 @@ app.get("/api/:field/courses", (req, res) => {
     course.forEach(course => {
       // check coursestatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
-        let pre = course.prerequisite;
+        let pre = course.Prerequisite;
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus.get(pre[i]) == 0) {
@@ -77,7 +79,7 @@ app.get("/api/:field/courses", (req, res) => {
     course.forEach(course => {
       // check coursestatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
-        let pre = course.prerequisite;
+        let pre = course.Prerequisite;
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus.get(pre[i]) == 0) {
@@ -198,7 +200,7 @@ function initilization() {
     console.log("Connected to the courses database for initilization!");
   });
   db.run(
-    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)"
+    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING)"
   );
 
   // hardcode for the first iteration: add courses manually
@@ -208,7 +210,7 @@ function initilization() {
 
   // TODO: Instead of hardcode like this, create all the course using the course class
   // TODO: Each course now will has a listOfPre attribuate
-  let courseInfo = [
+  courseInfo = [
     [
       0,
       "EN.601.315",
@@ -218,7 +220,7 @@ function initilization() {
       "TTh",
       "3:00PM - 4:15PM",
       "bd",
-      [18]
+      "18"
     ],
     [
       1,
@@ -229,7 +231,7 @@ function initilization() {
       "TTh",
       "12:00PM - 1:15PM",
       "bd",
-      [18]
+      "18"
     ],
     [
       2,
@@ -240,7 +242,7 @@ function initilization() {
       "MW",
       "12:00PM - 1:15PM",
       "bd",
-      [18]
+      "18"
     ],
     [
       3,
@@ -251,7 +253,7 @@ function initilization() {
       "TTh",
       "3:00PM - 4:15PM",
       "cb",
-      [18]
+      "18"
     ],
     [
       4,
@@ -262,7 +264,7 @@ function initilization() {
       "TTh",
       "1:30PM - 2:45PM",
       "cb",
-      [18]
+      "18"
     ],
     [
       5,
@@ -273,7 +275,7 @@ function initilization() {
       "TTh",
       "12:00PM - 1:15PM",
       "cb",
-      [18]
+      "18"
     ],
     [
       6,
@@ -284,7 +286,7 @@ function initilization() {
       "TTh",
       "9:00AM - 10:15AM",
       "nlp",
-      [18]
+      "18"
     ],
     [
       7,
@@ -295,7 +297,7 @@ function initilization() {
       "MWF",
       "11:00AM - 11:50AM",
       "nlp",
-      [18]
+      "18"
     ],
     [
       8,
@@ -306,7 +308,7 @@ function initilization() {
       "MWF",
       "4:30PM - 5:45PM",
       "nlp",
-      [18, 23, 24, 25]
+      "18-23-24-25"
     ],
     [
       9,
@@ -317,7 +319,7 @@ function initilization() {
       "TTh",
       "4:30PM - 5:45PM",
       "r",
-      [18]
+      "18"
     ],
     [
       10,
@@ -328,7 +330,7 @@ function initilization() {
       "TTh",
       "1:30PM - 2:45PM",
       "r",
-      [18]
+      "18"
     ],
     [
       11,
@@ -339,7 +341,7 @@ function initilization() {
       "TTh",
       "9:00AM - 10:15AM",
       "r",
-      [18, 23, 24, 25]
+      "18-23-24-25"
     ],
     [
       12,
@@ -350,7 +352,7 @@ function initilization() {
       "M",
       "6:00PM - 8:30PM",
       "is",
-      [18]
+      "18"
     ],
     [
       13,
@@ -361,7 +363,7 @@ function initilization() {
       "F",
       "1:30PM - 4:00PM",
       "is",
-      [18]
+      "18"
     ],
     [
       14,
@@ -372,7 +374,7 @@ function initilization() {
       "MW",
       "3:00PM - 4:15PM",
       "is",
-      [18]
+      "18"
     ],
     [
       15,
@@ -383,7 +385,7 @@ function initilization() {
       "MWF",
       "12:00PM - 1:15PM",
       "core",
-      [16]
+      "16"
     ],
     [
       16,
@@ -394,7 +396,7 @@ function initilization() {
       "MWF",
       "9:00AM - 9:50AM",
       "core",
-      []
+      ""
 
     ],
     [
@@ -406,7 +408,7 @@ function initilization() {
       "W",
       "4:30PM - 6:30PM",
       "core",
-      []
+      ""
     ],
     [
       18,
@@ -417,7 +419,7 @@ function initilization() {
       "MWF",
       "1:30PM - 2:45PM",
       "core",
-      [15]
+      "15"
     ],
     [
       19,
@@ -428,8 +430,7 @@ function initilization() {
       "MWF",
       "10:00AM - 10:50AM",
       "core",
-      [18]
-
+      "18"
     ],
     [
       20,
@@ -440,7 +441,7 @@ function initilization() {
       "TTh",
       "9:00AM - 10:15AM",
       "core",
-      [18]
+      "18"
     ],
     [
       21,
@@ -451,7 +452,7 @@ function initilization() {
       "TTh",
       "12:00PM - 1:15PM",
       "core",
-      [18, 22]
+      "18-22"
     ],
     [
       22,
@@ -462,7 +463,7 @@ function initilization() {
       "MWF, Th",
       "10:00AM - 10:50AM, 9:00AM - 9:50AM",
       "core",
-      []
+      ""
     ],
     [
       23,
@@ -473,7 +474,7 @@ function initilization() {
       "MWF, Th",
       "1:30PM - 2:20PM, 10:30AM - 11:20AM",
       "core",
-      [25]
+      "25"
     ],
     [
       24,
@@ -484,7 +485,7 @@ function initilization() {
       "MWF, Th",
       "1:30PM - 2:45PM, 9:00AM - 9:50AM",
       "core",
-      [25]
+      "25"
     ],
     [
       25,
@@ -495,7 +496,7 @@ function initilization() {
       "MWF, Th",
       "10:00AM - 10:50AM, 1:30PM - 2:20",
       "core",
-      []
+      ""
     ]
   ];
 
@@ -510,7 +511,7 @@ function initilization() {
 
   // run the query over and over for each inner array
   for (var i = 0; i < courseInfo.length; i++) {
-    statement.run(courseInfo[i], function(err) {
+    statement.run(courseInfo[i], function (err) {
       if (err) throw err;
     });
   }
