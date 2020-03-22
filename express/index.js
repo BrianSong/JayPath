@@ -12,9 +12,9 @@ let courseName = [];
 initilization();
 
 let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
-let courseStatus = new Map();
+let courseStatus = [];
 for (var id_loop = 0; id_loop <= 25; id_loop++) {
-  courseStatus.set(id_loop, 0); // initialize all course status to 0 
+  courseStatus[id_loop] = 0; // initialize all course status to 0 
 }
 // let course_to_id = new Map();
 // for (var id_loop = 0; id_loop <= 25; id_loop++) {
@@ -65,6 +65,9 @@ app.get("/api/:field/courses", (req, res) => {
   // courses = [];
   const field = String(req.params.field);
 
+  console.log(courseStatus);
+
+
   // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
@@ -82,12 +85,12 @@ app.get("/api/:field/courses", (req, res) => {
     }
     allcourse.forEach(course => {
       // check coursestcoursestatusatus, its prerequisite
-      if (courseStatus.get(course.id) == 0) {  // not taken yet
+      if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
-        let pre = pre_original.split("-");
+        let pre = pre_original.toString().split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
-          if (courseStatus.get(pre[i]) == 0) {
+          if (courseStatus[pre[i]] == 0) {
             fulfill_flag = 0;  // not fulfill the prerequisite 
             break;
           }
@@ -100,20 +103,20 @@ app.get("/api/:field/courses", (req, res) => {
   });
 
   let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql_1, [core], (err, allcourse) => {
+  db.all(sql_1, ["core"], (err, allcourse) => {
     if (err) {
       throw err;
     }
     allcourse.forEach(course => {
       // check coursestatus, its prerequisite
-      if (courseStatus.get(course.id) == 0) {  // not taken yet
+      if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
-        console.log(pre_original);
+        // console.log(pre_original);
 
-        let pre = pre_original.split("-");
+        let pre = pre_original.toString().split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
-          if (courseStatus.get(pre[i]) == 0) {
+          if (courseStatus[pre[i]] == 0) {
             fulfill_flag = 0;  // not fulfill the prerequisite 
             break;
           }
@@ -185,10 +188,12 @@ app.post("/api/user_info", (req, res) => {
   // TODO: need to connect to front end
   // req - id
   // console.log(req);
-  let course_to_add = req.body;
+  // !!!!!!!!!!! let course_to_add = req.body;
   // console.log(req.method);
 
-  // Open and connect to database
+  courses_to_add = req.body;
+  //console.log(courses_to_add[1].trim());
+  // Open and connect to data[1base
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
       console.error(err.message);
@@ -198,13 +203,16 @@ app.post("/api/user_info", (req, res) => {
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
   let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
-
-  db.get(sql, [course_to_add], (err, row) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    courseStatus[row.id] == 1;
-  });
+  for (var i = 0; i < courses_to_add.length; i++) {
+    // console.log(courses_to_add[i]);
+    db.get(sql, [courses_to_add[i].trim()], (err, row) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      courseStatus[row.id] = 1;
+      // console.log(courseStatus[row.id]);
+    });
+  }
 
   // Close database
   db.close(err => {
@@ -212,7 +220,6 @@ app.post("/api/user_info", (req, res) => {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    // res.send(courses);  // send the result to frontend
   });
 });
 

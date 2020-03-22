@@ -66,9 +66,10 @@ class CoursesTaken extends Component {
 
   sendAPI(data) {
     console.log("posting to api");
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
     }).then(res => res.json())
     .then(data => console.log("Success", data))
