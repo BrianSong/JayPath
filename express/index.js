@@ -7,17 +7,53 @@ const sqlite3 = require("sqlite3").verbose();
 app.use(express.json());
 app.use(cors());
 
+let courseInfo = [];
+let courseName = [];
 initilization();
 
-let courses = [];
+let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = new Map();
+for (var id_loop = 0; id_loop <= 25; id_loop++) {
+  courseStatus.set(id_loop, 0); // initialize all course status to 0 
+}
+// let course_to_id = new Map();
+// for (var id_loop = 0; id_loop <= 25; id_loop++) {
+//   courseStatus.set(id_loop, 0); // initialize all course status to 0 
+// }
 
 app.get("/", (req, res) => {
   res.send("Hello World!!");
 });
 
 app.get("/api/courses", (req, res) => {
-  res.send(courses);
+
+
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
+  let currCourse = [];
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses;`;
+
+  db.all(sql, (err, allCourses) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    allCourses.forEach((allCourse) => {currCourse.push(allCourse);})
+  });
+
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    res.send(currCourse);  // send the result to frontend
+  });
+
 });
 
 app.get("/api/test", (req, res) => {
@@ -25,10 +61,11 @@ app.get("/api/test", (req, res) => {
 });
 
 app.get("/api/:field/courses", (req, res) => {
-  courses = [];
+  // send candidate courses to backend 
+  // courses = [];
   const field = String(req.params.field);
 
-  // Open database
+  // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
       console.error(err.message);
@@ -38,22 +75,53 @@ app.get("/api/:field/courses", (req, res) => {
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
   let sql = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql, [field], (err, course) => {
+
+  db.all(sql, [field], (err, allcourse) => {
     if (err) {
       throw err;
     }
-    course.forEach(course => {
-      courses.push(course);
+    allcourse.forEach(course => {
+      // check coursestcoursestatusatus, its prerequisite
+      if (courseStatus.get(course.id) == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        let pre = pre_original.split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus.get(pre[i]) == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite 
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
     });
   });
 
-  let sql_1 = `SELECT * FROM courses WHERE Track = "core";`;
-  db.all(sql_1, [], (err, course) => {
+  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql_1, [core], (err, allcourse) => {
     if (err) {
       throw err;
     }
-    course.forEach(course => {
-      courses.push(course);
+    allcourse.forEach(course => {
+      // check coursestatus, its prerequisite
+      if (courseStatus.get(course.id) == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        console.log(pre_original);
+
+        let pre = pre_original.split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus.get(pre[i]) == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite 
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
     });
   });
 
@@ -63,7 +131,7 @@ app.get("/api/:field/courses", (req, res) => {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    res.send(courses);
+    res.send(courses);  // send the result to frontend
   });
 });
 
@@ -111,6 +179,43 @@ app.get("/api/courses/:id", (req, res) => {
   res.send(course);
 });
 
+app.post("/api/user_info", (req, res) => {
+  // update coursestatus
+  // suppose we get the string[] list of courses taken from frontend
+  // TODO: need to connect to front end
+  // req - id
+  // console.log(req);
+  let course_to_add = req.body;
+  // console.log(req.method);
+
+  // Open and connect to database
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
+
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
+
+  db.get(sql, [course_to_add], (err, row) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    courseStatus[row.id] == 1;
+  });
+
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    // res.send(courses);  // send the result to frontend
+  });
+});
+
 function validateCourse(course) {
   const schema = {
     name: Joi.string()
@@ -129,7 +234,7 @@ function initilization() {
     console.log("Connected to the courses database for initilization!");
   });
   db.run(
-    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT)"
+    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING)"
   );
 
   // hardcode for the first iteration: add courses manually
@@ -139,7 +244,7 @@ function initilization() {
 
   // TODO: Instead of hardcode like this, create all the course using the course class
   // TODO: Each course now will has a listOfPre attribuate
-  let courseInfo = [
+  courseInfo = [
     [
       0,
       "EN.601.315",
@@ -148,7 +253,8 @@ function initilization() {
       "D. Yarowsky",
       "TTh",
       "3:00PM - 4:15PM",
-      "bd"
+      "bd",
+      "18"
     ],
     [
       1,
@@ -158,7 +264,8 @@ function initilization() {
       "V. Braverman",
       "TTh",
       "12:00PM - 1:15PM",
-      "bd"
+      "bd",
+      "18"
     ],
     [
       2,
@@ -168,7 +275,8 @@ function initilization() {
       "S. Ghorbani Khaledi",
       "MW",
       "12:00PM - 1:15PM",
-      "bd"
+      "bd",
+      "18"
     ],
     [
       3,
@@ -178,7 +286,8 @@ function initilization() {
       "S. Salzberg",
       "TTh",
       "3:00PM - 4:15PM",
-      "cb"
+      "cb",
+      "18"
     ],
     [
       4,
@@ -188,7 +297,8 @@ function initilization() {
       "R. Taylor",
       "TTh",
       "1:30PM - 2:45PM",
-      "cb"
+      "cb",
+      "18"
     ],
     [
       5,
@@ -198,7 +308,8 @@ function initilization() {
       "B. Langmead",
       "TTh",
       "12:00PM - 1:15PM",
-      "cb"
+      "cb",
+      "18"
     ],
     [
       6,
@@ -208,7 +319,8 @@ function initilization() {
       "J. Sedoc, B. Van Durme",
       "TTh",
       "9:00AM - 10:15AM",
-      "nlp"
+      "nlp",
+      "18"
     ],
     [
       7,
@@ -218,7 +330,8 @@ function initilization() {
       "K. Duh",
       "MWF",
       "11:00AM - 11:50AM",
-      "nlp"
+      "nlp",
+      "18"
     ],
     [
       8,
@@ -228,7 +341,8 @@ function initilization() {
       "P. Graff",
       "MWF",
       "4:30PM - 5:45PM",
-      "nlp"
+      "nlp",
+      "18-23-24-25"
     ],
     [
       9,
@@ -238,7 +352,8 @@ function initilization() {
       "S. Leonard",
       "TTh",
       "4:30PM - 5:45PM",
-      "r"
+      "r",
+      "18"
     ],
     [
       10,
@@ -248,7 +363,8 @@ function initilization() {
       "R. Taylor",
       "TTh",
       "1:30PM - 2:45PM",
-      "r"
+      "r",
+      "18"
     ],
     [
       11,
@@ -258,7 +374,8 @@ function initilization() {
       "G. Hager",
       "TTh",
       "9:00AM - 10:15AM",
-      "r"
+      "r",
+      "18-23-24-25"
     ],
     [
       12,
@@ -268,7 +385,8 @@ function initilization() {
       "L. Ding",
       "M",
       "6:00PM - 8:30PM",
-      "is"
+      "is",
+      "18"
     ],
     [
       13,
@@ -278,7 +396,8 @@ function initilization() {
       "C. Monson",
       "F",
       "1:30PM - 4:00PM",
-      "is"
+      "is",
+      "18"
     ],
     [
       14,
@@ -288,7 +407,8 @@ function initilization() {
       "R. Johnston",
       "MW",
       "3:00PM - 4:15PM",
-      "is"
+      "is",
+      "18"
     ],
     [
       15,
@@ -298,7 +418,8 @@ function initilization() {
       "D. Hovemeyer",
       "MWF",
       "12:00PM - 1:15PM",
-      "core"
+      "core",
+      "16"
     ],
     [
       16,
@@ -308,7 +429,9 @@ function initilization() {
       "S. More",
       "MWF",
       "9:00AM - 9:50AM",
-      "core"
+      "core",
+      ""
+
     ],
     [
       17,
@@ -318,7 +441,8 @@ function initilization() {
       "T. Leschke",
       "W",
       "4:30PM - 6:30PM",
-      "core"
+      "core",
+      ""
     ],
     [
       18,
@@ -328,7 +452,8 @@ function initilization() {
       "J. Selinski",
       "MWF",
       "1:30PM - 2:45PM",
-      "core"
+      "core",
+      "15"
     ],
     [
       19,
@@ -338,7 +463,8 @@ function initilization() {
       "P. Koehn",
       "MWF",
       "10:00AM - 10:50AM",
-      "core"
+      "core",
+      "18"
     ],
     [
       20,
@@ -348,7 +474,8 @@ function initilization() {
       "S. Kosaraju",
       "TTh",
       "9:00AM - 10:15AM",
-      "core"
+      "core",
+      "18"
     ],
     [
       21,
@@ -358,7 +485,8 @@ function initilization() {
       "M. Dinitz",
       "TTh",
       "12:00PM - 1:15PM",
-      "core"
+      "core",
+      "18-22"
     ],
     [
       22,
@@ -368,7 +496,8 @@ function initilization() {
       "B. Castello",
       "MWF, Th",
       "10:00AM - 10:50AM, 9:00AM - 9:50AM",
-      "core"
+      "core",
+      ""
     ],
     [
       23,
@@ -378,7 +507,8 @@ function initilization() {
       "J. Wierman",
       "MWF, Th",
       "1:30PM - 2:20PM, 10:30AM - 11:20AM",
-      "core"
+      "core",
+      "25"
     ],
     [
       24,
@@ -388,7 +518,8 @@ function initilization() {
       "D. Athreya",
       "MWF, Th",
       "1:30PM - 2:45PM, 9:00AM - 9:50AM",
-      "core"
+      "core",
+      "25"
     ],
     [
       25,
@@ -398,14 +529,18 @@ function initilization() {
       "J. Han",
       "MWF, Th",
       "10:00AM - 10:50AM, 1:30PM - 2:20",
-      "core"
+      "core",
+      ""
     ]
   ];
 
+  for (var course in courseInfo) {
+    courseName.push(course[2]);
+  }
   // create the statement for the insertion of just ONE record
   let queryInfo =
-    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track) " +
-    "VALUES (?, ?, ? ,?, ?, ?, ? ,?)";
+    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite) " +
+    "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?)";
 
   // 'prepare' returns a 'statement' object which allows us to
   // bind the same query to different parameters each time we run it
@@ -413,7 +548,7 @@ function initilization() {
 
   // run the query over and over for each inner array
   for (var i = 0; i < courseInfo.length; i++) {
-    statement.run(courseInfo[i], function(err) {
+    statement.run(courseInfo[i], function (err) {
       if (err) throw err;
     });
   }
@@ -427,9 +562,6 @@ function initilization() {
     console.log("Close the courses database connection for initilization!");
   });
 }
-
-// TODO: A function that will be called everytime when the user enter some new courses that he/she has taken
-function updateStatus() {}
 
 // PORT
 const port = process.env.PORT || 5000;
