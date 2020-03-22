@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 let courseInfo = [];
-
+let courseName = [];
 initilization();
 
 let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
@@ -26,7 +26,34 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/courses", (req, res) => {
-  res.send(courses);
+
+
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
+  let currCourse = [];
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses;`;
+
+  db.all(sql, (err, allCourses) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    allCourses.forEach((allCourse) => {currCourse.push(allCourse);})
+  });
+
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    res.send(currCourse);  // send the result to frontend
+  });
+
 });
 
 app.get("/api/test", (req, res) => {
@@ -35,7 +62,7 @@ app.get("/api/test", (req, res) => {
 
 app.get("/api/:field/courses", (req, res) => {
   // send candidate courses to backend 
-  courses = [];
+  // courses = [];
   const field = String(req.params.field);
 
   // Open and connect to database
@@ -49,12 +76,12 @@ app.get("/api/:field/courses", (req, res) => {
   // Extract course according to the focus area and sent it back to the front end for displaying.
   let sql = `SELECT * FROM courses WHERE Track = ?;`;
 
-  db.all(sql, [field], (err, course) => {
+  db.all(sql, [field], (err, allcourse) => {
     if (err) {
       throw err;
     }
-    course.forEach(course => {
-      // check coursestatus, its prerequisite
+    allcourse.forEach(course => {
+      // check coursestcoursestatusatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
         let pre = pre_original.split("-");
@@ -72,15 +99,17 @@ app.get("/api/:field/courses", (req, res) => {
     });
   });
 
-  let sql_1 = `SELECT * FROM courses WHERE Track = "core";`;
-  db.all(sql_1, [], (err, course) => {
+  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql_1, [core], (err, allcourse) => {
     if (err) {
       throw err;
     }
-    course.forEach(course => {
+    allcourse.forEach(course => {
       // check coursestatus, its prerequisite
       if (courseStatus.get(course.id) == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
+        console.log(pre_original);
+
         let pre = pre_original.split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
@@ -155,7 +184,10 @@ app.post("/api/user_info", (req, res) => {
   // suppose we get the string[] list of courses taken from frontend
   // TODO: need to connect to front end
   // req - id
+  // console.log(req);
   let course_to_add = req.body;
+  // console.log(req.method);
+
   // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
@@ -165,13 +197,13 @@ app.post("/api/user_info", (req, res) => {
   });
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses WHERE Track = ?;`;
+  let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
 
   db.get(sql, [course_to_add], (err, row) => {
     if (err) {
       return console.error(err.message);
     }
-    coursestatus[row.id] == 1;
+    courseStatus[row.id] == 1;
   });
 
   // Close database
@@ -180,7 +212,7 @@ app.post("/api/user_info", (req, res) => {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    res.send(courses);  // send the result to frontend
+    // res.send(courses);  // send the result to frontend
   });
 });
 
@@ -502,6 +534,9 @@ function initilization() {
     ]
   ];
 
+  for (var course in courseInfo) {
+    courseName.push(course[2]);
+  }
   // create the statement for the insertion of just ONE record
   let queryInfo =
     "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite) " +

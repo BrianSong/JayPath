@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 
+
 class App extends Component {
     constructor(props) {
       super(props);
@@ -65,6 +66,7 @@ class CoursesTaken extends Component {
 
   sendAPI(data) {
     console.log("posting to api");
+    console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
       method: 'POST',
       body: JSON.stringify(data)
