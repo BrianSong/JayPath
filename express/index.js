@@ -153,6 +153,7 @@ app.post("/api/courses", (req, res) => {
 app.put("/api/courses/:id", (req, res) => {
   //Lookup Course
   const course = courses.find(c => c.id == parseInt(req.params.id));
+
   if (!course) {
     res.status(404).send("Course not found");
   }
