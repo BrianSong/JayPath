@@ -42,7 +42,7 @@ app.get("/api/courses", (req, res) => {
     if (err) {
       return console.error(err.message);
     }
-    allCourses.forEach((allCourse) => {currCourse.push(allCourse);})
+    allCourses.forEach((allCourse) => { currCourse.push(allCourse); })
   });
 
   // Close database
@@ -65,8 +65,7 @@ app.get("/api/:field/courses", (req, res) => {
   // courses = [];
   const field = String(req.params.field);
 
-  console.log(courseStatus);
-
+  // console.log(courseStatus);
 
   // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
@@ -258,8 +257,8 @@ function initilization() {
       "Databases",
       3,
       "D. Yarowsky",
-      "TTh",
-      "3:00PM - 4:15PM",
+      "T, Th",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "bd",
       "18"
     ],
@@ -269,8 +268,8 @@ function initilization() {
       "Randomized and Big Data Algorithms",
       3,
       "V. Braverman",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
       "18"
     ],
@@ -280,8 +279,8 @@ function initilization() {
       "Cloud Computing",
       3,
       "S. Ghorbani Khaledi",
-      "MW",
-      "12:00PM - 1:15PM",
+      "M, W",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
       "18"
     ],
@@ -291,8 +290,8 @@ function initilization() {
       "Genomic Data Science",
       3,
       "S. Salzberg",
-      "TTh",
-      "3:00PM - 4:15PM",
+      "T, Th",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "cb",
       "18"
     ],
@@ -302,8 +301,8 @@ function initilization() {
       "Computer Integrated Surgery",
       3,
       "R. Taylor",
-      "TTh",
-      "1:30PM - 2:45PM",
+      "T, Th",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "cb",
       "18"
     ],
@@ -313,8 +312,8 @@ function initilization() {
       "Computational Genomics: Sequences",
       3,
       "B. Langmead",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "cb",
       "18"
     ],
@@ -324,8 +323,8 @@ function initilization() {
       "Artificial Intelligence",
       3,
       "J. Sedoc, B. Van Durme",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "nlp",
       "18"
     ],
@@ -335,8 +334,8 @@ function initilization() {
       "Natural Language Processing",
       3,
       "K. Duh",
-      "MWF",
-      "11:00AM - 11:50AM",
+      "M, W, F",
+      "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
       "nlp",
       "18"
     ],
@@ -346,8 +345,8 @@ function initilization() {
       "Machine Learning",
       3,
       "P. Graff",
-      "MWF",
-      "4:30PM - 5:45PM",
+      "M, W, F",
+      "4:30PM - 5:45PM, 4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "nlp",
       "18-23-24-25"
     ],
@@ -357,8 +356,8 @@ function initilization() {
       "Algorithms for Sensor-Based Robotics",
       3,
       "S. Leonard",
-      "TTh",
-      "4:30PM - 5:45PM",
+      "T, Th",
+      "4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "r",
       "18"
     ],
@@ -368,8 +367,8 @@ function initilization() {
       "Computer Integrated Surgery I",
       4,
       "R. Taylor",
-      "TTh",
-      "1:30PM - 2:45PM",
+      "T, Th",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "r",
       "18"
     ],
@@ -379,8 +378,8 @@ function initilization() {
       "Computer Vision",
       3,
       "G. Hager",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "r",
       "18-23-24-25"
     ],
@@ -412,8 +411,8 @@ function initilization() {
       "Network Security",
       3,
       "R. Johnston",
-      "MW",
-      "3:00PM - 4:15PM",
+      "M, W",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "is",
       "18"
     ],
@@ -423,8 +422,8 @@ function initilization() {
       "Intermediate Programming",
       4,
       "D. Hovemeyer",
-      "MWF",
-      "12:00PM - 1:15PM",
+      "M, W, F",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
       "16"
     ],
@@ -434,8 +433,8 @@ function initilization() {
       "Gateway Computing: JAVA",
       3,
       "S. More",
-      "MWF",
-      "9:00AM - 9:50AM",
+      "M, W, F",
+      "9:00AM - 9:50AM, 9:00AM - 9:50AM, 9:00AM - 9:50AM",
       "core",
       ""
 
@@ -457,8 +456,8 @@ function initilization() {
       "Data Structures",
       4,
       "J. Selinski",
-      "MWF",
-      "1:30PM - 2:45PM",
+      "M, W, F",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "core",
       "15"
     ],
@@ -468,8 +467,8 @@ function initilization() {
       "Computer System Fundamentals",
       3,
       "P. Koehn",
-      "MWF",
-      "10:00AM - 10:50AM",
+      "M, W, F",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM",
       "core",
       "18"
     ],
@@ -479,8 +478,8 @@ function initilization() {
       "Automata & Computation Theory",
       3,
       "S. Kosaraju",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "core",
       "18"
     ],
@@ -490,8 +489,8 @@ function initilization() {
       "Intro Algorithms",
       3,
       "M. Dinitz",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
       "18-22"
     ],
@@ -501,8 +500,8 @@ function initilization() {
       "Discrete Mathematics",
       4,
       "B. Castello",
-      "MWF, Th",
-      "10:00AM - 10:50AM, 9:00AM - 9:50AM",
+      "M, W, F, Th",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM",
       "core",
       ""
     ],
@@ -512,8 +511,8 @@ function initilization() {
       "Intro to Probability",
       4,
       "J. Wierman",
-      "MWF, Th",
-      "1:30PM - 2:20PM, 10:30AM - 11:20AM",
+      "M, W, F, Th",
+      "1:30PM - 2:20PM, 1:30PM - 2:20PM, 1:30PM - 2:20PM, 10:30AM - 11:20AM",
       "core",
       "25"
     ],
@@ -524,7 +523,7 @@ function initilization() {
       4,
       "D. Athreya",
       "MWF, Th",
-      "1:30PM - 2:45PM, 9:00AM - 9:50AM",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM, 9:00AM - 9:50AM",
       "core",
       "25"
     ],
@@ -535,7 +534,7 @@ function initilization() {
       4,
       "J. Han",
       "MWF, Th",
-      "10:00AM - 10:50AM, 1:30PM - 2:20",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 1:30PM - 2:20",
       "core",
       ""
     ]
