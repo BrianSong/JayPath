@@ -499,6 +499,16 @@ class CoursesTaken extends Component {
           >
             Welcome to Big Data!
           </h1>
+          <div class="text2">
+            <h1>Recommended Schedule #1</h1>
+          </div>
+          <div class="text1">
+            <h1>Recommended Schedule #2</h1>
+          </div>
+          <div class="text3">
+            <h1>Recommended Schedule #3</h1>
+          </div>
+          
           <div>{listItems}</div>
         </div>
       );
