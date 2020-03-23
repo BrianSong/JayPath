@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
+const schedule = require("./schedule");
 
 app.use(express.json());
 app.use(cors());
@@ -107,6 +108,7 @@ app.get("/api/:field/courses", (req, res) => {
       throw err;
     }
     allcourse.forEach(course => {
+      console.log(type(course));
       // check coursestatus, its prerequisite
       if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
@@ -126,6 +128,8 @@ app.get("/api/:field/courses", (req, res) => {
       }
     });
   });
+
+  courses = schedule.testConflict(courses);
 
   // Close database
   db.close(err => {
