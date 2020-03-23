@@ -66,7 +66,8 @@ app.get("/api/:field/courses", (req, res) => {
   // courses = [];
   const field = String(req.params.field);
 
-  // console.log(courseStatus);
+  console.log(courseStatus);
+
 
   // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
@@ -91,7 +92,7 @@ app.get("/api/:field/courses", (req, res) => {
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite 
+            fulfill_flag = 0;  // not fulfill the prerequisite
             break;
           }
         }
@@ -108,7 +109,6 @@ app.get("/api/:field/courses", (req, res) => {
       throw err;
     }
     allcourse.forEach(course => {
-      console.log(type(course));
       // check coursestatus, its prerequisite
       if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
@@ -118,7 +118,7 @@ app.get("/api/:field/courses", (req, res) => {
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
           if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite 
+            fulfill_flag = 0;  // not fulfill the prerequisite
             break;
           }
         }
@@ -127,9 +127,11 @@ app.get("/api/:field/courses", (req, res) => {
         }
       }
     });
-  });
 
-  courses = schedule.testConflict(courses);
+    courses = schedule.testConflict(courses);
+  });
+  console.log(courses);
+
 
   // Close database
   db.close(err => {
@@ -187,13 +189,6 @@ app.get("/api/courses/:id", (req, res) => {
 });
 
 app.post("/api/user_info", (req, res) => {
-  // update coursestatus
-  // suppose we get the string[] list of courses taken from frontend
-  // TODO: need to connect to front end
-  // req - id
-  // console.log(req);
-  // !!!!!!!!!!! let course_to_add = req.body;
-  // console.log(req.method);
 
   courses_to_add = req.body;
   //console.log(courses_to_add[1].trim());

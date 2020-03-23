@@ -17,7 +17,7 @@ module.exports = {
         //         courses_eligible_id.push(courses_untaken_id[i]);
         //     }
         // }
-
+        console.log("testConflict called");
         // looping over all combination of 3 courses
         let schedule = [];
         for (var i = 0; i < courses.length; i++) {
@@ -36,70 +36,57 @@ module.exports = {
                         schedule.push(course1);
                         schedule.push(course2);
                         schedule.push(course3);
-                        return schedule;
+
                     }
                 }
             }
         }
+        return schedule;
     },
 
-    checkEligible: function checkEligible(id, taken_status) {
-        var course = courses.find(c => c.id == id);
-        // TODO: var course_prereq = course.prereq
-        course_prereq = "00000000000000000000000000";
-        for (var i = 0; i < taken_status.length; i++) {
-            if ((course_prereq[i] == "1") && (taken_status[i] == "0")) {
-                return false;
-            }
-        }
-        return true;
-    },
-
-    checkConflict: function checkConflict(course1, course2) {
-        // TODO: var course1_day = course1.DaysOfWeek
-        // TODO: var course1_time = course1.StartTimeEndTime
-        // TODO: var course2_day = course2.DaysOfWeek
-        // TODO: var course2_time = course2.StartTimeEndTime
-        var course1_day = "T, Th";
-        var course1_time = "3:00PM - 4:15PM, 3:00PM - 4:15PM";
-        var course2_day = "T, W";
-        var course2_time = "3:00PM - 4:15PM, 3:00PM - 4:15PM";
-
-        var course1_day_array = course1_day.split(", ");
-        var course1_time_array = course1_time.split(", ");
-        var course2_day_array = course2_day.split(", ");
-        var course2_time_array = course2_time.split(", ");
-
-        for (var day of ["M", "T", "W", "Th", "F"]) { // looping every day of the week
-            if (course1_day_array.includes(day) && course2_day_array.includes(day)) {
-                idx1 = course1_day_array.findIndex(element => element == day);
-                idx2 = course2_day_array.findIndex(element => element == day);
-                if (checkTimeOverlap(course1_time_array[idx1], course2_time_array[idx2])) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    },
-
-    checkTimeOverlap: function checkTimeOverlap(time1, time2) {
-        var start_minute1 = convertTimeToMinute(time1.split(" - ")[0])
-        var end_minute1 = convertTimeToMinute(time1.split(" - ")[1])
-        var start_minute2 = convertTimeToMinute(time2.split(" - ")[0])
-        var end_minute2 = convertTimeToMinute(time2.split(" - ")[1])
-        return (start_minute1 < end_minute2) && (start_minute2 < end_minute1);
-    },
-
-    convertTimeToMinute: function convertTimeToMinute(time) {
-        var hour = parseInt(time.substring(0, time.length - 2).split(":")[0]);
-        var minute = parseInt(time.substring(0, time.length - 2).split(":")[1]);
-        var AMPM = time.substring(time.length - 2);
-        if (AMPM == "AM" && hour == 12) {
-            hour = hour - 12
-        }
-        if (AMPM == "PM" && hour < 12) {
-            hour = hour + 12
-        }
-        return hour * 60 + minute;
-    }
 };
+
+function convertTimeToMinute(time) {
+    var hour = parseInt(time.substring(0, time.length - 2).split(":")[0]);
+    var minute = parseInt(time.substring(0, time.length - 2).split(":")[1]);
+    var AMPM = time.substring(time.length - 2);
+    if (AMPM == "AM" && hour == 12) {
+        hour = hour - 12
+    }
+    if (AMPM == "PM" && hour < 12) {
+        hour = hour + 12
+    }
+    return hour * 60 + minute;
+}
+
+function checkTimeOverlap(time1, time2) {
+    var start_minute1 = convertTimeToMinute(time1.split(" - ")[0])
+    var end_minute1 = convertTimeToMinute(time1.split(" - ")[1])
+    var start_minute2 = convertTimeToMinute(time2.split(" - ")[0])
+    var end_minute2 = convertTimeToMinute(time2.split(" - ")[1])
+    return (start_minute1 < end_minute2) && (start_minute2 < end_minute1);
+}
+
+function checkConflict(course1, course2) {
+    var course1_day = course1.DaysOfWeek
+    var course1_time = course1.StartTimeEndTime
+    var course2_day = course2.DaysOfWeek
+    var course2_time = course2.StartTimeEndTime
+    console.log(course1_day);
+
+    var course1_day_array = course1_day.split(", ");
+    var course1_time_array = course1_time.split(", ");
+    var course2_day_array = course2_day.split(", ");
+    var course2_time_array = course2_time.split(", ");
+
+    for (var day of ["M", "T", "W", "Th", "F"]) { // looping every day of the week
+        if (course1_day_array.includes(day) && course2_day_array.includes(day)) {
+            idx1 = course1_day_array.findIndex(element => element == day);
+            idx2 = course2_day_array.findIndex(element => element == day);
+            if (checkTimeOverlap(course1_time_array[idx1], course2_time_array[idx2])) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
