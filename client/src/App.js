@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
+import Autosuggest from 'react-autosuggest';
+
+
+
+
 
 class App extends Component {
     constructor(props) {
@@ -41,18 +46,18 @@ class App extends Component {
   }
 
 
+
 class CoursesTaken extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
       question: "What courses have you taken?",
-      value: "", // for display in the input box
-      allCourses: ["hello", "bye"], 
+      value: '',
+      finalValue: '',
+      suggestions: [],
+      allCourses: [],
       myCourses: []
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   callAPI() {
@@ -65,47 +70,87 @@ class CoursesTaken extends Component {
 
   sendAPI(data) {
     console.log("posting to api");
+    // console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
   }
 
-  // showData(data) {
-  //   console.log(JSON.stringify(data))
-  // }
-
   componentDidMount() {
     this.callAPI();
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value}); // prints input out by setting values to the changes
-  }
+  // Teach Autosuggest how to calculate suggestions for any given input value.
+  getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+  
+    return inputLength === 0 ? [] : this.state.allCourses.filter(ac =>
+      ac.CourseTitle.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  };
+  
+  // When suggestion is clicked, Autosuggest needs to populate the input
+  // based on the clicked suggestion. Teach Autosuggest how to calculate the
+  // input value for every given suggestion.
+  getSuggestionValue = suggestion => suggestion.CourseTitle;
+  
+  // Use your imagination to render suggestions.
+  renderSuggestion = (suggestion, { query, isHighlighted }) => (
+    <span>
+      {suggestion.CourseTitle}
+    </span>
+  );
 
-  handleSubmit(event) {
-    alert('Successfully added ' + this.state.value + '!');
-    this.setState(state => {
-      const myCourses = state.myCourses.concat(state.value);
-      return {
-        value:"",
-        myCourses,
-      };
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
     });
-    event.preventDefault();
-  }
+  };
 
+  // Autosuggest will call this function every time you need to update suggestions.
+    // You already implemented this logic above, so just use it.
+    onSuggestionsFetchRequested = ({ value }) => {
+      this.setState({
+        suggestions: this.getSuggestions(value)
+      });
+    };
+  
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+      this.setState({
+        suggestions: []
+      });
+    };
+
+    onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+      if (this.state.myCourses.includes(suggestionValue)) {
+        alert(suggestionValue + ' added already. Add a different course!');
+      } else {
+        alert('Successfully added ' + suggestionValue + '!');
+        const updatedCourses = this.state.myCourses.concat(suggestionValue);
+        this.setState({
+          myCourses: updatedCourses,
+          value: ""
+        });
+      }
+      
+    }
 
   render() {
-      const optionList = this.state.allCourses.map(it => 
-              <option>
-                {it.CourseTitle}
-              </option>
-              );
-        console.log("OPTION:",optionList)
-
+      const { value, suggestions } = this.state;
+  
+      // Autosuggest will pass through all these props to the input.
+      const inputProps = {
+        placeholder: 'course name',
+        value,
+        onChange: this.onChange
+      };
+      
       return (
         <div class="center">
           <h1
@@ -117,35 +162,25 @@ class CoursesTaken extends Component {
           >
             {this.state.question}
           </h1>
-          <form onSubmit={this.handleSubmit} style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}>
-            <label style={{color:"blue"}}> <i class="iconfont">&#xe600;</i>Choose your course from the list below
-            <div>
-            <select id="courses" value={this.state.value} onChange = {this.handleChange}>
-            <option value="">Select Your Courses </option>
-  {optionList}
-</select> 
-</div>
-<input class = "button_t" type="submit" value="I've taken it!" />
-</label>
-          </form>
-          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
-
-          {/* <label>
-    Choose a course from this list:
-   <input list="courses" id="prereq" autoComplete = "on"/>  
-</label>    */}
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          onSuggestionSelected= {this.onSuggestionSelected}
+          //renderSuggestionsContainer={this.renderSuggestionsContainer}
+          inputProps={inputProps}
+        />
+        <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
  
 
-<Link to="/focus_area">
-              <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
-                THAT'S IT!
-              </button>
-              <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
-          </Link>
+        <Link to="/focus_area">
+            <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
+              THAT'S IT!
+            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+         </Link>
 
 
         </div>
@@ -153,30 +188,6 @@ class CoursesTaken extends Component {
     );
   }
 }
-
-
-
-// class Dropdown extends Component {
-//     constructor(prop) {
-//       super(prop);
-//       this.state = {
-//         question: "What is your focus area in computer science?",
-//         schedule: []
-//       };
-//     }
-  
-//     callAPI() {
-//       console.log("fetching from api");
-//       fetch("http://localhost:5000/api/nlp/courses") //to be changed
-//         .then(res => res.json())
-//         .then(res => this.setState({ schedule: res }))
-//         .catch(err => err);
-//     }
-  
-//     componentDidMount() {
-//       this.callAPI();
-//     }
-//   }
   
   class FocusArea extends Component {
     constructor(prop) {
@@ -274,7 +285,7 @@ class CoursesTaken extends Component {
         );
       });
       return (
-        <div class="center1">
+        <div>
           <h1
             style={{
               display: "flex",
