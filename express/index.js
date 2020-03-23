@@ -12,9 +12,9 @@ let courseName = [];
 initilization();
 
 let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
-let courseStatus = new Map();
+let courseStatus = [];
 for (var id_loop = 0; id_loop <= 25; id_loop++) {
-  courseStatus.set(id_loop, 0); // initialize all course status to 0 
+  courseStatus[id_loop] = 0; // initialize all course status to 0 
 }
 // let course_to_id = new Map();
 // for (var id_loop = 0; id_loop <= 25; id_loop++) {
@@ -42,7 +42,7 @@ app.get("/api/courses", (req, res) => {
     if (err) {
       return console.error(err.message);
     }
-    allCourses.forEach((allCourse) => {currCourse.push(allCourse);})
+    allCourses.forEach((allCourse) => { currCourse.push(allCourse); })
   });
 
   // Close database
@@ -65,6 +65,8 @@ app.get("/api/:field/courses", (req, res) => {
   // courses = [];
   const field = String(req.params.field);
 
+  // console.log(courseStatus);
+
   // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
@@ -82,12 +84,12 @@ app.get("/api/:field/courses", (req, res) => {
     }
     allcourse.forEach(course => {
       // check coursestcoursestatusatus, its prerequisite
-      if (courseStatus.get(course.id) == 0) {  // not taken yet
+      if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
-        let pre = pre_original.split("-");
+        let pre = pre_original.toString().split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
-          if (courseStatus.get(pre[i]) == 0) {
+          if (courseStatus[pre[i]] == 0) {
             fulfill_flag = 0;  // not fulfill the prerequisite 
             break;
           }
@@ -100,20 +102,20 @@ app.get("/api/:field/courses", (req, res) => {
   });
 
   let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql_1, [core], (err, allcourse) => {
+  db.all(sql_1, ["core"], (err, allcourse) => {
     if (err) {
       throw err;
     }
     allcourse.forEach(course => {
       // check coursestatus, its prerequisite
-      if (courseStatus.get(course.id) == 0) {  // not taken yet
+      if (courseStatus[course.id] == 0) {  // not taken yet
         let pre_original = course.Prerequisite;
-        console.log(pre_original);
+        // console.log(pre_original);
 
-        let pre = pre_original.split("-");
+        let pre = pre_original.toString().split("-");
         let fulfill_flag = 1;
         for (var i = 0; i < pre.length; i++) {
-          if (courseStatus.get(pre[i]) == 0) {
+          if (courseStatus[pre[i]] == 0) {
             fulfill_flag = 0;  // not fulfill the prerequisite 
             break;
           }
@@ -186,10 +188,12 @@ app.post("/api/user_info", (req, res) => {
   // TODO: need to connect to front end
   // req - id
   // console.log(req);
-  let course_to_add = req.body;
+  // !!!!!!!!!!! let course_to_add = req.body;
   // console.log(req.method);
 
-  // Open and connect to database
+  courses_to_add = req.body;
+  //console.log(courses_to_add[1].trim());
+  // Open and connect to data[1base
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
       console.error(err.message);
@@ -199,13 +203,16 @@ app.post("/api/user_info", (req, res) => {
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
   let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
-
-  db.get(sql, [course_to_add], (err, row) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    courseStatus[row.id] == 1;
-  });
+  for (var i = 0; i < courses_to_add.length; i++) {
+    // console.log(courses_to_add[i]);
+    db.get(sql, [courses_to_add[i].trim()], (err, row) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      courseStatus[row.id] = 1;
+      // console.log(courseStatus[row.id]);
+    });
+  }
 
   // Close database
   db.close(err => {
@@ -213,7 +220,6 @@ app.post("/api/user_info", (req, res) => {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    // res.send(courses);  // send the result to frontend
   });
 });
 
@@ -252,8 +258,8 @@ function initilization() {
       "Databases",
       3,
       "D. Yarowsky",
-      "TTh",
-      "3:00PM - 4:15PM",
+      "T, Th",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "bd",
       "18"
     ],
@@ -263,8 +269,8 @@ function initilization() {
       "Randomized and Big Data Algorithms",
       3,
       "V. Braverman",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
       "18"
     ],
@@ -274,8 +280,8 @@ function initilization() {
       "Cloud Computing",
       3,
       "S. Ghorbani Khaledi",
-      "MW",
-      "12:00PM - 1:15PM",
+      "M, W",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
       "18"
     ],
@@ -285,8 +291,8 @@ function initilization() {
       "Genomic Data Science",
       3,
       "S. Salzberg",
-      "TTh",
-      "3:00PM - 4:15PM",
+      "T, Th",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "cb",
       "18"
     ],
@@ -296,8 +302,8 @@ function initilization() {
       "Computer Integrated Surgery",
       3,
       "R. Taylor",
-      "TTh",
-      "1:30PM - 2:45PM",
+      "T, Th",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "cb",
       "18"
     ],
@@ -307,8 +313,8 @@ function initilization() {
       "Computational Genomics: Sequences",
       3,
       "B. Langmead",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "cb",
       "18"
     ],
@@ -318,8 +324,8 @@ function initilization() {
       "Artificial Intelligence",
       3,
       "J. Sedoc, B. Van Durme",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "nlp",
       "18"
     ],
@@ -329,8 +335,8 @@ function initilization() {
       "Natural Language Processing",
       3,
       "K. Duh",
-      "MWF",
-      "11:00AM - 11:50AM",
+      "M, W, F",
+      "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
       "nlp",
       "18"
     ],
@@ -340,8 +346,8 @@ function initilization() {
       "Machine Learning",
       3,
       "P. Graff",
-      "MWF",
-      "4:30PM - 5:45PM",
+      "M, W, F",
+      "4:30PM - 5:45PM, 4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "nlp",
       "18-23-24-25"
     ],
@@ -351,8 +357,8 @@ function initilization() {
       "Algorithms for Sensor-Based Robotics",
       3,
       "S. Leonard",
-      "TTh",
-      "4:30PM - 5:45PM",
+      "T, Th",
+      "4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "r",
       "18"
     ],
@@ -362,8 +368,8 @@ function initilization() {
       "Computer Integrated Surgery I",
       4,
       "R. Taylor",
-      "TTh",
-      "1:30PM - 2:45PM",
+      "T, Th",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "r",
       "18"
     ],
@@ -373,8 +379,8 @@ function initilization() {
       "Computer Vision",
       3,
       "G. Hager",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "r",
       "18-23-24-25"
     ],
@@ -406,8 +412,8 @@ function initilization() {
       "Network Security",
       3,
       "R. Johnston",
-      "MW",
-      "3:00PM - 4:15PM",
+      "M, W",
+      "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "is",
       "18"
     ],
@@ -417,8 +423,8 @@ function initilization() {
       "Intermediate Programming",
       4,
       "D. Hovemeyer",
-      "MWF",
-      "12:00PM - 1:15PM",
+      "M, W, F",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
       "16"
     ],
@@ -428,8 +434,8 @@ function initilization() {
       "Gateway Computing: JAVA",
       3,
       "S. More",
-      "MWF",
-      "9:00AM - 9:50AM",
+      "M, W, F",
+      "9:00AM - 9:50AM, 9:00AM - 9:50AM, 9:00AM - 9:50AM",
       "core",
       ""
 
@@ -451,8 +457,8 @@ function initilization() {
       "Data Structures",
       4,
       "J. Selinski",
-      "MWF",
-      "1:30PM - 2:45PM",
+      "M, W, F",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "core",
       "15"
     ],
@@ -462,8 +468,8 @@ function initilization() {
       "Computer System Fundamentals",
       3,
       "P. Koehn",
-      "MWF",
-      "10:00AM - 10:50AM",
+      "M, W, F",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM",
       "core",
       "18"
     ],
@@ -473,8 +479,8 @@ function initilization() {
       "Automata & Computation Theory",
       3,
       "S. Kosaraju",
-      "TTh",
-      "9:00AM - 10:15AM",
+      "T, Th",
+      "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "core",
       "18"
     ],
@@ -484,8 +490,8 @@ function initilization() {
       "Intro Algorithms",
       3,
       "M. Dinitz",
-      "TTh",
-      "12:00PM - 1:15PM",
+      "T, Th",
+      "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
       "18-22"
     ],
@@ -495,8 +501,8 @@ function initilization() {
       "Discrete Mathematics",
       4,
       "B. Castello",
-      "MWF, Th",
-      "10:00AM - 10:50AM, 9:00AM - 9:50AM",
+      "M, W, F, Th",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM",
       "core",
       ""
     ],
@@ -506,8 +512,8 @@ function initilization() {
       "Intro to Probability",
       4,
       "J. Wierman",
-      "MWF, Th",
-      "1:30PM - 2:20PM, 10:30AM - 11:20AM",
+      "M, W, F, Th",
+      "1:30PM - 2:20PM, 1:30PM - 2:20PM, 1:30PM - 2:20PM, 10:30AM - 11:20AM",
       "core",
       "25"
     ],
@@ -518,7 +524,7 @@ function initilization() {
       4,
       "D. Athreya",
       "MWF, Th",
-      "1:30PM - 2:45PM, 9:00AM - 9:50AM",
+      "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM, 9:00AM - 9:50AM",
       "core",
       "25"
     ],
@@ -529,7 +535,7 @@ function initilization() {
       4,
       "J. Han",
       "MWF, Th",
-      "10:00AM - 10:50AM, 1:30PM - 2:20",
+      "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 1:30PM - 2:20",
       "core",
       ""
     ]
