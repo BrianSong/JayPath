@@ -18,8 +18,10 @@ module.exports = {
         //     }
         // }
         console.log("testConflict called");
+        console.log(courses.length);
         // looping over all combination of 3 courses
         let schedule = [];
+        let count = 0;
         for (var i = 0; i < courses.length; i++) {
             for (var j = i + 1; j < courses.length; j++) {
                 for (var k = j + 1; k < courses.length; k++) {
@@ -29,14 +31,15 @@ module.exports = {
 
                     // check time conflict
                     if (checkConflict(course1, course2) || checkConflict(course2, course3) || checkConflict(course1, course3)) {
-                        console.log("found time conflict.");
                     } else {
                         // found no time conflict and send all three courses
-                        console.log("found no time conflict.");
                         schedule.push(course1);
                         schedule.push(course2);
                         schedule.push(course3);
-
+                        count++;
+                        if(count > 2){
+                            return schedule;
+                        }
                     }
                 }
             }
@@ -72,7 +75,6 @@ function checkConflict(course1, course2) {
     var course1_time = course1.StartTimeEndTime
     var course2_day = course2.DaysOfWeek
     var course2_time = course2.StartTimeEndTime
-    console.log(course1_day);
 
     var course1_day_array = course1_day.split(", ");
     var course1_time_array = course1_time.split(", ");
