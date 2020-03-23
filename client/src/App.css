@@ -9,7 +9,6 @@ select{
 }
 
 .center {
-  /* padding: 370px 0; */
   line-height: 50px;
   height: 920px;
   border: 3px solid rgba(211, 149, 190, 0.431);
@@ -19,15 +18,64 @@ select{
 }
 
 .center1 {
-  /* padding: 370px 0; */
   line-height: 50px;
-  height: 920px;
+  height: 250px;
   border: 3px solid rgba(211, 149, 190, 0.431);
   text-align: center;
   align-items: center;
   justify-content: center;
 }
 
+.box1 {
+  line-height: 50px;
+  margin: auto;
+  width: 50%;
+  border: 3px solid#b1e2f2;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.box2 {
+  line-height: 50px;
+  margin: auto;
+  width: 50%;
+  border: 3px solid#fad993;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.box3 {
+  line-height: 50px;
+  margin: auto;
+  width: 50%;
+  border: 3px solid#fad9ff;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.text1 {
+  padding: 20px;
+  text-align: center;
+  color: #b1e2f2;
+  font-size: 10px;
+}
+
+.text2 {
+  padding: 20px;
+  text-align: center;
+  color: #fad993;
+  font-size: 10px;
+}
+
+.text3 {
+  padding: 20px;
+  text-align: center;
+  color: #fad9ff;
+  font-size: 10px;
+}
 
 .button0 {
   height:35px;
@@ -128,26 +176,6 @@ select{
   margin: 15px;
 }
 
-.text1 {
-  padding: 20px;
-  text-align: center;
-  color: #b1e2f2;
-  font-size: 10px;
-}
-
-.text2 {
-  padding: 20px;
-  text-align: center;
-  color: #fad993;
-  font-size: 10px;
-}
-
-.text3 {
-  padding: 20px;
-  text-align: center;
-  color: #fad9ff;
-  font-size: 10px;
-}
 
 .App {
   text-align: center;

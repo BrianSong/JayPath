@@ -254,8 +254,9 @@ class CoursesTaken extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        apiResponse: "",
-        schedule: []
+        schedule1: [],
+        schedule2: [],
+        schedule3: []
       };
     }
   
@@ -263,7 +264,10 @@ class CoursesTaken extends Component {
       console.log("fetching from api");
       fetch("http://localhost:5000/api/nlp/courses")
         .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
+        .then(res => this.setState({ 
+          schedule1: res.slice(0, 3),
+          schedule2: res.slice(3, 6),
+          schedule3: res.slice(6, 9)}))
         .catch(err => err);
     }
   
@@ -272,7 +276,33 @@ class CoursesTaken extends Component {
     }
   
     render() {
-      const listItems = this.state.schedule.map(d => {
+      const list1 = this.state.schedule1.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list2 = this.state.schedule2.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list3 = this.state.schedule3.map(d => {
         return (
           <li>
             {d.CourseNumber}
@@ -296,7 +326,18 @@ class CoursesTaken extends Component {
           >
             Welcome to Natural Language Processing!
           </h1>
-          <div>{listItems}</div>
+          <div class="text2">
+            <h1>Recommended Schedule #1</h1>
+          </div>
+          <div class="box2">{list1}</div>
+          <div class="text1">
+            <h1>Recommended Schedule #2</h1>
+          </div>
+          <div class="box1">{list2}</div>
+          <div class="text3">
+            <h1>Recommended Schedule #3</h1>
+          </div>
+          <div class="box3">{list3}</div>
         </div>
       );
     }
@@ -306,14 +347,19 @@ class CoursesTaken extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        schedule: []
+        schedule1: [],
+        schedule2: [],
+        schedule3: []
       };
     }
   
     callAPI() {
       fetch("http://localhost:5000/api/cb/courses")
         .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
+        .then(res => this.setState({ 
+          schedule1: res.slice(0, 3),
+          schedule2: res.slice(3, 6),
+          schedule3: res.slice(6, 9)}))
         .catch(err => err);
     }
   
@@ -322,7 +368,33 @@ class CoursesTaken extends Component {
     }
   
     render() {
-      const listItems = this.state.schedule.map(d => {
+      const list1 = this.state.schedule1.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list2 = this.state.schedule2.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list3 = this.state.schedule3.map(d => {
         return (
           <li>
             {d.CourseNumber}
@@ -346,7 +418,18 @@ class CoursesTaken extends Component {
           >
             Welcome to Computational Biology!
           </h1>
-          <div>{listItems}</div>
+          <div class="text2">
+            <h1>Recommended Schedule #1</h1>
+          </div>
+          <div class="box2">{list1}</div>
+          <div class="text1">
+            <h1>Recommended Schedule #2</h1>
+          </div>
+          <div class="box1">{list2}</div>
+          <div class="text3">
+            <h1>Recommended Schedule #3</h1>
+          </div>
+          <div class="box3">{list3}</div>
         </div>
       );
     }
@@ -356,15 +439,19 @@ class CoursesTaken extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        apiResponse: "",
-        schedule: []
+        schedule1: [],
+        schedule2: [],
+        schedule3: []
       };
     }
   
     callAPI() {
       fetch("http://localhost:5000/api/is/courses")
         .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
+        .then(res => this.setState({ 
+          schedule1: res.slice(0, 3),
+          schedule2: res.slice(3, 6),
+          schedule3: res.slice(6, 9)}))
         .catch(err => err);
     }
   
@@ -373,7 +460,33 @@ class CoursesTaken extends Component {
     }
   
     render() {
-      const listItems = this.state.schedule.map(d => {
+      const list1 = this.state.schedule1.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list2 = this.state.schedule2.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list3 = this.state.schedule3.map(d => {
         return (
           <li>
             {d.CourseNumber}
@@ -397,7 +510,18 @@ class CoursesTaken extends Component {
           >
             Welcome to Information Securities!
           </h1>
-          <div>{listItems}</div>
+          <div class="text2">
+            <h1>Recommended Schedule #1</h1>
+          </div>
+          <div class="box2">{list1}</div>
+          <div class="text1">
+            <h1>Recommended Schedule #2</h1>
+          </div>
+          <div class="box1">{list2}</div>
+          <div class="text3">
+            <h1>Recommended Schedule #3</h1>
+          </div>
+          <div class="box3">{list3}</div>
         </div>
       );
     }
@@ -408,14 +532,19 @@ class CoursesTaken extends Component {
       super(prop);
       this.state = {
         apiResponse: "",
-        schedule: []
+        schedule1: [],
+        schedule2: [],
+        schedule3: [],
       };
     }
   
     callAPI() {
       fetch("http://localhost:5000/api/r/courses")
         .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
+        .then(res => this.setState({ 
+          schedule1: res.slice(0, 3),
+          schedule2: res.slice(3, 6),
+          schedule3: res.slice(6, 9)}))
         .catch(err => err);
     }
   
@@ -424,7 +553,33 @@ class CoursesTaken extends Component {
     }
   
     render() {
-      const listItems = this.state.schedule.map(d => {
+      const list1 = this.state.schedule1.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list2 = this.state.schedule2.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list3 = this.state.schedule3.map(d => {
         return (
           <li>
             {d.CourseNumber}
@@ -448,7 +603,18 @@ class CoursesTaken extends Component {
           >
             Welcome to Robotics!
           </h1>
-          <div>{listItems}</div>
+          <div class="text2">
+            <h1>Recommended Schedule #1</h1>
+          </div>
+          <div class="box2">{list1}</div>
+          <div class="text1">
+            <h1>Recommended Schedule #2</h1>
+          </div>
+          <div class="box1">{list2}</div>
+          <div class="text3">
+            <h1>Recommended Schedule #3</h1>
+          </div>
+          <div class="box3">{list3}</div>
         </div>
       );
     }
@@ -458,15 +624,19 @@ class CoursesTaken extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        apiResponse: "",
-        schedule: []
+        schedule1: [],
+        schedule2: [],
+        schedule3: []
       };
     }
   
     callAPI() {
       fetch("http://localhost:5000/api/bd/courses")
         .then(res => res.json())
-        .then(res => this.setState({ schedule: res }))
+        .then(res => this.setState({ 
+          schedule1: res.slice(0, 3),
+          schedule2: res.slice(3, 6),
+          schedule3: res.slice(6, 9)}))
         .catch(err => err);
     }
   
@@ -475,7 +645,33 @@ class CoursesTaken extends Component {
     }
   
     render() {
-      const listItems = this.state.schedule.map(d => {
+      const list1 = this.state.schedule1.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list2 = this.state.schedule2.map(d => {
+        return (
+          <li>
+            {d.CourseNumber}
+            {": "}
+            {d.CourseTitle}
+            {" Credit:"}
+            {d.Credits}
+            {" Instructor:"}
+            {d.Instructor}
+          </li>
+        );
+      });
+      const list3 = this.state.schedule3.map(d => {
         return (
           <li>
             {d.CourseNumber}
@@ -502,14 +698,15 @@ class CoursesTaken extends Component {
           <div class="text2">
             <h1>Recommended Schedule #1</h1>
           </div>
+          <div class="box2">{list1}</div>
           <div class="text1">
             <h1>Recommended Schedule #2</h1>
           </div>
+          <div class="box1">{list2}</div>
           <div class="text3">
             <h1>Recommended Schedule #3</h1>
           </div>
-          
-          <div>{listItems}</div>
+          <div class="box3">{list3}</div>
         </div>
       );
     }
