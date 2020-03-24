@@ -20,11 +20,12 @@ The user clicks on one of the focus areas and is then taken to the final recomme
 
 
 ## Iteration Backlog
-- As a student, I want to input the courses I have taken so that the application knows my current progress.
+- As a student, I want to determine the number of courses I want to take each semester so that I can evenly distribute remaining courses to each semester.
 - As a student, I want to see multiple recommended schedules so that I get the flexibility to choose between them.
-- As a student, I want to receive a schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.
+- As a student, I want to receive a full schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.
+- As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.
 
 ## Tasks
-- Implement a simple version of course recommendation algorithm that outputs recommendations for next semester.
-- Add interfaces that allow users to input the courses he/she has taken.
+- Implement a simple but full version of course recommendation algorithm(exclude recommendation based on preferences).
+- Add a better interface for displaying course schedules.
 - Add all course infomation to database.
