@@ -29,3 +29,8 @@ The user clicks on one of the focus areans and is then taken to the final recomm
 - Implement a simple version of course recommendation algorithm that outputs recommendations for next semester.
 - Add interfaces that allow users to input the courses he/she has taken.
 - Add all course infomation to database.
+
+# Retrospective
+
+
+As for the iteration part of the database section, we adding a new feature: prerequisite to each course so that now the recommendation courses to the user will be those courses that all of its prerequisite courses have been taken. The process is quite smooth. However, there exists some difficulties when we send all the courses back to the frontend. It turned out to be the request from the frontend is lack with some important information in the header s.t. the req.body is empty. Thanks to the effort of our groupmate, the difficulty has been resolved. For the next iteration, we will recommend a whole path to the user, so that some effort and update will be made in the database section so that we can fulfill this new feature.
