@@ -1,9 +1,9 @@
 class course_node {
   constructor(course_status) {
     this.status = course_status;
-    this.value = 0;
-    this.child_indices = [];
-    this.best_child_index = -1;
+    this.value = 0; // not used for iter3
+    this.child_indices = []; // not used for iter3
+    this.best_child_index = -1; // not used for iter3
   }
 
   // getter
