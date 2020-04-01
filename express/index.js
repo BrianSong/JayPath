@@ -16,8 +16,6 @@ initilization();
 
 // let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
-let field = null;
-// let proceed = false;
 for (var id_loop = 0; id_loop <= 25; id_loop++) {
   courseStatus[id_loop] = 0; // initialize all course status to 0 
 }
@@ -67,87 +65,82 @@ app.get("/api/test", (req, res) => {
 
 app.get("/api/:field/courses", (req, res) => {
   // send candidate courses to backend
-  // courses = [];
+  let courses = []
   field = String(req.params.field);
-  console.log(courseStatus);
-  courses = filterByPre();
-  // while (proceed == false) {
-  //   console.log("Executing the filter function, wait...");
-  // }
-  console.log(courses);
-  courses = schedule.testConflict(courses);
-  res.send(courses);
-  // // Open and connect to database
-  // let db = new sqlite3.Database("../db/JayPath.db", err => {
-  //   if (err) {
-  //     console.error(err.message);
-  //   }
-  //   console.log("Connected to the courses database.");
-  // });
 
-  // // Extract course according to the focus area and sent it back to the front end for displaying.
-  // let sql = `SELECT * FROM courses WHERE Track = ?;`;
+  // courses = filter.filterByPre(courseStatus, field, schedule.testConflict);
 
-  // db.all(sql, [field], (err, allcourse) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   allcourse.forEach(course => {
-  //     // check coursestcoursestatusatus, its prerequisite
-  //     if (courseStatus[course.id] == 0) {  // not taken yet
-  //       let pre_original = course.Prerequisite;
-  //       let pre = pre_original.toString().split("-");
-  //       let fulfill_flag = 1;
-  //       for (var i = 0; i < pre.length; i++) {
-  //         if (courseStatus[pre[i]] == 0) {
-  //           fulfill_flag = 0;  // not fulfill the prerequisite
-  //           break;
-  //         }
-  //       }
-  //       if (fulfill_flag == 1) {
-  //         courses.push(course);  // add a course to courses
-  //       }
-  //     }
-  //   });
-  // });
+  // Open and connect to database
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+  });
 
-  // let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
-  // db.all(sql_1, ["core"], (err, allcourse) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   allcourse.forEach(course => {
-  //     // check coursestatus, its prerequisite
-  //     if (courseStatus[course.id] == 0) {  // not taken yet
-  //       let pre_original = course.Prerequisite;
-  //       // console.log(pre_original);
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses WHERE Track = ?;`;
 
-  //       let pre = pre_original.toString().split("-");
-  //       let fulfill_flag = 1;
-  //       for (var i = 0; i < pre.length; i++) {
-  //         if (courseStatus[pre[i]] == 0) {
-  //           fulfill_flag = 0;  // not fulfill the prerequisite
-  //           break;
-  //         }
-  //       }
-  //       if (fulfill_flag == 1) {
-  //         courses.push(course);  // add a course to courses
-  //       }
-  //     }
-  //   });
-  //   console.log(courses);
-  //   courses = schedule.testConflict(courses);
-  // });
+  db.all(sql, [field], (err, allcourse) => {
+    if (err) {
+      throw err;
+    }
+    allcourse.forEach(course => {
+      // check coursestcoursestatusatus, its prerequisite
+      if (courseStatus[course.id] == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        let pre = pre_original.toString().split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus[pre[i]] == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
+    });
+  });
+
+  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql_1, ["core"], (err, allcourse) => {
+    if (err) {
+      throw err;
+    }
+    allcourse.forEach(course => {
+      // check coursestatus, its prerequisite
+      if (courseStatus[course.id] == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        // console.log(pre_original);
+
+        let pre = pre_original.toString().split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus[pre[i]] == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
+    });
+    // console.log(courses);
+    courses = schedule.testConflict(courses);
+  });
 
 
-  // // Close database
-  // db.close(err => {
-  //   if (err) {
-  //     console.error(err.message);
-  //   }
-  //   console.log("Close the courses connection.");
-  //   res.send(courses);  // send the result to frontend
-  // });
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    res.send(courses);  // send the result to frontend
+  });
 });
 
 app.post("/api/courses", (req, res) => {
@@ -576,17 +569,15 @@ function initilization() {
   });
 }
 
-function filterByPre() {
+function filterByPre(courseStatus, field, callback) {
   // Open and connect to database
   console.log("filterByPre function is called!");
   let courses = []
-  proceed = false;
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
       console.error(err.message);
     }
     console.log("Connected to the courses database.");
-    console.log("Finally???");
   });
 
 
@@ -646,7 +637,7 @@ function filterByPre() {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    console.log(courses);
+    courses = callback(courses);
     return courses;
   });
 }

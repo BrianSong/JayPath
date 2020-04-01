@@ -18,7 +18,7 @@ module.exports = {
         //     }
         // }
         console.log("testConflict called");
-        console.log(courses.length);
+        // console.log(courses.length);
         // looping over all combination of 3 courses
         let schedule = [];
         let count = 0;
