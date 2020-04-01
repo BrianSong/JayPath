@@ -8,6 +8,7 @@ select{
   text-align-last: center;
 }
 
+
 .center {
   line-height: 50px;
   height: 920px;
@@ -29,21 +30,30 @@ select{
 .box1 {
   line-height: 50px;
   margin: auto;
-  width: 50%;
+  width: 90%;
   border: 3px solid#b1e2f2;
   text-align: center;
   justify-content: center;
-  padding: 10px;
+}
+
+.schoolyear_Box {
+  float:left;
+  margin: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 24%;
+  border: 3px solid #90a4ae;
+  text-align: center;
+  justify-content: center;
 }
 
 .box2 {
   line-height: 50px;
   margin: auto;
-  width: 50%;
+  width: 90%;
   border: 3px solid#fad993;
   text-align: center;
   justify-content: center;
-  padding: 10px;
 }
 
 .box3 {
@@ -56,10 +66,40 @@ select{
   padding: 10px;
 }
 
+.hh1{
+  padding:5px;
+  text-align:center;
+  font-size:15px;
+  color: #193b4d;
+  font-family: Optima-Bold;
+}
+
+.hh2{
+  padding:5px;
+  text-align:center;
+  font-size:15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  background-color: #61dafb;
+}
+
+.hh3{
+  padding:5px;
+  text-align:center;
+  font-size:15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  background-color: #fad993;
+}
+
+
 .text1 {
-  padding: 20px;
   text-align: center;
-  color: #b1e2f2;
+  color: white;
   font-size: 10px;
 }
 
