@@ -37,7 +37,7 @@ module.exports = {
                         schedule.push(course2);
                         schedule.push(course3);
                         count++;
-                        if(count > 2){
+                        if (count > 2) {
                             return schedule;
                         }
                     }

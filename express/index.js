@@ -4,16 +4,20 @@ const app = express();
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
 const schedule = require("./schedule");
+const filter = require("./filter");
 
 app.use(express.json());
 app.use(cors());
 
 let courseInfo = [];
 let courseName = [];
+
 initilization();
 
-let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
+// let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
+let field = null;
+// let proceed = false;
 for (var id_loop = 0; id_loop <= 25; id_loop++) {
   courseStatus[id_loop] = 0; // initialize all course status to 0 
 }
@@ -62,85 +66,88 @@ app.get("/api/test", (req, res) => {
 });
 
 app.get("/api/:field/courses", (req, res) => {
-  // send candidate courses to backend 
+  // send candidate courses to backend
   // courses = [];
-  const field = String(req.params.field);
-
+  field = String(req.params.field);
   console.log(courseStatus);
-
-
-  // Open and connect to database
-  let db = new sqlite3.Database("../db/JayPath.db", err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Connected to the courses database.");
-  });
-
-  // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses WHERE Track = ?;`;
-
-  db.all(sql, [field], (err, allcourse) => {
-    if (err) {
-      throw err;
-    }
-    allcourse.forEach(course => {
-      // check coursestcoursestatusatus, its prerequisite
-      if (courseStatus[course.id] == 0) {  // not taken yet
-        let pre_original = course.Prerequisite;
-        let pre = pre_original.toString().split("-");
-        let fulfill_flag = 1;
-        for (var i = 0; i < pre.length; i++) {
-          if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite
-            break;
-          }
-        }
-        if (fulfill_flag == 1) {
-          courses.push(course);  // add a course to courses
-        }
-      }
-    });
-  });
-
-  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql_1, ["core"], (err, allcourse) => {
-    if (err) {
-      throw err;
-    }
-    allcourse.forEach(course => {
-      // check coursestatus, its prerequisite
-      if (courseStatus[course.id] == 0) {  // not taken yet
-        let pre_original = course.Prerequisite;
-        // console.log(pre_original);
-
-        let pre = pre_original.toString().split("-");
-        let fulfill_flag = 1;
-        for (var i = 0; i < pre.length; i++) {
-          if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite
-            break;
-          }
-        }
-        if (fulfill_flag == 1) {
-          courses.push(course);  // add a course to courses
-        }
-      }
-    });
-
-    courses = schedule.testConflict(courses);
-  });
+  courses = filterByPre();
+  // while (proceed == false) {
+  //   console.log("Executing the filter function, wait...");
+  // }
   console.log(courses);
+  courses = schedule.testConflict(courses);
+  res.send(courses);
+  // // Open and connect to database
+  // let db = new sqlite3.Database("../db/JayPath.db", err => {
+  //   if (err) {
+  //     console.error(err.message);
+  //   }
+  //   console.log("Connected to the courses database.");
+  // });
+
+  // // Extract course according to the focus area and sent it back to the front end for displaying.
+  // let sql = `SELECT * FROM courses WHERE Track = ?;`;
+
+  // db.all(sql, [field], (err, allcourse) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   allcourse.forEach(course => {
+  //     // check coursestcoursestatusatus, its prerequisite
+  //     if (courseStatus[course.id] == 0) {  // not taken yet
+  //       let pre_original = course.Prerequisite;
+  //       let pre = pre_original.toString().split("-");
+  //       let fulfill_flag = 1;
+  //       for (var i = 0; i < pre.length; i++) {
+  //         if (courseStatus[pre[i]] == 0) {
+  //           fulfill_flag = 0;  // not fulfill the prerequisite
+  //           break;
+  //         }
+  //       }
+  //       if (fulfill_flag == 1) {
+  //         courses.push(course);  // add a course to courses
+  //       }
+  //     }
+  //   });
+  // });
+
+  // let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
+  // db.all(sql_1, ["core"], (err, allcourse) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   allcourse.forEach(course => {
+  //     // check coursestatus, its prerequisite
+  //     if (courseStatus[course.id] == 0) {  // not taken yet
+  //       let pre_original = course.Prerequisite;
+  //       // console.log(pre_original);
+
+  //       let pre = pre_original.toString().split("-");
+  //       let fulfill_flag = 1;
+  //       for (var i = 0; i < pre.length; i++) {
+  //         if (courseStatus[pre[i]] == 0) {
+  //           fulfill_flag = 0;  // not fulfill the prerequisite
+  //           break;
+  //         }
+  //       }
+  //       if (fulfill_flag == 1) {
+  //         courses.push(course);  // add a course to courses
+  //       }
+  //     }
+  //   });
+  //   console.log(courses);
+  //   courses = schedule.testConflict(courses);
+  // });
 
 
-  // Close database
-  db.close(err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Close the courses connection.");
-    res.send(courses);  // send the result to frontend
-  });
+  // // Close database
+  // db.close(err => {
+  //   if (err) {
+  //     console.error(err.message);
+  //   }
+  //   console.log("Close the courses connection.");
+  //   res.send(courses);  // send the result to frontend
+  // });
 });
 
 app.post("/api/courses", (req, res) => {
@@ -566,6 +573,81 @@ function initilization() {
       console.error(err.message);
     }
     console.log("Close the courses database connection for initilization!");
+  });
+}
+
+function filterByPre() {
+  // Open and connect to database
+  console.log("filterByPre function is called!");
+  let courses = []
+  proceed = false;
+  let db = new sqlite3.Database("../db/JayPath.db", err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Connected to the courses database.");
+    console.log("Finally???");
+  });
+
+
+  // Extract course according to the focus area and sent it back to the front end for displaying.
+  let sql = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql, [field], (err, allcourse) => {
+    if (err) {
+      throw err;
+    }
+    allcourse.forEach(course => {
+      // check coursestcoursestatusatus, its prerequisite
+      if (courseStatus[course.id] == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        let pre = pre_original.toString().split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus[pre[i]] == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
+    });
+  });
+
+  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
+  db.all(sql_1, ["core"], (err, allcourse) => {
+    if (err) {
+      throw err;
+    }
+    allcourse.forEach(course => {
+      // check coursestatus, its prerequisite
+      if (courseStatus[course.id] == 0) {  // not taken yet
+        let pre_original = course.Prerequisite;
+        // console.log(pre_original);
+
+        let pre = pre_original.toString().split("-");
+        let fulfill_flag = 1;
+        for (var i = 0; i < pre.length; i++) {
+          if (courseStatus[pre[i]] == 0) {
+            fulfill_flag = 0;  // not fulfill the prerequisite
+            break;
+          }
+        }
+        if (fulfill_flag == 1) {
+          courses.push(course);  // add a course to courses
+        }
+      }
+    });
+  });
+  // Close database
+  db.close(err => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log("Close the courses connection.");
+    console.log(courses);
+    return courses;
   });
 }
 
