@@ -1,26 +1,26 @@
 module.exports = {
-    get_all_semesters: function get_all_semesters(user_semester) {
+    get_all_semesters: function get_all_semesters(user_semester, field) {
         // input: user course nodes list (a list contains a single course node)
         // output: a list where each element (corresponding to a term) is a list of course codes
 
         let all_semesters = []; // every element is a list of courses for a term
 
         // get the very next semester nodes based on the user nodes list
-        let curr_semester_nodes_list = get_one_semester(user_semester);
+        let curr_semester_nodes_list = get_one_semester(user_semester, field);
         
         // note: check graduation before push to all semesters to make sure values are assigned
         // check graudation and assign values (pass by reference in order to modify input?)
-        let grad_flag = check_grad(curr_semester_nodes_list);
+        let grad_flag = check_grad(curr_semester_nodes_list, field);
 
         // add the current semester nodes list into the all semesters list
         all_semesters.push(curr_semester_nodes_list);
 
         while (!grad_flag) { // not graduate yet, need to take one more semester
             // get the next semester nodes
-            curr_semester_nodes_list = get_one_semester(all_semesters[-1]); // only need to input the most recent semester
+            curr_semester_nodes_list = get_one_semester(all_semesters[-1], field); // only need to input the most recent semester
 
             // check graudation and assign values (pass by reference in order to modify input?)
-            grad_flag = check_grad(curr_semester_nodes_list);
+            grad_flag = check_grad(curr_semester_nodes_list, field);
 
             // add the current semester nodes list into the all semesters list
             all_semesters.push(curr_semester_nodes_list);
@@ -30,7 +30,7 @@ module.exports = {
     },
 };
 
-function check_grad(nodes_list){
+function check_grad(nodes_list, field){
     let grad_flag = false;
     let curr_node_status = [];
     let node_value = 0;
