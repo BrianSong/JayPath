@@ -18,7 +18,7 @@ module.exports = {
         //     }
         // }
         console.log("testConflict called");
-        console.log(courses.length);
+        // console.log(courses.length);
         // looping over all combination of 3 courses
         let schedule = [];
         let count = 0;
@@ -37,7 +37,7 @@ module.exports = {
                         schedule.push(course2);
                         schedule.push(course3);
                         count++;
-                        if(count > 2){
+                        if (count > 2) {
                             return schedule;
                         }
                     }
