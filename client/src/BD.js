@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Jay from "./bluejay.png";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class BD extends Component {
     constructor(prop) {
@@ -125,6 +126,15 @@ class BD extends Component {
           </div>
           <div class="box2">{list2}</div>
           </div>
+
+          <div>
+          <Link to="/">
+            <button class = "button_r" type="button">
+              Go Back
+            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe7f9;</i>
+          </Link>
+      </div>
           
         </div>
       );
