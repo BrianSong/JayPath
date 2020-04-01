@@ -25,7 +25,7 @@ module.exports = {
                     // add a new child node into the current semester nodes list
                     curr_semester_nodes_list.push(child_nodes[j])
                     // remember the child node index
-                    // prev_semester_nodes_list[i].add_child_index(curr_semester_nodes_list.length); // not used for iter3
+                    // prev_semester_nodes_list[i].add_child_index(curr_semester_nodes_list.length-1); // not used for iter3
                 } else {
                     // remember the child node index
                     // prev_semester_nodes_list[i].add_child_index(child_node_idx);  // not used for iter3
