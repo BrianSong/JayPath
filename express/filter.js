@@ -96,7 +96,7 @@ module.exports = {
             }
             console.log("Close the courses connection.");
             console.log("Finish filtering the courses by prerequisites!")
-            return callback(courses);
+            return callback(courseStatus, courses);
         });
     },
 };
