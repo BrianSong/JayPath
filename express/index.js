@@ -15,11 +15,11 @@ initilization();
 let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
 for (var id_loop = 0; id_loop <= 25; id_loop++) {
-  courseStatus[id_loop] = 0; // initialize all course status to 0 
+  courseStatus[id_loop] = 0; // initialize all course status to 0
 }
 // let course_to_id = new Map();
 // for (var id_loop = 0; id_loop <= 25; id_loop++) {
-//   courseStatus.set(id_loop, 0); // initialize all course status to 0 
+//   courseStatus.set(id_loop, 0); // initialize all course status to 0
 // }
 
 app.get("/", (req, res) => {
@@ -62,7 +62,7 @@ app.get("/api/test", (req, res) => {
 });
 
 app.get("/api/:field/courses", (req, res) => {
-  // send candidate courses to backend 
+  // send candidate courses to backend
   // courses = [];
   const field = String(req.params.field);
 
@@ -189,7 +189,7 @@ app.get("/api/courses/:id", (req, res) => {
 });
 
 app.post("/api/user_info", (req, res) => {
-
+  res.header('Access-Control-Allow-Origin', "*");
   courses_to_add = req.body;
   //console.log(courses_to_add[1].trim());
   // Open and connect to data[1base
