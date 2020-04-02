@@ -1,0 +1,20 @@
+# OO Design
+
+![](assets/oose.jpg)
+
+
+# Wireframe
+
+
+
+## Iteration Backlog
+- As a student , I want to make sure that I can successfully graduate by following the recommended course path.
+- As a student, I want to know if I can graduate on time with a CS degree based on my current school year and the courses I have taken.
+- As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.
+- As a student who has taken 1+ gap semesters, I want to receive a schedule that accomodates to my unique circumstances.
+    (e.g. after a gap semester, I might start my sophomore year in the spring)
+- As a student, I want to see an 8-semester overview of my academic progress(e.g. what has been completed, what is yet to be done) in the final recommended course path calendar view.
+
+## Tasks
+- Optimize code to eliminate redundencies.
+
