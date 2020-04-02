@@ -65,13 +65,23 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses", (req, res) => {
   // send candidate courses to backend
+  let field = String(req.params.field);
+  let courses = [];
+  let course_id = [];
+  for(var i = 0; i < 25; i++){
+    course_id.push(Math.floor(Math.random()*30));
+  }
 
-  let courses = []
-  field = String(req.params.field);
+  // let user_course_node = new (courseStatus);
+  // let all = all_semesters.get_all_semesters(user_course_node, field);
+  // let schedule_list = one_schedule.get_schedule_simple(all);
+  // let last_semester_schedule = schedule_list[-1].get_status;
+  // for(var i = 0; i < last_semester_schedule.length; i++){
+  //   if(last_semester_schedule[i] == 1){
+  //     course_id.push(i);
+  //   }
+  // }
 
-  // courses = filter.filterByPre(courseStatus, field, schedule.testConflict);
-
-  // Open and connect to database
   let db = new sqlite3.Database("../db/JayPath.db", err => {
     if (err) {
       console.error(err.message);
@@ -80,82 +90,18 @@ app.get("/api/:field/courses", (req, res) => {
   });
 
   // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses WHERE Track = ?;`;
-
-  db.all(sql, [field], (err, allcourse) => {
-    if (err) {
-      throw err;
-    }
-    allcourse.forEach(course => {
-      // check coursestcoursestatusatus, its prerequisite
-      if (courseStatus[course.id] == 0) {  // not taken yet
-        let pre_original = course.Prerequisite;
-        let pre = pre_original.toString().split("-");
-        let fulfill_flag = 1;
-        for (var i = 0; i < pre.length; i++) {
-          if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite
-            break;
-          }
-        }
-        if (fulfill_flag == 1) {
-          courses.push(course);  // add a course to courses
-        }
+  let sql = `SELECT * FROM courses WHERE id = ?;`;
+  for (var i = 0; i < course_id.length; i++) {
+    // console.log(courses_to_add[i]);
+    db.all(sql, [course_id[i]], (err, allcourse) => {
+      if (err) {
+        return console.error(err.message);
       }
+      allcourse.forEach(course=>{
+        courses.push(course);
+      })
     });
-  });
-
-  let sql_1 = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql_1, ["core"], (err, allcourse) => {
-    if (err) {
-      throw err;
-    }
-    allcourse.forEach(course => {
-      // check coursestatus, its prerequisite
-      if (courseStatus[course.id] == 0) {  // not taken yet
-        let pre_original = course.Prerequisite;
-        // console.log(pre_original);
-
-        let pre = pre_original.toString().split("-");
-        let fulfill_flag = 1;
-        for (var i = 0; i < pre.length; i++) {
-          if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite
-            break;
-          }
-        }
-        if (fulfill_flag == 1) {
-          courses.push(course);  // add a course to courses
-        }
-      }
-    });
-  });
-
-  let sql_2 = `SELECT * FROM courses WHERE Track = ?;`;
-  db.all(sql_2, ["elective"], (err, allcourse) => {
-    if (err) {
-      throw err;
-    }
-    allcourse.forEach(course => {
-      // check coursestatus, its prerequisite
-      if (courseStatus[course.id] == 0) {  // not taken yet
-        let pre_original = course.Prerequisite;
-        // console.log(pre_original);
-
-        let pre = pre_original.toString().split("-");
-        let fulfill_flag = 1;
-        for (var i = 0; i < pre.length; i++) {
-          if (courseStatus[pre[i]] == 0) {
-            fulfill_flag = 0;  // not fulfill the prerequisite
-            break;
-          }
-        }
-        if (fulfill_flag == 1) {
-          courses.push(course);  // add a course to courses
-        }
-      }
-    });
-  });
+  }
 
   // Close database
   db.close(err => {
@@ -163,8 +109,7 @@ app.get("/api/:field/courses", (req, res) => {
       console.error(err.message);
     }
     console.log("Close the courses connection.");
-    courses = schedule.testConflict(courses);
-    res.send(courses);  // send the result to frontend
+    res.send(courses);
   });
 });
 
