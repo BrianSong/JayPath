@@ -13,7 +13,9 @@ module.exports = {
         for (var i = 0; i < prev_semester_nodes_list.length; i++) {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
-            let child_nodes = select_from_eligible(prev_semester_nodes_list[i].get_status);
+            console.log("prev status: ");
+            console.log(prev_semester_nodes_list[i].get_status);
+            let child_nodes = get_child_nodes(prev_semester_nodes_list[i]);
             console.log("child_nodes length: " + child_nodes.length);
 
             // add child course nodes in the current semester nodes list
@@ -39,19 +41,24 @@ module.exports = {
 
 function get_child_nodes(prev_course_node, field) {
     let prev_course_status = prev_course_node.get_status;
-    return filter.filterByPre(prev_course_status, field, select_from_eligible); // for function callback
+    let eligible_courses_filter_by_pre = filter.filterByPre(prev_course_status, field);
+    console.log("eligible_courses_filter_by_pre;");
+    console.log(eligible_courses_filter_by_pre);
+    let eligible_courses_filter_by_conflict = select_from_eligible(prev_course_status, eligible_courses_filter_by_pre);
+    return eligible_courses_filter_by_conflict
 }
 
-function select_from_eligible(prev_course_status) {
-    console.log(prev_course_status);
+function select_from_eligible(prev_course_status, eligible_courses) {
     // extract useful information
     let courses_conflict = ["3-25-38-19-8-26-16-23-27-33-42", "", "41", "25-38-0", "14-15-17-36-44", "11-12-13-45", "18-29-34-39", "40-9-20-24-28", "19-26-16-23-27-33-42-0", "7-40-20-24-28", "", "5-12-13-45-23", "5-6-11-13-18-29-34-39-45", "5-11-12-45", "4-15-17-36-44", "4-6-14-17-18-29-34-36-39-44", "19-8-26-23-27-33-42-0", "4-14-15-44", "6-12-29-34-45-39-15", "8-26-16-23-27-33-42-0", "7-40-9-24-28", "30-46", "", "19-8-26-16-0-33-42-0-11", "7-40-9-20-28", "3-38-0", "19-8-16-23-27-33-42-0", "19-8-26-16-23-33-42-0", "7-40-9-20-24", "6-19-34-39", "21-46", "", "", "19-8-26-16-23-27-42-0", "6-18-29-39", "", "4-14-15-44", "43", "3-25-0", "6-12-15-18-29-34-45", "7-9-20-24-28", "2", "19-8-26-16-23-27-33-0", "37", "4-14-15-17-36", "5-6-11-12-13-15-18-29-34-39", "21-30"];
-    let eligible_ids = []; // course id for each eligible course, e.g.: [1,2,5]
-    for(let t = 0; t < 25; t++){
-        if(!prev_course_status.includes(t)){
-            eligible_ids.push(t);
-        }
-    }
+    // let eligible_ids = []; // course id for each eligible course, e.g.: [1,2,5]
+    // for (let t = 0; t < 25; t++) {
+    //     if (prev_course_status[t] == 0) {
+    //         eligible_ids.push(t);
+    //     }
+    // }
+    eligible_ids = eligible_courses;
+    console.log(eligible_courses);
     let conflict_ids = []; // course id of conflict courses for each eligible course, e.g.: [[2,3], [1], []]
     for (let i = 0; i < eligible_ids.length; i++) {
         let conflict_string = courses_conflict[eligible_ids[i]].split("-");

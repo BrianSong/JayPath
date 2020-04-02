@@ -66,6 +66,7 @@ app.get("/api/:field/courses", (req, res) => {
   for(var i = 0; i < 25; i++){
     course_id.push(Math.floor(Math.random()*30));
   }
+
   // let user_course_node = new (courseStatus);
   // let all = all_semesters.get_all_semesters(user_course_node, field);
   // let schedule_list = one_schedule.get_schedule_simple(all);
