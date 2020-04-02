@@ -5,12 +5,12 @@ Use a software to draw this (e.g. draw.io) and save the diagram as an image.
 Upload the image and link it in here using this sintax.
 
 
-![](oose.jpg)
+![](assets/oose.jpg)
 
 # Wireframe
 
-![](Wireframe1.jpg)
-![](Wireframe2.jpg)
+![](assets/Wireframe1.jpg)
+![](assets/Wireframe2.jpg)
 
 # Iteration Backlog
 

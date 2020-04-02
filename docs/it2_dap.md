@@ -5,19 +5,19 @@ Use a software to draw this (e.g. draw.io) and save the diagram as an image.
 Upload the image and link it in here using this sintax.
 
 
-![](oose.jpg)
+![](assets/oose.jpg)
 
 
 # Wireframe
 
 On the first page, the user is asked to input the courses he/she has taken. 
-![](it2_p1v1.jpg)
-![](it2_p1v2.jpg)
-![](it2_p1v3.jpg)
+![](assets/it2_p1v1.jpg)
+![](assets/it2_p1v2.jpg)
+![](assets/it2_p1v3.jpg)
 Once all courses are added, the user clicks on "That's it", which would then redirect him/her to the following page. 
-![](it2_p2.jpg)
+![](assets/it2_p2.jpg)
 The user clicks on one of the focus areans and is then taken to the final recommendation page.   
-![](it2_p3.jpg)
+![](assets/it2_p3.jpg)
 
 
 ## Iteration Backlog
