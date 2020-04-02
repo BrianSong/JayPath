@@ -3,7 +3,7 @@ module.exports = {
     filterByPre: function filterByPre(courseStatus, field, callback) {
         // Open and connect to database
         console.log("filterByPre function is called!");
-        let courses = [];
+        let courses = []
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
@@ -95,7 +95,7 @@ module.exports = {
                 console.error(err.message);
             }
             console.log("Close the courses connection.");
-            console.log("Finish filtering the courses by prerequisites!");
+            console.log("Finish filtering the courses by prerequisites!")
             return callback(courseStatus, courses);
         });
     },
