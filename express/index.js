@@ -240,7 +240,7 @@ function initilization() {
     console.log("Connected to the courses database for initilization!");
   });
   db.run(
-    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING)"
+    "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING)"
   );
 
   // hardcode for the first iteration: add courses manually
@@ -260,6 +260,7 @@ function initilization() {
       "W",
       "4:30PM - 6:30PM",
       "core",
+      "",
       ""
     ],
     [
@@ -271,8 +272,8 @@ function initilization() {
       "M, W, F",
       "9:00AM - 9:50AM, 9:00AM - 9:50AM, 9:00AM - 9:50AM",
       "core",
+      "",
       ""
-
     ],
     [
       3,
@@ -283,7 +284,8 @@ function initilization() {
       "M, W, F",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
-      "2"
+      "2",
+      ""
     ],
     [
       4,
@@ -294,7 +296,8 @@ function initilization() {
       "M, W, F",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "core",
-      "3"
+      "3",
+      ""
     ],
     [
       5,
@@ -305,7 +308,8 @@ function initilization() {
       "M, W, F",
       "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM",
       "core",
-      "3"
+      "3",
+      ""
     ],
     [
       6,
@@ -316,7 +320,8 @@ function initilization() {
       "T, Th",
       "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "core",
-      "3"
+      "3",
+      ""
     ],
     [
       7,
@@ -327,7 +332,8 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
-      "3-6-12"
+      "3-6-12",
+      ""
     ],
     [
       8,
@@ -338,7 +344,8 @@ function initilization() {
       "T, Th",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "elective",
-      "3"
+      "3",
+      ""
     ],
     [
       9,
@@ -349,7 +356,8 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "elective",
-      "3"
+      "3",
+      ""
     ],
     [
       10,
@@ -360,6 +368,7 @@ function initilization() {
       "M",
       "8:00AM - 10:00AM",
       "core",
+      "",
       ""
     ],
     [
@@ -371,7 +380,8 @@ function initilization() {
       "M, T, Th, F",
       "10:00AM - 10:50AM, 10:00AM - 10:50AM, 4:30PM - 5:20PM, 10:00AM - 10:50AM",
       "core",
-      "10"
+      "10",
+      ""
     ],
     [
       12,
@@ -382,6 +392,7 @@ function initilization() {
       "M, W, F, Th",
       "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM",
       "core",
+      "",
       ""
     ],
     [
@@ -393,7 +404,8 @@ function initilization() {
       "MWF, Th",
       "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 1:30PM - 2:20",
       "core",
-      "11"
+      "11",
+      ""
     ],
     [
       14,
@@ -404,7 +416,8 @@ function initilization() {
       "M, W, F, Th",
       "1:30PM - 2:20PM, 1:30PM - 2:20PM, 1:30PM - 2:20PM, 10:30AM - 11:20AM",
       "core",
-      "11-13"
+      "11-13",
+      ""
     ],
     [
       15,
@@ -415,7 +428,8 @@ function initilization() {
       "MWF, Th",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM, 9:00AM - 9:50AM",
       "core",
-      "11-13-14"
+      "11-13-14",
+      ""
     ],
     [
       16,
@@ -426,6 +440,7 @@ function initilization() {
       "T, Th",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "core",
+      "",
       ""
     ],
     [
@@ -437,6 +452,7 @@ function initilization() {
       "M, W",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "core",
+      "",
       ""
     ],
     [
@@ -448,6 +464,7 @@ function initilization() {
       "T, Th, F",
       "9:00AM - 10:15AM, 9:00AM - 10:15AM, 8:00AM - 8:50AM",
       "core",
+      "",
       ""
     ],
     [
@@ -459,6 +476,7 @@ function initilization() {
       "T",
       "1:30PM - 4:20PM",
       "core",
+      "",
       ""
     ],
     [
@@ -470,6 +488,7 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "core",
+      "",
       ""
     ],
     [
@@ -481,6 +500,7 @@ function initilization() {
       "M, W, F",
       "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
       "core",
+      "",
       ""
     ],
     [
@@ -492,6 +512,7 @@ function initilization() {
       "T, Th",
       "10:30AM - 11:45AM, 10:30AM - 11:45AM",
       "core",
+      "",
       ""
     ],
     [
@@ -503,7 +524,8 @@ function initilization() {
       "T, Th",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "bd",
-      "3"
+      "3",
+      ""
     ],
     [
       23,
@@ -514,7 +536,8 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
-      "3"
+      "3",
+      ""
     ],
     [
       24,
@@ -525,7 +548,8 @@ function initilization() {
       "M, W",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
-      "3"
+      "3",
+      ""
     ],
     [
       25,
@@ -536,7 +560,8 @@ function initilization() {
       "T, Th",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "cb",
-      "3"
+      "3",
+      ""
     ],
     [
       26,
@@ -547,7 +572,8 @@ function initilization() {
       "T, Th",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "cb",
-      "3"
+      "3",
+      ""
     ],
     [
       27,
@@ -558,7 +584,8 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "cb",
-      "3"
+      "3",
+      ""
     ],
     [
       28,
@@ -569,7 +596,8 @@ function initilization() {
       "T, Th",
       "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "nlp",
-      "3"
+      "3",
+      ""
     ],
     [
       29,
@@ -580,7 +608,8 @@ function initilization() {
       "M, W, F",
       "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
       "nlp",
-      "3"
+      "3",
+      ""
     ],
     [
       30,
@@ -591,7 +620,8 @@ function initilization() {
       "M, W, F",
       "4:30PM - 5:45PM, 4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "nlp",
-      "3-11-13-14-15"
+      "3-11-13-14-15",
+      ""
     ],
     [
       31,
@@ -602,7 +632,8 @@ function initilization() {
       "T, Th",
       "4:30PM - 5:45PM, 4:30PM - 5:45PM",
       "r",
-      "3"
+      "3",
+      ""
     ],
     [
       32,
@@ -613,7 +644,8 @@ function initilization() {
       "T, Th",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "r",
-      "3-26"
+      "3-26",
+      ""
     ],
     [
       33,
@@ -624,7 +656,8 @@ function initilization() {
       "T, Th",
       "9:00AM - 10:15AM, 9:00AM - 10:15AM",
       "r",
-      "3-11-13-14-15"
+      "3-11-13-14-15",
+      ""
     ],
     [
       34,
@@ -635,7 +668,8 @@ function initilization() {
       "M",
       "6:00PM - 8:30PM",
       "is",
-      "3"
+      "3",
+      ""
     ],
     [
       35,
@@ -646,7 +680,8 @@ function initilization() {
       "F",
       "1:30PM - 4:00PM",
       "is",
-      "3"
+      "3",
+      ""
     ],
     [
       36,
@@ -657,7 +692,8 @@ function initilization() {
       "M, W",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "is",
-      "3"
+      "3",
+      ""
     ],
     [
       37,
@@ -668,7 +704,8 @@ function initilization() {
       "M, W",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "is",
-      "3"
+      "3",
+      ""
     ],
     [
       38,
@@ -679,7 +716,8 @@ function initilization() {
       "T, Th",
       "8:30AM - 10:15AM, 8:30AM - 10:15AM",
       "r",
-      "3"
+      "3",
+      ""
     ],
     [
       39,
@@ -690,7 +728,8 @@ function initilization() {
       "T, Th",
       "12:00PM - 1:15PM, 12:00PM - 1:15PM",
       "bd",
-      "3"
+      "3",
+      ""
     ],
     [
       40,
@@ -701,7 +740,8 @@ function initilization() {
       "M, W, F",
       "8:30AM - 9:45AM, 8:30AM - 9:45AM, 8:30AM - 9:45AM",
       "nlp",
-      "3-11-13-14-15-30"
+      "3-11-13-14-15-30",
+      ""
     ],
     [
       41,
@@ -712,7 +752,8 @@ function initilization() {
       "T, Th",
       "1:30PM - 2:45PM, 1:30PM - 2:45PM",
       "nlp",
-      "3-11-13-14-15-30"
+      "3-11-13-14-15-30",
+      ""
     ],
     [
       42,
@@ -723,6 +764,7 @@ function initilization() {
       "M, W",
       "3:00PM - 4:15PM, 3:00PM - 4:15PM",
       "core",
+      "",
       ""
     ],
     [
@@ -734,6 +776,7 @@ function initilization() {
       "M, W, F",
       "1:30PM - 2:55PM, 1:30PM - 2:55PM, 1:30PM - 2:55PM",
       "core",
+      "",
       ""
     ],
     [
@@ -745,6 +788,7 @@ function initilization() {
       "M, W, Th, F",
       "10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM, 10:00AM - 10:50AM",
       "core",
+      "",
       ""
     ],
     [
@@ -756,7 +800,8 @@ function initilization() {
       "M, W, Th, F",
       "11:00AM - 11:50AM, 11:00AM - 11:50AM, 3:00PM - 3:50PM, 11:00AM - 11:50AM",
       "core",
-      "44"
+      "44",
+      ""
     ],
     [
       46,
@@ -767,6 +812,7 @@ function initilization() {
       "M, T, W, F",
       "12:00PM - 12:50PM, 1:30PM - 2:20PM, 12:00PM - 12:50PM, 12:00PM - 12:50PM",
       "core",
+      "",
       ""
     ]
 
@@ -777,8 +823,8 @@ function initilization() {
   }
   // create the statement for the insertion of just ONE record
   let queryInfo =
-    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite) " +
-    "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?)";
+    "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisit, Conflicts) " +
+    "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?)";
 
   // 'prepare' returns a 'statement' object which allows us to
   // bind the same query to different parameters each time we run it
