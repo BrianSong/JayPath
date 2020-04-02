@@ -1,9 +1,18 @@
-class course_node {
+module.exports =  class course_node {
   constructor(course_status) {
     this.status = course_status;
     this.value = 0; // not used for iter3
     this.child_indices = []; // not used for iter3
     this.best_child_index = -1; // not used for iter3
+  }
+
+  equals(another_course_node){
+      for(let i = 0; i < another_course_node.status.length; i++){
+          if(another_course_node.status[i] != this.status[i]){
+              return false;
+          }
+      }
+      return true;
   }
 
   // getter
@@ -39,4 +48,4 @@ class course_node {
   set set_best_child_index(index) {
   	this.best_child_index = index;
   }
-}
+};
