@@ -27,6 +27,9 @@ class App extends Component {
             <Route exact path="/">
               <CoursesTaken />
             </Route>
+            <Route exact path="/current_semester">
+              <SemestersTaken />
+            </Route>
             <Route exact path="/focus_area">
               <FocusArea />
             </Route>
@@ -181,7 +184,7 @@ class CoursesTaken extends Component {
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
  
 
-        <Link to="/focus_area">
+        <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
             </button>
@@ -189,6 +192,77 @@ class CoursesTaken extends Component {
          </Link>
 
 
+        </div>
+        
+    );
+  }
+}
+
+class SemestersTaken extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      question: "Which of the following best describes your current semester(or the one you just completed)?",
+      value: 0,
+      options: ['Freshman year semester 1', 'Freshman year semester 2',
+      'Sophomore year semester 1', 'Sophomore year semester 2',
+      'Junior year semester 1', 'Junior year semester 2',
+      'Senior year semester 1', 'Senior year semester 2']
+    };
+  }
+
+  sendAPI(data) {
+    console.log("posting to api");
+    // console.log(JSON.stringify(data));
+    fetch('http://localhost:5000/api/user_info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+    .then(data => console.log("Success", data))
+    .catch(err => console.log("Error:", err));
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+
+  handleClick = (event) => {
+    this.setState({
+      value: this.state.options.indexOf(event.target.value)
+    });
+  };
+
+  render() {
+    const opts = this.state.options.map((opt) => {
+      return <button
+              value= {opt}
+              class="square" 
+              onClick={e => this.handleClick(e)}>
+              {opt}
+              </button>
+    });
+  
+    return (
+      <div class="center">
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+          {this.state.question}
+        </h1>
+        <div class = "container1">{opts}</div>
+
+          <Link to="/focus_area">
+            <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
+              THAT'S IT!
+            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+          </Link>
         </div>
         
     );
