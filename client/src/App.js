@@ -3,6 +3,11 @@ import logo from "./logo.svg";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
+import NLP from "./NLP.js";
+import ROB from "./ROB.js";
+import BD from "./BD.js";
+import IS from "./IS.js";
+import CB from "./CB.js";
 
 
 
@@ -21,6 +26,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <CoursesTaken />
+            </Route>
+            <Route exact path="/current_semester">
+              <SemestersTaken />
             </Route>
             <Route exact path="/focus_area">
               <FocusArea />
@@ -71,8 +79,9 @@ class CoursesTaken extends Component {
 
   sendAPI(data) {
     console.log("posting to api");
-    // console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
+      mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
@@ -176,7 +185,7 @@ class CoursesTaken extends Component {
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
  
 
-        <Link to="/focus_area">
+        <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
             </button>
@@ -184,6 +193,78 @@ class CoursesTaken extends Component {
          </Link>
 
 
+        </div>
+        
+    );
+  }
+}
+
+class SemestersTaken extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      question: "Which of the following best describes your current semester(or the one you just completed)?",
+      value: 0,
+      options: ['Freshman year semester 1', 'Freshman year semester 2',
+      'Sophomore year semester 1', 'Sophomore year semester 2',
+      'Junior year semester 1', 'Junior year semester 2',
+      'Senior year semester 1', 'Senior year semester 2']
+    };
+  }
+
+  sendAPI(data) {
+    console.log("posting to api");
+    console.log(JSON.stringify(data));
+    fetch('http://localhost:5000/api/user_info', {
+      mode: 'no-cors',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+    .then(data => console.log("Success", data))
+    .catch(err => console.log("Error:", err));
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+
+  handleClick = (event) => {
+    this.setState({
+      value: this.state.options.indexOf(event.target.value)
+    });
+  };
+
+  render() {
+    const opts = this.state.options.map((opt) => {
+      return <button
+              value= {opt}
+              class="square" 
+              onClick={e => this.handleClick(e)}>
+              {opt}
+              </button>
+    });
+  
+    return (
+      <div class="center">
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+          {this.state.question}
+        </h1>
+        <div class = "container1">{opts}</div>
+
+          <Link to="/focus_area">
+            <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
+              THAT'S IT!
+            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+          </Link>
         </div>
         
     );
@@ -248,468 +329,5 @@ class CoursesTaken extends Component {
       );
     }
   }
-  
-  
-  class NLP extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        schedule1: [],
-        schedule2: [],
-        schedule3: []
-      };
-    }
-  
-    callAPI() {
-      console.log("fetching from api");
-      fetch("http://localhost:5000/api/nlp/courses")
-        .then(res => res.json())
-        .then(res => this.setState({ 
-          schedule1: res.slice(0, 3),
-          schedule2: res.slice(3, 6),
-          schedule3: res.slice(6, 9)}))
-        .catch(err => err);
-    }
-  
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-    render() {
-      const list1 = this.state.schedule1.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list2 = this.state.schedule2.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list3 = this.state.schedule3.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      return (
-        <div>
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            Welcome to Natural Language Processing!
-          </h1>
-          <div class="text2">
-            <h1>Recommended Schedule #1</h1>
-          </div>
-          <div class="box2">{list1}</div>
-          <div class="text1">
-            <h1>Recommended Schedule #2</h1>
-          </div>
-          <div class="box1">{list2}</div>
-          <div class="text3">
-            <h1>Recommended Schedule #3</h1>
-          </div>
-          <div class="box3">{list3}</div>
-        </div>
-      );
-    }
-  }
-  
-  class CB extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        schedule1: [],
-        schedule2: [],
-        schedule3: []
-      };
-    }
-  
-    callAPI() {
-      fetch("http://localhost:5000/api/cb/courses")
-        .then(res => res.json())
-        .then(res => this.setState({ 
-          schedule1: res.slice(0, 3),
-          schedule2: res.slice(3, 6),
-          schedule3: res.slice(6, 9)}))
-        .catch(err => err);
-    }
-  
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-    render() {
-      const list1 = this.state.schedule1.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list2 = this.state.schedule2.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list3 = this.state.schedule3.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      return (
-        <div>
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            Welcome to Computational Biology!
-          </h1>
-          <div class="text2">
-            <h1>Recommended Schedule #1</h1>
-          </div>
-          <div class="box2">{list1}</div>
-          <div class="text1">
-            <h1>Recommended Schedule #2</h1>
-          </div>
-          <div class="box1">{list2}</div>
-          <div class="text3">
-            <h1>Recommended Schedule #3</h1>
-          </div>
-          <div class="box3">{list3}</div>
-        </div>
-      );
-    }
-  }
-  
-  class IS extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        schedule1: [],
-        schedule2: [],
-        schedule3: []
-      };
-    }
-  
-    callAPI() {
-      fetch("http://localhost:5000/api/is/courses")
-        .then(res => res.json())
-        .then(res => this.setState({ 
-          schedule1: res.slice(0, 3),
-          schedule2: res.slice(3, 6),
-          schedule3: res.slice(6, 9)}))
-        .catch(err => err);
-    }
-  
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-    render() {
-      const list1 = this.state.schedule1.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list2 = this.state.schedule2.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list3 = this.state.schedule3.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      return (
-        <div>
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            Welcome to Information Securities!
-          </h1>
-          <div class="text2">
-            <h1>Recommended Schedule #1</h1>
-          </div>
-          <div class="box2">{list1}</div>
-          <div class="text1">
-            <h1>Recommended Schedule #2</h1>
-          </div>
-          <div class="box1">{list2}</div>
-          <div class="text3">
-            <h1>Recommended Schedule #3</h1>
-          </div>
-          <div class="box3">{list3}</div>
-        </div>
-      );
-    }
-  }
-  
-  class ROB extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        apiResponse: "",
-        schedule1: [],
-        schedule2: [],
-        schedule3: [],
-      };
-    }
-  
-    callAPI() {
-      fetch("http://localhost:5000/api/r/courses")
-        .then(res => res.json())
-        .then(res => this.setState({ 
-          schedule1: res.slice(0, 3),
-          schedule2: res.slice(3, 6),
-          schedule3: res.slice(6, 9)}))
-        .catch(err => err);
-    }
-  
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-    render() {
-      const list1 = this.state.schedule1.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list2 = this.state.schedule2.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list3 = this.state.schedule3.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      return (
-        <div>
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            Welcome to Robotics!
-          </h1>
-          <div class="text2">
-            <h1>Recommended Schedule #1</h1>
-          </div>
-          <div class="box2">{list1}</div>
-          <div class="text1">
-            <h1>Recommended Schedule #2</h1>
-          </div>
-          <div class="box1">{list2}</div>
-          <div class="text3">
-            <h1>Recommended Schedule #3</h1>
-          </div>
-          <div class="box3">{list3}</div>
-        </div>
-      );
-    }
-  }
-  
-  class BD extends Component {
-    constructor(prop) {
-      super(prop);
-      this.state = {
-        schedule1: [],
-        schedule2: [],
-        schedule3: []
-      };
-    }
-  
-    callAPI() {
-      fetch("http://localhost:5000/api/bd/courses")
-        .then(res => res.json())
-        .then(res => this.setState({ 
-          schedule1: res.slice(0, 3),
-          schedule2: res.slice(3, 6),
-          schedule3: res.slice(6, 9)}))
-        .catch(err => err);
-    }
-  
-    componentDidMount() {
-      this.callAPI();
-    }
-  
-    render() {
-      const list1 = this.state.schedule1.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list2 = this.state.schedule2.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      const list3 = this.state.schedule3.map(d => {
-        return (
-          <li>
-            {d.CourseNumber}
-            {": "}
-            {d.CourseTitle}
-            {" Credit:"}
-            {d.Credits}
-            {" Instructor:"}
-            {d.Instructor}
-          </li>
-        );
-      });
-      return (
-        <div>
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            Welcome to Big Data!
-          </h1>
-          <div class="text2">
-            <h1>Recommended Schedule #1</h1>
-          </div>
-          <div class="box2">{list1}</div>
-          <div class="text1">
-            <h1>Recommended Schedule #2</h1>
-          </div>
-          <div class="box1">{list2}</div>
-          <div class="text3">
-            <h1>Recommended Schedule #3</h1>
-          </div>
-          <div class="box3">{list3}</div>
-        </div>
-      );
-    }
-  }
-  
-  export default App;
+
+export default App;
