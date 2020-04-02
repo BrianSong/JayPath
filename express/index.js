@@ -16,7 +16,7 @@ initial.initilization(courseName);
 
 // let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
-for (var id_loop = 0; id_loop <= 25; id_loop++) {
+for (var id_loop = 0; id_loop <= 46; id_loop++) {
   courseStatus[id_loop] = 0; // initialize all course status to 0 
 }
 // let course_to_id = new Map();
