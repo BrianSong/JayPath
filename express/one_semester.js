@@ -59,6 +59,7 @@ function select_from_eligible(prev_course_status, eligible_courses) {
     // select no conflict courses based on just ids
     // TODO: can be improved by using sublist removing!!!
     let child_nodes = [];
+    let count = 0;
     for (var i = 0; i < eligible_ids.length; i++) {
         let course1_id = eligible_ids[i];
 
@@ -83,6 +84,10 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 child_course_status[course3_id] = 1;
                 let child_node = new course_node(child_course_status);
                 child_nodes.push(child_node);
+                count++;
+                if(count > 10){
+                    break;
+                }
             }
         }
     }
