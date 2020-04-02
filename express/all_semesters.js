@@ -50,8 +50,8 @@ function check_grad(nodes_list, field){
 
         // check field requirement
 
-        node_value = 0;
-        nodes_list[i].set_value() = node_value;
+        // node_value = 0;
+        // nodes_list[i].set_value() = node_value;
 
         if (node_value == 1) {
             grad_flag = true; // do not break since we need to assign values to all nodes
