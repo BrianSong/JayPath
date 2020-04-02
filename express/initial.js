@@ -21,6 +21,18 @@ module.exports = {
         // TODO: Each course now will has a listOfPre attribuate
         courseInfo = [
             [
+                0,
+                "AS.110.302",
+                "Differential Equations and Applications",
+                4,
+                "L. Sun",
+                "M, T, W, F",
+                "12:00PM - 12:50PM, 1:30PM - 2:20PM, 12:00PM - 12:50PM, 12:00PM - 12:50PM",
+                "core",
+                "",
+                "3-25-38-19-8-26-16-23-27-33-42"
+            ], 
+            [
                 1,
                 "EN.601.104",
                 "Computer Ethics",
@@ -571,20 +583,7 @@ module.exports = {
                 "core",
                 "44",
                 "21-30"
-            ],
-            [
-                47,
-                "AS.110.302",
-                "Differential Equations and Applications",
-                4,
-                "L. Sun",
-                "M, T, W, F",
-                "12:00PM - 12:50PM, 1:30PM - 2:20PM, 12:00PM - 12:50PM, 12:00PM - 12:50PM",
-                "core",
-                "",
-                "3-25-38-19-8-26-16-23-27-33-42"
             ]
-
         ];
 
         for (var course in courseInfo) {
