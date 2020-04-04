@@ -4,7 +4,15 @@
 
 
 # Wireframe
-
+The first and second page will remain the same as Iteration 2, where the user is first asked to input the courses he/she has taken.
+![](assets/it2_p1v1.jpg)
+![](assets/it2_p1v2.jpg)
+![](assets/it3_p1.jpg)
+Once all courses are added, the user clicks on "That's it", which would then redirect him/her to the following page.
+![](assets/it2_p2.jpg)
+The user clicks on one of the focus areas and is then taken to the final recommendation page. The recommendation page shows a complete 4-year schedule with specific courses to take each semester.
+![](assets/it3_p2.jpg)
+TO BE MODIFIED
 
 
 ## Iteration Backlog

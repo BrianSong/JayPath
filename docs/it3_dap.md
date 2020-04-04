@@ -30,3 +30,7 @@ The user clicks on one of the focus areas and is then taken to the final recomme
 - Implement a simple but full version of course recommendation algorithm(exclude recommendation based on preferences).
 - Add a better interface for displaying course schedules.
 - Add all course infomation to database.
+
+# Retrospective
+There were some logic flaws in our it3 design. One glaring mistake was the fact that we could not possibly display the full 8-semester calendar view without information on when the previous courses were taken. We ended up adding an additioinal page for the user to provide his/her current semester x. So our computation can just focus on computing courses for the (8 - x) semesters ahead. 
+The different color scheme to distinguish courses taken or not (shown in the above wireframe) was also abandoned in our actual implementation. We re-considered the objective of this web application, and it seems that displaying previous courses is of minimal interest. In the next iteration, we will come up with new designs on the final recommendation page to help our user focus only on what is ahead. 
