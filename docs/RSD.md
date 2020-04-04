@@ -22,29 +22,23 @@ A web-based application will be used to solve this problem. Our application take
 
 
 ### Must have
-
-As a student, I want to input my major and focus area so that I can view a schedule tailored to my needs.  
+As a CS student, I want to specify my areas of focus/preference in my major, so that the relevant courses will be prioritized.
 As a student, I want to input the courses I have taken so that the application knows my current progress.
 As a student, I want to see multiple recommended schedules so that I get the flexibility to choose between them. 
-As a student, I want to view the suggested course sequence so that I know what to take each semester.  
-As a student, I want to determine the number of courses I want to take each semester so that I can evenly distribute remaining courses to each semester.  
-As an admin, I want to add/delete courses based on school offerings so that students can obtain correct schedules.  
-As an admin, I want to specify course relationships (whether one is prerequisite of another) so that students can take courses in sequence.  
-As an admin, I want to monitor major graduation requirements, so that the software can modify schedules accordingly.  
-As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.  
-As a student, I want to receive a schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.  
-As a student, I want to get my course recommendations displayed by calendar view to get better/more convenient user experience.  
+As a student, I want to view the suggested course sequence so that I know what to take each semester.   
+As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.
+As a student, I want to receive a schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.
+As a student, I want to get my course recommendations displayed by calendar view to get better/more convenient user experience.
 As a student, I want to be able to choose between several potential paths, so that I can pick the one that interests me the most.  
 As a student, I want to see my progress in meeting the degree requirements, so that I know my current position in the entire plan.  
-As a student, I want to see the degree requirements themselves in this application, so that I can be confident with the plans.  
-As a student, I want to log in/out into this application, so that I can save my information.  
 
 ### Nice to have
-
-As a student, I can specify my areas of focus/preference in my major, so that the relevant courses will be prioritized.  
+As a student, I want to determine the number of courses I want to take each semester so that I can evenly distribute remaining courses to each semester.
+As a student, I want to see the degree requirements themselves in this application, so that I can be confident with the plans. 
+As a student, I want to log in/out of this application, so that I can save the previously input information. 
+As an admin, I want to monitor major graduation requirements, so that the software can modify schedules accordingly.
+As an admin, I want to add/delete courses based on school offerings so that students can obtain correct schedules.  
 As a student, I want to open a mode called "multiple major mode" so that I can get my recommendation if I decide to take the multiple major option.  
-As a student, I want to have an evaluation function so that I can predict the average GPA for each recommendation path.  
-As a student who wants to graduate early, I want to set my expected graduation year and get optimal schedule recommendations so that I can fulfill the graduate requirements with the least time and credits.  
 As a student, when getting course recommendations, I want to be able to rearrange/modify the recommended schedule in the application so that I can customize it based on my own preferences.  
 As a student, I want to be able to import and extract course schedules as files so that I can easily share my schedule with my friends.  
 
