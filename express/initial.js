@@ -9,7 +9,7 @@ module.exports = {
             console.log("Connected to the courses database for initilization!");
         });
         db.run(
-            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING)"
+            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Semester STRING)"
         );
 
         // hardcode for the first iteration: add courses manually
@@ -30,8 +30,9 @@ module.exports = {
                 "12:00PM - 12:50PM, 1:30PM - 2:20PM, 12:00PM - 12:50PM, 12:00PM - 12:50PM",
                 "core",
                 "",
-                "3-25-38-19-8-26-16-23-27-33-42"
-            ], 
+                "3-25-38-19-8-26-16-23-27-33-42",
+                "Both"
+            ],
             [
                 1,
                 "EN.601.104",
@@ -42,7 +43,8 @@ module.exports = {
                 "4:30PM - 6:30PM",
                 "core",
                 "",
-                ""
+                "",
+                "Both"
             ],
             [
                 2,
@@ -54,7 +56,8 @@ module.exports = {
                 "9:00AM - 9:50AM, 9:00AM - 9:50AM, 9:00AM - 9:50AM",
                 "core",
                 "",
-                "41"
+                "41",
+                "Both"
             ],
             [
                 3,
@@ -66,7 +69,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "core",
                 "2",
-                "25-38-0"
+                "25-38-0",
+                "Both"
             ],
             [
                 4,
@@ -78,7 +82,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM",
                 "core",
                 "3",
-                "14-15-17-36-44"
+                "14-15-17-36-44",
+                "Both"
             ],
             [
                 5,
@@ -90,7 +95,8 @@ module.exports = {
                 "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM",
                 "core",
                 "3",
-                "11-12-13-45"
+                "11-12-13-45",
+                "Both"
             ],
             [
                 6,
@@ -102,7 +108,9 @@ module.exports = {
                 "9:00AM - 10:15AM, 9:00AM - 10:15AM",
                 "core",
                 "3",
-                "18-29-34-39"
+                "18-29-34-39",
+                "Both"
+
             ],
             [
                 7,
@@ -114,7 +122,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "core",
                 "3-6-12",
-                "40-9-20-24-28"
+                "40-9-20-24-28",
+                "Both"
             ],
             [
                 8,
@@ -126,7 +135,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "elective",
                 "3",
-                "19-26-16-23-27-33-42-0"
+                "19-26-16-23-27-33-42-0",
+                "Spring"
             ],
             [
                 9,
@@ -138,7 +148,9 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "elective",
                 "3",
-                "7-40-20-24-28"
+                "7-40-20-24-28",
+                "Both"
+
             ],
             [
                 10,
@@ -150,7 +162,8 @@ module.exports = {
                 "8:00AM - 10:00AM",
                 "core",
                 "",
-                ""
+                "",
+                "Fall"
             ],
             [
                 11,
@@ -162,7 +175,8 @@ module.exports = {
                 "10:00AM - 10:50AM, 10:00AM - 10:50AM, 4:30PM - 5:20PM, 10:00AM - 10:50AM",
                 "core",
                 "10",
-                "5-12-13-45-23"
+                "5-12-13-45-23",
+                "Both"
             ],
             [
                 12,
@@ -174,7 +188,8 @@ module.exports = {
                 "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM",
                 "core",
                 "",
-                "5-6-11-13-18-29-34-39-45"
+                "5-6-11-13-18-29-34-39-45",
+                "Both"
             ],
             [
                 13,
@@ -186,7 +201,8 @@ module.exports = {
                 "10:00AM - 10:50AM, 10:00AM - 10:50AM, 10:00AM - 10:50AM, 1:30PM - 2:20",
                 "core",
                 "11",
-                "5-11-12-45"
+                "5-11-12-45",
+                "Both"
             ],
             [
                 14,
@@ -198,7 +214,8 @@ module.exports = {
                 "1:30PM - 2:20PM, 1:30PM - 2:20PM, 1:30PM - 2:20PM, 10:30AM - 11:20AM",
                 "core",
                 "11-13",
-                "4-15-17-36-44"
+                "4-15-17-36-44",
+                "Both"
             ],
             [
                 15,
@@ -210,7 +227,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM, 1:30PM - 2:45PM, 9:00AM - 9:50AM",
                 "core",
                 "11-13-14",
-                "4-6-14-17-18-29-34-36-39-44"
+                "4-6-14-17-18-29-34-36-39-44",
+                "Both"
             ],
             [
                 16,
@@ -222,7 +240,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "core",
                 "",
-                "19-8-26-23-27-33-42-0"
+                "19-8-26-23-27-33-42-0",
+                "Spring"
             ],
             [
                 17,
@@ -234,7 +253,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM",
                 "core",
                 "",
-                "4-14-15-44"
+                "4-14-15-44",
+                "Spring"
             ],
             [
                 18,
@@ -246,11 +266,12 @@ module.exports = {
                 "9:00AM - 10:15AM, 9:00AM - 10:15AM, 8:00AM - 8:50AM",
                 "core",
                 "",
-                "6-12-29-34-45-39-15"
+                "6-12-29-34-45-39-15",
+                "Spring"
             ],
             [
                 19,
-                "AS.171.111",
+                "AS.173.111",
                 "General Physics Laboratory",
                 1,
                 "J. Mumford",
@@ -258,7 +279,8 @@ module.exports = {
                 "1:30PM - 4:20PM",
                 "core",
                 "",
-                "8-26-16-23-27-33-42-0"
+                "8-26-16-23-27-33-42-0",
+                "Both"
             ],
             [
                 20,
@@ -270,7 +292,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "core",
                 "",
-                "7-40-9-24-28"
+                "7-40-9-24-28",
+                "Spring"
             ],
             [
                 21,
@@ -282,7 +305,8 @@ module.exports = {
                 "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
                 "core",
                 "",
-                "30-46"
+                "30-46",
+                "Both"
             ],
             [
                 22,
@@ -294,7 +318,8 @@ module.exports = {
                 "10:30AM - 11:45AM, 10:30AM - 11:45AM",
                 "core",
                 "",
-                ""
+                "",
+                "Both"
             ],
             [
                 23,
@@ -306,7 +331,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "bd",
                 "3",
-                "19-8-26-16-0-33-42-11"
+                "19-8-26-16-0-33-42-11",
+                "Both"
             ],
             [
                 24,
@@ -318,7 +344,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "bd",
                 "3",
-                "7-40-9-20-28"
+                "7-40-9-20-28",
+                "Fall"
             ],
             [
                 25,
@@ -330,7 +357,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "bd",
                 "3",
-                "3-38-0"
+                "3-38-0",
+                "Both"
             ],
             [
                 26,
@@ -342,7 +370,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "cb",
                 "3",
-                "19-8-16-23-27-33-42-0"
+                "19-8-16-23-27-33-42-0",
+                "Spring"
             ],
             [
                 27,
@@ -354,7 +383,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM",
                 "cb",
                 "3",
-                "19-8-26-16-23-33-42-0"
+                "19-8-26-16-23-33-42-0",
+                "Fall"
             ],
             [
                 28,
@@ -366,7 +396,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "cb",
                 "3",
-                "7-40-9-20-24"
+                "7-40-9-20-24",
+                "Fall"
             ],
             [
                 29,
@@ -378,7 +409,8 @@ module.exports = {
                 "9:00AM - 10:15AM, 9:00AM - 10:15AM",
                 "nlp",
                 "3",
-                "6-19-34-39"
+                "6-19-34-39",
+                "Fall"
             ],
             [
                 30,
@@ -390,7 +422,8 @@ module.exports = {
                 "11:00AM - 11:50AM, 11:00AM - 11:50AM, 11:00AM - 11:50AM",
                 "nlp",
                 "3",
-                "21-46"
+                "21-46",
+                "Fall"
             ],
             [
                 31,
@@ -402,7 +435,8 @@ module.exports = {
                 "4:30PM - 5:45PM, 4:30PM - 5:45PM, 4:30PM - 5:45PM",
                 "nlp",
                 "3-11-13-14-15",
-                ""
+                "",
+                "Both"
             ],
             [
                 32,
@@ -414,11 +448,12 @@ module.exports = {
                 "4:30PM - 5:45PM, 4:30PM - 5:45PM",
                 "r",
                 "3",
-                ""
+                "",
+                "Both"
             ],
             [
                 33,
-                "EN.601.455",
+                "EN.601.456",
                 "Computer Integrated Surgery II",
                 3,
                 "R. Taylor",
@@ -426,7 +461,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM",
                 "r",
                 "3-26",
-                "19-8-26-16-23-27-42-0"
+                "19-8-26-16-23-27-42-0",
+                "Spring"
             ],
             [
                 34,
@@ -438,7 +474,8 @@ module.exports = {
                 "9:00AM - 10:15AM, 9:00AM - 10:15AM",
                 "r",
                 "3-11-13-14-15",
-                "6-18-29-39"
+                "6-18-29-39",
+                "Both"
             ],
             [
                 35,
@@ -450,7 +487,8 @@ module.exports = {
                 "6:00PM - 8:30PM",
                 "is",
                 "3",
-                ""
+                "",
+                "Fall"
             ],
             [
                 36,
@@ -462,7 +500,8 @@ module.exports = {
                 "1:30PM - 4:00PM",
                 "is",
                 "3",
-                "4-14-15-44"
+                "4-14-15-44",
+                "Fall"
             ],
             [
                 37,
@@ -474,7 +513,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "is",
                 "3",
-                "43"
+                "43",
+                "Spring"
             ],
             [
                 38,
@@ -486,7 +526,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "is",
                 "3",
-                "3-25-0"
+                "3-25-0",
+                "Spring"
             ],
             [
                 39,
@@ -498,7 +539,8 @@ module.exports = {
                 "8:30AM - 10:15AM, 8:30AM - 10:15AM",
                 "r",
                 "3",
-                "6-12-15-18-29-34-45"
+                "6-12-15-18-29-34-45",
+                "Spring"
             ],
             [
                 40,
@@ -510,7 +552,8 @@ module.exports = {
                 "12:00PM - 1:15PM, 12:00PM - 1:15PM",
                 "bd",
                 "3",
-                "7-9-20-24-28"
+                "7-9-20-24-28",
+                "Spring"
             ],
             [
                 41,
@@ -522,7 +565,8 @@ module.exports = {
                 "8:30AM - 9:45AM, 8:30AM - 9:45AM, 8:30AM - 9:45AM",
                 "nlp",
                 "3-11-13-14-15-30",
-                "2"
+                "2",
+                "Both"
             ],
             [
                 42,
@@ -534,7 +578,8 @@ module.exports = {
                 "1:30PM - 2:45PM, 1:30PM - 2:45PM",
                 "nlp",
                 "3-11-13-14-15-30",
-                "19-8-26-16-23-27-33-0"
+                "19-8-26-16-23-27-33-0",
+                "Spring"
             ],
             [
                 43,
@@ -546,7 +591,8 @@ module.exports = {
                 "3:00PM - 4:15PM, 3:00PM - 4:15PM",
                 "core",
                 "",
-                "37"
+                "37",
+                "Spring"
             ],
             [
                 44,
@@ -558,7 +604,8 @@ module.exports = {
                 "1:30PM - 2:55PM, 1:30PM - 2:55PM, 1:30PM - 2:55PM",
                 "core",
                 "",
-                "4-14-15-17-36"
+                "4-14-15-17-36",
+                "Spring"
             ],
             [
                 45,
@@ -570,7 +617,8 @@ module.exports = {
                 "10:00AM - 10:50AM, 10:00AM - 10:50AM, 9:00AM - 9:50AM, 10:00AM - 10:50AM",
                 "core",
                 "",
-                "5-6-11-12-13-15-18-29-34-39"
+                "5-6-11-12-13-15-18-29-34-39",
+                "Both"
             ],
             [
                 46,
@@ -581,8 +629,9 @@ module.exports = {
                 "M, W, Th, F",
                 "11:00AM - 11:50AM, 11:00AM - 11:50AM, 3:00PM - 3:50PM, 11:00AM - 11:50AM",
                 "core",
-                "44",
-                "21-30"
+                "45",
+                "21-30",
+                "Spring"
             ]
         ];
 
@@ -591,8 +640,8 @@ module.exports = {
         }
         // create the statement for the insertion of just ONE record
         let queryInfo =
-            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts) " +
-            "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?)";
+            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester) " +
+            "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?, ?)";
 
         // 'prepare' returns a 'statement' object which allows us to
         // bind the same query to different parameters each time we run it
