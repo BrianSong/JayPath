@@ -9,7 +9,7 @@ module.exports = {
             console.log("Connected to the courses database for initilization!");
         });
         db.run(
-            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Semester STRING)"
+            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Semester STRING, Area STRING)"
         );
 
         // hardcode for the first iteration: add courses manually
@@ -31,7 +31,8 @@ module.exports = {
                 "core",
                 "",
                 "3-25-38-19-8-26-16-23-27-33-42",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 1,
@@ -44,7 +45,8 @@ module.exports = {
                 "core",
                 "",
                 "",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 2,
@@ -57,7 +59,8 @@ module.exports = {
                 "core",
                 "",
                 "41",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 3,
@@ -70,7 +73,8 @@ module.exports = {
                 "core",
                 "2",
                 "25-38-0",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 4,
@@ -83,7 +87,8 @@ module.exports = {
                 "core",
                 "3",
                 "14-15-17-36-44",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 5,
@@ -96,7 +101,8 @@ module.exports = {
                 "core",
                 "3",
                 "11-12-13-45",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 6,
@@ -109,7 +115,8 @@ module.exports = {
                 "core",
                 "3",
                 "18-29-34-39",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 7,
@@ -122,7 +129,8 @@ module.exports = {
                 "core",
                 "3-6-12",
                 "40-9-20-24-28",
-                "Both"
+                "Both",
+                "Theory"
             ],
             [
                 8,
@@ -135,7 +143,8 @@ module.exports = {
                 "elective",
                 "3",
                 "19-26-16-23-27-33-42-0",
-                "Spring"
+                "Spring",
+                "N/A",
             ],
             [
                 9,
@@ -148,8 +157,8 @@ module.exports = {
                 "elective",
                 "3",
                 "7-40-20-24-28",
-                "Both"
-
+                "Both",
+                "Software"
             ],
             [
                 10,
@@ -162,7 +171,8 @@ module.exports = {
                 "core",
                 "",
                 "",
-                "Fall"
+                "Fall",
+                "N/A"
             ],
             [
                 11,
@@ -175,7 +185,8 @@ module.exports = {
                 "core",
                 "10",
                 "5-12-13-45-23",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 12,
@@ -188,7 +199,8 @@ module.exports = {
                 "core",
                 "",
                 "5-6-11-13-18-29-34-39-45",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 13,
@@ -201,7 +213,8 @@ module.exports = {
                 "core",
                 "11",
                 "5-11-12-45",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 14,
@@ -214,7 +227,8 @@ module.exports = {
                 "core",
                 "11-13",
                 "4-15-17-36-44",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 15,
@@ -227,7 +241,8 @@ module.exports = {
                 "core",
                 "11-13-14",
                 "4-6-14-17-18-29-34-36-39-44",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 16,
@@ -240,7 +255,8 @@ module.exports = {
                 "core",
                 "",
                 "19-8-26-23-33-42-0",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 17,
@@ -253,7 +269,8 @@ module.exports = {
                 "core",
                 "",
                 "4-14-15-44",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 18,
@@ -266,7 +283,8 @@ module.exports = {
                 "core",
                 "",
                 "6-12-34-45-39-15",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 19,
@@ -279,7 +297,8 @@ module.exports = {
                 "core",
                 "",
                 "8-26-16-23-27-33-42-0",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 20,
@@ -292,7 +311,8 @@ module.exports = {
                 "core",
                 "",
                 "7-40-9",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 21,
@@ -305,7 +325,8 @@ module.exports = {
                 "core",
                 "",
                 "30-46",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 22,
@@ -318,7 +339,8 @@ module.exports = {
                 "core",
                 "",
                 "",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 23,
@@ -331,7 +353,8 @@ module.exports = {
                 "bd",
                 "3",
                 "19-8-26-16-0-33-42-11",
-                "Both"
+                "Both",
+                "Software"
             ],
             [
                 24,
@@ -344,7 +367,8 @@ module.exports = {
                 "bd",
                 "3",
                 "7-9-28",
-                "Fall"
+                "Fall",
+                "N/A"
             ],
             [
                 25,
@@ -357,7 +381,8 @@ module.exports = {
                 "bd",
                 "3",
                 "3-38-0",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 26,
@@ -370,7 +395,8 @@ module.exports = {
                 "cb",
                 "3",
                 "19-8-16-23-33-42-0",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 27,
@@ -383,7 +409,8 @@ module.exports = {
                 "cb",
                 "3",
                 "19-23-0",
-                "Fall"
+                "Fall",
+                "Applications"
             ],
             [
                 28,
@@ -396,7 +423,8 @@ module.exports = {
                 "cb",
                 "3",
                 "7-9-24",
-                "Fall"
+                "Fall",
+                "Applications"
             ],
             [
                 29,
@@ -409,7 +437,8 @@ module.exports = {
                 "nlp",
                 "3",
                 "6-19-34",
-                "Fall"
+                "Fall",
+                "Reasoning"
             ],
             [
                 30,
@@ -422,7 +451,8 @@ module.exports = {
                 "nlp",
                 "3",
                 "21",
-                "Fall"
+                "Fall",
+                "Applications"
             ],
             [
                 31,
@@ -435,7 +465,8 @@ module.exports = {
                 "nlp",
                 "3-11-13-14-15",
                 "",
-                "Both"
+                "Both",
+                "Reasoning"
             ],
             [
                 32,
@@ -448,7 +479,8 @@ module.exports = {
                 "r",
                 "3",
                 "",
-                "Both"
+                "Both",
+                "Applications"
             ],
             [
                 33,
@@ -461,7 +493,8 @@ module.exports = {
                 "r",
                 "3-26",
                 "19-8-26-16-23-42-0",
-                "Spring"
+                "Spring",
+                "Applications"
             ],
             [
                 34,
@@ -474,7 +507,8 @@ module.exports = {
                 "r",
                 "3-11-13-14-15",
                 "6-18-29-39",
-                "Both"
+                "Both",
+                "Applications"
             ],
             [
                 35,
@@ -487,7 +521,8 @@ module.exports = {
                 "is",
                 "3",
                 "",
-                "Fall"
+                "Fall",
+                "N/A"
             ],
             [
                 36,
@@ -500,7 +535,8 @@ module.exports = {
                 "is",
                 "3",
                 "4-14-15",
-                "Fall"
+                "Fall",
+                "N/A"
             ],
             [
                 37,
@@ -513,7 +549,8 @@ module.exports = {
                 "is",
                 "3",
                 "43",
-                "Spring"
+                "Spring",
+                "Software"
             ],
             [
                 38,
@@ -526,7 +563,8 @@ module.exports = {
                 "is",
                 "3",
                 "3-25-0",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 39,
@@ -539,7 +577,8 @@ module.exports = {
                 "r",
                 "3",
                 "6-12-15-18-34-45",
-                "Spring"
+                "Spring",
+                "Applications"
             ],
             [
                 40,
@@ -552,7 +591,8 @@ module.exports = {
                 "bd",
                 "3",
                 "7-9-20",
-                "Spring"
+                "Spring",
+                "Applications"
             ],
             [
                 41,
@@ -565,7 +605,8 @@ module.exports = {
                 "nlp",
                 "3-11-13-14-15-30",
                 "2",
-                "Both"
+                "Both",
+                "Reasoning"
             ],
             [
                 42,
@@ -578,7 +619,8 @@ module.exports = {
                 "nlp",
                 "3-11-13-14-15-30",
                 "19-8-26-16-23-33-0",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 43,
@@ -591,7 +633,8 @@ module.exports = {
                 "core",
                 "",
                 "37",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 44,
@@ -604,7 +647,8 @@ module.exports = {
                 "core",
                 "",
                 "4-14-15-17",
-                "Spring"
+                "Spring",
+                "N/A"
             ],
             [
                 45,
@@ -617,7 +661,8 @@ module.exports = {
                 "core",
                 "",
                 "5-6-11-12-13-15-18-29-34-39",
-                "Both"
+                "Both",
+                "N/A"
             ],
             [
                 46,
@@ -630,7 +675,8 @@ module.exports = {
                 "core",
                 "45",
                 "21",
-                "Spring"
+                "Spring",
+                "N/A"
             ]
         ];
 
@@ -639,8 +685,8 @@ module.exports = {
         }
         // create the statement for the insertion of just ONE record
         let queryInfo =
-            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester) " +
-            "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?, ?)";
+            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area) " +
+            "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?, ?, ?)";
 
         // 'prepare' returns a 'statement' object which allows us to
         // bind the same query to different parameters each time we run it
