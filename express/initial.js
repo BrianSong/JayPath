@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    initilization: function initilization(courseName) {
+    initilization: function initilization(courseName, courses_track, courses_pre, courses_area) {
         // open the database
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
@@ -700,12 +700,29 @@ module.exports = {
         }
         statement.finalize();
 
+        let sql = `SELECT * FROM courses`;
+
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                courses_track.push(row.Track);
+                courses_pre.push(row.Prerequisite);
+                courses_area.push(row.Area);
+            });
+        });
+
+
         // close the database
         db.close(err => {
             if (err) {
                 console.error(err.message);
             }
             console.log("Close the courses database connection for initilization!");
+            console.log(courses_track);
+            console.log(courses_pre);
+            console.log(courses_area);
         });
     },
 };

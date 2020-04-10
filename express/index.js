@@ -11,8 +11,11 @@ app.use(express.json());
 app.use(cors());
 
 let courseName = [];
+let courses_track = [];
+let courses_pre = [];
+let courses_area = [];
 
-initial.initilization(courseName);
+initial.initilization(courseName, courses_track, courses_pre, courses_area);
 
 // let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
@@ -68,8 +71,8 @@ app.get("/api/:field/courses", (req, res) => {
   let field = String(req.params.field);
   let courses = [];
   let course_id = [];
-  for(var i = 0; i < 25; i++){
-    course_id.push(Math.floor(Math.random()*30));
+  for (var i = 0; i < 25; i++) {
+    course_id.push(Math.floor(Math.random() * 30));
   }
 
   // let user_course_node = new (courseStatus);
@@ -97,7 +100,7 @@ app.get("/api/:field/courses", (req, res) => {
       if (err) {
         return console.error(err.message);
       }
-      allcourse.forEach(course=>{
+      allcourse.forEach(course => {
         courses.push(course);
       })
     });
