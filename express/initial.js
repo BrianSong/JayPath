@@ -720,9 +720,9 @@ module.exports = {
                 console.error(err.message);
             }
             console.log("Close the courses database connection for initilization!");
-            console.log(courses_track);
-            console.log(courses_pre);
-            console.log(courses_area);
+            // console.log(courses_track);
+            // console.log(courses_pre);
+            // console.log(courses_area);
         });
     },
 };
