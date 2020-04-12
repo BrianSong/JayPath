@@ -10,10 +10,6 @@ import IS from "./IS.js";
 import CB from "./CB.js";
 
 
-
-
-
-
 class App extends Component {
     constructor(props) {
       super(props);
@@ -33,20 +29,8 @@ class App extends Component {
             <Route exact path="/focus_area">
               <FocusArea />
             </Route>
-            <Route exact path="/nlp">
-              <NLP />
-            </Route>
-            <Route exact path="/r">
-              <ROB />
-            </Route>
-            <Route exact path="/bd">
-              <BD />
-            </Route>
-            <Route exact path="/is">
-              <IS />
-            </Route>
-            <Route exact path="/cb">
-              <CB />
+            <Route exact path="/final">
+              <ROB valueFromParent='/rob'/>
             </Route>
           </Switch>
         </Router>
@@ -205,10 +189,10 @@ class SemestersTaken extends Component {
     this.state = {
       question: "Which of the following best describes your current semester(or the one you just completed)?",
       value: 0,
-      options: ['Freshman year semester 1', 'Freshman year semester 2',
-      'Sophomore year semester 1', 'Sophomore year semester 2',
-      'Junior year semester 1', 'Junior year semester 2',
-      'Senior year semester 1', 'Senior year semester 2']
+      options: ['semester 1', 'semester 2',
+      'semester 3', 'semester 4',
+      'semester 5', 'semester 6',
+      'semester 7', 'semester 8']
     };
   }
 
@@ -239,12 +223,13 @@ class SemestersTaken extends Component {
 
   render() {
     const opts = this.state.options.map((opt) => {
-      return <button
+      return <button100
               value= {opt}
               class="square" 
+              tabindex="0"
               onClick={e => this.handleClick(e)}>
               {opt}
-              </button>
+              </button100>
     });
   
     return (
@@ -259,28 +244,52 @@ class SemestersTaken extends Component {
         </h1>
         <div class = "container1">{opts}</div>
 
-          <Link to="/focus_area">
-            <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
-              THAT'S IT!
-            </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+        <Link to="/focus_area">
+          <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
+            THAT'S IT!
+          </button>
+          <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
         </div>
         
     );
   }
 }
-  
+
   class FocusArea extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        question: "What is your focus area in computer science?"
+        question: "What is your focus area in computer science?",
         // later on may want to add componentDidMount() to read focus areas from the DB
+        options: [
+          {name: 'Robotics', redirect: '/rob', class: 'button1'},
+          {name: 'Big Data', redirect: '/bd', class: 'button4'},
+          {name: 'Information Security', redirect:'/is', class: 'button5'},
+          {name: 'Computational Biology', redirect: '/cb', class: 'button3'},
+          {name: 'Natural Language Processing', redirect: '/nlp', class: 'button2'}
+        ],
+        value: 0
       };
     }
-  
+    handleClick = (event) => {
+      this.setState({
+        value: event.target.value
+      });
+
+    };
+
     render() {
+      const opts = this.state.options.map((opt) => {
+        return (
+          <Link to="/final">
+          <button value={opt.redirect} class={opt.class} type="button" onClick={e => this.handleClick(e)}>
+            {opt.name}
+          </button>
+          </Link>
+        )
+      });
+      
       return (
         <div class="center">
           <h1
@@ -298,36 +307,14 @@ class SemestersTaken extends Component {
               display: "flex",
               justifyContent: "center"
             }}
-          >
-          <Link to="/r">
-            <button class="button1" type="button">
-              Robotics
-            </button>
-          </Link>
-          <Link to="/bd">
-            <button class="button4" type="button">
-              Big Data
-            </button>
-          </Link>
-          <Link to="/is">
-            <button class="button5" type="button">
-              Information Security
-            </button>
-          </Link>
-          <Link to="/cb">
-            <button class="button3" type="button">
-              Computational Biology
-            </button>
-          </Link>
-          <Link to="/nlp">
-            <button class="button2" type="button">
-              Natural Language Processing
-            </button>
-          </Link>
-          </div>
+          >{opts}</div>
+        
+          {/* TO DO: 1. pass self.state.value to parent class; 2. completion picture */}
         </div>
       );
     }
   }
+
+  
 
 export default App;

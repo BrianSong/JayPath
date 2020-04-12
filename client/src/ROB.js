@@ -6,30 +6,17 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 class ROB extends Component {
     constructor(prop) {
         super(prop);
+        // inheritated from FocusArea: this.props.valueFromParent
         this.state = {
-            schedule1: [],
-            schedule2: [],
-            schedule3: [],
-            schedule4: [],
-            schedule5: [],
-            schedule6: [],
-            schedule7: [],
-            schedule8: []
+            schedule: [],
         };
     }
 
     callAPI() {
-        fetch("http://localhost:5000/api/rob/courses")
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses'))
             .then(res => res.json())
             .then(res => this.setState({
-                schedule1: res.slice(0, 3),
-                schedule2: res.slice(3, 6),
-                schedule3: res.slice(6, 9),
-                schedule4: res.slice(9, 12),
-                schedule5: res.slice(12, 15),
-                schedule6: res.slice(15, 18),
-                schedule7: res.slice(18, 21),
-                schedule8: res.slice(21, 24),
+                schedule: res
             }))
             .catch(err => err);
     }
@@ -39,110 +26,66 @@ class ROB extends Component {
     }
 
     render() {
-        const list1 = this.state.schedule1.map(d => {
+        const year_hash = ['FRESHMAN YEAR', 'SOPHOMORE YEAR', 'JUNIOR YEAR', 'SENIOR YEAR']
+        const list0 = [];
+        for (var i = 0; i < 4; i++) {
+            const cur = this.state.schedule.slice(6 * i, 6 * i + 3);
+            const temp1 = cur.map(d => {
+                return (
+                    <button200
+                    class="row"
+                    tabindex="0"
+                    type="button" disabled><li>
+                        {d.CourseNumber}
+                        {": "}
+                        {d.CourseTitle}
+                        {" Credit:"}
+                        {d.Credits}
+                        {" Instructor:"}
+                        {d.Instructor}
+                    </li></button200>
+                );
+            });
+            const cur2 = this.state.schedule.slice(6 * i + 3, 6 * (i + 1));
+            const temp2 = cur2.map(d => {
+                return (
+                    <button200
+                    class="row"
+                    tabindex="0"
+                    type="button" disabled><li>
+                        {d.CourseNumber}
+                        {": "}
+                        {d.CourseTitle}
+                        {" Credit:"}
+                        {d.Credits}
+                        {" Instructor:"}
+                        {d.Instructor}
+                    </li></button200>
+                );
+            });
+
+            list0[i] = {details1: temp1, details2: temp2, 
+                semester1: 'Semester'.concat(i * 2 + 1), semester2: 'Semester'.concat(i * 2 + 2),
+                year: year_hash[i]};
+        }
+        const list = list0.map(l => {
             return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
+                <div class="schoolyear_Box">
+                    <div class="hh1">{l.year}</div>
+                    <div class="text1">
+                        <div class="hh2">{l.semester1}</div>
+                    </div>
+                    <div class="box1">{l.details1}</div>
+                    <div class="text1">
+                        <div class="hh3">{l.semester2}</div>
+                    </div>
+                    <div class="box2">{l.details1}</div>
+                </div>
             );
         });
-        const list2 = this.state.schedule2.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list3 = this.state.schedule3.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list4 = this.state.schedule4.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list5 = this.state.schedule5.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list6 = this.state.schedule6.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list7 = this.state.schedule7.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
-        const list8 = this.state.schedule8.map(d => {
-            return (
-                <li>
-                    {d.CourseNumber}
-                    {": "}
-                    {d.CourseTitle}
-                    {" Credit:"}
-                    {d.Credits}
-                    {" Instructor:"}
-                    {d.Instructor}
-                </li>
-            );
-        });
+
+    
+        
         return (
             <div>
                 <h1
@@ -155,52 +98,8 @@ class ROB extends Component {
                     <img src={Jay} style={{width: 50, height: 50, float: "left"}}></img>
                     MY PATH
                 </h1>
-                <div class="schoolyear_Box">
-                    <div class="hh1">FRESHMAN YEAR</div>
-                    <div class="text1">
-                        <div class="hh2">Semester 1</div>
-                    </div>
-                    <div class="box1">{list1}</div>
-                    <div class="text1">
-                        <div class="hh3">Semester 2</div>
-                    </div>
-                    <div class="box2">{list2}</div>
-                </div>
-
-                <div class="schoolyear_Box">
-                    <div class="hh1">SOPHOMORE YEAR</div>
-                    <div class="text1">
-                        <div class="hh2">Semester 3</div>
-                    </div>
-                    <div class="box1">{list3}</div>
-                    <div class="text1">
-                        <div class="hh3">Semester 4</div>
-                    </div>
-                    <div class="box2">{list4}</div>
-                </div>
-
-                <div class="schoolyear_Box">
-                    <div class="hh1">JUNIOR YEAR</div>
-                    <div class="text1">
-                        <div class="hh2">Semester 5</div>
-                    </div>
-                    <div class="box1">{list5}</div>
-                    <div class="text1">
-                        <div class="hh3">Semester 6</div>
-                    </div>
-                    <div class="box2">{list6}</div>
-                </div>
-
-                <div class="schoolyear_Box">
-                    <div class="hh1">SENIOR YEAR</div>
-                    <div class="text1">
-                        <div class="hh2">Semester 7</div>
-                    </div>
-                    <div class="box1">{list7}</div>
-                    <div class="text1">
-                        <div class="hh3">Semester 8</div>
-                    </div>
-                    <div class="box2">{list8}</div>
+                <div class="container2">
+                    {list}
                 </div>
 
                 <div>
