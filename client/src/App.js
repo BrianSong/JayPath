@@ -1,38 +1,35 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
-import NLP from "./NLP.js";
-import ROB from "./ROB.js";
-import BD from "./BD.js";
-import IS from "./IS.js";
-import CB from "./CB.js";
+import Final from "./Final.js";
 
 
 class App extends Component {
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+        focus_area: '/aa'
+      };
     }
-  
+
+    parentFunction = (data_from_child) => {
+      this.setState({
+        focus_area: data_from_child
+      });
+      
+    };
+
     render() {
       return (
         <Router>
-          <Switch>
-            <Route exact path="/">
-              <CoursesTaken />
-            </Route>
-            <Route exact path="/current_semester">
-              <SemestersTaken />
-            </Route>
-            <Route exact path="/focus_area">
-              <FocusArea />
-            </Route>
-            <Route exact path="/final">
-              <ROB valueFromParent='/rob'/>
-            </Route>
-          </Switch>
+          {/* <Switch> */}
+          {/* statements below follow NO sequential order */}
+            <Route exact path="/" component={CoursesTaken} />
+            <Route exact path="/current_semester" component={SemestersTaken} />
+            <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
+            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} />} />
+          {/* </Switch> */}
         </Router>
       );
     }
@@ -168,17 +165,14 @@ class CoursesTaken extends Component {
         />
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
  
-
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
             </button>
             <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
          </Link>
-
-
-        </div>
         
+        </div>
     );
   }
 }
@@ -196,9 +190,9 @@ class SemestersTaken extends Component {
     };
   }
 
-  sendAPI(data) {
+  sendAPI = (data) => {
     console.log("posting to api");
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(this.state.value));
     fetch('http://localhost:5000/api/user_info', {
       mode: 'no-cors',
       method: 'POST',
@@ -207,12 +201,6 @@ class SemestersTaken extends Component {
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
-  }
-
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
   };
 
   handleClick = (event) => {
@@ -223,13 +211,13 @@ class SemestersTaken extends Component {
 
   render() {
     const opts = this.state.options.map((opt) => {
-      return <button100
+      return <button
               value= {opt}
-              class="square" 
+              class="button100"
               tabindex="0"
               onClick={e => this.handleClick(e)}>
               {opt}
-              </button100>
+              </button>
     });
   
     return (
@@ -245,7 +233,7 @@ class SemestersTaken extends Component {
         <div class = "container1">{opts}</div>
 
         <Link to="/focus_area">
-          <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
+          <button onClick = {this.sendAPI(this.state.value)} class="button0" type="button">
             THAT'S IT!
           </button>
           <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
@@ -269,27 +257,36 @@ class SemestersTaken extends Component {
           {name: 'Computational Biology', redirect: '/cb', class: 'button3'},
           {name: 'Natural Language Processing', redirect: '/nlp', class: 'button2'}
         ],
-        value: 0
+        value: ''
       };
     }
+    
     handleClick = (event) => {
       this.setState({
         value: event.target.value
       });
-
     };
+
+    // passing user input value to parent component App
+    sendFA = () => {
+      console.log(this.state.value);
+      //e.preventDefault();
+      this.props.functionCallFromParent(this.state.value);
+    };
+
+    
 
     render() {
       const opts = this.state.options.map((opt) => {
-        return (
-          <Link to="/final">
-          <button value={opt.redirect} class={opt.class} type="button" onClick={e => this.handleClick(e)}>
-            {opt.name}
-          </button>
-          </Link>
-        )
+        return <button
+                value= {opt.redirect}
+                class={opt.class}
+                tabindex="0"
+                onClick={e => this.handleClick(e)}>
+                {opt.name}
+                </button>
       });
-      
+    
       return (
         <div class="center">
           <h1
@@ -297,8 +294,7 @@ class SemestersTaken extends Component {
               display: "flex",
               justifyContent: "center",
               alignItems: "center"
-            }}
-          >
+            }}>
             {this.state.question}
           </h1>
           <div
@@ -308,13 +304,15 @@ class SemestersTaken extends Component {
               justifyContent: "center"
             }}
           >{opts}</div>
-        
-          {/* TO DO: 1. pass self.state.value to parent class; 2. completion picture */}
-        </div>
+  
+          <Link to="/final">
+            <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
+              VIEW MY PATH!
+            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+          </Link>
+          </div>
       );
     }
   }
-
-  
-
 export default App;
