@@ -1,15 +1,16 @@
 // const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    filterByPre: function filterByPre(courseStatus, field, courses_track, courses_pre) {
-        // let courses_field = ["core", "core", "core", "core", "core", "core", "core", "core", "elective", "elective", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "bd", "bd", "bd", "cb", "cb", "cb", "nlp", "nlp", "nlp", "r", "r", "r", "is", "is", "is", "is", "r", "bd", "nlp", "nlp", "core", "core", "core", "core"];
-        // let courses_pre = ["", "", "", "2", "3", "3", "3", "3-6-12", "3", "3", "", "10", "", "11", "11-13", "11-13-14", "", "", "", "", "", "", "", "3", "3", "3", "3", "3", "3", "3", "3", "3-11-13-14-15", "3", "3-26", "3-11-13-14-15", "3", "3", "3", "3", "3", "3", "3-11-13-14-15-30", "3-11-13-14-15-30", "", "", "", "44"];
+    filterByPre: function filterByPre(courseStatus, field, semester, courses_info) {
+        courses_track = courses_info[1];
+        courses_pre = courses_info[2];
+        courses_semester = courses_info[4];
         let eligible_course = [];
         for (var i = 0; i < courseStatus.length; i++) {
-            if (courseStatus[i] == 0 && courses_track[i] == field) {
+            if (courseStatus[i] == 0 && (courses_track[i] == field || courses_track[i] == 'core' || courses_track[i] == 'elective') && (courses_semester[i] == semester || courses_semester[i] == "Both")) {
                 let fulfill_flag = 1;
                 let curr_pre = courses_pre[i].split("-");
-                for (var i = 0; i < curr_pre.length; i++) {
-                    if (courseStatus[curr_pre[i]] == 0) {
+                for (var j = 0; j < curr_pre.length; j++) {
+                    if (courseStatus[curr_pre[j]] == 0) {
                         fulfill_flag = 0;  // not fulfill the prerequisite
                         break;
                     }

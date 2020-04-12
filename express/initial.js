@@ -1,7 +1,13 @@
 const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    initilization: function initilization(courseName, courses_track, courses_pre, courses_area) {
+    initilization: function initilization(courseName, courses_info) {
         // open the database
+        let courses_credit = [];
+        let courses_track = [];
+        let courses_pre = [];
+        let courses_conflict = [];
+        let courses_semester = [];
+        let courses_area = [];
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
@@ -707,8 +713,11 @@ module.exports = {
                 throw err;
             }
             rows.forEach((row) => {
+                courses_credit.push(row.Credits);
                 courses_track.push(row.Track);
                 courses_pre.push(row.Prerequisite);
+                courses_conflict.push(row.Conflicts);
+                courses_semester.push(row.Semester);
                 courses_area.push(row.Area);
             });
         });
@@ -720,9 +729,12 @@ module.exports = {
                 console.error(err.message);
             }
             console.log("Close the courses database connection for initilization!");
-            // console.log(courses_track);
-            // console.log(courses_pre);
-            // console.log(courses_area);
+            courses_info.push(courses_credit);
+            courses_info.push(courses_track);
+            courses_info.push(courses_pre);
+            courses_info.push(courses_conflict);
+            courses_info.push(courses_semester);
+            courses_info.push(courses_area);
         });
     },
 };

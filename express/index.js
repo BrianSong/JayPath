@@ -11,11 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 let courseName = [];
-let courses_track = [];
-let courses_pre = [];
-let courses_area = [];
+let courses_info = [];
 
-initial.initilization(courseName, courses_track, courses_pre, courses_area);
+initial.initilization(courseName, courses_info);
 
 // let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
