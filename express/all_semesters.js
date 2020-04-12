@@ -1,62 +1,49 @@
 const one_semester = require("./one_semester");
+var course_node = require("./course_node");
 
 module.exports = {
-    get_all_semesters: function get_all_semesters(user_semester, field) {
+    get_all_semesters: function get_all_semesters(user_semester_list, field, courses_track, courses_pre) {
         // input: user course nodes list (a list contains a single course node)
         // output: a list where each element (corresponding to a term) is a list of course codes
 
         let all_semesters = []; // every element is a list of courses for a term
-
-        // get the very next semester nodes based on the user nodes list
-        let curr_semester_nodes_list = one_semester.get_one_semester(user_semester, field);
-        
-        // note: check graduation before push to all semesters to make sure values are assigned
-        // check graudation and assign values (pass by reference in order to modify input?)
-        // let grad_flag = check_grad(curr_semester_nodes_list, field); // not used for iter3
+        let semesters_left = 8; // depending on user input
         let grad_flag = false;
 
-        // add the current semester nodes list into the all semesters list
-        all_semesters.push(curr_semester_nodes_list);
+        while ((!grad_flag) && (all_semesters.length < semesters_left)) {
+            // get the very next semester nodes based on the previous semester nodes
+            let curr_semester_nodes_list = [];
+            if (all_semesters.length == 0) {
+                curr_semester_nodes_list = one_semester.get_one_semester(user_semester_list, field, courses_track, courses_pre);
+            } else {
+                curr_semester_nodes_list = one_semester.get_one_semester(all_semesters[all_semesters.length-1], field, courses_track, courses_pre);
+            }
 
-        while (!grad_flag) { // not graduate yet, need to take one more semester
-            // get the next semester nodes
-            curr_semester_nodes_list = one_semester.get_one_semester(all_semesters[-1], field); // only need to input the most recent semester
+            if (curr_semester_nodes_list.length == 0) {return all_semesters;} // no more courses to take
 
-            // check graudation and assign values (pass by reference in order to modify input?)
-            // grad_flag = check_grad(curr_semester_nodes_list, field); // not used for iter3
-
-            // add the current semester nodes list into the all semesters list
+            // note: check graduation before push to all semesters to make sure values are assigned
+            // check graudation and assign values
+            grad_flag = check_grad(curr_semester_nodes_list, field, courses_track, courses_pre);
             all_semesters.push(curr_semester_nodes_list);
+        }
 
-            if (all_semesters.length == 8) { break; } // only for iter3!!!
-       }
+        // ONLY FOR TESTING: set values for all course nodes at the last semester to 1
+        for (var i = 0; i < all_semesters[all_semesters.length-1].length; i++) {
+            all_semesters[all_semesters.length-1][i].change_node_value(1);
+            grad_flag = true;
+        }
 
-       return all_semesters; // note all the nodes should have values assinged, but only the last semester has value 1 and matters
-    },
-};
-
-function check_grad(nodes_list, field){
-    let grad_flag = false;
-    let curr_node_status = [];
-
-    // looping over all course nodes
-    for (var i = 0; i < nodes_list.length; i++) {
-        // assing value by checking graduation requirement, pass: 1; fail: -1
-        curr_node_status = nodes_list[i].get_status();
-        
-        // check core requirement
-
-        // check total credits requirement
-
-        // check field requirement
-
-        node_value = 0;
-        nodes_list[i].set_value() = node_value;
-
-        if (node_value == 1) {
-            grad_flag = true; // do not break since we need to assign values to all nodes
+        if (grad_flag) {
+            return all_semesters; // note all the nodes should have values assinged, but only the values at the last semester matters
+        } else {
+            return []; // cannot graduate, dump everything
         }
     }
+};
 
-    return grad_flag;
+function check_grad(nodes_list, field, courses_track, courses_pre){
+    for (var i = 0; i < nodes_list.length; i++) {
+        nodes_list[i].change_node_value(0);
+    }
+    return false;
 }
