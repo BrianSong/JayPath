@@ -9,7 +9,8 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        focus_area: '/aa'
+        focus_area: '/aa',
+        semesters_taken: -2
       };
     }
 
@@ -17,19 +18,21 @@ class App extends Component {
       this.setState({
         focus_area: data_from_child
       });
-      
+    };
+
+    parentFunction2 = (data_from_child) => {
+      this.setState({
+        semesters_taken: data_from_child
+      });
     };
 
     render() {
       return (
         <Router>
-          {/* <Switch> */}
-          {/* statements below follow NO sequential order */}
             <Route exact path="/" component={CoursesTaken} />
-            <Route exact path="/current_semester" component={SemestersTaken} />
+            <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
             <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
-            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} />} />
-          {/* </Switch> */}
+            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
         </Router>
       );
     }
@@ -190,17 +193,21 @@ class SemestersTaken extends Component {
     };
   }
 
-  sendAPI = (data) => {
+  sendAPI = () => {
     console.log("posting to api");
     console.log(JSON.stringify(this.state.value));
     fetch('http://localhost:5000/api/user_info', {
       mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(this.state.value)
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
+
+    // passing user input value to parent component App
+    console.log(this.state.value);
+    this.props.functionCallFromParent(this.state.value);
   };
 
   handleClick = (event) => {
@@ -233,7 +240,7 @@ class SemestersTaken extends Component {
         <div class = "container1">{opts}</div>
 
         <Link to="/focus_area">
-          <button onClick = {this.sendAPI(this.state.value)} class="button0" type="button">
+          <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
             THAT'S IT!
           </button>
           <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>

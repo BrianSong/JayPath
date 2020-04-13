@@ -96,7 +96,7 @@ class Final extends Component {
                     }}
                 >
                     <img src={Jay} style={{width: 50, height: 50, float: "left"}}></img>
-                    MY PATH
+                    MY PATH - {this.props.valueFromParent2}
                 </h1>
                 <div class="container2">
                     {list}
