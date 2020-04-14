@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: white;
 }
 
 select{
@@ -66,6 +67,7 @@ select{
   padding: 10px;
 }
 
+
 .hh1{
   padding:5px;
   text-align:center;
@@ -117,6 +119,7 @@ select{
   font-size: 10px;
 }
 
+
 .button_r {
   position: relative;
   top: 5px;
@@ -129,6 +132,7 @@ select{
   width: 75px;
   border-radius: 10px;
 }
+
 
 .button0 {
   height:35px;

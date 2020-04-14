@@ -1,0 +1,53 @@
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+    border: 3px solid rgba(211, 149, 190, 0.431);
+  }
+
+
+.title {
+    text-align: center;
+    color: black;
+    font-size: 15px;
+  }
+
+
+  .text1 {
+    text-align: left;
+    left: 50px;
+    color: #193b4d;
+    position: relative;
+    top: 50px;
+    font-size: 15px;
+  }
+  .text2 {
+    text-align: left;
+    left: 30px;
+    color: #193b4d;
+    position: relative;
+    top: 100px;
+    font-size: 15px;
+  }
+
+  .note {
+    padding-top: 20px;
+    position: relative;
+    left: 50px;
+    top: 50px;
+    font-size:15px;
+    color: darkblue;
+    font-family: Optima-Bold;
+  }
+
+  .button_b {
+    position: relative;
+    top: 100px;
+    left: 50px;
+    font-size: 16px;
+    border:transparent;
+    background-color: darkblue;
+    color: white;
+    height: 50px;
+    width: 120px;
+    border-radius: 50%;
+  }
