@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./App.css";
 import Jay from "./bluejay.png";
-import {BrowserRouter as Link} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 class Final extends Component {
     constructor(prop) {
