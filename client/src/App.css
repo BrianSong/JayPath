@@ -34,6 +34,7 @@ select{
   border: 3px solid#b1e2f2;
   text-align: center;
   justify-content: center;
+  height: 488px;
 }
 
 .schoolyear_Box {
@@ -54,6 +55,7 @@ select{
   border: 3px solid#fad993;
   text-align: center;
   justify-content: center;
+  height: 488px;
 }
 
 .box3 {
@@ -64,6 +66,11 @@ select{
   text-align: center;
   justify-content: center;
   padding: 10px;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
 }
 
 .hh1{

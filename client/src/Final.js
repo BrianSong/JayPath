@@ -1,19 +1,23 @@
 import React, {Component} from "react";
 import "./App.css";
 import Jay from "./bluejay.png";
-import {BrowserRouter as Link} from "react-router-dom";
+import Done from "./complete.jpg";
+import {BrowserRouter as Router,Link} from "react-router-dom";
 
 class Final extends Component {
     constructor(prop) {
         super(prop);
         // inheritated from FocusArea: this.props.valueFromParent
+        //inheritated from SemestersTaken: this.props.valueFromParent2
         this.state = {
             schedule: [],
+            semesters: -2,
+            focus_area: ''
         };
     }
 
     callAPI() {
-        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses'))
+        fetch(''.concat('http://localhost:5000/api', this.state.focus_area,'/courses'))
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
@@ -21,8 +25,16 @@ class Final extends Component {
             .catch(err => err);
     }
 
+    getParentpProps() {
+        this.setState({
+            semesters: this.props.valueFromParent2,
+            focus_area: parseInt(this.props.valueFromParent)
+        });
+    }
+
     componentDidMount() {
         this.callAPI();
+        this.getParentpProps();
     }
 
     render() {
@@ -64,12 +76,28 @@ class Final extends Component {
                 );
             });
 
-            list0[i] = {details1: temp1, details2: temp2, 
-                semester1: 'Semester'.concat(i * 2 + 1), semester2: 'Semester'.concat(i * 2 + 2),
+            const img0 = <div class = 'imgContainer'><img src={Done} style={{width: 350, height: 380, float: "left"}} /></div>
+
+            if (i * 2 + 1 <= this.state.semesters) {
+                list0[i] = {details1: img0, details2: img0, 
+                semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                 year: year_hash[i]};
+                console.log(list0[i].details1);
+            } else if (i * 2 === this.state.semesters){
+                list0[i] = {details1: img0, details2: temp2, 
+                    semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
+                    year: year_hash[i]};
+                    console.log(list0[i].details1);
+            } else {
+                list0[i] = {details1: temp1, details2: temp2, 
+                    semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
+                    year: year_hash[i]};
+            }
+            
         }
         const list = list0.map(l => {
             return (
+
                 <div class="schoolyear_Box">
                     <div class="hh1">{l.year}</div>
                     <div class="text1">
@@ -95,8 +123,8 @@ class Final extends Component {
                         alignItems: "center",
                     }}
                 >
-                    <img src={Jay} style={{width: 50, height: 50, float: "left"}}></img>
-                    MY PATH - {this.props.valueFromParent2}
+                    <img src={Jay} style={{width: 50, height: 50, float: "left"}} />
+                    MY PATH
                 </h1>
                 <div class="container2">
                     {list}
