@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-ro
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
 import Final from "./Final.js";
+import FailingPage from "./FailingPage.js";
 
 
 class App extends Component {
@@ -30,9 +31,12 @@ class App extends Component {
       return (
         <Router>
             <Route exact path="/" component={CoursesTaken} />
+            <Route exact path="/oops" component = {FailingPage} />
             <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
             <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
             <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
+            <Route exact path="/advising" component={() => { window.location.href = 'https://advising.jhu.edu/'; return null;}}></Route>
+            <Route exact path="/cs_req" component={() => { window.location.href = 'http://e-catalog.jhu.edu/departments-program-requirements-and-courses/engineering/computer-science/'; return null;}}></Route>
         </Router>
       );
     }
@@ -312,7 +316,7 @@ class SemestersTaken extends Component {
             }}
           >{opts}</div>
   
-          <Link to="/final">
+          <Link to="/oops">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
               VIEW MY PATH!
             </button>
