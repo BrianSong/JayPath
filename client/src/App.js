@@ -1,54 +1,42 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
-import NLP from "./NLP.js";
-import ROB from "./ROB.js";
-import BD from "./BD.js";
-import IS from "./IS.js";
-import CB from "./CB.js";
-
-
-
-
+import Final from "./Final.js";
+import FailingPage from "./FailingPage.js";
 
 
 class App extends Component {
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+        focus_area: '/aa',
+        semesters_taken: -2
+      };
     }
-  
+
+    parentFunction = (data_from_child) => {
+      this.setState({
+        focus_area: data_from_child
+      });
+    };
+
+    parentFunction2 = (data_from_child) => {
+      this.setState({
+        semesters_taken: data_from_child
+      });
+    };
+
     render() {
       return (
         <Router>
-          <Switch>
-            <Route exact path="/">
-              <CoursesTaken />
-            </Route>
-            <Route exact path="/current_semester">
-              <SemestersTaken />
-            </Route>
-            <Route exact path="/focus_area">
-              <FocusArea />
-            </Route>
-            <Route exact path="/nlp">
-              <NLP />
-            </Route>
-            <Route exact path="/r">
-              <ROB />
-            </Route>
-            <Route exact path="/bd">
-              <BD />
-            </Route>
-            <Route exact path="/is">
-              <IS />
-            </Route>
-            <Route exact path="/cb">
-              <CB />
-            </Route>
-          </Switch>
+            <Route exact path="/" component={CoursesTaken} />
+            <Route exact path="/oops" component = {FailingPage} />
+            <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
+            <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
+            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
+            <Route exact path="/advising" component={() => { window.location.href = 'https://advising.jhu.edu/'; return null;}}></Route>
+            <Route exact path="/cs_req" component={() => { window.location.href = 'http://e-catalog.jhu.edu/departments-program-requirements-and-courses/engineering/computer-science/'; return null;}}></Route>
         </Router>
       );
     }
@@ -184,17 +172,14 @@ class CoursesTaken extends Component {
         />
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
  
-
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
             </button>
             <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
          </Link>
-
-
-        </div>
         
+        </div>
     );
   }
 }
@@ -205,30 +190,28 @@ class SemestersTaken extends Component {
     this.state = {
       question: "Which of the following best describes your current semester(or the one you just completed)?",
       value: 0,
-      options: ['Freshman year semester 1', 'Freshman year semester 2',
-      'Sophomore year semester 1', 'Sophomore year semester 2',
-      'Junior year semester 1', 'Junior year semester 2',
-      'Senior year semester 1', 'Senior year semester 2']
+      options: ['semester 1', 'semester 2',
+      'semester 3', 'semester 4',
+      'semester 5', 'semester 6',
+      'semester 7', 'semester 8']
     };
   }
 
-  sendAPI(data) {
+  sendAPI = () => {
     console.log("posting to api");
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(this.state.value));
     fetch('http://localhost:5000/api/user_info', {
       mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(this.state.value)
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
-  }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
+    // passing user input value to parent component App
+    console.log(this.state.value);
+    this.props.functionCallFromParent(this.state.value);
   };
 
   handleClick = (event) => {
@@ -241,7 +224,8 @@ class SemestersTaken extends Component {
     const opts = this.state.options.map((opt) => {
       return <button
               value= {opt}
-              class="square" 
+              class="button100"
+              tabindex="0"
               onClick={e => this.handleClick(e)}>
               {opt}
               </button>
@@ -259,28 +243,61 @@ class SemestersTaken extends Component {
         </h1>
         <div class = "container1">{opts}</div>
 
-          <Link to="/focus_area">
-            <button onClick = {() => this.sendAPI(this.state.value)} class="button0" type="button">
-              THAT'S IT!
-            </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+        <Link to="/focus_area">
+          <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
+            THAT'S IT!
+          </button>
+          <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
         </div>
         
     );
   }
 }
-  
+
   class FocusArea extends Component {
     constructor(prop) {
       super(prop);
       this.state = {
-        question: "What is your focus area in computer science?"
+        question: "What is your focus area in computer science?",
         // later on may want to add componentDidMount() to read focus areas from the DB
+        options: [
+          {name: 'Robotics', redirect: '/rob', class: 'button1'},
+          {name: 'Big Data', redirect: '/bd', class: 'button4'},
+          {name: 'Information Security', redirect:'/is', class: 'button5'},
+          {name: 'Computational Biology', redirect: '/cb', class: 'button3'},
+          {name: 'Natural Language Processing', redirect: '/nlp', class: 'button2'}
+        ],
+        value: ''
       };
     }
-  
+    
+    handleClick = (event) => {
+      this.setState({
+        value: event.target.value
+      });
+    };
+
+    // passing user input value to parent component App
+    sendFA = () => {
+      console.log(this.state.value);
+      //e.preventDefault();
+      this.props.functionCallFromParent(this.state.value);
+    };
+
+    
+
     render() {
+      const opts = this.state.options.map((opt) => {
+        return <button
+                value= {opt.redirect}
+                class={opt.class}
+                tabindex="0"
+                onClick={e => this.handleClick(e)}>
+                {opt.name}
+                </button>
+      });
+    
       return (
         <div class="center">
           <h1
@@ -288,8 +305,7 @@ class SemestersTaken extends Component {
               display: "flex",
               justifyContent: "center",
               alignItems: "center"
-            }}
-          >
+            }}>
             {this.state.question}
           </h1>
           <div
@@ -298,36 +314,16 @@ class SemestersTaken extends Component {
               display: "flex",
               justifyContent: "center"
             }}
-          >
-          <Link to="/r">
-            <button class="button1" type="button">
-              Robotics
+          >{opts}</div>
+  
+          <Link to="/oops">
+            <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
+              VIEW MY PATH!
             </button>
-          </Link>
-          <Link to="/bd">
-            <button class="button4" type="button">
-              Big Data
-            </button>
-          </Link>
-          <Link to="/is">
-            <button class="button5" type="button">
-              Information Security
-            </button>
-          </Link>
-          <Link to="/cb">
-            <button class="button3" type="button">
-              Computational Biology
-            </button>
-          </Link>
-          <Link to="/nlp">
-            <button class="button2" type="button">
-              Natural Language Processing
-            </button>
+            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
           </div>
-        </div>
       );
     }
   }
-
 export default App;

@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: white;
 }
 
 select{
@@ -34,6 +35,7 @@ select{
   border: 3px solid#b1e2f2;
   text-align: center;
   justify-content: center;
+  height: 488px;
 }
 
 .schoolyear_Box {
@@ -54,6 +56,7 @@ select{
   border: 3px solid#fad993;
   text-align: center;
   justify-content: center;
+  height: 488px;
 }
 
 .box3 {
@@ -64,6 +67,11 @@ select{
   text-align: center;
   justify-content: center;
   padding: 10px;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
 }
 
 .hh1{
@@ -117,6 +125,7 @@ select{
   font-size: 10px;
 }
 
+
 .button_r {
   position: relative;
   top: 5px;
@@ -129,6 +138,7 @@ select{
   width: 75px;
   border-radius: 10px;
 }
+
 
 .button0 {
   height:35px;
@@ -162,12 +172,19 @@ select{
   flex-direction: column;
   justify-content: center;
 }
+
+.container2 {
+  display: flex;
+  flex-direction: rowf;
+  justify-content: center;
+}
+
 .square {
   height:50px;
   width:300px;
   background-color: white;
   color: black;
-  border: 2px solid #dbcfcf;
+  border: 2px solid #89cff0;
   border-radius: 25%;
   padding: 0;
   font-size: 16px;
@@ -177,6 +194,21 @@ select{
   align-self: center;
 }
 
+.row {
+  height:160px;
+  width:330px;
+  background-color: white;
+  color: black;
+  border: 1px solid #F5F5F5;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0px;
+  align-self: center;
+}
 
 .button1 {
   height:100px;
@@ -190,6 +222,66 @@ select{
   text-align: center;
   vertical-align: middle;
   margin: 15px;
+}
+
+.button100 {
+  height:50px;
+  width:300px;
+  background-color: white;
+  color: black;
+  border: 2px solid #89cff0;
+  border-radius: 25%;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 15px;
+  align-self: center;
+
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  outline: none;
+}
+
+.button100:hover {
+  color: #255784;
+  background: #89cff0;
+  box-shadow: 0 0 10px #89cff0, 0 0 40px #89cff0, 0 0 80px #89cff0;
+  transition-delay: 0.1s;
+}
+
+.button100:focus {
+  color: #255784;
+  background: #89cff0;
+  box-shadow: 0 0 10px #89cff0, 0 0 40px #89cff0, 0 0 80px #89cff0;
+  transition-delay: 0.1s;
+}
+
+button200 {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #D3D3D3;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 24px;
+  overflow: hidden;
+  transition: 0.2s;
+  outline: none;
+}
+
+button200:hover {
+  color: #255784;
+  background: #F5F5F5;
+  box-shadow: 0 0 10px #F5F5F5, 0 0 40px #F5F5F5, 0 0 80px #F5F5F5;
+  transition-delay: 0.1s;
 }
 
 .button2 {
