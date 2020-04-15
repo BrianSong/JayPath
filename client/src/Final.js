@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./App.css";
 import Jay from "./bluejay.png";
 import Done from "./complete.jpg";
-import {BrowserRouter as Router,Link} from "react-router-dom";
+import {BrowserRouter as Route,Router,Link,Redirect} from "react-router-dom";
 
 class Final extends Component {
     constructor(prop) {
@@ -12,7 +12,8 @@ class Final extends Component {
         this.state = {
             schedule: [],
             semesters: -2,
-            focus_area: ''
+            focus_area: '',
+            if_succeed: 0
         };
     }
 
@@ -35,6 +36,12 @@ class Final extends Component {
     componentDidMount() {
         this.callAPI();
         this.getParentpProps();
+    }
+    
+    renderRedirect = () => {
+        if (this.state.if_succeed == 0) {
+            return <Redirect to = "/oops"/>;
+        }
     }
 
     render() {
@@ -99,6 +106,7 @@ class Final extends Component {
             return (
 
                 <div class="schoolyear_Box">
+                    {this.renderRedirect()}
                     <div class="hh1">{l.year}</div>
                     <div class="text1">
                         <div class="hh2">{l.semester1}</div>
