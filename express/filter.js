@@ -1,12 +1,11 @@
 // const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    filterByPre: function filterByPre(courseStatus, field, semester, courses_info) {
-        courses_track = courses_info[1];
-        courses_pre = courses_info[2];
-        courses_semester = courses_info[4];
+    filterByPre: function filterByPre(courseStatus, field, courses_track, courses_pre) {
+        // let courses_track = ["core", "core", "core", "core", "core", "core", "core", "core", "elective", "elective", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "bd", "bd", "bd", "cb", "cb", "cb", "nlp", "nlp", "nlp", "r", "r", "r", "is", "is", "is", "is", "r", "bd", "nlp", "nlp", "core", "core", "core", "core"];
+        // let courses_pre = ["", "", "", "2", "3", "3", "3", "3-6-12", "3", "3", "", "10", "", "11", "11-13", "11-13-14", "", "", "", "", "", "", "", "3", "3", "3", "3", "3", "3", "3", "3", "3-11-13-14-15", "3", "3-26", "3-11-13-14-15", "3", "3", "3", "3", "3", "3", "3-11-13-14-15-30", "3-11-13-14-15-30", "", "", "", "44"];
         let eligible_course = [];
         for (var i = 0; i < courseStatus.length; i++) {
-            if (courseStatus[i] == 0 && (courses_track[i] == field || courses_track[i] == 'core' || courses_track[i] == 'elective') && (courses_semester[i] == semester || courses_semester[i] == "Both")) {
+            if (courseStatus[i] == 0 && (courses_track[i] == field || courses_track[i] == 'core' || courses_track[i] == 'elective')) {
                 let fulfill_flag = 1;
                 let curr_pre = courses_pre[i].split("-");
                 for (var j = 0; j < curr_pre.length; j++) {
@@ -20,7 +19,8 @@ module.exports = {
                 }
             }
         }
-        return eligible_course;
+        //console.log("Finish filtering the courses by prerequisites!");
+        return eligible_course
         // // Open and connect to database
         // console.log("filterByPre function is called!");
         // let courses = []
