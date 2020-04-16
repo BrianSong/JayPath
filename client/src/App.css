@@ -280,7 +280,7 @@ select{
   transition-delay: 0.1s;
 }
 
-.button100:focus {
+.active {
   color: #255784;
   background: #89cff0;
   box-shadow: 0 0 10px #89cff0, 0 0 40px #89cff0, 0 0 80px #89cff0;
