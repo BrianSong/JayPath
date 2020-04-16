@@ -187,13 +187,31 @@ class CoursesTaken extends Component {
 class SemestersTaken extends Component {
   constructor(prop) {
     super(prop);
+    
     this.state = {
-      question: "Which of the following best describes your current semester(or the one you just completed)?",
+      question1: "Which of the following best describes your current semester(or the one you just completed)?",
+      question2: "In which season will you attend your upcoming semester?",
       value: 0,
-      options: ['semester 1', 'semester 2',
-      'semester 3', 'semester 4',
-      'semester 5', 'semester 6',
-      'semester 7', 'semester 8']
+      left: [ {value: 'semester 1', active: 'button100'},
+      {value: 'semester 3', active: 'button100', },
+      {value: 'semester 5', active: 'button100'},
+      {value: 'semester 7', active: 'button100'},
+      {value: 'high school', active: 'button100'}],
+
+      right: [ {value: 'semester 2', active: 'button100'},
+      {value: 'semester 4', active: 'button100'},
+      {value: 'semester 6', active: 'button100'},
+      {value: 'semester 8', active: 'button100'}],
+
+      bottom_active: ['button100', 'button100'],
+
+      hash_table: ['high school', 'semester 1', 'semester 2',
+      'semester 3', 'semester 4', 'semester 5', 
+      'semester 6', 'semester 7', 'semester 8'],
+      // using index used in the hash_table to access left & right
+      // > 0 belongs to left
+      // 1-indexed to avoid confusion over 0
+      hash_idx: [5, 1, -1, 2, -2, 3, -3, 4, -4]
     };
   }
 
@@ -211,23 +229,74 @@ class SemestersTaken extends Component {
 
     // passing user input value to parent component App
     console.log(this.state.value);
-    this.props.functionCallFromParent(this.state.value);
+    console.log(this.state.value % 100);
+    this.props.functionCallFromParent(this.state.value % 100);
   };
 
+
   handleClick = (event) => {
+    const e = this.state.hash_table.indexOf(event.target.value); // index in hash_table
     this.setState({
-      value: this.state.options.indexOf(event.target.value)
+      value: this.state.value - (this.state.value % 100) + e
+    });
+
+    const left0 = this.state.left;
+    const right0 = this.state.right;
+    const idx = this.state.hash_idx[e];
+    for (var i = 0; i < right0.length; i++) {
+      right0[i].active = 'button100';
+    }
+    for (var i = 0; i < left0.length; i++) {
+      left0[i].active = 'button100';
+    }
+    if (idx > 0) { // belongs to left
+      left0[idx - 1].active = 'button100 active';
+    } else {
+      console.log(-1 - idx);
+      right0[-1 - idx].active = 'button100 active';
+    }
+    this.setState ({
+      left: left0,
+      right: right0
     });
   };
 
+
+  handleClick2 = (event) => {
+    this.setState({
+      value: (this.state.value % 100) + parseInt(event.target.value)
+    });
+
+    var temp = [];
+    if (event.target.value == "100") {
+      temp = ['button100 active', 'button100'];
+    } else {
+      temp = ['button100', 'button100 active'];
+    }
+    this.setState ({
+      bottom_active: temp
+    });
+    
+  };
+
   render() {
-    const opts = this.state.options.map((opt) => {
+    const opts_left = this.state.left.map((opt) => {
       return <button
-              value= {opt}
-              class="button100"
+              value= {opt.value}
+              class= {opt.active}
               tabindex="0"
               onClick={e => this.handleClick(e)}>
-              {opt}
+              {opt.value}
+              </button>
+    });
+
+    const opts_right = this.state.right.map((opt) => {
+      return <button
+              value= {opt.value}
+              class= {opt.active}
+              tabindex="0"
+              onClick={e => this.handleClick(e)}>
+              {opt.value}
               </button>
     });
   
@@ -239,9 +308,46 @@ class SemestersTaken extends Component {
             justifyContent: "center",
             alignItems: "center"
           }}>
-          {this.state.question}
+          {this.state.question1}
         </h1>
-        <div class = "container1">{opts}</div>
+        <div class='row1'>
+          <div class='column1'>
+          {opts_left}
+          </div>
+          <div class='column1'>
+          {opts_right}
+          </div>
+        </div>
+        
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+          {this.state.question2}
+        </h1>
+        <div class='row2'>
+          <div class='column1'>
+          <button
+              value= '100'
+              class={this.state.bottom_active[0]}
+              tabindex="0"
+              onClick={e => this.handleClick2(e)}>
+              Fall
+              </button>
+          </div>
+          <div class='column1'>
+          <button
+              value= '200'
+              class={this.state.bottom_active[1]}
+              tabindex="0"
+              onClick={e => this.handleClick2(e)}>
+              Spring
+              </button>
+          </div>
+        </div>
+
 
         <Link to="/focus_area">
           <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
@@ -250,7 +356,7 @@ class SemestersTaken extends Component {
           <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
         </div>
-        
+      //  </div> 
     );
   }
 }
