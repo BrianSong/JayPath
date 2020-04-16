@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
-const schedule = require("./schedule");
+// const schedule = require("./schedule");
 const filter = require("./filter");
 const initial = require("./initial");
 

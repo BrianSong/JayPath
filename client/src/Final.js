@@ -10,10 +10,9 @@ class Final extends Component {
         // inheritated from FocusArea: this.props.valueFromParent
         //inheritated from SemestersTaken: this.props.valueFromParent2
         this.state = {
-            schedule: [],
+            schedule: [""],
             semesters: -2,
             focus_area: '',
-            if_succeed: 0
         };
     }
 
@@ -39,7 +38,7 @@ class Final extends Component {
     }
     
     renderRedirect = () => {
-        if (this.state.if_succeed == 0) {
+        if (this.state.schedule.length == 0) {
             return <Redirect to = "/oops"/>;
         }
     }
