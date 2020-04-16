@@ -18,11 +18,11 @@ initial.initilization(courseName, courses_info);
 // let courses = [];  // all the candidate courses (ready to be chosen if no time conflict)
 let courseStatus = [];
 for (var id_loop = 0; id_loop <= 46; id_loop++) {
-  courseStatus[id_loop] = 0; // initialize all course status to 0 
+    courseStatus[id_loop] = 0; // initialize all course status to 0
 }
 // let course_to_id = new Map();
 // for (var id_loop = 0; id_loop <= 25; id_loop++) {
-//   courseStatus.set(id_loop, 0); // initialize all course status to 0 
+//   courseStatus.set(id_loop, 0); // initialize all course status to 0
 // }
 
 // app.get("/", (req, res) => {
@@ -32,31 +32,33 @@ for (var id_loop = 0; id_loop <= 46; id_loop++) {
 app.get("/api/courses", (req, res) => {
 
 
-  let db = new sqlite3.Database("../db/JayPath.db", err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Connected to the courses database.");
-  });
-  let currCourse = [];
-  // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses;`;
+    let db = new sqlite3.Database("../db/JayPath.db", err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Connected to the courses database.");
+    });
+    let currCourse = [];
+    // Extract course according to the focus area and sent it back to the front end for displaying.
+    let sql = `SELECT * FROM courses;`;
 
-  db.all(sql, (err, allCourses) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    allCourses.forEach((allCourse) => { currCourse.push(allCourse); })
-  });
+    db.all(sql, (err, allCourses) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        allCourses.forEach((allCourse) => {
+            currCourse.push(allCourse);
+        })
+    });
 
-  // Close database
-  db.close(err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Close the courses connection.");
-    res.send(currCourse);  // send the result to frontend
-  });
+    // Close database
+    db.close(err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Close the courses connection.");
+        res.send(currCourse);  // send the result to frontend
+    });
 
 });
 
@@ -65,53 +67,64 @@ app.get("/api/courses", (req, res) => {
 // });
 
 app.get("/api/:field/courses", (req, res) => {
-  // send candidate courses to backend
-  let field = String(req.params.field);
-  let courses = [];
-  let course_id = [];
-  for (var i = 0; i < 25; i++) {
-    course_id.push(Math.floor(Math.random() * 30));
-  }
+    // send candidate courses to backend
+    let field = String(req.params.field);
+    let courses = [];
+    let course_id = [];
 
-  // let user_course_node = new (courseStatus);
-  // let all = all_semesters.get_all_semesters(user_course_node, field);
-  // let schedule_list = one_schedule.get_schedule_simple(all);
-  // let last_semester_schedule = schedule_list[-1].get_status;
-  // for(var i = 0; i < last_semester_schedule.length; i++){
-  //   if(last_semester_schedule[i] == 1){
-  //     course_id.push(i);
-  //   }
-  // }
+    let courses_track = ["core", "core", "core", "core", "core", "core", "core", "core", "elective", "elective", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "bd", "bd", "bd", "cb", "cb", "cb", "nlp", "nlp", "nlp", "r", "r", "r", "is", "is", "is", "is", "r", "bd", "nlp", "nlp", "core", "core", "core", "core"];
+    let courses_pre = ["", "", "", "2", "3", "3", "3", "3-6-12", "3", "3", "", "10", "", "11", "11-13", "11-13-14", "", "", "", "", "", "", "", "3", "3", "3", "3", "3", "3", "3", "3", "3-11-13-14-15", "3", "3-26", "3-11-13-14-15", "3", "3", "3", "3", "3", "3", "3-11-13-14-15-30", "3-11-13-14-15-30", "", "", "", "44"];
 
-  let db = new sqlite3.Database("../db/JayPath.db", err => {
-    if (err) {
-      console.error(err.message);
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
+
+    if (one_schedule_list.length != 0) {
+        for(var i = 0; i < one_schedule_list.length; i++){
+            var semester_course_statue = one_schedule_list[i].get_status();
+            for(var j = 0; j < semester_course_statue.length; j++){
+                if(semester_course_statue[j] == 1){
+                    if(course_id.indexOf(j) == -1){
+                        course_id.push(j);
+                    }
+                }
+            }
+        }
+
+        let db = new sqlite3.Database("../db/JayPath.db", err => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log("Connected to the courses database.");
+        });
+
+        // Extract course according to the focus area and sent it back to the front end for displaying.
+        let sql = `SELECT * FROM courses WHERE id = ?;`;
+        for (var i = 0; i < course_id.length; i++) {
+            // console.log(courses_to_add[i]);
+            db.all(sql, [course_id[i]], (err, allcourse) => {
+                if (err) {
+                    return console.error(err.message);
+                }
+                allcourse.forEach(course => {
+                    courses.push(course);
+                })
+            });
+        }
+
+        // Close database
+        db.close(err => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log("Close the courses connection.");
+            res.send(courses);
+        });
+
+    } else {
+        res.send(courses);
     }
-    console.log("Connected to the courses database.");
-  });
-
-  // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses WHERE id = ?;`;
-  for (var i = 0; i < course_id.length; i++) {
-    // console.log(courses_to_add[i]);
-    db.all(sql, [course_id[i]], (err, allcourse) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      allcourse.forEach(course => {
-        courses.push(course);
-      })
-    });
-  }
-
-  // Close database
-  db.close(err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Close the courses connection.");
-    res.send(courses);
-  });
 });
 
 // app.post("/api/courses", (req, res) => {
@@ -161,36 +174,36 @@ app.get("/api/:field/courses", (req, res) => {
 
 app.post("/api/user_info", (req, res) => {
 
-  courses_to_add = req.body;
-  //console.log(courses_to_add[1].trim());
-  // Open and connect to data[1base
-  let db = new sqlite3.Database("../db/JayPath.db", err => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log("Connected to the courses database.");
-  });
-
-  // Extract course according to the focus area and sent it back to the front end for displaying.
-  let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
-  for (var i = 0; i < courses_to_add.length; i++) {
-    // console.log(courses_to_add[i]);
-    db.get(sql, [courses_to_add[i].trim()], (err, row) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      courseStatus[row.id] = 1;
-      // console.log(courseStatus[row.id]);
+    courses_to_add = req.body;
+    //console.log(courses_to_add[1].trim());
+    // Open and connect to data[1base
+    let db = new sqlite3.Database("../db/JayPath.db", err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Connected to the courses database.");
     });
-  }
 
-  // Close database
-  db.close(err => {
-    if (err) {
-      console.error(err.message);
+    // Extract course according to the focus area and sent it back to the front end for displaying.
+    let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
+    for (var i = 0; i < courses_to_add.length; i++) {
+        // console.log(courses_to_add[i]);
+        db.get(sql, [courses_to_add[i].trim()], (err, row) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            courseStatus[row.id] = 1;
+            // console.log(courseStatus[row.id]);
+        });
     }
-    console.log("Close the courses connection.");
-  });
+
+    // Close database
+    db.close(err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Close the courses connection.");
+    });
 });
 
 // function validateCourse(course) {

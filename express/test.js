@@ -16,3 +16,17 @@ let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, c
 
 let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
 console.log(one_schedule_list);
+course_id = []
+if (one_schedule_list.length != 0) {
+    for (var i = 0; i < one_schedule_list.length; i++) {
+        var semester_course_statue = one_schedule_list[i].status;
+        for (var j = 0; j < semester_course_statue.length; j++) {
+            if (semester_course_statue[j] == 1) {
+                if (course_id.indexOf(j) == -1) {
+                    course_id.push(j);
+                }
+            }
+        }
+    }
+}
+console.log(course_id);

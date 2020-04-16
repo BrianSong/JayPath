@@ -685,10 +685,6 @@ module.exports = {
                 "N/A"
             ]
         ];
-
-        for (var course in courseInfo) {
-            courseName.push(course[2]);
-        }
         // create the statement for the insertion of just ONE record
         let queryInfo =
             "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area) " +
@@ -706,27 +702,37 @@ module.exports = {
         }
         statement.finalize();
 
-        let sql = `SELECT * FROM courses`;
+        // let sql = `SELECT * FROM courses`;
 
-        db.all(sql, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                courses_credit.push(row.Credits);
-                courses_track.push(row.Track);
-                courses_pre.push(row.Prerequisite);
-                courses_conflict.push(row.Conflicts);
-                courses_semester.push(row.Semester);
-                courses_area.push(row.Area);
-            });
-        });
+        // db.all(sql, [], (err, rows) => {
+        //     if (err) {
+        //         throw err;
+        //     }
+        //     rows.forEach((row) => {
+        //         courses_credit.push(row.Credits);
+        //         courses_track.push(row.Track);
+        //         courses_pre.push(row.Prerequisite);
+        //         courses_conflict.push(row.Conflicts);
+        //         courses_semester.push(row.Semester);
+        //         courses_area.push(row.Area);
+        //     });
+        // });
 
 
         // close the database
         db.close(err => {
             if (err) {
                 console.error(err.message);
+            }
+            for (var i = 0; i < courseInfo.length; i++) {
+                let course = courseInfo[i]
+                courseName.push(course[2]);
+                courses_credit.push(course[3]);
+                courses_track.push(course[7]);
+                courses_pre.push(course[8]);
+                courses_conflict.push(course[9]);
+                courses_semester.push(course[10]);
+                courses_area.push(course[11]);
             }
             console.log("Close the courses database connection for initilization!");
             courses_info.push(courses_credit);
@@ -735,6 +741,7 @@ module.exports = {
             courses_info.push(courses_conflict);
             courses_info.push(courses_semester);
             courses_info.push(courses_area);
+            // console.log(courses_info);
         });
     },
 };
