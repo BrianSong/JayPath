@@ -84,12 +84,12 @@ class Final extends Component {
 
             const img0 = <div class = 'imgContainer'><img src={Done} style={{width: 350, height: 380, float: "left"}} /></div>
 
-            if (i * 2 + 1 <= this.state.semesters) {
+            if (i * 2 + 1 < this.state.semesters) {
                 list0[i] = {details1: img0, details2: img0, 
                 semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                 year: year_hash[i]};
                 console.log(list0[i].details1);
-            } else if (i * 2 === this.state.semesters){
+            } else if (i * 2 + 1 == this.state.semesters){
                 list0[i] = {details1: img0, details2: temp2, 
                     semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                     year: year_hash[i]};
