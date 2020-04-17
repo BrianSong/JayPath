@@ -422,7 +422,7 @@ class SemestersTaken extends Component {
             }}
           >{opts}</div>
   
-          <Link to="/oops">
+          <Link to="/final">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
               VIEW MY PATH!
             </button>
