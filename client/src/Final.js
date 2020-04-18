@@ -82,7 +82,7 @@ class Final extends Component {
                 );
             });
 
-            const img0 = <div class = 'imgContainer'><img src={Done} style={{width: 350, height: 380, float: "left"}} /></div>
+            const img0 = <div class = 'imgContainer'><img src={Done} style={{width: '100%', height: '100%', float: "left"}} /></div>
 
             if (i * 2 + 1 < this.state.semesters) {
                 list0[i] = {details1: img0, details2: img0, 
@@ -122,14 +122,8 @@ class Final extends Component {
     
         
         return (
-            <div>
-                <h1
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
+            <div class = "center111">
+                <h1 class = "my_path">
                     <img src={Jay} style={{width: 50, height: 50, float: "left"}} />
                     MY PATH
                 </h1>
