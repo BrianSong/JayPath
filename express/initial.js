@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    initilization: function initilization(courseName, courses_info) {
+    initilization: function initilization(courses_info) {
         // open the database
         let courses_credit = [];
         let courses_track = [];
@@ -726,7 +726,6 @@ module.exports = {
             }
             for (var i = 0; i < courseInfo.length; i++) {
                 let course = courseInfo[i]
-                courseName.push(course[2]);
                 courses_credit.push(course[3]);
                 courses_track.push(course[7]);
                 courses_pre.push(course[8]);

@@ -6,7 +6,7 @@ module.exports = {
         // output: a list of course nodes, where each course node is the courses to be taked at each semester
 
         let schedule_list = []; // store the best course nodes for every semesters
-        if (all_semesters_list.length == 0) {return schedule_list;}
+        if (all_semesters_list.length == 0) { return schedule_list; }
         if (all_semesters_list.length == 1) {
             for (var i = 0; i < all_semesters_list[0].length; i++) {
                 if (all_semesters_list[0][i].get_value == 1) { // must exist one, otherwise all_semesters_list will be []
@@ -23,7 +23,7 @@ module.exports = {
                 let child_indices_list = all_semesters_list[i][j].get_child_indices;
                 let child_values_list = [];
                 for (var k = 0; k < child_indices_list.length; k++) {
-                    child_values_list.push(all_semesters_list[i+1][child_indices_list[k]].get_value);
+                    child_values_list.push(all_semesters_list[i + 1][child_indices_list[k]].get_value);
                 }
 
                 // choose the best child
@@ -45,7 +45,7 @@ module.exports = {
         // get the schedule
         schedule_list.push(all_semesters_list[0][best_first_semester_index])
         for (var i = 0; i < all_semesters_list.length - 1; i++) {
-            schedule_list.push(all_semesters_list[i+1][schedule_list[schedule_list.length-1].get_best_child_index])
+            schedule_list.push(all_semesters_list[i + 1][schedule_list[schedule_list.length - 1].get_best_child_index])
         }
 
         return schedule_list
