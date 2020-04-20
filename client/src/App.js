@@ -151,13 +151,7 @@ class CoursesTaken extends Component {
       
       return (
         <div class="center">
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
+          <h1 class = "question">
             {this.state.question}
           </h1>
         <Autosuggest
@@ -170,8 +164,9 @@ class CoursesTaken extends Component {
           //renderSuggestionsContainer={this.renderSuggestionsContainer}
           inputProps={inputProps}
         />
+        
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
- 
+      
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
@@ -301,13 +296,8 @@ class SemestersTaken extends Component {
     });
   
     return (
-      <div class="center">
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
+      <div class= "center11" >
+        <h1 class = "question">
           {this.state.question1}
         </h1>
         <div class='row1'>
@@ -319,12 +309,7 @@ class SemestersTaken extends Component {
           </div>
         </div>
         
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
+        <h1 class = "question">
           {this.state.question2}
         </h1>
         <div class='row2'>
@@ -367,12 +352,14 @@ class SemestersTaken extends Component {
       this.state = {
         question: "What is your focus area in computer science?",
         // later on may want to add componentDidMount() to read focus areas from the DB
-        options: [
+        left: [
           {name: 'Robotics', redirect: '/rob', class: 'button1'},
-          {name: 'Big Data', redirect: '/bd', class: 'button4'},
-          {name: 'Information Security', redirect:'/is', class: 'button5'},
+          {name: 'Big Data', redirect: '/bd', class: 'button2'},
+          {name: 'Information Security', redirect:'/is', class: 'button5'}
+        ],
+        right: [
           {name: 'Computational Biology', redirect: '/cb', class: 'button3'},
-          {name: 'Natural Language Processing', redirect: '/nlp', class: 'button2'}
+          {name: 'Natural Language Processing', redirect: '/nlp', class: 'button4'}
         ],
         value: ''
       };
@@ -394,33 +381,40 @@ class SemestersTaken extends Component {
     
 
     render() {
-      const opts = this.state.options.map((opt) => {
+
+      const opts_left = this.state.left.map((opt) => {
         return <button
                 value= {opt.redirect}
-                class={opt.class}
+                class= {opt.class}
                 tabindex="0"
                 onClick={e => this.handleClick(e)}>
                 {opt.name}
                 </button>
       });
-    
+  
+      const opts_right = this.state.right.map((opt) => {
+        return <button
+                value= {opt.redirect}
+                class= {opt.class}
+                tabindex="0"
+                onClick={e => this.handleClick(e)}>
+                {opt.name}
+                </button>
+      });
+
       return (
-        <div class="center">
-          <h1
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}>
+        <div class="center11">
+          <h1 class = "question">
             {this.state.question}
           </h1>
-          <div
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >{opts}</div>
+          <div class='row1'>
+          <div class='column1'>
+          {opts_left}
+          </div>
+          <div class='column1'>
+          {opts_right}
+          </div>
+        </div>
   
           <Link to="/final">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
