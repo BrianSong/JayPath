@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(cors());
 
 
-
 // Initilization for database.
 let courseList = [];
 initial.initilization(courseList);
