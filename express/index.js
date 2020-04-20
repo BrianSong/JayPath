@@ -10,20 +10,20 @@ const initial = require("./initial");
 app.use(express.json());
 app.use(cors());
 
-let courses_info = [];
+
 
 // Initilization for database.
-initial.initilization(courses_info);
+let courseList = [];
+initial.initilization(courseList);
 
 // Initialize all course status to 0.
 let courseStatus = [];
-for (var id_loop = 0; id_loop < courses_info.length; id_loop++) {
+for (var id_loop = 0; id_loop < courseList.length; id_loop++) {
     courseStatus[id_loop] = 0;
 }
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {
-
     // Open the database
     let db = new sqlite3.Database("../db/JayPath.db", err => {
         if (err) {

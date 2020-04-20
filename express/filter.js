@@ -1,11 +1,9 @@
-const sqlite3 = require("sqlite3").verbose();
+// const sqlite3 = require("sqlite3").verbose();
 module.exports = {
     // filterByPre: function filterByPre(courseStatus, field, courses_track, courses_pre) {
     filterByPre: function filterByPre(courseStatus, field, courseList) {
         // id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, 
         // StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area
-
-
         // let courses_track = []
         // for (var i = 0; i < courseList.length; i++) {
 
@@ -16,7 +14,7 @@ module.exports = {
         for (var i = 0; i < courseStatus.length; i++) {
             if (courseStatus[i] == 0 && (courseList[i].Track == field || courseList[i].Track == 'core' || courseList[i].Track == 'elective')) {
                 let fulfill_flag = 1;
-                let curr_pre = courseList[i].Prerequisite.split("-"); z
+                let curr_pre = courseList[i].Prerequisite.split("-");
                 for (var j = 0; j < curr_pre.length; j++) {
                     if (courseStatus[curr_pre[j]] == 0) {
                         fulfill_flag = 0;  // not fulfill the prerequisite
@@ -28,8 +26,29 @@ module.exports = {
                 }
             }
         }
+
+        let priorityEligibleCourse = [];
+
+        for (var i = 0; i < eligible_course.length; i++) {
+            if (eligible_course[i].Track == field) {
+                priorityEligibleCourse.push(eligible_course[i]);
+            }
+        }
+
+        for (var i = 0; i < eligible_course.length; i++) {
+            if (eligible_course[i].Track == 'core') {
+                priorityEligibleCourse.push(eligible_course[i]);
+            }
+        }
+
+        for (var i = 0; i < eligible_course.length; i++) {
+            if (eligible_course[i].Track == 'elective') {
+                priorityEligibleCourse.push(eligible_course[i]);
+            }
+        }
+
         //console.log("Finish filtering the courses by prerequisites!");
-        return eligible_course
+        return priorityEligibleCourse
 
 
         // // Open and connect to database

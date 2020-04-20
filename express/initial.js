@@ -1,9 +1,8 @@
 const sqlite3 = require("sqlite3").verbose();
 var Course = require('./model/Course');
 module.exports = {
-    initilization: function initilization() {
+    initilization: function initilization(courseList) {
         // open the database
-        let courseList = [];
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
@@ -708,7 +707,7 @@ module.exports = {
             if (err) {
                 console.error(err.message);
             }
-            console.log(courseList);
+            // console.log(courseList);
             return courseList;
         });
     },
