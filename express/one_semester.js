@@ -3,7 +3,7 @@ var course_node = require("./course_node");
 
 
 module.exports = {
-    get_one_semester: function get_one_semester(prev_semester_nodes_list, field, courses_track, courses_pre) {
+    get_one_semester: function get_one_semester(prev_semester_nodes_list, field, courses_track, courses_pre, courseList) {
         // input: list of course nodes at the previous semester
         // e.g.: [node(0,0,0,0)]
         // output: list of course nodes at the current semester
@@ -16,7 +16,7 @@ module.exports = {
         for (var i = 0; i < prev_semester_nodes_list.length; i++) {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
-            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, courses_track, courses_pre);
+            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, courses_track, courses_pre, courseList);
             //console.log("prev node i = " + i + " child_nodes_list length: " + child_nodes_list.length);
 
             // add child course nodes in the current semester nodes list
@@ -51,11 +51,16 @@ module.exports = {
     }
 };
 
-function get_child_nodes(prev_course_node, field, courses_track, courses_pre) {
+function get_child_nodes(prev_course_node, field, courses_track, courses_pre, courseList) {
     let prev_course_status = prev_course_node.get_status;
-    let eligible_ids = filter.filterByPre(prev_course_status, field, courses_track, courses_pre);
+    // need field, courseList
+    let eligible_courses = filter.filterByPre(prev_course_status, field, courseList);
+    let eligible_ids = [];
+    for(var i = 0; i < eligible_courses.length; i++){
+        eligible_ids.push(eligible_courses[i].id);
+    }
     let child_nodes_list = select_from_eligible(prev_course_status, eligible_ids);
-    return child_nodes_list
+    return child_nodes_list;
 }
 
 function select_from_eligible(prev_course_status, eligible_ids) {
