@@ -1,13 +1,9 @@
 const sqlite3 = require("sqlite3").verbose();
+var Course = require('./model/Course');
 module.exports = {
-    initilization: function initilization(courses_info) {
+    initilization: function initilization() {
         // open the database
-        let courses_credit = [];
-        let courses_track = [];
-        let courses_pre = [];
-        let courses_conflict = [];
-        let courses_semester = [];
-        let courses_area = [];
+        let courseList = [];
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
@@ -702,45 +698,18 @@ module.exports = {
         }
         statement.finalize();
 
-        // let sql = `SELECT * FROM courses`;
-
-        // db.all(sql, [], (err, rows) => {
-        //     if (err) {
-        //         throw err;
-        //     }
-        //     rows.forEach((row) => {
-        //         courses_credit.push(row.Credits);
-        //         courses_track.push(row.Track);
-        //         courses_pre.push(row.Prerequisite);
-        //         courses_conflict.push(row.Conflicts);
-        //         courses_semester.push(row.Semester);
-        //         courses_area.push(row.Area);
-        //     });
-        // });
-
+        for (var i = 0; i < courseInfo.length; i++) {
+            currCourse = new Course(courseInfo[i][0], courseInfo[i][1], courseInfo[i][2], courseInfo[i][3], courseInfo[i][4], courseInfo[i][5], courseInfo[i][6], courseInfo[i][7], courseInfo[i][8], courseInfo[i][9], courseInfo[i][10], courseInfo[i][11]);
+            courseList.push(currCourse);
+        }
 
         // close the database
         db.close(err => {
             if (err) {
                 console.error(err.message);
             }
-            for (var i = 0; i < courseInfo.length; i++) {
-                let course = courseInfo[i]
-                courses_credit.push(course[3]);
-                courses_track.push(course[7]);
-                courses_pre.push(course[8]);
-                courses_conflict.push(course[9]);
-                courses_semester.push(course[10]);
-                courses_area.push(course[11]);
-            }
-            console.log("Close the courses database connection for initilization!");
-            courses_info.push(courses_credit);
-            courses_info.push(courses_track);
-            courses_info.push(courses_pre);
-            courses_info.push(courses_conflict);
-            courses_info.push(courses_semester);
-            courses_info.push(courses_area);
-            // console.log(courses_info);
+            console.log(courseList);
+            return courseList;
         });
     },
 };

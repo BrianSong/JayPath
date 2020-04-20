@@ -1,6 +1,7 @@
 const filter = require("./filter");
 var course_node = require("./course_node");
 
+
 module.exports = {
     get_one_semester: function get_one_semester(prev_semester_nodes_list, field, courses_track, courses_pre) {
         // input: list of course nodes at the previous semester
@@ -37,7 +38,7 @@ module.exports = {
                     curr_semester_nodes_list.push(child_nodes_list[j]);
 
                     // remember the child node index
-                    prev_semester_nodes_list[i].add_one_child(curr_semester_nodes_list.length-1);
+                    prev_semester_nodes_list[i].add_one_child(curr_semester_nodes_list.length - 1);
                 } else {
                     // remember the child node index
                     prev_semester_nodes_list[i].add_one_child(child_node_idx);
@@ -52,14 +53,14 @@ module.exports = {
 
 function get_child_nodes(prev_course_node, field, courses_track, courses_pre) {
     let prev_course_status = prev_course_node.get_status;
-    eligible_ids = filter.filterByPre(prev_course_status, field, courses_track, courses_pre); // a list of courses id
-    child_nodes_list = select_from_eligible(prev_course_status, eligible_ids); // a list of course nodes
-    return child_nodes_list;
+    let eligible_ids = filter.filterByPre(prev_course_status, field, courses_track, courses_pre);
+    let child_nodes_list = select_from_eligible(prev_course_status, eligible_ids);
+    return child_nodes_list
 }
 
 function select_from_eligible(prev_course_status, eligible_ids) {
-    let child_nodes_list = [];
-    if (eligible_ids.length == 0) {return child_nodes_list}
+    let child_nodes_list = []
+    if (eligible_ids.length == 0) { return child_nodes_list }
 
     let all_conflict_strings = ["3-25-38-19-8-26-16-23-27-33-42", "", "41", "25-38-0", "14-15-17-36-44", "11-12-13-45", "18-29-34-39", "40-9-20-24-28", "19-26-16-23-27-33-42-0", "7-40-20-24-28", "", "5-12-13-45-23", "5-6-11-13-18-29-34-39-45", "5-11-12-45", "4-15-17-36-44", "4-6-14-17-18-29-34-36-39-44", "19-8-26-23-27-33-42-0", "4-14-15-44", "6-12-29-34-45-39-15", "8-26-16-23-27-33-42-0", "7-40-9-24-28", "30-46", "", "19-8-26-16-0-33-42-0-11", "7-40-9-20-28", "3-38-0", "19-8-16-23-27-33-42-0", "19-8-26-16-23-33-42-0", "7-40-9-20-24", "6-19-34-39", "21-46", "", "", "19-8-26-16-23-27-42-0", "6-18-29-39", "", "4-14-15-44", "43", "3-25-0", "6-12-15-18-29-34-45", "7-9-20-24-28", "2", "19-8-26-16-23-27-33-0", "37", "4-14-15-17-36", "5-6-11-12-13-15-18-29-34-39", "21-30"];
 
@@ -99,6 +100,6 @@ function select_from_eligible(prev_course_status, eligible_ids) {
                 if (child_nodes_list.length == 2) { return child_nodes_list; }
             }
         }
+        return child_nodes_list;
     }
-    return child_nodes_list;
 }

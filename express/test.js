@@ -2,6 +2,7 @@ var course_node = require("./course_node");
 var one_semester = require("./one_semester");
 var all_semesters = require("./all_semesters");
 var one_schedule = require("./one_schedule");
+const initial = require("./initial");
 
 let field = "nlp";
 let courses_track = ["core", "core", "core", "core", "core", "core", "core", "core", "elective", "elective", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "bd", "bd", "bd", "cb", "cb", "cb", "nlp", "nlp", "nlp", "r", "r", "r", "is", "is", "is", "is", "r", "bd", "nlp", "nlp", "core", "core", "core", "core"];
@@ -30,3 +31,5 @@ if (one_schedule_list.length != 0) {
     }
 }
 console.log(course_id);
+// Initilization for database.
+coursesList = initial.initilization();
