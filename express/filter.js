@@ -1,7 +1,7 @@
 // const sqlite3 = require("sqlite3").verbose();
 module.exports = {
     // filterByPre: function filterByPre(courseStatus, field, courses_track, courses_pre) {
-    filterByPre: function filterByPre(courseStatus, field, courseList) {
+    filterByPre: function filterByPre(courseStatus, field, semester, courseList) {
         // id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, 
         // StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area
         // let courses_track = []
@@ -12,7 +12,7 @@ module.exports = {
 
         let eligible_course = [];
         for (var i = 0; i < courseStatus.length; i++) {
-            if (courseStatus[i] == 0 && (courseList[i].Track == field || courseList[i].Track == 'core' || courseList[i].Track == 'elective')) {
+            if (courseStatus[i] == 0 && (courseList[i].Track == field || courseList[i].Track == 'core' || courseList[i].Track == 'elective') && (courseList[i].Semester == semester || courseList[i].Semester == "Both")) {
                 let fulfill_flag = 1;
                 let curr_pre = courseList[i].Prerequisite.split("-");
                 for (var j = 0; j < curr_pre.length; j++) {
