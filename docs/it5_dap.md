@@ -1,6 +1,6 @@
 # OO Design
 
-![](assets/oose.jpg)
+![](assets/oose_ood_update.jpg)
 
 
 # Wireframe
