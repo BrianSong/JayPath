@@ -15,6 +15,7 @@ app.use(cors());
 let courseList = [];
 initial.initilization(courseList);
 
+
 // Initialize all course status to 0.
 let courseStatus = [];
 for (var id_loop = 0; id_loop < courseList.length; id_loop++) {

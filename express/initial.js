@@ -7,10 +7,10 @@ module.exports = {
             if (err) {
                 console.error(err.message);
             }
-            console.log("Connected to the courses database for initilization!");
+            console.log("Connected to the courses database for initialization!");
         });
         db.run(
-            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Semester STRING, Area STRING)"
+            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Term STRING, Area STRING)"
         );
 
         // hardcode for the first iteration: add courses manually
@@ -682,7 +682,7 @@ module.exports = {
         ];
         // create the statement for the insertion of just ONE record
         let queryInfo =
-            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area) " +
+            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Term, Area) " +
             "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?, ?, ?)";
 
         // 'prepare' returns a 'statement' object which allows us to
@@ -707,8 +707,7 @@ module.exports = {
             if (err) {
                 console.error(err.message);
             }
-            // console.log(courseList);
-            return courseList;
+            console.log("Close database for initialization!");
         });
     },
 };

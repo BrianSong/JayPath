@@ -1,5 +1,5 @@
 module.exports = class Course {
-  constructor(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area) {
+  constructor(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Term, Area) {
     this.id = id;
     this.CourseNumber = CourseNumber;
     this.CourseTitle = CourseTitle;
@@ -10,7 +10,7 @@ module.exports = class Course {
     this.Track = Track;
     this.Prerequisite = Prerequisite;
     this.Conflicts = Conflicts;
-    this.Semester = Semester;
+    this.Term = Term;
     this.Area = Area;
   }
 }
