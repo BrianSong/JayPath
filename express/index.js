@@ -16,6 +16,7 @@ app.use(cors());
 let courseStatus = new Map();
 let preferCourse = new Map();
 initial.initilization(courseStatus, preferCourse);
+let student = new Student(0, courseStatus, null);
 
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
