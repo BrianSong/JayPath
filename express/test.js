@@ -12,7 +12,8 @@ let user_semester = [new course_node(Array(courses_pre.length).fill(0))];
 console.log("user_semester status: " + user_semester[0].get_status);
 
 let courseList = [];
-initial.initilization(courseList);
+let courseStatus = new Map();
+initial.initilization(courseList, courseStatus);
 let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre, courseList);
 console.log(all_semesters_list);
 // let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
