@@ -118,9 +118,12 @@ app.get("/api/:field/courses", (req, res) => {
     }
 });
 
+// API for courses students has taken
 app.post("/api/user_info", (req, res) => {
 
     courses_to_add = req.body;
+    console.log("Courses to add");
+    console.log(courses_to_add);
     //console.log(courses_to_add[1].trim());
     // Open and connect to data[1base
     let db = new sqlite3.Database("../db/JayPath.db", err => {
@@ -150,6 +153,26 @@ app.post("/api/user_info", (req, res) => {
         }
         console.log("Close the courses connection.");
     });
+});
+
+// API for student's current semester and semester he/she wants to enroll in
+app.post("/api/semesters_info", (req, res) => {
+
+    semesters_info = req.body;
+    console.log("Semester_info");
+    console.log(semesters_info);
+    //console.log(courses_to_add[1].trim());
+    // Open and connect to data[1base
+
+});
+
+
+// API for courses the student wants to prioritize
+app.post("/api/courses_prioritized", (req, res) => {
+
+    courses_info = req.body;
+    console.log("Courses Prioritized");
+    console.log(courses_info);
 });
 
 // PORT

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
+import CoursesPrioritized from "./CoursesPrioritized.js";
 import Final from "./Final.js";
 import FailingPage from "./FailingPage.js";
 
@@ -32,6 +33,7 @@ class App extends Component {
         <Router>
             <Route exact path="/" component={CoursesTaken} />
             <Route exact path="/oops" component = {FailingPage} />
+            <Route exact path="/courses_prioritized" component = {CoursesPrioritized} />
             <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
             <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
             <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
@@ -69,7 +71,7 @@ class CoursesTaken extends Component {
     console.log("posting to api");
     console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
-      mode: 'no-cors',
+      // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
@@ -212,12 +214,14 @@ class SemestersTaken extends Component {
 
   sendAPI = () => {
     console.log("posting to api");
-    console.log(JSON.stringify(this.state.value));
-    fetch('http://localhost:5000/api/user_info', {
-      mode: 'no-cors',
+    const sem_num = [].concat(this.state.value)
+    console.log(JSON.stringify(sem_num));
+    fetch('http://localhost:5000/api/semesters_info', {
+      // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(this.state.value)
+      body: JSON.stringify(sem_num)
+      
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
@@ -334,7 +338,7 @@ class SemestersTaken extends Component {
         </div>
 
 
-        <Link to="/focus_area">
+        <Link to="/courses_prioritized">
           <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
             THAT'S IT!
           </button>

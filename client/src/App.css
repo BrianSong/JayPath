@@ -17,6 +17,18 @@ select{
   margin-bottom: 50%;
   width: 70%;
   /* border: 3px solid rgba(211, 149, 190, 0.431); */
+  /* text-align: center; */
+  align-items: center;
+}
+
+.center_new {
+  line-height: 300%;
+  height: fit-content;
+  margin-left: 20%;
+  margin-bottom: 50%;
+  width: 70%;
+  /* border: 3px solid rgba(211, 149, 190, 0.431); */
+  /* text-align: center; */
   align-items: center;
 }
 
@@ -41,7 +53,11 @@ select{
 
 .question {
   margin-top: 8%;
+  justify-content: center;
+  
 }
+
+
 
 .my_path {
   margin-top: 8%;
