@@ -12,11 +12,10 @@ app.use(cors());
 
 
 // Initilization for database.
-let courseList = [];
 // Initialize all course status to 0.
 let courseStatus = new Map();
 
-initial.initilization(courseList, courseStatus);
+initial.initilization(courseStatus);
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {

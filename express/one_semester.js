@@ -3,7 +3,7 @@ var course_node = require("./course_node");
 
 
 module.exports = {
-    get_one_semester: function get_one_semester(prev_semester_nodes_list, field, courses_track, courses_pre, courseList) {
+    get_one_semester: function get_one_semester(prev_semester_nodes_list, field, courses_track, courses_pre) {
         // input: list of course nodes at the previous semester
         // e.g.: [node(0,0,0,0)]
         // output: list of course nodes at the current semester
@@ -16,7 +16,7 @@ module.exports = {
         for (var i = 0; i < prev_semester_nodes_list.length; i++) {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
-            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, courses_track, courses_pre, courseList);
+            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, courses_track, courses_pre);
             //console.log("prev node i = " + i + " child_nodes_list length: " + child_nodes_list.length);
 
             // add child course nodes in the current semester nodes list
@@ -24,14 +24,6 @@ module.exports = {
             for (var j = 0; j < child_nodes_list.length; j++) {
                 // check if the child node is in the current semester nodes list
                 let child_node_idx = curr_semester_nodes_list.findIndex(element => child_nodes_list[j].equals(element))
-
-                // let child_node_idx = -1
-                // for (var k = 0; k < curr_semester_nodes_list.length; k++) {
-                //     if (curr_semester_nodes_list[k].get_status == child_nodes_list[j].get_status) {
-                //         child_node_idx = k;
-                //         break;
-                //     }
-                // }
 
                 if (child_node_idx == -1) {
                     // add a new child node into the current semester nodes list
@@ -51,10 +43,9 @@ module.exports = {
     }
 };
 
-function get_child_nodes(prev_course_node, field, courses_track, courses_pre, courseList) {
+function get_child_nodes(prev_course_node, field, courses_track, courses_pre) {
     let prev_course_status = prev_course_node.get_status;
-    // need field, courseList
-    let eligible_courses = filter.filterByPre(prev_course_status, field, courseList);
+    let eligible_courses = filter.filterByPre(prev_course_status, field);
     let eligible_ids = [];
     for(var i = 0; i < eligible_courses.length; i++){
         eligible_ids.push(eligible_courses[i].id);
