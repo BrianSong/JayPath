@@ -14,7 +14,7 @@ console.log("user_semester status: " + user_semester[0].get_status);
 let courseList = [];
 initial.initilization(courseList);
 let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre, courseList);
-console.log(all_semesters_list[0][0]);
+console.log(all_semesters_list);
 // let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
 // console.log(one_schedule_list);
 // course_id = []

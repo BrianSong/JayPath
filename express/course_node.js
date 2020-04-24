@@ -4,10 +4,15 @@ module.exports =  class course_node {
     this.value = -1; // not used for iter3
     this.child_indices = []; // not used for iter3
     this.best_child_index = -1; // not used for iter3
+    this.semester = 0;
   }
 
   equals(another_course_node){
     return (another_course_node.get_status == this.status);
+  }
+
+  get get_semester(){
+    return this.semester;
   }
 
   // getter
@@ -33,6 +38,10 @@ module.exports =  class course_node {
 
   change_node_value(node_value) {
     this.value = node_value;
+  }
+
+  change_semester(s){
+    this.semester = s;
   }
 
   set_best_child_index(index) {
