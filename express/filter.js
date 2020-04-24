@@ -12,6 +12,7 @@ module.exports = {
                 let fulfill_flag = 1;
                 let curr_pre = course.Prerequisite.split("-");
                 for (var j = 0; j < curr_pre.length; j++) {
+                    
                     if (courseStatus.get(curr_pre[j]) == 0) {
                         fulfill_flag = 0;  // not fulfill the prerequisite
                         break;
