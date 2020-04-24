@@ -17,7 +17,7 @@ class Final extends Component {
     }
 
     callAPI() {
-        fetch(''.concat('http://localhost:5000/api', this.state.focus_area,'/courses'))
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses'))
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
