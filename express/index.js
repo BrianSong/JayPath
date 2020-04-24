@@ -131,16 +131,16 @@ app.post("/api/user_info", (req, res) => {
 
     // Extract course according to the focus area and sent it back to the front end for displaying.
     let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
-    
+
     console.log(courses_to_add);
-    
+
     for (var i = 0; i < courses_to_add.length; i++) {
         // console.log(courses_to_add[i]);
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
             if (err) {
                 return console.error(err.message);
             }
-            
+
             for (var course in courseStatus) {
                 if (course.CourseTitle == row.CourseTitle) {
                     courseStatus.set(course, 1); //update: course have taken
