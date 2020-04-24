@@ -1,6 +1,5 @@
-// const sqlite3 = require("sqlite3").verbose();
 module.exports = {
-    check: function check(courseStatus, course) {
+    check: function check(courseStatus, preferCourse) {
         // check areas: 3 of Applications, Systems, Software, Reasoning, Theory
         // check credits
         let areas = [0, 0, 0, 0, 0];
@@ -32,7 +31,18 @@ module.exports = {
             }
         }
         if (area_count >= 3 && credits >= 72) {
-            return true;
+            let fulfill_flag = 1;
+            for (const [course, status] of preferCourse.entries()) {
+                if (status == 1) {
+                    if (courseStatus.get(course) == 0) {
+                        fulfill_flag = 0;
+                        break;
+                    }
+                }
+            }
+            if (fulfill_flag == 1) {
+                return true;
+            }
         }
         return false;
     },
