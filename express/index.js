@@ -135,20 +135,22 @@ app.post("/api/user_info", (req, res) => {
     console.log(courses_to_add);
 
     for (var i = 0; i < courses_to_add.length; i++) {
-        // console.log(courses_to_add[i]);
+        console.log("Entering the loop!");
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
             if (err) {
                 return console.error(err.message);
             }
-
-            for (var course in courseStatus) {
+            console.log(courseStatus);
+            for (const [course, status] of courseStatus.entries()) {
+                console.log("Enter find course loop!");
                 if (course.CourseTitle == row.CourseTitle) {
+                    console.log("Find it!!");
                     courseStatus.set(course, 1); //update: course have taken
                     break;
                 }
             }
             // courseStatus[row.id] = 1;
-            console.log(courseStatus);
+            // console.log(courseStatus);
         });
     }
 
