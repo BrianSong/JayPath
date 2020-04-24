@@ -56,6 +56,7 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses", (req, res) => {
     // send candidate courses to backend
+    console.log("1111");
     let field = String(req.params.field);
     let courses = [];
     let course_id = [];
