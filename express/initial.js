@@ -1,21 +1,16 @@
 const sqlite3 = require("sqlite3").verbose();
+var Course = require('./model/Course');
 module.exports = {
-    initilization: function initilization(courseName, courses_info) {
+    initilization: function initilization(courseList) {
         // open the database
-        let courses_credit = [];
-        let courses_track = [];
-        let courses_pre = [];
-        let courses_conflict = [];
-        let courses_semester = [];
-        let courses_area = [];
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
             }
-            console.log("Connected to the courses database for initilization!");
+            console.log("Connected to the courses database for initialization!");
         });
         db.run(
-            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Semester STRING, Area STRING)"
+            "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Term STRING, Area STRING)"
         );
 
         // hardcode for the first iteration: add courses manually
@@ -685,13 +680,9 @@ module.exports = {
                 "N/A"
             ]
         ];
-
-        for (var course in courseInfo) {
-            courseName.push(course[2]);
-        }
         // create the statement for the insertion of just ONE record
         let queryInfo =
-            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Semester, Area) " +
+            "INSERT OR REPLACE INTO courses(id, CourseNumber, CourseTitle, Credits, Instructor, DaysOfWeek, StartTimeEndTime, Track, Prerequisite, Conflicts, Term, Area) " +
             "VALUES (?, ?, ? ,?, ?, ?, ? ,?, ?, ?, ?, ?)";
 
         // 'prepare' returns a 'statement' object which allows us to
@@ -706,35 +697,17 @@ module.exports = {
         }
         statement.finalize();
 
-        let sql = `SELECT * FROM courses`;
-
-        db.all(sql, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                courses_credit.push(row.Credits);
-                courses_track.push(row.Track);
-                courses_pre.push(row.Prerequisite);
-                courses_conflict.push(row.Conflicts);
-                courses_semester.push(row.Semester);
-                courses_area.push(row.Area);
-            });
-        });
-
+        for (var i = 0; i < courseInfo.length; i++) {
+            currCourse = new Course(courseInfo[i][0], courseInfo[i][1], courseInfo[i][2], courseInfo[i][3], courseInfo[i][4], courseInfo[i][5], courseInfo[i][6], courseInfo[i][7], courseInfo[i][8], courseInfo[i][9], courseInfo[i][10], courseInfo[i][11]);
+            courseList.push(currCourse);
+        }
 
         // close the database
         db.close(err => {
             if (err) {
                 console.error(err.message);
             }
-            console.log("Close the courses database connection for initilization!");
-            courses_info.push(courses_credit);
-            courses_info.push(courses_track);
-            courses_info.push(courses_pre);
-            courses_info.push(courses_conflict);
-            courses_info.push(courses_semester);
-            courses_info.push(courses_area);
+            console.log("Close database for initialization!");
         });
     },
 };
