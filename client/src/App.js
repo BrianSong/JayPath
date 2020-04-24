@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
 import Autosuggest from 'react-autosuggest';
+import CoursesPrioritized from "./CoursesPrioritized.js";
 import Final from "./Final.js";
 import FailingPage from "./FailingPage.js";
 
@@ -19,12 +20,14 @@ class App extends Component {
       this.setState({
         focus_area: data_from_child
       });
+      sessionStorage.setItem('focus_area', data_from_child);
     };
 
     parentFunction2 = (data_from_child) => {
       this.setState({
         semesters_taken: data_from_child
       });
+      sessionStorage.setItem('semesters_taken', data_from_child);
     };
 
     render() {
@@ -32,9 +35,12 @@ class App extends Component {
         <Router>
             <Route exact path="/" component={CoursesTaken} />
             <Route exact path="/oops" component = {FailingPage} />
+            <Route exact path="/courses_prioritized" component = {CoursesPrioritized} />
             <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
             <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
-            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
+            <Route exact path="/final1" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={1}/>} />
+            <Route exact path="/final2" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={2}/>} />
+            <Route exact path="/final3" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={3}/>} />
             <Route exact path="/advising" component={() => { window.location.href = 'https://advising.jhu.edu/'; return null;}}></Route>
             <Route exact path="/cs_req" component={() => { window.location.href = 'http://e-catalog.jhu.edu/departments-program-requirements-and-courses/engineering/computer-science/'; return null;}}></Route>
         </Router>
@@ -69,7 +75,7 @@ class CoursesTaken extends Component {
     console.log("posting to api");
     console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
-      mode: 'no-cors',
+      // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
@@ -80,6 +86,7 @@ class CoursesTaken extends Component {
 
   componentDidMount() {
     this.callAPI();
+    sessionStorage.clear();
   }
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -166,12 +173,13 @@ class CoursesTaken extends Component {
         />
         
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
-      
+      
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
+              <i class="iconfont">&#xe627;</i>
             </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+            
          </Link>
         
         </div>
@@ -186,7 +194,7 @@ class SemestersTaken extends Component {
     this.state = {
       question1: "Which of the following best describes your current semester(or the one you just completed)?",
       question2: "In which season will you attend your upcoming semester?",
-      value: 0,
+      value: -1,
       left: [ {value: 'semester 1', active: 'button100'},
       {value: 'semester 3', active: 'button100', },
       {value: 'semester 5', active: 'button100'},
@@ -206,18 +214,24 @@ class SemestersTaken extends Component {
       // using index used in the hash_table to access left & right
       // > 0 belongs to left
       // 1-indexed to avoid confusion over 0
-      hash_idx: [5, 1, -1, 2, -2, 3, -3, 4, -4]
+      hash_idx: [5, 1, -1, 2, -2, 3, -3, 4, -4],
     };
+
+    // document.getElementById("thatsIt").setAttribute("disabled", "true");
   }
 
   sendAPI = () => {
+    // validate user input
+    
     console.log("posting to api");
-    console.log(JSON.stringify(this.state.value));
-    fetch('http://localhost:5000/api/user_info', {
-      mode: 'no-cors',
+    const sem_num = [].concat(this.state.value)
+    console.log(JSON.stringify(sem_num));
+    fetch('http://localhost:5000/api/semesters_info', {
+      // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(this.state.value)
+      body: JSON.stringify(sem_num)
+      
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
@@ -226,6 +240,7 @@ class SemestersTaken extends Component {
     console.log(this.state.value);
     console.log(this.state.value % 100);
     this.props.functionCallFromParent(this.state.value % 100);
+    
   };
 
 
@@ -254,6 +269,10 @@ class SemestersTaken extends Component {
       left: left0,
       right: right0
     });
+
+    if (this.state.value >= 100) {
+      document.getElementById('fs').disabled = false;
+    }
   };
 
 
@@ -271,6 +290,10 @@ class SemestersTaken extends Component {
     this.setState ({
       bottom_active: temp
     });
+
+    if (this.state.value % 100 < 99) {
+      document.getElementById('fs').disabled = false;
+    }
     
   };
 
@@ -294,6 +317,8 @@ class SemestersTaken extends Component {
               {opt.value}
               </button>
     });
+
+    // document.getElementById('thatsIt').disabled = this.state.disabled;
   
     return (
       <div class= "center11" >
@@ -333,13 +358,15 @@ class SemestersTaken extends Component {
           </div>
         </div>
 
-
+        <fieldset id="fs" disabled>
         <Link to="/focus_area">
           <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
             THAT'S IT!
+            <button class="iconfont">&#xe627;</button>
           </button>
-          <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
-          </Link>
+        </Link>
+        </fieldset>
+
         </div>
       //  </div> 
     );
@@ -369,6 +396,7 @@ class SemestersTaken extends Component {
       this.setState({
         value: event.target.value
       });
+      document.getElementById('fs').disabled = false;
     };
 
     // passing user input value to parent component App
@@ -415,13 +443,15 @@ class SemestersTaken extends Component {
           {opts_right}
           </div>
         </div>
-  
-          <Link to="/final">
+        
+        <fieldset id="fs" disabled>
+          <Link to="/final1">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
               VIEW MY PATH!
+              <button class="iconfont">&#xe627;</button>
             </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
+          </fieldset>
           </div>
       );
     }
