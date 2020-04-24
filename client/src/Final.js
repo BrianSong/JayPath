@@ -13,11 +13,14 @@ class Final extends Component {
             schedule: [""],
             semesters: -2,
             focus_area: '',
+            numSchedule: 0
         };
     }
 
     callAPI() {
-        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses'))
+        console.log(this.props.valueFromParent);
+        console.log(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule))
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
@@ -27,14 +30,16 @@ class Final extends Component {
 
     getParentpProps() {
         this.setState({
-            semesters: this.props.valueFromParent2,
-            focus_area: parseInt(this.props.valueFromParent)
+            semesters: parseInt(this.props.valueFromParent2),
+            numSchedule: parseInt(this.props.numSchedule)
         });
     }
 
     componentDidMount() {
-        this.callAPI();
         this.getParentpProps();
+        this.callAPI();
+        document.getElementById('li'.concat(this.props.numSchedule)).className = "active1";
+        document.getElementById('a'.concat(this.props.numSchedule)).className = "active1_a";
     }
     
     renderRedirect = () => {
@@ -123,9 +128,21 @@ class Final extends Component {
         
         return (
             <div class = "center111">
+                <header id="header">
+                    <a href="#" class="logo">
+                        <img src={Jay} style={{width: 50, height: 50, float: "left"}} />
+                        Jaypath {this.state.numSchedule}
+                    </a>
+                    <ul></ul>
+                    <ul>
+                    <li id="li1"><a id="a1" href="/final1">Path 1</a></li>
+                    <li id="li2"><a id="a2" href="/final2">Path 2</a></li>
+                    <li id="li3"><a id="a3" href="/final3">Path 3</a></li>
+                    <li><a href="/" active>Start Afresh</a></li>
+                    </ul>
+                    <div class="toggle" onclick="toggle()"></div>
+                </header>
                 <h1 class = "my_path">
-                    <img src={Jay} style={{width: 50, height: 50, float: "left"}} />
-                    MY PATH
                 </h1>
                 <div class="container2">
                     {list}
