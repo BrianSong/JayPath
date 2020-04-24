@@ -12,11 +12,11 @@ app.use(cors());
 
 
 // Initilization for database.
-let courseList = [];
 // Initialize all course status to 0.
 let courseStatus = new Map();
 
-initial.initilization(courseList, courseStatus);
+initial.initilization(courseStatus);
+
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {
@@ -118,9 +118,6 @@ app.get("/api/:field/courses", (req, res) => {
 // API for courses students has taken
 app.post("/api/user_info", (req, res) => {
     courses_to_add = req.body;
-    console.log("Courses to add");
-    console.log(courses_to_add);
-    //console.log(courses_to_add[1].trim());
     // Open and connect to data[1base
     let db = new sqlite3.Database("../db/JayPath.db", err => {
         if (err) {
@@ -132,25 +129,18 @@ app.post("/api/user_info", (req, res) => {
     // Extract course according to the focus area and sent it back to the front end for displaying.
     let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
 
-    console.log(courses_to_add);
 
     for (var i = 0; i < courses_to_add.length; i++) {
-        console.log("Entering the loop!");
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
             if (err) {
                 return console.error(err.message);
             }
-            console.log(courseStatus);
             for (const [course, status] of courseStatus.entries()) {
-                console.log("Enter find course loop!");
                 if (course.CourseTitle == row.CourseTitle) {
-                    console.log("Find it!!");
                     courseStatus.set(course, 1); //update: course have taken
                     break;
                 }
             }
-            // courseStatus[row.id] = 1;
-            // console.log(courseStatus);
         });
     }
 
@@ -167,10 +157,6 @@ app.post("/api/user_info", (req, res) => {
 app.post("/api/semesters_info", (req, res) => {
 
     semesters_info = req.body;
-    console.log("Semester_info");
-    console.log(semesters_info);
-    //console.log(courses_to_add[1].trim());
-    // Open and connect to data[1base
 
 });
 
