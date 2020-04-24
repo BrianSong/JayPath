@@ -6,14 +6,14 @@ module.exports = {
         // StartTimeEndTime, Track, Prerequisite, Conflicts, Term, Area
 
         let eligible_course = [];
+        let courseList = Array.from( courseStatus.keys() );
         for (const [course, status] of courseStatus.entries()) {
-            if (status == 0 && (course.Track == field || course.Track == "core" || course.Track == "elective") && (course.Term == term || course.Term == " Both")) {
+            if (status == 0 && (course.Track == field || course.Track == "core" || course.Track == "elective") && (course.Term == term || course.Term == "Both")) {
                 // consider to take
                 let fulfill_flag = 1;
                 let curr_pre = course.Prerequisite.split("-");
                 for (var j = 0; j < curr_pre.length; j++) {
-                    
-                    if (courseStatus.get(curr_pre[j]) == 0) {
+                    if (courseStatus.get(courseList[curr_pre[j]]) == 0) {
                         fulfill_flag = 0;  // not fulfill the prerequisite
                         break;
                     }
