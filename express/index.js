@@ -13,14 +13,10 @@ app.use(cors());
 
 // Initilization for database.
 let courseList = [];
-initial.initilization(courseList);
-
-
 // Initialize all course status to 0.
-let courseStatus = [];
-for (var id_loop = 0; id_loop < courseList.length; id_loop++) {
-    courseStatus[id_loop] = 0;
-}
+let courseStatus = new Map();
+
+initial.initilization(courseList, courseStatus);
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {
@@ -120,7 +116,6 @@ app.get("/api/:field/courses", (req, res) => {
 });
 
 app.post("/api/user_info", (req, res) => {
-
     courses_to_add = req.body;
     //console.log(courses_to_add[1].trim());
     // Open and connect to data[1base
@@ -133,14 +128,24 @@ app.post("/api/user_info", (req, res) => {
 
     // Extract course according to the focus area and sent it back to the front end for displaying.
     let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
+    
+    console.log(courses_to_add);
+    
     for (var i = 0; i < courses_to_add.length; i++) {
         // console.log(courses_to_add[i]);
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
             if (err) {
                 return console.error(err.message);
             }
-            courseStatus[row.id] = 1;
-            // console.log(courseStatus[row.id]);
+            
+            for (var course in courseStatus) {
+                if (course.CourseTitle == row.CourseTitle) {
+                    courseStatus.set(course, 1); //update: course have taken
+                    break;
+                }
+            }
+            // courseStatus[row.id] = 1;
+            console.log(courseStatus);
         });
     }
 
