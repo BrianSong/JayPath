@@ -8,12 +8,15 @@ module.exports =  class course_node {
   }
 
   equals(another_course_node){
-    for(let k in this.status.keys()){
-      if(this.status.get(k) != another_course_node.get_status.get(k)){
-        return false;
-      }
-    }
-    return true;
+    // for(let k in this.status.keys()){
+    //   console.log("----");
+    //   console.log(another_course_node.get_status.get(k));
+    //   console.log(this.status.get(k));
+    //   if(this.status.get(k) != another_course_node.get_status.get(k)){
+    //     return false;
+    //   }
+    // }
+    return this.status == another_course_node.get_status;
   }
 
   get get_semester(){

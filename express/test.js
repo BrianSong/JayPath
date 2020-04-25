@@ -12,7 +12,7 @@ let user_semester = [new course_node(user_semester_status)];
 console.log("user_semester status: " + user_semester[0].get_status);
 
 let one_semester_list = one_semester.get_one_semester(user_semester, field, term);
-console.log(one_semester_list);
+//console.log(one_semester_list.length);
 // let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre);
 // console.log(all_semesters_list[0][0]);
 // let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
