@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a56939c9-6483-478f-ab53-b7c2122a1444" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/babel-loader/1e4d938f6bde880d05697b86f4ca2903.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/babel-loader/7c1facccc5dd0084f93f3a60172899ec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/babel-loader/8c5535dc9dcc0c05f90ecf64cad409c5.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/babel-loader/b2ce920d7cf0c53b8cd4389503d9a82f.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/eslint-loader/2802828c213095858934210f376a8df4b19116c6.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/eslint-loader/461a4c801d605e5fd0a0a0239e8e7ca952e5757e.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/eslint-loader/b21e0e7801b10c0c6e2b7330a69834c0fec5a0f5.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/node_modules/.cache/eslint-loader/f129f391fd203b815a982494b1e3a85f5cbee2cc.json.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Final.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/JayPath.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/JayPath.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/all_semesters.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/all_semesters.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/check_graduation.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/check_graduation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/express/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/initial.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/initial.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/express/model/Course.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/model/Course.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/express/one_semester.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/one_semester.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/express/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/test.js" afterDir="false" />
     </list>
@@ -52,19 +38,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/express/one_semester.js">
+        <entry file="file://$PROJECT_DIR$/express/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/express/filter.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+            <state relative-caret-position="266">
+              <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -72,17 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/course_node.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/express/test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+            <state relative-caret-position="19">
+              <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -90,8 +58,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/all_semesters.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+            <state relative-caret-position="95">
+              <caret line="17" column="63" lean-forward="true" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/express/initial.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="700" column="44" lean-forward="true" selection-start-line="700" selection-start-column="44" selection-end-line="700" selection-end-column="44" />
+              <folding>
+                <element signature="e#1143#19349#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/express/model/Course.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -99,8 +88,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="179">
+              <caret line="138" column="75" selection-start-line="138" selection-start-column="75" selection-end-line="138" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/express/one_semester.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="80" column="13" lean-forward="true" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -142,11 +140,12 @@
         <option value="$PROJECT_DIR$/client/src/ROB.js" />
         <option value="$PROJECT_DIR$/express/filter.js" />
         <option value="$PROJECT_DIR$/express/all_semesters.js" />
-        <option value="$PROJECT_DIR$/express/one_semester.js" />
-        <option value="$PROJECT_DIR$/express/index.js" />
         <option value="$PROJECT_DIR$/express/course_node.js" />
         <option value="$PROJECT_DIR$/express/one_schedule.js" />
+        <option value="$PROJECT_DIR$/express/index.js" />
         <option value="$PROJECT_DIR$/express/test.js" />
+        <option value="$PROJECT_DIR$/express/model/Course.js" />
+        <option value="$PROJECT_DIR$/express/one_semester.js" />
       </list>
     </option>
   </component>
@@ -184,6 +183,12 @@
               <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
               <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
               <item name="express" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
+              <item name="express" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -246,7 +251,7 @@
       <workItem from="1586980748897" duration="4161000" />
       <workItem from="1586987407318" duration="10257000" />
       <workItem from="1587744015944" duration="369000" />
-      <workItem from="1587768833635" duration="758000" />
+      <workItem from="1587768833635" duration="5452000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1582684655530</created>
@@ -332,11 +337,25 @@
       <option name="project" value="LOCAL" />
       <updated>1587769429713</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Merge branch 'master' into multiplePath&#10;&#10;# Conflicts:&#10;#&#9;express/test.js">
+      <created>1587769760905</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1587769760905</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Merge branch 'master' into multiplePath">
+      <created>1587769845204</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1587769845204</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28010000" />
+    <option name="totallyTimeSpent" value="32704000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -351,7 +370,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20469798" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20469798" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -364,7 +383,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.551676" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3114525" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.13407822" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -441,7 +460,9 @@
     <MESSAGE value="modified part of one_schedule" />
     <MESSAGE value="completed multiple path algorithm; needs testing" />
     <MESSAGE value="merging master" />
-    <option name="LAST_COMMIT_MESSAGE" value="merging master" />
+    <MESSAGE value="Merge branch 'master' into multiplePath&#10;&#10;# Conflicts:&#10;#&#9;express/test.js" />
+    <MESSAGE value="Merge branch 'master' into multiplePath" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into multiplePath" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -524,13 +545,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/express/checkgraduation.js" />
-    <entry file="file://$PROJECT_DIR$/express/initial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13509">
-          <caret line="711" column="11" selection-start-line="711" selection-start-column="11" selection-end-line="711" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/express/check_graduation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -545,45 +559,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/course_node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/express/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/express/one_semester.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/express/all_semesters.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/express/filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state relative-caret-position="95">
+          <caret line="17" column="63" lean-forward="true" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/express/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+        <state relative-caret-position="266">
+          <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/course_node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-209">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="138" column="75" selection-start-line="138" selection-start-column="75" selection-end-line="138" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/initial.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="700" column="44" lean-forward="true" selection-start-line="700" selection-start-column="44" selection-end-line="700" selection-end-column="44" />
+          <folding>
+            <element signature="e#1143#19349#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/model/Course.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/one_semester.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="80" column="13" lean-forward="true" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
         </state>
       </provider>
     </entry>

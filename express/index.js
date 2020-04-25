@@ -117,7 +117,7 @@ app.get("/api/:field/courses", (req, res) => {
 
 // API for courses students has taken
 app.post("/api/user_info", (req, res) => {
-    courses_to_add = req.body;
+    let courses_to_add = req.body;
     // Open and connect to data[1base
     let db = new sqlite3.Database("../db/JayPath.db", err => {
         if (err) {
@@ -128,7 +128,6 @@ app.post("/api/user_info", (req, res) => {
 
     // Extract course according to the focus area and sent it back to the front end for displaying.
     let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
-
 
     for (var i = 0; i < courses_to_add.length; i++) {
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
