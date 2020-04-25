@@ -25,23 +25,18 @@ module.exports = {
             for (var j = 0; j < all_semesters_list[i].length; j++) { // all_semesters_list[i][j] is a course node
                 // get indices of child nodes at the next semester
                 let child_indices_list = all_semesters_list[i][j].get_child_indices;
-                let child_values_list = [];
                 let sum = 0;
                 for (var k = 0; k < child_indices_list.length; k++) {
-                    child_values_list.push(all_semesters_list[i + 1][child_indices_list[k]].get_value);
                     sum += all_semesters_list[i + 1][child_indices_list[k]].get_value;
                 }
 
-                // choose the best child
-                let best_child_value = Math.max(...child_values_list); // destructuring assignment to extract data from arrays into distinct variables
-                all_semesters_list[i][j].change_node_value(best_child_value);
-                let best_child_index = child_values_list.findIndex(element => element == best_child_value); // only return the first max index
-                all_semesters_list[i][j].set_best_child_index(best_child_index);
+                // change score of this course node
+                all_semesters_list[i][j].change_node_value(sum);
             }
         }
 
 
-        var stack=new Array();
+        let stack=[];
         for(i = 0; i < all_semesters_list[0].length; i++){
             all_semesters_list[0][i].change_semester(0);
             stack.push(all_semesters_list[0][i]);
@@ -63,10 +58,10 @@ module.exports = {
                     continue;
                 }
             }
-            var child_indices = node.get_child_indices;
-            var semester = node.get_semester;
+            let child_indices = node.get_child_indices;
+            let semester = node.get_semester;
             for(j = 0; j < child_indices.length; j++){
-                var child_index = child_indices[j];
+                let child_index = child_indices[j];
                 all_semesters_list[semester+1][child_index].change_semester(semester+1);
                 stack.push(all_semesters_list[semester+1][child_index]);
             }
