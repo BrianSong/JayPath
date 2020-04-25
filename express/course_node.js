@@ -8,7 +8,12 @@ module.exports =  class course_node {
   }
 
   equals(another_course_node){
-    return (another_course_node.get_status == this.status);
+    for(let k in this.status.keys()){
+      if(this.status.get(k) != another_course_node.get_status.get(k)){
+        return false;
+      }
+    }
+    return true;
   }
 
   get get_semester(){

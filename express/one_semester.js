@@ -4,7 +4,7 @@ const init = require("./initial");
 
 
 module.exports = {
-    get_one_semester: function get_one_semester(prev_semester_nodes_list, field) {
+    get_one_semester: function get_one_semester(prev_semester_nodes_list, field, term) {
         // input: list of course nodes at the previous semester
         // e.g.: [node(0,0,0,0)]
         // output: list of course nodes at the current semester
@@ -17,7 +17,7 @@ module.exports = {
         for (var i = 0; i < prev_semester_nodes_list.length; i++) {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
-            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field);
+            let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, term);
             //console.log("prev node i = " + i + " child_nodes_list length: " + child_nodes_list.length);
 
             // add child course nodes in the current semester nodes list
@@ -42,9 +42,9 @@ module.exports = {
     }
 };
 
-function get_child_nodes(prev_course_node, field) {
+function get_child_nodes(prev_course_node, field, term) {
     let prev_course_status = prev_course_node.get_status;
-    let eligible_courses = filter.filterByPre(prev_course_status, field);
+    let eligible_courses = filter.filterByPre(prev_course_status, field, term);
     let child_nodes_list = select_from_eligible(prev_course_status, eligible_courses);
     return child_nodes_list;
 }
@@ -77,10 +77,9 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 // Need a new courseStatus
                 let course_status_new = new Map();
                 for(let c of prev_course_status.keys()){
-                    let course_new = c.copy();
-                    course_status_new.set(course_new, prev_course_status.get(c));
-                    if(course_new.id == eligible_courses[i].id || course_new.id == eligible_courses[j].id || course_new.id == eligible_courses[k].id){
-                        course_status_new.set(course_new, 1);
+                    course_status_new.set(c, prev_course_status.get(c));
+                    if(c.id == eligible_courses[i].id || c.id == eligible_courses[j].id || c.id == eligible_courses[k].id){
+                        course_status_new.set(c, 1);
                     }
                 }
 
