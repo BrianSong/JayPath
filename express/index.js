@@ -6,6 +6,7 @@ const sqlite3 = require("sqlite3").verbose();
 // const schedule = require("./schedule");
 const filter = require("./filter");
 const initial = require("./initial");
+var Student = require('./model/Student');
 
 app.use(express.json());
 app.use(cors());
