@@ -14,8 +14,9 @@ app.use(cors());
 // Initilization for database.
 // Initialize all course status to 0.
 let courseStatus = new Map();
-
-initial.initilization(courseStatus);
+let preferCourse = new Map();
+initial.initilization(courseStatus, preferCourse);
+let student = new Student(0, courseStatus, null);
 
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
@@ -55,6 +56,7 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses", (req, res) => {
     // send candidate courses to backend
+    console.log("1111");
     let field = String(req.params.field);
     let courses = [];
     let course_id = [];
@@ -90,7 +92,6 @@ app.get("/api/:field/courses", (req, res) => {
         // Extract course according to the focus area and sent it back to the front end for displaying.
         let sql = `SELECT * FROM courses WHERE id = ?;`;
         for (var i = 0; i < course_id.length; i++) {
-            // console.log(courses_to_add[i]);
             db.all(sql, [course_id[i]], (err, allcourse) => {
                 if (err) {
                     return console.error(err.message);
@@ -118,7 +119,7 @@ app.get("/api/:field/courses", (req, res) => {
 // API for courses students has taken
 app.post("/api/user_info", (req, res) => {
     courses_to_add = req.body;
-    // Open and connect to data[1base
+    // Open and connect to database
     let db = new sqlite3.Database("../db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
@@ -155,7 +156,6 @@ app.post("/api/user_info", (req, res) => {
 
 // API for student's current semester and semester he/she wants to enroll in
 app.post("/api/semesters_info", (req, res) => {
-
     semesters_info = req.body;
 
 });
@@ -163,12 +163,43 @@ app.post("/api/semesters_info", (req, res) => {
 
 // API for courses the student wants to prioritize
 app.post("/api/courses_prioritized", (req, res) => {
+    let prefer_to_take = req.body;
 
-    courses_info = req.body;
-    console.log("Courses Prioritized");
-    console.log(courses_info);
+    // Open and connect to database
+    let db = new sqlite3.Database("../db/JayPath.db", err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Connected to the courses database.");
+    });
+
+    // Extract course according to the focus area and sent it back to the front end for displaying.
+    let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
+
+
+    for (var i = 0; i < prefer_to_take.length; i++) {
+        db.get(sql, [prefer_to_take[i].trim()], (err, row) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            for (const [course, status] of preferCourse.entries()) {
+                if (course.CourseTitle == row.CourseTitle) {
+                    preferCourse.set(course, 1); //update: course have taken
+                    break;
+                }
+            }
+        });
+    }
+
+    // Close database
+    db.close(err => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("Close the courses connection.");
+    });
 });
 
-// PORT
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("Listening on port " + port));
