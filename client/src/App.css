@@ -311,6 +311,7 @@ header ul li:hover
   display: flex;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 }
 
 .button0:disabled {

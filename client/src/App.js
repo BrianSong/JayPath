@@ -117,6 +117,7 @@ class CoursesTaken extends Component {
     });
   };
 
+  // Unselect entered course
   handleDelete = course => {
     const courses = this.state.myCourses.filter(c => c != course);
     this.setState({
@@ -204,6 +205,7 @@ class CoursesTaken extends Component {
   }
 }
 
+// Component for entry of course taken
 function Course(props){
   return (
     <div class = "courseItem"> 
