@@ -3,7 +3,7 @@ var course_node = require("./course_node");
 const grad = require("./check_graduation");
 
 module.exports = {
-    get_all_semesters: function get_all_semesters(user_semester_list, field, courses_track, courses_pre) {
+    get_all_semesters: function get_all_semesters(user_semester_list, field, term) {
         // input: user course nodes list (a list contains a single course node)
         // output: a list where each element (corresponding to a term) is a list of course codes
 
@@ -15,15 +15,15 @@ module.exports = {
             // get the very next semester nodes based on the previous semester nodes
             let curr_semester_nodes_list = [];
             if (all_semesters.length == 0) {
-                curr_semester_nodes_list = one_semester.get_one_semester(user_semester_list, field, courses_track, courses_pre);
+                curr_semester_nodes_list = one_semester.get_one_semester(user_semester_list, field, term);
             } else {
-                curr_semester_nodes_list = one_semester.get_one_semester(all_semesters[all_semesters.length - 1], field, courses_track, courses_pre);
+                curr_semester_nodes_list = one_semester.get_one_semester(all_semesters[all_semesters.length - 1], field, term);
             }
-            if (curr_semester_nodes_list.length == 0) { return all_semesters; } // no more courses to take
+            if (curr_semester_nodes_list.length == 0) {
+                console.log("no more courses to take, exiting...");
+                return all_semesters;
+            } // no more courses to take
 
-            // note: check graduation before push to all semesters to make sure values are assigned
-            // check graudation and assign values
-            grad_flag = check_grad(curr_semester_nodes_list, field, courses_track, courses_pre);
             all_semesters.push(curr_semester_nodes_list);
         }
 

@@ -18,7 +18,6 @@ module.exports = {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
             let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, term);
-            console.log(child_nodes_list.length);
 
             // add child course nodes in the current semester nodes list
             // note: make sure there is no duplicates!
@@ -86,7 +85,7 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 let course_node_new = new course_node(course_status_new);
                 child_nodes_list.push(course_node_new);
                 count++;
-                if(count > 3){
+                if(count > 50){
                     break;
                 }
             }
