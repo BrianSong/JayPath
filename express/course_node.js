@@ -5,6 +5,8 @@ module.exports =  class course_node {
     this.child_indices = []; // not used for iter3
     this.best_child_index = -1; // not used for iter3
     this.semester = 0;
+    this.curr_path = []; // used for recording the path, excluding itself.
+    this.visited = false; // used for dfs
   }
 
   equals(another_course_node){
@@ -40,6 +42,10 @@ module.exports =  class course_node {
   	return this.best_child_index;
   }
 
+  get get_curr_path(){
+    return this.curr_path;
+  }
+
   add_one_child(index) {
     this.child_indices.push(index);
   }
@@ -55,4 +61,21 @@ module.exports =  class course_node {
   set_best_child_index(index) {
     this.best_child_index = index;
   }
+
+  push_to_path(courseNode){
+    thsi.curr_path.push(courseNode);
+  }
+
+  set_path(path){
+    this.curr_path = path;
+  }
+
+  ifVisited(){
+    return this.visited;
+  }
+
+  setVisited(){
+    this.visited = true;
+  }
+
 };

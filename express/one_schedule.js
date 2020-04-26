@@ -35,22 +35,20 @@ module.exports = {
             }
         }
 
-
         let stack=[];
         for(i = 0; i < all_semesters_list[0].length; i++){
             all_semesters_list[0][i].change_semester(0);
             stack.push(all_semesters_list[0][i]);
         }
 
-        var onePath = [];
-        var scheduleList = [];
-        var numPath = 0;
+        let scheduleList = [];
+        let numPath = 0;
         while(stack.length > 0){
-            var node = stack.pop();
-            onePath.push(node);
+            let node = stack.pop();
+            let curr_path = node.get_curr_path;
+            curr_path.push(node); //curr path now contains the path up to the current node
             if(node.get_value == 1 && node.get_child_indices.length == 0){//if doesn't have child and can graduate, then it's a node of the last semester
-                scheduleList.push(onePath);
-                onePath = [];
+                scheduleList.push(curr_path);
                 numPath++;
                 if (numPath > 2) {
                     break;
@@ -62,28 +60,16 @@ module.exports = {
             let semester = node.get_semester;
             for(j = 0; j < child_indices.length; j++){
                 let child_index = child_indices[j];
-                all_semesters_list[semester+1][child_index].change_semester(semester+1);
-                stack.push(all_semesters_list[semester+1][child_index]);
+                let child_node = all_semesters_list[semester+1][child_index];
+                if(!child_node.ifVisited()){
+                    child_node.setVisited();
+                    child_node.set_path(curr_path); // child node now contains the path up to its parent
+                    child_node.change_semester(semester+1);
+                    stack.push(child_node);
+                }
             }
         }
 
         return scheduleList;
-
-
-        // // looping over the first semester to determine the schedule
-        // let first_semester_values_list = [];
-        // for (var i = 0; i < all_semesters_list[0].length; i++) {
-        //     first_semester_values_list.push(all_semesters_list[0][i].get_value);
-        // }
-        // let best_first_semester_value = Math.max(...first_semester_values_list); // destructuring assignment to extract data from arrays into distinct variables
-        // let best_first_semester_index = first_semester_values_list.findIndex(element => element == best_first_semester_value);
-        //
-        // // get the schedule
-        // schedule_list.push(all_semesters_list[0][best_first_semester_index])
-        // for (var i = 0; i < all_semesters_list.length - 1; i++) {
-        //     schedule_list.push(all_semesters_list[i + 1][schedule_list[schedule_list.length - 1].get_best_child_index])
-        // }
-        //
-        // return schedule_list
     },
 };
