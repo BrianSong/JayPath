@@ -117,6 +117,14 @@ class CoursesTaken extends Component {
     });
   };
 
+  // Unselect entered course
+  handleDelete = course => {
+    const courses = this.state.myCourses.filter(c => c != course);
+    this.setState({
+      myCourses: courses
+    });
+  };
+
   // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({ value }) => {
@@ -146,6 +154,7 @@ class CoursesTaken extends Component {
       
     }
 
+
   render() {
       const { value, suggestions } = this.state;
   
@@ -155,6 +164,7 @@ class CoursesTaken extends Component {
         value,
         onChange: this.onChange
       };
+
       
       return (
         <div class="center">
@@ -172,7 +182,15 @@ class CoursesTaken extends Component {
           inputProps={inputProps}
         />
         
-        <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
+        {/* <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div> */}
+        <div class = "coursesBox">
+          {this.state.myCourses.map(course => (
+            <Course course = {course} onDelete = {() => this.handleDelete(course)}
+            />
+          ))}
+        </div>
+          
+
       
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
@@ -186,6 +204,16 @@ class CoursesTaken extends Component {
     );
   }
 }
+
+// Component for entry of course taken
+function Course(props){
+  return (
+    <div class = "courseItem"> 
+    {props.course}
+    <button class = "delete" onClick = {props.onDelete}>x</button>
+    </div>
+  )
+};
 
 class SemestersTaken extends Component {
   constructor(prop) {

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-ro
 import "./App.css";
 import Autosuggest from 'react-autosuggest';
 
+
 class CoursesPrioritized extends Component {
     constructor(prop) {
       super(prop);
@@ -96,8 +97,17 @@ class CoursesPrioritized extends Component {
             value: ""
           });
         }
+
+        
         
       }
+
+      handleDelete = course => {
+        const courses = this.state.myCourses.filter(c => c != course);
+        this.setState({
+          myCourses: courses
+        });
+      };
   
     render() {
         const { value, suggestions } = this.state;
@@ -128,18 +138,32 @@ class CoursesPrioritized extends Component {
             inputProps={inputProps}
           />
           
-          <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
+          <div class = "coursesBox_p">
+          {this.state.myCourses.map(course => (
+            <Course course = {course} onDelete = {() => this.handleDelete(course)}
+            />
+          ))}
+        </div>
         
           <Link to="/focus_area">
               <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
                 THAT'S IT!
+                <i class="iconfont">&#xe627;</i>
               </button>
-              <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
-           </Link>
+          </Link>
           
           </div>
       );
     }
   }
+
+  function Course(props){
+    return (
+      <div class = "courseItem"> 
+      {props.course}
+      <button class = "delete" onClick = {props.onDelete}>x</button>
+      </div>
+    )
+  };
 
   export default CoursesPrioritized;

@@ -113,6 +113,7 @@ header ul li:hover
   /* border: 3px solid rgba(211, 149, 190, 0.431); */
   /* text-align: center; */
   align-items: center;
+  
 }
 
 .center11 {
@@ -291,6 +292,10 @@ header ul li:hover
   border-radius: 10px;
 }
 
+.text_box {
+  background-color: red;
+}
+
 
 .button0 {
   height:10%;
@@ -306,6 +311,7 @@ header ul li:hover
   display: flex;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 }
 
 .button0:disabled {
@@ -314,6 +320,38 @@ header ul li:hover
 
 fieldset {
   border: none;
+}
+
+.courseItem {
+  font-size: 15px;
+  border-bottom: #aaa solid 1px;
+}
+
+.delete {
+  position: relative;
+  float: right;
+  font-size: 15px;
+  border-radius: 30%;
+  margin-top: 2.5%;
+  background-color: #aaa ;
+  color: white;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background-color: darkblue;
+}
+
+.coursesBox {
+  margin-top: 5%;
+  width: 30%;
+  text-align: center;
+}
+
+.coursesBox_p {
+  margin-top: 5%;
+  width: 45%;
+  text-align: left;
 }
 
 
@@ -692,12 +730,12 @@ button200:hover {
 
 @font-face {
   font-family: 'iconfont';  /* project id 1695304 */
-  src: url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.eot');
-  src: url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1695304_qh9x2bbwbr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.eot');
+  src: url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1695304_6rgqgaaj62l.svg#iconfont') format('svg');
 }
 
 .iconfont{ 
