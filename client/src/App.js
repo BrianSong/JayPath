@@ -7,22 +7,29 @@ import Final from "./Final.js";
 import FailingPage from "./FailingPage.js";
 
 
+/* Our top-level component that directs us to different components based on the url */
 class App extends Component {
     constructor(props) {
       super(props);
+      // initialize to random values to help with debugging
       this.state = {
         focus_area: '/aa',
         semesters_taken: -2
       };
     }
 
+    // value passed in from child component FocusArea
     parentFunction = (data_from_child) => {
       this.setState({
         focus_area: data_from_child
       });
+      // some persistence here so that we still have access
+      // to the user input as we direct user from one path
+      // to another
       sessionStorage.setItem('focus_area', data_from_child);
     };
 
+    // value passed in from child component CurrentSemester
     parentFunction2 = (data_from_child) => {
       this.setState({
         semesters_taken: data_from_child
@@ -49,7 +56,7 @@ class App extends Component {
   }
 
 
-
+/* First page shown, collects user's previous coursework */
 class CoursesTaken extends Component {
   constructor(prop) {
     super(prop);
@@ -63,17 +70,16 @@ class CoursesTaken extends Component {
     };
   }
 
+  // grabs all valid courses from one api
   callAPI() {
-    console.log("fetching from api");
-    fetch("http://localhost:5000/api/courses") // to be changed
+    fetch("http://localhost:5000/api/courses") // apis
       .then(res => res.json())
       .then(res => this.setState({ allCourses: res }))
       .catch(err => err);
   }
 
+  // posts the input courses to another apis
   sendAPI(data) {
-    console.log("posting to api");
-    console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
       // mode: 'no-cors',
       method: 'POST',
@@ -84,26 +90,30 @@ class CoursesTaken extends Component {
     .catch(err => console.log("Error:", err));
   }
 
+
   componentDidMount() {
     this.callAPI();
+    // clears data stored from a previous round
     sessionStorage.clear();
   }
+
+  /* Code below customizes the Autosuggest library */
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-  
+
     return inputLength === 0 ? [] : this.state.allCourses.filter(ac =>
       ac.CourseTitle.toLowerCase().slice(0, inputLength) === inputValue
     );
   };
-  
+
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
   getSuggestionValue = suggestion => suggestion.CourseTitle;
-  
+
   // Use your imagination to render suggestions.
   renderSuggestion = (suggestion, { query, isHighlighted }) => (
     <span>
@@ -132,7 +142,7 @@ class CoursesTaken extends Component {
         suggestions: this.getSuggestions(value)
       });
     };
-  
+
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
       this.setState({
@@ -151,13 +161,13 @@ class CoursesTaken extends Component {
           value: ""
         });
       }
-      
+
     }
 
 
   render() {
       const { value, suggestions } = this.state;
-  
+
       // Autosuggest will pass through all these props to the input.
       const inputProps = {
         placeholder: 'course name',
@@ -165,7 +175,7 @@ class CoursesTaken extends Component {
         onChange: this.onChange
       };
 
-      
+
       return (
         <div class="center">
           <h1 class = "question">
@@ -181,7 +191,7 @@ class CoursesTaken extends Component {
           //renderSuggestionsContainer={this.renderSuggestionsContainer}
           inputProps={inputProps}
         />
-        
+
         {/* <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div> */}
         <div class = "coursesBox">
           {this.state.myCourses.map(course => (
@@ -189,17 +199,17 @@ class CoursesTaken extends Component {
             />
           ))}
         </div>
-          
 
-      
+
+
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
               <i class="iconfont">&#xe627;</i>
             </button>
-            
+
          </Link>
-        
+
         </div>
     );
   }
@@ -208,7 +218,7 @@ class CoursesTaken extends Component {
 // Component for entry of course taken
 function Course(props){
   return (
-    <div class = "courseItem"> 
+    <div class = "courseItem">
     {props.course}
     <button class = "delete" onClick = {props.onDelete}>x</button>
     </div>
@@ -218,11 +228,16 @@ function Course(props){
 class SemestersTaken extends Component {
   constructor(prop) {
     super(prop);
-    
+
+    // note that w could NOT use the focus property that came with
+    // CSS because we will be taking 2 inputs from this one page.
+    // Additional implementation below to toggle the active status
+    // of buttons
     this.state = {
       question1: "Which of the following best describes your current semester(or the one you just completed)?",
       question2: "In which season will you attend your upcoming semester?",
       value: -1,
+      // none of the buttons are active upon intialization
       left: [ {value: 'semester 1', active: 'button100'},
       {value: 'semester 3', active: 'button100', },
       {value: 'semester 5', active: 'button100'},
@@ -234,10 +249,13 @@ class SemestersTaken extends Component {
       {value: 'semester 6', active: 'button100'},
       {value: 'semester 8', active: 'button100'}],
 
+      // button status for the two buttons in Q2
       bottom_active: ['button100', 'button100'],
 
+      // uses hash tables to make our implementation below
+      // less redundant
       hash_table: ['high school', 'semester 1', 'semester 2',
-      'semester 3', 'semester 4', 'semester 5', 
+      'semester 3', 'semester 4', 'semester 5',
       'semester 6', 'semester 7', 'semester 8'],
       // using index used in the hash_table to access left & right
       // > 0 belongs to left
@@ -249,8 +267,6 @@ class SemestersTaken extends Component {
   }
 
   sendAPI = () => {
-    // validate user input
-    
     console.log("posting to api");
     const sem_num = [].concat(this.state.value)
     console.log(JSON.stringify(sem_num));
@@ -259,7 +275,7 @@ class SemestersTaken extends Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(sem_num)
-      
+
     }).then(res => res.json())
     .then(data => console.log("Success", data))
     .catch(err => console.log("Error:", err));
@@ -268,12 +284,13 @@ class SemestersTaken extends Component {
     console.log(this.state.value);
     console.log(this.state.value % 100);
     this.props.functionCallFromParent(this.state.value % 100);
-    
   };
 
-
+  // handles Q1 input
+  // toggles the active status of buttons in Q1
   handleClick = (event) => {
     const e = this.state.hash_table.indexOf(event.target.value); // index in hash_table
+    // handles the edge case when the user changes his/her mind by clicking on another button
     this.setState({
       value: this.state.value - (this.state.value % 100) + e
     });
@@ -281,12 +298,14 @@ class SemestersTaken extends Component {
     const left0 = this.state.left;
     const right0 = this.state.right;
     const idx = this.state.hash_idx[e];
+    // deactivate all buttons in Q1
     for (var i = 0; i < right0.length; i++) {
       right0[i].active = 'button100';
     }
     for (var i = 0; i < left0.length; i++) {
       left0[i].active = 'button100';
     }
+    // activates only the one just selected
     if (idx > 0) { // belongs to left
       left0[idx - 1].active = 'button100 active';
     } else {
@@ -298,12 +317,17 @@ class SemestersTaken extends Component {
       right: right0
     });
 
+    // we enter here only after Q1 is answered
+    // only need to check whether Q2 is answered
+    // note that we handles the situation where user answers
+    // the 2 questions in reverse order
     if (this.state.value >= 100) {
       document.getElementById('fs').disabled = false;
     }
   };
 
-
+  // handles Q2 input
+  // similar to handleClick
   handleClick2 = (event) => {
     this.setState({
       value: (this.state.value % 100) + parseInt(event.target.value)
@@ -319,13 +343,20 @@ class SemestersTaken extends Component {
       bottom_active: temp
     });
 
+    // we enter here only after Q2 is answered
+    // only need to check whether Q1 is answered
+    // note that we handles the situation where user answers
+    // the 2 questions in reverse order
+    // this.state.value % 100 == 99 if Q1 unanswered
+    // bc this.state.value initialized to -1
     if (this.state.value % 100 < 99) {
       document.getElementById('fs').disabled = false;
     }
-    
+
   };
 
   render() {
+    // maps lists into their html representation
     const opts_left = this.state.left.map((opt) => {
       return <button
               value= {opt.value}
@@ -346,8 +377,9 @@ class SemestersTaken extends Component {
               </button>
     });
 
-    // document.getElementById('thatsIt').disabled = this.state.disabled;
-  
+
+    // initially the "that's it" button is diabled
+    // the 2 handleClick functions will toggle its active status
     return (
       <div class= "center11" >
         <h1 class = "question">
@@ -361,7 +393,7 @@ class SemestersTaken extends Component {
           {opts_right}
           </div>
         </div>
-        
+
         <h1 class = "question">
           {this.state.question2}
         </h1>
@@ -397,11 +429,11 @@ class SemestersTaken extends Component {
         </fieldset>
 
         </div>
-      //  </div> 
     );
   }
 }
 
+  /* Page to ask user what focus area in computer science he/she is in */
   class FocusArea extends Component {
     constructor(prop) {
       super(prop);
@@ -420,7 +452,9 @@ class SemestersTaken extends Component {
         value: ''
       };
     }
-    
+
+    // again, we handle the edge case where user does not input
+    // a response before proceeding
     handleClick = (event) => {
       this.setState({
         value: event.target.value
@@ -435,7 +469,7 @@ class SemestersTaken extends Component {
       this.props.functionCallFromParent(this.state.value);
     };
 
-    
+
 
     render() {
 
@@ -448,7 +482,7 @@ class SemestersTaken extends Component {
                 {opt.name}
                 </button>
       });
-  
+
       const opts_right = this.state.right.map((opt) => {
         return <button
                 value= {opt.redirect}
@@ -472,7 +506,7 @@ class SemestersTaken extends Component {
           {opts_right}
           </div>
         </div>
-        
+
         <fieldset id="fs" disabled>
           <Link to="/final1">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
