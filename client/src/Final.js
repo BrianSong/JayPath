@@ -1,7 +1,15 @@
 import React, {Component} from "react";
 import "./App.css";
-import Jay from "./bluejay.png";
-import Done from "./complete.jpg";
+import Jay from "./assets/bluejay.png";
+import Done from "./assets/complete.jpg";
+import Core from "./assets/core_icon.png";
+import BD from "./assets/data_icon.png";
+import NLP from "./assets/lang_icon.png";
+import R from "./assets/robotics_icon.png";
+import IS from "./assets/info_icon.png";
+import CB from "./assets/bio_icon.png";
+import E from "./assets/elective.png";
+
 import {BrowserRouter as Route,Router,Link,Redirect} from "react-router-dom";
 
 class Final extends Component {
@@ -20,7 +28,7 @@ class Final extends Component {
     callAPI() {
         console.log(this.props.valueFromParent);
         console.log(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
-        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule))
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule)) 
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
@@ -50,6 +58,8 @@ class Final extends Component {
 
     render() {
         const year_hash = ['FRESHMAN YEAR', 'SOPHOMORE YEAR', 'JUNIOR YEAR', 'SENIOR YEAR']
+        const icon_hash = [Core, BD, NLP, R, IS, CB, E]; // indices correspond to the hash below
+        const track_hash = ['core', 'bd', 'nlp', 'r', 'is', 'cb', 'elective'];
         const list0 = [];
         for (var i = 0; i < 4; i++) {
             const cur = this.state.schedule.slice(6 * i, 6 * i + 3);
@@ -58,15 +68,16 @@ class Final extends Component {
                     <button200
                     class="row"
                     tabindex="0"
-                    type="button" disabled><li>
-                        {d.CourseNumber}
-                        {": "}
-                        {d.CourseTitle}
-                        {" Credit:"}
-                        {d.Credits}
-                        {" Instructor:"}
-                        {d.Instructor}
-                    </li></button200>
+                    type="button" disabled>
+                        <div class="title">
+                        {d.CourseNumber}{": "}{d.CourseTitle}
+                        </div>
+                        <div class="small_icon_container">
+                            <img src={icon_hash[track_hash.indexOf(d.Track)]} class="small_icon"/>
+                        </div>
+                        <li>{" Credit:"}{d.Credits}</li>
+                        <li>{" Instructor:"}{d.Instructor}</li>
+                    </button200>
                 );
             });
             const cur2 = this.state.schedule.slice(6 * i + 3, 6 * (i + 1));
@@ -75,15 +86,16 @@ class Final extends Component {
                     <button200
                     class="row"
                     tabindex="0"
-                    type="button" disabled><li>
-                        {d.CourseNumber}
-                        {": "}
-                        {d.CourseTitle}
-                        {" Credit:"}
-                        {d.Credits}
-                        {" Instructor:"}
-                        {d.Instructor}
-                    </li></button200>
+                    type="button" disabled>
+                        <div class="title">
+                        {d.CourseNumber}{": "}{d.CourseTitle}
+                        </div>
+                        <div class="small_icon_container">
+                            <img src={icon_hash[track_hash.indexOf(d.Track)]} class="small_icon"/>
+                        </div>
+                        <li>{" Credit:"}{d.Credits}</li>
+                        <li>{" Instructor:"}{d.Instructor}</li>
+                    </button200>
                 );
             });
 
@@ -127,36 +139,56 @@ class Final extends Component {
     
         
         return (
-            <div class = "center111">
-                <header id="header">
-                    <a href="#" class="logo">
-                        <img src={Jay} style={{width: 50, height: 50, float: "left"}} />
-                        Jaypath {this.state.numSchedule}
-                    </a>
-                    <ul></ul>
-                    <ul>
-                    <li id="li1"><a id="a1" href="/final1">Path 1</a></li>
-                    <li id="li2"><a id="a2" href="/final2">Path 2</a></li>
-                    <li id="li3"><a id="a3" href="/final3">Path 3</a></li>
-                    <li><a href="/" active>Start Afresh</a></li>
-                    </ul>
-                    <div class="toggle" onclick="toggle()"></div>
-                </header>
-                <h1 class = "my_path">
-                </h1>
-                <div class="container2">
-                    {list}
+            <div class="wrapper">
+                <div class = "center111">
+                    <header id="header">
+                        <a href="#" class="logo">
+                            <img src={Jay} style={{width: 80, height: 80, float: "left"}} />
+                            Jaypath <span>{this.state.numSchedule}</span>
+                        </a>
+                        <ul></ul> 
+                        <ul>
+                        <li id="li1"><a id="a1" href="/final1">Path 1</a></li>
+                        <li id="li2"><a id="a2" href="/final2">Path 2</a></li>
+                        <li id="li3"><a id="a3" href="/final3">Path 3</a></li>
+                        <li><a href="/" active>Start Afresh</a></li>
+                        </ul>
+                    </header>
+                    
+                    <div class="message">
+                        <div class="small_icon_container2">
+                            <img src={Core} class="small_icon"/>: core requirement
+                        </div>
+                        <div class="small_icon_container2">
+                            <img src={BD} class="small_icon"/>: big data
+                        </div>
+                        <div class="small_icon_container2">
+                            <img src={NLP} class="small_icon"/>: natural language processing
+                        </div>
+                        <div class="small_icon_container2">
+                            <img src={R} class="small_icon"/>: robotics
+                        </div>
+                        <div class="small_icon_container2">
+                            <img src={IS} class="small_icon"/>: information security
+                        </div>
+                        <div class="small_icon_container2">
+                            <img src={CB} class="small_icon"/>: computational biology
+                        </div>
+                    </div>
+
+                    <div class="container2">
+                        {list}
+                    </div>
                 </div>
 
-                <div>
-                    <Link to="/">
-                        <button class="button_r" type="button">
-                            Go Back
-                        </button>
-                        <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe7f9;</i>
-                    </Link>
-                </div>
-
+                <Link to="/">
+                    <div class="link_container">
+                    <button class="button_r" type="button">
+                        <div class="icon_container"><i class="iconfont">&#xe7f9;</i></div>
+                        Go Back
+                    </button>
+                    </div>
+                </Link>
             </div>
         );
     }
