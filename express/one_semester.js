@@ -18,18 +18,13 @@ module.exports = {
             // generate a possible course node at the current semester
             // get a list of child nodes based on a given course node
             let child_nodes_list = get_child_nodes(prev_semester_nodes_list[i], field, term);
+            // console.log("number of childs: " + child_nodes_list.length);
 
             // add child course nodes in the current semester nodes list
             // note: make sure there is no duplicates!
             for (var j = 0; j < child_nodes_list.length; j++) {
                 // check if the child node is in the current semester nodes list
                 let child_node_idx = curr_semester_nodes_list.findIndex(element => child_nodes_list[j].equals(element));
-                // let flag = true;
-                // for(let node in curr_semester_nodes_list){
-                //     if(compareNode(child_nodes_list[j], node)){
-                //         flag = false;
-                //     }
-                // }
                 if (child_node_idx == -1) {
                     // add a new child node into the current semester nodes list
                     curr_semester_nodes_list.push(child_nodes_list[j]);
@@ -91,7 +86,9 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 child_nodes_list.push(course_node_new);
                 count++;
                 if(count > 1){
-                    break;
+                    i = Number.MAX_VALUE;
+                    j = Number.MAX_VALUE;
+                    k = Number.MAX_VALUE;
                 }
             }
         }

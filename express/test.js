@@ -12,10 +12,15 @@ console.log("number of courses: " + user_semester_status.size);
 let user_semester = [new course_node(user_semester_status)];
 console.log("user_semester status: " + user_semester[0].get_status);
 
+// let one_semesters_list = one_semester.get_one_semester(user_semester, field, term);
+// console.log(one_semesters_list.length);
+//console.log(one_semesters_list);
 let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term);
 console.log(all_semesters_list.length);
 // console.log(all_semesters_list[0][0]);
-// let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
+let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
+console.log(one_schedule_list.length);
+console.log(one_schedule_list[0]);
 // console.log(one_schedule_list);
 // course_id = []
 // if (one_schedule_list.length != 0) {

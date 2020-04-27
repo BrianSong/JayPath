@@ -2,7 +2,7 @@ var course_node = require("./course_node");
 var grad = require("./check_graduation");
 
 module.exports = {
-    get_schedule: function get_schedule(all_semesters_list, courseList) {
+    get_schedule: function get_schedule(all_semesters_list) {
         // input: a list, where each element (corresponding to a term) is a list of course codes
         // output: a list of course nodes, where each course node is the courses to be taked at each semester
 
@@ -11,7 +11,7 @@ module.exports = {
 
         for (var i = 0; i < all_semesters_list[all_semesters_list.length-1].length; i++) {
             let curr_node = all_semesters_list[all_semesters_list.length - 1][i];
-            let g = grad.check(curr_node.get_status, courseList);
+            let g = grad.check(curr_node.get_status);
             if(g){
                 curr_node.change_node_value(1);
             }else{
@@ -50,11 +50,6 @@ module.exports = {
             if(node.get_value == 1 && node.get_child_indices.length == 0){//if doesn't have child and can graduate, then it's a node of the last semester
                 scheduleList.push(curr_path);
                 numPath++;
-                if (numPath > 2) {
-                    break;
-                }else{
-                    continue;
-                }
             }
             let child_indices = node.get_child_indices;
             let semester = node.get_semester;
