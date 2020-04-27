@@ -24,7 +24,12 @@ module.exports = {
             for (var j = 0; j < child_nodes_list.length; j++) {
                 // check if the child node is in the current semester nodes list
                 let child_node_idx = curr_semester_nodes_list.findIndex(element => child_nodes_list[j].equals(element));
-
+                // let flag = true;
+                // for(let node in curr_semester_nodes_list){
+                //     if(compareNode(child_nodes_list[j], node)){
+                //         flag = false;
+                //     }
+                // }
                 if (child_node_idx == -1) {
                     // add a new child node into the current semester nodes list
                     curr_semester_nodes_list.push(child_nodes_list[j]);
@@ -85,11 +90,23 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 let course_node_new = new course_node(course_status_new);
                 child_nodes_list.push(course_node_new);
                 count++;
-                if(count > 2){
+                if(count > 1){
                     break;
                 }
             }
         }
         return child_nodes_list;
     }
+}
+
+function compareNode(node1, node2){
+    for(let k in node1.status.keys()){
+        console.log("----");
+        console.log(node2.get_status.get(k));
+        console.log(node1.status.get(k));
+        if(node1.status.get(k) != node2.get_status.get(k)){
+            return false;
+        }
+    }
+    return true;
 }
