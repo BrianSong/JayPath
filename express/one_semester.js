@@ -85,7 +85,7 @@ function select_from_eligible(prev_course_status, eligible_courses) {
                 let course_node_new = new course_node(course_status_new);
                 child_nodes_list.push(course_node_new);
                 count++;
-                if(count > 50){
+                if(count > 2){
                     break;
                 }
             }

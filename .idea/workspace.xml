@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a56939c9-6483-478f-ab53-b7c2122a1444" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/course_node.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/course_node.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/express/one_schedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/one_schedule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/JayPath.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/JayPath.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/express/all_semesters.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/all_semesters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/express/one_semester.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/one_semester.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/client/node_modules/" />
     <ignored path="$PROJECT_DIR$/express/node_modules/" />
@@ -38,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+            <state relative-caret-position="285">
+              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -53,19 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/express/one_schedule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/course_node.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
+            <state relative-caret-position="1311">
               <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
             </state>
           </provider>
@@ -74,20 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/express/all_semesters.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+            <state relative-caret-position="684">
+              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/express/initial.js">
+        <entry file="file://$PROJECT_DIR$/express/one_schedule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="779">
-              <caret line="700" column="44" selection-start-line="700" selection-start-column="44" selection-end-line="700" selection-end-column="44" />
-              <folding>
-                <element signature="e#1143#19349#0" />
-              </folding>
+            <state relative-caret-position="243">
+              <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -110,11 +99,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/express/one_semester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="282">
+              <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+              <folding>
+                <element signature="e#233#288#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,6 +130,7 @@
       <find>info</find>
       <find>semester</find>
       <find>courses_info</find>
+      <find>console.lo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,13 +148,13 @@
         <option value="$PROJECT_DIR$/client/src/CB.js" />
         <option value="$PROJECT_DIR$/client/src/ROB.js" />
         <option value="$PROJECT_DIR$/express/filter.js" />
-        <option value="$PROJECT_DIR$/express/all_semesters.js" />
         <option value="$PROJECT_DIR$/express/index.js" />
         <option value="$PROJECT_DIR$/express/model/Course.js" />
-        <option value="$PROJECT_DIR$/express/test.js" />
-        <option value="$PROJECT_DIR$/express/one_semester.js" />
         <option value="$PROJECT_DIR$/express/course_node.js" />
         <option value="$PROJECT_DIR$/express/one_schedule.js" />
+        <option value="$PROJECT_DIR$/express/test.js" />
+        <option value="$PROJECT_DIR$/express/all_semesters.js" />
+        <option value="$PROJECT_DIR$/express/one_semester.js" />
       </list>
     </option>
   </component>
@@ -198,12 +191,6 @@
               <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
               <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
               <item name="express" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
-              <item name="express" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -268,7 +255,8 @@
       <workItem from="1586987407318" duration="10257000" />
       <workItem from="1587744015944" duration="369000" />
       <workItem from="1587768833635" duration="12005000" />
-      <workItem from="1587862258706" duration="1331000" />
+      <workItem from="1587862258706" duration="6072000" />
+      <workItem from="1587962328977" duration="3132000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1582684655530</created>
@@ -403,11 +391,25 @@
       <option name="project" value="LOCAL" />
       <updated>1587787005656</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="dfs implemented">
+      <created>1587863609268</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1587863609268</updated>
+    </task>
+    <task id="LOCAL-00021" summary="ISSUE: number of nodes become 0 at the sixth semester">
+      <created>1587866237117</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1587866237117</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40588000" />
+    <option name="totallyTimeSpent" value="48461000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -422,7 +424,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20738254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21006711" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -435,7 +437,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.551676" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.13407822" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30865923" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -519,7 +521,9 @@
     <MESSAGE value="course_node equals added" />
     <MESSAGE value="course_node equals needs to be modified" />
     <MESSAGE value="need to record path in oneSchedule" />
-    <option name="LAST_COMMIT_MESSAGE" value="need to record path in oneSchedule" />
+    <MESSAGE value="dfs implemented" />
+    <MESSAGE value="ISSUE: number of nodes become 0 at the sixth semester" />
+    <option name="LAST_COMMIT_MESSAGE" value="ISSUE: number of nodes become 0 at the sixth semester" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -609,20 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/express/filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/express/initial.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
@@ -633,17 +623,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/index.js">
+    <entry file="file://$PROJECT_DIR$/express/filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2622">
-          <caret line="138" column="75" selection-start-line="138" selection-start-column="75" selection-end-line="138" selection-end-column="75" />
+        <state relative-caret-position="399">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/one_semester.js">
+    <entry file="file://$PROJECT_DIR$/express/course_node.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="1311">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -654,24 +644,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/all_semesters.js">
+    <entry file="file://$PROJECT_DIR$/express/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+        <state relative-caret-position="2622">
+          <caret line="138" column="75" selection-start-line="138" selection-start-column="75" selection-end-line="138" selection-end-column="75" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/express/course_node.js">
+    <entry file="file://$PROJECT_DIR$/express/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+        <state relative-caret-position="285">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/express/one_schedule.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+        <state relative-caret-position="243">
+          <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/all_semesters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/express/one_semester.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+          <folding>
+            <element signature="e#233#288#0" />
+          </folding>
         </state>
       </provider>
     </entry>

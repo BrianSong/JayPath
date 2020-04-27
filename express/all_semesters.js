@@ -10,6 +10,7 @@ module.exports = {
         let all_semesters = []; // every element is a list of courses for a term
         let semesters_left = 8; // depending on user input
         let grad_flag = false;
+        term = "Fall";
 
         while ((!grad_flag) && (all_semesters.length < semesters_left)) {
             // get the very next semester nodes based on the previous semester nodes
@@ -21,10 +22,20 @@ module.exports = {
             }
             if (curr_semester_nodes_list.length == 0) {
                 console.log("no more courses to take, exiting...");
+                // let keys = all_semesters[all_semesters.length - 1][0].get_status.values();
+                let testNodeList = [all_semesters[all_semesters.length - 1][0]];
+                console.log(all_semesters[all_semesters.length - 1][0].get_status);
+                // let t = one_semester.get_one_semester(testNodeList, field, term);
+                // console.log("test length: " + t.length);
                 return all_semesters;
             } // no more courses to take
 
             all_semesters.push(curr_semester_nodes_list);
+            if(term == "Fall"){
+                term = "Spring";
+            }else{
+                term = "Fall";
+            }
         }
 
         // ONLY FOR TESTING: set values for all course nodes at the last semester to 1
