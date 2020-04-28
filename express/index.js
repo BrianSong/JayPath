@@ -74,13 +74,13 @@ app.get("/api/:field/courses1", (req, res) => {
 });
 
 app.get("/api/:field/courses2", (req, res) => {
-    console.log("First path: ");
+    console.log("Second path: ");
     console.log(rslt[1]);
     res.send(rslt[1]);
 });
 
 app.get("/api/:field/courses3", (req, res) => {
-    console.log("First path: ");
+    console.log("Third path: ");
     console.log(rslt[2]);
     res.send(rslt[2]);
 });
@@ -231,7 +231,7 @@ app.post("/api/courses_prioritized", (req, res) => {
         }
         rslt.push(curr_path);
     }
-    console.log("?? :" + rslt[0][0].CourseTitle);
+    // console.log("?? :" + rslt[0][0].CourseTitle);
 });
 
 
