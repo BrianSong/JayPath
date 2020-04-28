@@ -4,19 +4,32 @@ var all_semesters = require("./all_semesters");
 var one_schedule = require("./one_schedule");
 const initial = require("./initial");
 
+// construct user input
 let field = "nlp";
-let courses_track = ["core", "core", "core", "core", "core", "core", "core", "core", "elective", "elective", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "core", "bd", "bd", "bd", "cb", "cb", "cb", "nlp", "nlp", "nlp", "r", "r", "r", "is", "is", "is", "is", "r", "bd", "nlp", "nlp", "core", "core", "core", "core"];
-let courses_pre = ["", "", "", "2", "3", "3", "3", "3-6-12", "3", "3", "", "10", "", "11", "11-13", "11-13-14", "", "", "", "", "", "", "", "3", "3", "3", "3", "3", "3", "3", "3", "3-11-13-14-15", "3", "3-26", "3-11-13-14-15", "3", "3", "3", "3", "3", "3", "3-11-13-14-15-30", "3-11-13-14-15-30", "", "", "", "44"];
+let term = "Fall";
+let semesters_left = 8;
 
-let user_semester = [new course_node(Array(courses_pre.length).fill(0))];
-console.log("user_semester status: " + user_semester[0].get_status);
+// initialize user_semester_status
+let user_semester_status = new Map();
+let user_prefer_courses = new Map();
+initial.initilization(user_semester_status, user_prefer_courses);
+console.log("number of courses: " + user_semester_status.size);
 
-let courseStatus = new Map();
-initial.initilization(courseStatus);
+// initialize user_semester_list
+let user_semester_list = [new course_node(user_semester_status)];
+// console.log("user_semester_list status: " + user_semester_list[0]);
 
-let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre);
-console.log(all_semesters_list[0][0]);
-// let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
+let all_semesters_list = all_semesters.get_all_semesters(user_semester_list, field, term, semesters_left);
+let one_schedule_list = one_schedule.get_schedule(all_semesters_list, user_prefer_courses);
+console.log();
+console.log("one_schedule_list length: " + one_schedule_list.length);
+console.log();
+console.log("first schedule: " + one_schedule_list[0][0]);
+console.log(one_schedule_list[0][0].status);
+console.log("second schedule: " + one_schedule_list[1].length);
+console.log("third schedule: " + one_schedule_list[2].length);
+console.log();
+
 // console.log(one_schedule_list);
 // course_id = []
 // if (one_schedule_list.length != 0) {

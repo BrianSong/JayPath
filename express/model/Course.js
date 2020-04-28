@@ -13,4 +13,10 @@ module.exports = class Course {
     this.Term = Term;
     this.Area = Area;
   }
-}
+
+
+  copy(){
+    let copy = new Course(this.id, this.CourseTitle, this.Credits, this.Instructor, this.DaysOfWeek, this.StartTimeEndTime, this.Track, this.Prerequisite, this.Conflicts, this.Term, this.Area);
+    return copy;
+  }
+};
