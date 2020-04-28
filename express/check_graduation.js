@@ -31,7 +31,7 @@ module.exports = {
                 area_count++;
             }
         }
-        if (area_count >= 3 && credits >= 72) {
+        if (area_count >= 2 && credits >= 60) {
             return true;
         }
         return false;
