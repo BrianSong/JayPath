@@ -69,7 +69,9 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses1", (req, res) => {
     console.log("First path: ");
-    console.log(rslt[0]);
+    for(let c of rslt[0]){
+        console.log("courseId； " + c.id);
+    }
     res.send(rslt[0]);
 });
 
@@ -217,6 +219,9 @@ app.post("/api/courses_prioritized", (req, res) => {
         for(let node of s){
             let node_status = node.get_status;
             for(let k of node_status.keys()){
+                if(node_status.get(k) == 0){
+                    continue;
+                }
                 let course = k;
                 let flag = true;
                 for(let c of curr_path){
