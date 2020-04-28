@@ -7,6 +7,11 @@ const sqlite3 = require("sqlite3").verbose();
 const filter = require("./filter");
 const initial = require("./initial");
 var Student = require('./model/Student');
+var course_node = require("./course_node");
+var one_semester = require("./one_semester");
+var all_semesters = require("./all_semesters");
+var one_schedule = require("./one_schedule");
+let rslt = [];
 
 app.use(express.json());
 app.use(cors());
@@ -18,6 +23,9 @@ let courseStatus = new Map();
 let preferCourse = new Map();
 initial.initilization(courseStatus, preferCourse);
 let student = new Student(0, courseStatus, null);
+let term = "Fall";
+let semesters_left = 8;
+let field = "nlp";
 
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
@@ -55,77 +63,55 @@ app.get("/api/courses", (req, res) => {
 
 });
 
-app.get("/api/:field/courses", (req, res) => {
-    // send candidate courses to backend
-    console.log("1111");
-    let field = String(req.params.field);
-    let courses = [];
-    let course_id = [];
-
-    let courses_track = courses_info[1];
-    let courses_pre = courses_info[2];
-
-
-    let user_semester = [new course_node(courseStatus)];
-    console.log("user_semester status: " + user_semester[0].get_status);
-    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, courses_track, courses_pre);
-    let one_schedule_list = one_schedule.get_schedule(all_semesters_list);
-
-    if (one_schedule_list.length != 0) {
-        for (var i = 0; i < one_schedule_list.length; i++) {
-            var semester_course_statue = one_schedule_list[i].get_status();
-            for (var j = 0; j < semester_course_statue.length; j++) {
-                if (semester_course_statue[j] == 1) {
-                    if (course_id.indexOf(j) == -1) {
-                        course_id.push(j);
-                    }
-                }
-            }
-        }
-
-        let db = new sqlite3.Database("../db/JayPath.db", err => {
-            if (err) {
-                console.error(err.message);
-            }
-            console.log("Connected to the courses database.");
-        });
-
-        // Extract course according to the focus area and sent it back to the front end for displaying.
-        let sql = `SELECT * FROM courses WHERE id = ?;`;
-        for (var i = 0; i < course_id.length; i++) {
-            db.all(sql, [course_id[i]], (err, allcourse) => {
-                if (err) {
-                    return console.error(err.message);
-                }
-                allcourse.forEach(course => {
-                    courses.push(course);
-                })
-            });
-        }
-
-        // Close database
-        db.close(err => {
-            if (err) {
-                console.error(err.message);
-            }
-            console.log("Close the courses connection.");
-            res.send(courses);
-        });
-
-    } else {
-        res.send(courses);
-    }
+app.get("/api/final1", (req, res) => {
+    console.log("First path: ");
+    console.log(rslt[0]);
+    res.send(rslt[0]);
 });
 
-// API for courses students has taken
+app.get("/api/final2", (req, res) => {
+    res.send(rslt[1]);
+});
+
+app.get("/api/final3", (req, res) => {
+    res.send(rslt[2]);
+});
+
+app.get("/api/:field/courses", (req, res) => {
+    console.log("Returning schedules...");
+    // send candidate courses to backend
+    let field = String(req.params.field);
+    let rslt = [];
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
+
+    for(let s of one_schedule_list){
+        let curr_path = [];
+        for(let node of s){
+            let node_status = node.get_status;
+            for(let k of node_status.keys()){
+                let course = node_status.get(k);
+                let flag = true;
+                for(let c of curr_path){
+                    if(c.id == course.id){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    curr_path.push(course);
+                }
+            }
+        }
+        rslt.push(curr_path);
+    }
+    res.send(rslt);
+});
+
 app.post("/api/user_info", (req, res) => {
-<<<<<<< HEAD
     let courses_to_add = req.body;
-    // Open and connect to data[1base
-=======
-    courses_to_add = req.body;
     // Open and connect to database
->>>>>>> master
     let db = new sqlite3.Database("../db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
@@ -135,6 +121,7 @@ app.post("/api/user_info", (req, res) => {
 
     // Extract course according to the focus area and sent it back to the front end for displaying.
     let sql = `SELECT * FROM courses WHERE CourseTitle = ?;`;
+
 
     for (var i = 0; i < courses_to_add.length; i++) {
         db.get(sql, [courses_to_add[i].trim()], (err, row) => {
@@ -161,9 +148,16 @@ app.post("/api/user_info", (req, res) => {
 
 // API for student's current semester and semester he/she wants to enroll in
 app.post("/api/semesters_info", (req, res) => {
-    semesters_info = req.body;
-
+    let val = parseInt(req.body[0]);
+    if(val > 100){//spring
+        term = "Fall";
+        semesters_left = 8 - (val % 100);
+    }else{//fall
+        term = "Spring";
+        semesters_left = 8 - (val % 100);
+    }
 });
+
 
 
 // API for courses the student wants to prioritize
@@ -203,6 +197,35 @@ app.post("/api/courses_prioritized", (req, res) => {
         }
         console.log("Close the courses connection.");
     });
+
+    rslt = [];
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
+    console.log("schedule length: " + one_schedule_list.length);
+    //console.log(one_schedule_list[0][0]);
+
+    for(let s of one_schedule_list){
+        let curr_path = [];
+        for(let node of s){
+            let node_status = node.get_status;
+            for(let k of node_status.keys()){
+                let course = k;
+                let flag = true;
+                for(let c of curr_path){
+                    if(c.id == course.id){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    curr_path.push(course);
+                }
+            }
+        }
+        rslt.push(curr_path);
+    }
+    console.log("?? :" + rslt[0][0].CourseTitle);
 });
 
 
