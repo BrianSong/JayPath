@@ -6,7 +6,7 @@ module.exports = {
         // StartTimeEndTime, Track, Prerequisite, Conflicts, Term, Area
 
         let eligible_course = [];
-        let courseList = Array.from( courseStatus.keys() );
+        let courseList = Array.from(courseStatus.keys());
         for (const [course, status] of courseStatus.entries()) {
             if (status == 0 && (course.Track == field || course.Track == "core" || course.Track == "elective") && (course.Term == term || course.Term == "Both")) {
                 // consider to take

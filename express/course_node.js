@@ -4,6 +4,8 @@ module.exports =  class course_node {
     this.value = -1; // not used for iter3
     this.child_indices = []; // not used for iter3
     this.best_child_index = -1; // not used for iter3
+
+    // extra use?
     this.semester = 0;
     this.curr_path = []; // used for recording the path, excluding itself.
     this.visited = false; // used for dfs
