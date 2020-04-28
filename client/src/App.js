@@ -1,31 +1,40 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
 import Autosuggest from 'react-autosuggest';
 import CoursesPrioritized from "./CoursesPrioritized.js";
 import Final from "./Final.js";
 import FailingPage from "./FailingPage.js";
 
 
+/* Our top-level component that directs us to different components based on the url */
 class App extends Component {
     constructor(props) {
       super(props);
+      // initialize to random values to help with debugging
       this.state = {
         focus_area: '/aa',
         semesters_taken: -2
       };
     }
 
+    // value passed in from child component FocusArea
     parentFunction = (data_from_child) => {
       this.setState({
         focus_area: data_from_child
       });
+      // some persistence here so that we still have access
+      // to the user input as we direct user from one path 
+      // to another
+      sessionStorage.setItem('focus_area', data_from_child);
     };
 
+    // value passed in from child component CurrentSemester
     parentFunction2 = (data_from_child) => {
       this.setState({
         semesters_taken: data_from_child
       });
+      sessionStorage.setItem('semesters_taken', data_from_child);
     };
 
     render() {
@@ -36,7 +45,9 @@ class App extends Component {
             <Route exact path="/courses_prioritized" component = {CoursesPrioritized} />
             <Route exact path="/current_semester" render={(props) => <SemestersTaken {...props} functionCallFromParent={this.parentFunction2.bind(this)} />} />
             <Route exact path="/focus_area" render={(props) => <FocusArea {...props} functionCallFromParent={this.parentFunction.bind(this)} />}/>
-            <Route exact path="/final" render={(props) => <Final {...props} valueFromParent={this.state.focus_area} valueFromParent2={this.state.semesters_taken}/>} />
+            <Route exact path="/final1" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={1}/>} />
+            <Route exact path="/final2" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={2}/>} />
+            <Route exact path="/final3" render={(props) => <Final {...props} valueFromParent={sessionStorage.getItem('focus_area')} valueFromParent2={sessionStorage.getItem('semesters_taken')} numSchedule={3}/>} />
             <Route exact path="/advising" component={() => { window.location.href = 'https://advising.jhu.edu/'; return null;}}></Route>
             <Route exact path="/cs_req" component={() => { window.location.href = 'http://e-catalog.jhu.edu/departments-program-requirements-and-courses/engineering/computer-science/'; return null;}}></Route>
         </Router>
@@ -45,7 +56,7 @@ class App extends Component {
   }
 
 
-
+/* First page shown, collects user's previous coursework */
 class CoursesTaken extends Component {
   constructor(prop) {
     super(prop);
@@ -59,17 +70,16 @@ class CoursesTaken extends Component {
     };
   }
 
+  // grabs all valid courses from one api
   callAPI() {
-    console.log("fetching from api");
-    fetch("http://localhost:5000/api/courses") // to be changed
+    fetch("http://localhost:5000/api/courses") // apis
       .then(res => res.json())
       .then(res => this.setState({ allCourses: res }))
       .catch(err => err);
   }
 
+  // posts the input courses to another apis
   sendAPI(data) {
-    console.log("posting to api");
-    console.log(JSON.stringify(data));
     fetch('http://localhost:5000/api/user_info', {
       // mode: 'no-cors',
       method: 'POST',
@@ -80,9 +90,14 @@ class CoursesTaken extends Component {
     .catch(err => console.log("Error:", err));
   }
 
+
   componentDidMount() {
     this.callAPI();
+    // clears data stored from a previous round
+    sessionStorage.clear();
   }
+
+  /* Code below customizes the Autosuggest library */
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   getSuggestions = value => {
@@ -168,12 +183,13 @@ class CoursesTaken extends Component {
         />
         
         <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div>
-      
+      
         <Link to="/current_semester">
             <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
               THAT'S IT!
+              <i class="iconfont">&#xe627;</i>
             </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
+            
          </Link>
         
         </div>
@@ -181,14 +197,20 @@ class CoursesTaken extends Component {
   }
 }
 
+/* This page collects user's timing info */
 class SemestersTaken extends Component {
   constructor(prop) {
     super(prop);
     
+    // note that w could NOT use the focus property that came with 
+    // CSS because we will be taking 2 inputs from this one page. 
+    // Additional implementation below to toggle the active status 
+    // of buttons
     this.state = {
       question1: "Which of the following best describes your current semester(or the one you just completed)?",
       question2: "In which season will you attend your upcoming semester?",
-      value: 0,
+      value: -1,
+      // none of the buttons are active upon intialization
       left: [ {value: 'semester 1', active: 'button100'},
       {value: 'semester 3', active: 'button100', },
       {value: 'semester 5', active: 'button100'},
@@ -200,16 +222,21 @@ class SemestersTaken extends Component {
       {value: 'semester 6', active: 'button100'},
       {value: 'semester 8', active: 'button100'}],
 
+      // button status for the two buttons in Q2
       bottom_active: ['button100', 'button100'],
 
+      // uses hash tables to make our implementation below 
+      // less redundant
       hash_table: ['high school', 'semester 1', 'semester 2',
       'semester 3', 'semester 4', 'semester 5', 
       'semester 6', 'semester 7', 'semester 8'],
       // using index used in the hash_table to access left & right
       // > 0 belongs to left
       // 1-indexed to avoid confusion over 0
-      hash_idx: [5, 1, -1, 2, -2, 3, -3, 4, -4]
+      hash_idx: [5, 1, -1, 2, -2, 3, -3, 4, -4],
     };
+
+    // document.getElementById("thatsIt").setAttribute("disabled", "true");
   }
 
   sendAPI = () => {
@@ -232,9 +259,11 @@ class SemestersTaken extends Component {
     this.props.functionCallFromParent(this.state.value % 100);
   };
 
-
+  // handles Q1 input
+  // toggles the active status of buttons in Q1
   handleClick = (event) => {
     const e = this.state.hash_table.indexOf(event.target.value); // index in hash_table
+    // handles the edge case when the user changes his/her mind by clicking on another button
     this.setState({
       value: this.state.value - (this.state.value % 100) + e
     });
@@ -242,12 +271,14 @@ class SemestersTaken extends Component {
     const left0 = this.state.left;
     const right0 = this.state.right;
     const idx = this.state.hash_idx[e];
+    // deactivate all buttons in Q1
     for (var i = 0; i < right0.length; i++) {
       right0[i].active = 'button100';
     }
     for (var i = 0; i < left0.length; i++) {
       left0[i].active = 'button100';
     }
+    // activates only the one just selected
     if (idx > 0) { // belongs to left
       left0[idx - 1].active = 'button100 active';
     } else {
@@ -258,9 +289,18 @@ class SemestersTaken extends Component {
       left: left0,
       right: right0
     });
+
+    // we enter here only after Q1 is answered
+    // only need to check whether Q2 is answered
+    // note that we handles the situation where user answers 
+    // the 2 questions in reverse order
+    if (this.state.value >= 100) {
+      document.getElementById('fs').disabled = false;
+    }
   };
 
-
+  // handles Q2 input
+  // similar to handleClick
   handleClick2 = (event) => {
     this.setState({
       value: (this.state.value % 100) + parseInt(event.target.value)
@@ -275,10 +315,21 @@ class SemestersTaken extends Component {
     this.setState ({
       bottom_active: temp
     });
+
+    // we enter here only after Q2 is answered
+    // only need to check whether Q1 is answered
+    // note that we handles the situation where user answers 
+    // the 2 questions in reverse order
+    // this.state.value % 100 == 99 if Q1 unanswered
+    // bc this.state.value initialized to -1
+    if (this.state.value % 100 < 99) {
+      document.getElementById('fs').disabled = false;
+    }
     
   };
 
   render() {
+    // maps lists into their html representation
     const opts_left = this.state.left.map((opt) => {
       return <button
               value= {opt.value}
@@ -298,7 +349,10 @@ class SemestersTaken extends Component {
               {opt.value}
               </button>
     });
-  
+
+    
+    // initially the "that's it" button is diabled
+    // the 2 handleClick functions will toggle its active status
     return (
       <div class= "center11" >
         <h1 class = "question">
@@ -338,18 +392,21 @@ class SemestersTaken extends Component {
         </div>
 
 
+        <fieldset id="fs" disabled>
         <Link to="/courses_prioritized">
           <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
             THAT'S IT!
+            <button class="iconfont">&#xe627;</button>
           </button>
-          <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
-          </Link>
+        </Link>
+        </fieldset>
+
         </div>
-      //  </div> 
     );
   }
 }
 
+  /* Page to ask user what focus area in computer science he/she is in */
   class FocusArea extends Component {
     constructor(prop) {
       super(prop);
@@ -369,10 +426,13 @@ class SemestersTaken extends Component {
       };
     }
     
+    // again, we handle the edge case where user does not input 
+    // a response before proceeding
     handleClick = (event) => {
       this.setState({
         value: event.target.value
       });
+      document.getElementById('fs').disabled = false;
     };
 
     // passing user input value to parent component App
@@ -419,13 +479,15 @@ class SemestersTaken extends Component {
           {opts_right}
           </div>
         </div>
-  
-          <Link to="/final">
+        
+        <fieldset id="fs" disabled>
+          <Link to="/final1">
             <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
               VIEW MY PATH!
+              <button class="iconfont">&#xe627;</button>
             </button>
-            <i class="iconfont" style={{position: "absolute", right: "40px"}}>&#xe627;</i>
           </Link>
+          </fieldset>
           </div>
       );
     }
