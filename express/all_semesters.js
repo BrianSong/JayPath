@@ -3,13 +3,11 @@ var course_node = require("./course_node");
 const grad = require("./check_graduation");
 
 module.exports = {
-    get_all_semesters: function get_all_semesters(user_semester_list, field, term) {
+    get_all_semesters: function get_all_semesters(user_semester_list, field, term, semesters_left) {
         // input: user course nodes list (a list contains a single course node)
         // output: a list where each element (corresponding to a term) is a list of course codes
 
         let all_semesters = []; // every element is a list of course nodes
-        let semesters_left = 8; // TODO: use user input!!!
-        let term = "Fall"; // TODO: use user input!!!, Note: the term for the semester that are generating course nodes
         let curr_semester_nodes_list = [];
 
         while (all_semesters.length < semesters_left) {
