@@ -67,17 +67,21 @@ app.get("/api/courses", (req, res) => {
 });
 
 
-app.get("/api/final1", (req, res) => {
+app.get("/api/:field/course1", (req, res) => {
     console.log("First path: ");
     console.log(rslt[0]);
     res.send(rslt[0]);
 });
 
-app.get("/api/final2", (req, res) => {
+app.get("/api/:field/course2", (req, res) => {
+    console.log("First path: ");
+    console.log(rslt[1]);
     res.send(rslt[1]);
 });
 
-app.get("/api/final3", (req, res) => {
+app.get("/api/:field/course3", (req, res) => {
+    console.log("First path: ");
+    console.log(rslt[2]);
     res.send(rslt[2]);
 });
 
