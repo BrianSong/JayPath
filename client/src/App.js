@@ -192,7 +192,6 @@ class CoursesTaken extends Component {
           inputProps={inputProps}
         />
 
-        {/* <div>{this.state.myCourses.map(data => (<li>{data}</li>))}</div> */}
         <div class = "coursesBox">
           {this.state.myCourses.map(course => (
             <Course course = {course} onDelete = {() => this.handleDelete(course)}
@@ -201,16 +200,17 @@ class CoursesTaken extends Component {
         </div>
 
 
-
-        <Link to="/current_semester">
-            <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
-              THAT'S IT!
-              <i class="iconfont">&#xe627;</i>
-            </button>
-
-         </Link>
-
+        <div class="as_container">
+          <fieldset id="fs">
+            <Link to="/current_semester" style={{ textDecoration: 'none' }}>
+                <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
+                  THAT'S IT!
+                  <button class="iconfont">&#xe627;</button>
+                </button>
+            </Link>
+          </fieldset>
         </div>
+      </div>
     );
   }
 }
@@ -382,52 +382,54 @@ class SemestersTaken extends Component {
     // the 2 handleClick functions will toggle its active status
     return (
       <div class= "center11" >
-        <h1 class = "question">
-          {this.state.question1}
-        </h1>
-        <div class='row1'>
-          <div class='column1'>
-          {opts_left}
+        <div class="questions_container">
+          <h1 class = "question">
+            {this.state.question1}
+          </h1>
+          <div class='row1'>
+            <div class='column1'>
+            {opts_left}
+            </div>
+            <div class='column1'>
+            {opts_right}
+            </div>
           </div>
-          <div class='column1'>
-          {opts_right}
+
+          <h1 class = "question">
+            {this.state.question2}
+          </h1>
+          <div class='row2'>
+            <div class='column1'>
+            <button
+                value= '100'
+                class={this.state.bottom_active[0]}
+                tabindex="0"
+                onClick={e => this.handleClick2(e)}>
+                Fall
+                </button>
+            </div>
+            <div class='column1'>
+            <button
+                value= '200'
+                class={this.state.bottom_active[1]}
+                tabindex="0"
+                onClick={e => this.handleClick2(e)}>
+                Spring
+                </button>
+            </div>
           </div>
         </div>
-
-        <h1 class = "question">
-          {this.state.question2}
-        </h1>
-        <div class='row2'>
-          <div class='column1'>
-          <button
-              value= '100'
-              class={this.state.bottom_active[0]}
-              tabindex="0"
-              onClick={e => this.handleClick2(e)}>
-              Fall
-              </button>
-          </div>
-          <div class='column1'>
-          <button
-              value= '200'
-              class={this.state.bottom_active[1]}
-              tabindex="0"
-              onClick={e => this.handleClick2(e)}>
-              Spring
-              </button>
-          </div>
-        </div>
-
-
+        <div class="fs_container">
         <fieldset id="fs" disabled>
-        <Link to="/courses_prioritized">
+        <Link to="/courses_prioritized" style={{ textDecoration: 'none' }}>
           <button onClick = {this.sendAPI.bind(this)} class="button0" type="button">
             THAT'S IT!
             <button class="iconfont">&#xe627;</button>
           </button>
         </Link>
-        </fieldset>
 
+        </fieldset>
+      </div>
         </div>
     );
   }
@@ -495,27 +497,30 @@ class SemestersTaken extends Component {
 
       return (
         <div class="center11">
-          <h1 class = "question">
-            {this.state.question}
-          </h1>
-          <div class='row1'>
-          <div class='column1'>
-          {opts_left}
-          </div>
-          <div class='column1'>
-          {opts_right}
+          <div class="questions_container2">
+            <h1 class = "question">
+              {this.state.question}
+            </h1>
+            <div class='row1'>
+            <div class='column1'>
+            {opts_left}
+            </div>
+            <div class='column1'>
+            {opts_right}
+            </div>
           </div>
         </div>
-
-        <fieldset id="fs" disabled>
-          <Link to="/final1">
-            <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
-              VIEW MY PATH!
-              <button class="iconfont">&#xe627;</button>
-            </button>
-          </Link>
+        <div class="fs_container">
+          <fieldset id="fs" disabled>
+            <Link to="/final1" style={{ textDecoration: 'none' }}>
+              <button onClick = {this.sendFA.bind(this)} class="button0" type="button">
+                VIEW MY PATH!
+                <button class="iconfont">&#xe627;</button>
+              </button>
+            </Link>
           </fieldset>
-          </div>
+        </div>
+      </div>
       );
     }
   }

@@ -110,9 +110,9 @@ header ul li:hover
   display: flex;
   flex-direction: column;
   margin-top: 15vh;
-  /* justify-content: center; */
+  justify-content: center;
   line-height: 300%;
-  height: 100vh;
+  padding-bottom: 20%;
   width: 100%;
   /* border: 3px solid rgba(211, 149, 190, 0.431); */
   /* text-align: center; */
@@ -120,25 +120,36 @@ header ul li:hover
 }
 
 .center_new {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15vh;
+  justify-content: center;
   line-height: 300%;
-  height: fit-content;
-  margin-left: 20%;
-  margin-bottom: 50%;
-  width: 70%;
+  padding-bottom: 20%;
+  width: 100%;
   /* border: 3px solid rgba(211, 149, 190, 0.431); */
   /* text-align: center; */
   align-items: center;
-  
 }
 
 .center11 {
+  margin-top: 2%;
+  padding-bottom: 3%;
+  position: relative;
   height: fit-content;
+  /* border: 3px solid rgba(211, 149, 190, 0.431); */
+}
+
+.questions_container {
   padding-left: 20%;
   padding-right: 20%;
-  padding-bottom: 8%;
-  width: 70%;
-  position: relative;
-  /* border: 3px solid rgba(211, 149, 190, 0.431); */
+}
+
+.questions_container2 {
+  padding-top: 6%;
+  line-height: 500%;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
 .overlay {
@@ -195,9 +206,10 @@ header ul li:hover
 
 
 .question {
-  margin-top: 8%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  
 }
 
 
@@ -296,6 +308,12 @@ header ul li:hover
   background-color: #fad9938e;
 }
 
+.question2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 0.8rem;
+}
 
 .text1 {
   text-align: center;
@@ -356,19 +374,16 @@ header ul li:hover
 
 
 .button0 {
-  height:10%;
-  width:5%;
+  height:5vh;
+  width:7vw;
   background-color: white;
   color: darkblue;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
   text-align: center;
-  vertical-align: right;
-  position: absolute;
-  right: 10%;
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   cursor: pointer;
 }
 
@@ -378,6 +393,23 @@ header ul li:hover
 
 fieldset {
   border: none;
+  background-color: white;
+}
+
+.fs_container {
+  background-color: white;
+  padding-right:15vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.as_container {
+  background-color: white;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .courseItem {
@@ -540,7 +572,7 @@ fieldset {
   color: black;
   border: 2px solid #89cff0;
   border-radius: 25%;
-  font-size: 16px;
+  font-size: 1rem;
   text-align: center;
   vertical-align: middle;
   margin-top: 5%;
@@ -550,7 +582,7 @@ fieldset {
 
   position: relative;
   display: inline-block;
-  padding: 15px 30px;
+  /* padding: 15px 30px; */
   text-transform: uppercase;
   letter-spacing: 4px;
   text-decoration: none;
@@ -811,6 +843,7 @@ button200:hover {
   -webkit-text-stroke-width: 0.2px; 
   -moz-osx-font-smoothing: grayscale;
   border: none;
+  cursor: pointer;
 }
 
 .icon_container {

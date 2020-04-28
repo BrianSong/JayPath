@@ -120,11 +120,11 @@ class CoursesPrioritized extends Component {
         };
         
         return (
-          <div class="center_new">
+          <div class="center">
             <h1 class = "question">
               {this.state.question}
             </h1>
-            <text1 class = "question">
+            <text1 class = "question2">
                 {this.state.note}
             </text1>
           <Autosuggest
@@ -145,14 +145,17 @@ class CoursesPrioritized extends Component {
           ))}
         </div>
         
-          <Link to="/focus_area">
-              <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
-                THAT'S IT!
-                <i class="iconfont">&#xe627;</i>
-              </button>
-          </Link>
-          
-          </div>
+        <div class="as_container">
+          <fieldset id="fs">
+            <Link to="/focus_area" style={{ textDecoration: 'none' }}>
+                <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
+                  THAT'S IT!
+                  <button class="iconfont">&#xe627;</button>
+                </button>
+            </Link>
+          </fieldset>
+        </div>
+      </div>
       );
     }
   }
