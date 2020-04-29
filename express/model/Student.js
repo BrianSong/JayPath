@@ -1,7 +1,8 @@
 module.exports = class Student {
-    constructor(id, courseStatus, schedule) {
+    constructor(id, name, courseStatus, preferCourse) {
         this.id = id;
+        this.name = name;
         this.courseStatus = courseStatus;
-        this.schedule = schedule;
+        this.preferCourse = preferCourse;
     }
 }
