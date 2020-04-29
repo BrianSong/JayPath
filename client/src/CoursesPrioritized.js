@@ -17,7 +17,8 @@ class CoursesPrioritized extends Component {
         myCourses: []
       };
     }
-  
+
+    // function to get course list from server
     callAPI() {
       console.log("fetching from api");
       fetch("http://localhost:5000/api/courses") // to be changed
@@ -25,7 +26,8 @@ class CoursesPrioritized extends Component {
         .then(res => this.setState({ allCourses: res }))
         .catch(err => err);
     }
-  
+
+    // function to send prioritized course information to server
     sendAPI(data) {
       console.log("posting to api");
       console.log(JSON.stringify(data));
@@ -38,39 +40,39 @@ class CoursesPrioritized extends Component {
       .then(data => console.log("Success", data))
       .catch(err => console.log("Error:", err));
     }
-  
+
     componentDidMount() {
       this.callAPI();
     }
-  
+
     // Teach Autosuggest how to calculate suggestions for any given input value.
     getSuggestions = value => {
       const inputValue = value.trim().toLowerCase();
       const inputLength = inputValue.length;
-    
+
       return inputLength === 0 ? [] : this.state.allCourses.filter(ac =>
         ac.CourseTitle.toLowerCase().slice(0, inputLength) === inputValue
       );
     };
-    
+
     // When suggestion is clicked, Autosuggest needs to populate the input
     // based on the clicked suggestion. Teach Autosuggest how to calculate the
     // input value for every given suggestion.
     getSuggestionValue = suggestion => suggestion.CourseTitle;
-    
+
     // Use your imagination to render suggestions.
     renderSuggestion = (suggestion, { query, isHighlighted }) => (
       <span>
         {suggestion.CourseTitle}
       </span>
     );
-  
+
     onChange = (event, { newValue }) => {
       this.setState({
         value: newValue
       });
     };
-  
+
     // Autosuggest will call this function every time you need to update suggestions.
       // You already implemented this logic above, so just use it.
       onSuggestionsFetchRequested = ({ value }) => {
@@ -78,14 +80,14 @@ class CoursesPrioritized extends Component {
           suggestions: this.getSuggestions(value)
         });
       };
-    
+
       // Autosuggest will call this function every time you need to clear suggestions.
       onSuggestionsClearRequested = () => {
         this.setState({
           suggestions: []
         });
       };
-  
+
       onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         if (this.state.myCourses.includes(suggestionValue)) {
           alert(suggestionValue + ' added already. Add a different course!');
@@ -98,27 +100,28 @@ class CoursesPrioritized extends Component {
           });
         }
 
-        
-        
+
+
       }
 
+      // De-select course entry
       handleDelete = course => {
         const courses = this.state.myCourses.filter(c => c != course);
         this.setState({
           myCourses: courses
         });
       };
-  
+
     render() {
         const { value, suggestions } = this.state;
-    
+
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
           placeholder: 'course name',
           value,
           onChange: this.onChange
         };
-        
+
         return (
           <div class="center_new">
             <h1 class = "question">
@@ -137,29 +140,31 @@ class CoursesPrioritized extends Component {
             //renderSuggestionsContainer={this.renderSuggestionsContainer}
             inputProps={inputProps}
           />
-          
+
           <div class = "coursesBox_p">
           {this.state.myCourses.map(course => (
             <Course course = {course} onDelete = {() => this.handleDelete(course)}
             />
           ))}
         </div>
-        
+
+          // link to next page
           <Link to="/focus_area">
               <button onClick = {() => this.sendAPI(this.state.myCourses)} class="button0" type="button">
                 THAT'S IT!
                 <i class="iconfont">&#xe627;</i>
               </button>
           </Link>
-          
+
           </div>
       );
     }
   }
 
+  // component for single course entry
   function Course(props){
     return (
-      <div class = "courseItem"> 
+      <div class = "courseItem">
       {props.course}
       <button class = "delete" onClick = {props.onDelete}>x</button>
       </div>
