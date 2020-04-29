@@ -116,9 +116,9 @@ class CoursesTaken extends Component {
 
   // Use your imagination to render suggestions.
   renderSuggestion = (suggestion, { query, isHighlighted }) => (
-    <span>
+    <div class="span1">
       {suggestion.CourseTitle}
-    </span>
+    </div>
   );
 
   onChange = (event, { newValue }) => {

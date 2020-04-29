@@ -193,9 +193,9 @@ header ul li:hover
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  font-size: 2vh;
+  padding-top: 1vmin;
+  padding-bottom: 1vmin;
+  font-size: 2vmin;
 }
 
 .small_icon {
@@ -209,6 +209,7 @@ header ul li:hover
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-size: 2vw;
 }
 
 
@@ -229,6 +230,7 @@ header ul li:hover
 } */
 
 .box1 {
+  flex:1 ;
   margin-top: 3%;
   border: 3px solid#b1e2f2;
   display: flex;
@@ -254,6 +256,7 @@ header ul li:hover
   border: 3px solid#fad993;
   display: flex;
   flex-direction: column;
+  flex:1;
 }
 
 .box3 {
@@ -268,9 +271,13 @@ header ul li:hover
 
 .imgContainer {
   display: flex;
-  align-items: center;
-  height: 68vmin;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-top: 0.01vmin;
 }
+
 
 .hh1{
   position: relative;
@@ -278,7 +285,7 @@ header ul li:hover
   font-size:15px;
   color: #193b4d;
   font-family: Optima-bold;
-  font-size: 3vmin;
+  font-size: 2vw;
 }
 
 .hh2{
@@ -286,8 +293,8 @@ header ul li:hover
   flex-direction: row;
   justify-content: center;
   position: relative;
-  padding: 1vmin;
-  font-size:2.5vmin;
+  padding: 0.5vw;
+  font-size:1.5vw;
   margin-top: 3%;
   background-color: #61dafb86;
 }
@@ -297,8 +304,8 @@ header ul li:hover
   flex-direction: row;
   justify-content: center;
   position: relative;
-  padding: 1vmin;
-  font-size:2.5vmin;
+  padding: 0.5vw;
+  font-size: 1.5vw;
   margin-top: 3%;
   background-color: #fad9938e;
 }
@@ -327,25 +334,28 @@ header ul li:hover
 }
 
 .wrapper {
+  position: relative;
   width: 100%;
   height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 0;
+
 }
 
 .button_r {
   position: relative;
-  font-size: 2vmin;
+  font-size: 1vw;
   text-decoration: none;
   border:none;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
   background-color:#2c194dd5;
   color: white;
-  height: 8vmin;
-  width: 12vmin;
-  
-  clip-path: ellipse(5vw 7vh at 80% 90%);
+  display: flex;
+  width: 100%;
+  height: 100%;
+  clip-path: ellipse(80% 60% at 80% 70%);
 }
 
 .button_r:hover {
@@ -357,6 +367,7 @@ header ul li:hover
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  height: fit-content;
 }
 
 .text_box {
@@ -370,7 +381,7 @@ header ul li:hover
   background-color: white;
   color: darkblue;
   border: none;
-  font-size: 1rem;
+  font-size: 1vw;
   text-align: center;
   position: relative;
   display: flex;
@@ -404,7 +415,7 @@ fieldset {
 }
 
 .courseItem {
-  font-size: 15px;
+  font-size: 1vw;
   border-bottom: #aaa solid 1px;
 }
 
@@ -480,11 +491,12 @@ fieldset {
 
 .container2 {
   position: relative;
-  display: flex;
-  flex-direction: rowf;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 30px;
   width: 100%;
 }
+
 
 
 .square {
@@ -502,19 +514,7 @@ fieldset {
   align-self: center;
 }
 
-.row {
-  height:160px;
-  width:80%;
-  background-color: white;
-  color: black;
-  border: 1px solid #F5F5F5;
-  border-left: none;
-  border-right: none;
-  font-size: 0.7rem;
-  text-align: center;
-  vertical-align: middle;
-  align-self: center;
-}
+
 
 
 .button1 {
@@ -597,6 +597,7 @@ button200 .title1 {
   line-height: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 button200 {
@@ -609,6 +610,16 @@ button200 {
   padding-bottom: 3vmin;
   transition: 0.2s;
   margin-top: 0.01vmin;
+  min-width: 200px;
+  min-height: 240px;
+
+  background-color: white;
+  color: black;
+  border: 1px solid #F5F5F5;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  flex: 1;
 }
 
 button200:hover {
@@ -830,7 +841,7 @@ button200 li {
 
 .iconfont{ 
   font-family:"iconfont" !important; 
-  font-size: 1vmin;
+  height: 100%;
   font-style:normal; 
   -webkit-font-smoothing: antialiased; 
   -webkit-text-stroke-width: 0.2px; 
@@ -839,10 +850,14 @@ button200 li {
   cursor: pointer;
 }
 
+
 .icon_container {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+  padding: 3px;
 }
 
 
@@ -852,12 +867,12 @@ button200 li {
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 30px;
-  padding: 10px 20px;
+  width: 15vw;
+  height: 3vw;
+  padding: 1vw 2vw;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1vw;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
@@ -880,28 +895,30 @@ button200 li {
 .react-autosuggest__suggestions-container--open {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  width: 280px;
+  position: relative;
+  width: 19vw;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1vw;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   z-index: 2;
-
 }
 
 .react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
+  width: 100%;
   list-style-type: none;
 }
 
 .react-autosuggest__suggestion {
   cursor: pointer;
-  padding: 10px 20px;
+  font-size: 1vw;
+  padding: 1vw 2vw;
+  width: 15vw;
 }
 
 .react-autosuggest__suggestion--highlighted {
@@ -919,4 +936,12 @@ span {
   justify-content: center;
   font-size: 5vmin;
   margin-left: 1vmin;
+}
+
+.span1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1vw;
+  text-align: center;
 }

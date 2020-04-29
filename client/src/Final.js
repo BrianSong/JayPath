@@ -31,7 +31,7 @@ class Final extends Component {
     path # = this.props.valueFromParent2 */
     callAPI() {
         console.log(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
-        fetch(''.concat('http://localhost:5000/api','/courses')) 
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule)) 
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
@@ -53,6 +53,8 @@ class Final extends Component {
         document.getElementById('li'.concat(this.props.numSchedule)).className = "active1";
         document.getElementById('a'.concat(this.props.numSchedule)).className = "active1_a";
     }
+
+    
     
     /* If empty schedule returned, redirect to the failing page*/
     renderRedirect = () => {
@@ -91,7 +93,6 @@ class Final extends Component {
             const temp2 = cur2.map(d => {
                 return (
                     <button200
-                    class="row"
                     tabindex="0"
                     type="button" disabled>
                         <div class="title1">
@@ -107,7 +108,7 @@ class Final extends Component {
             });
 
             // image to indicate that the semester is completed
-            const img0 = <div class = 'imgContainer'><img src={Done} style={{width: '100%', height: '100%', float: "left"}} /></div>
+            const img0 = <div class = 'imgContainer'><img src={Done} style={{height:'35vmin', width:'100%', float: "left"}} /></div>
 
             // if both semesters in the column are completed
             if (i * 2 + 1 < this.state.semesters) {
@@ -142,7 +143,6 @@ class Final extends Component {
             );
         });
 
-    
         
         return (
             <div class="wrapper">
@@ -184,21 +184,22 @@ class Final extends Component {
                     </div>
 
                 
-
+                    
                     <div class="container2">
                         {list}
                     </div>
                 </div>
 
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                    <div class="link_container">
-                    <button class="button_r" type="button">
-                        <div class="icon_container"><i class="iconfont">&#xe7f9;</i></div>
-                        Go Back
-                    </button>
-                    </div>
-                </Link>
+                <div class="link_container">
+                    <Link to="/" style={{ textDecoration: 'none'}}>
+                        <button class="button_r">
+                            <div class="icon_container"><i class="iconfont">&#xe7f9;</i></div>
+                        </button>
+                        
+                    </Link>
+                </div>
             </div>
+            
         );
     }
 }
