@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 var Course = require('./model/Course');
 module.exports = {
-    initilization: function initilization(courseStatus, preferCourse) {
+    initilization: function initilization(student) {
         // open the database
         let db = new sqlite3.Database("../db/JayPath.db", err => {
             if (err) {
@@ -11,6 +11,14 @@ module.exports = {
         });
         db.run(
             "CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL PRIMARY KEY, CourseNumber TEXT, CourseTitle TEXT, Credits INTEGER, Instructor TEXT, DaysOfWeek TEXT, StartTimeEndTime TEXT, Track TEXT, Prerequisite STRING, Conflicts STRING, Term STRING, Area STRING)"
+        );
+
+        db.run(
+            "CREATE TABLE IF NOT EXISTS Students(id INTEGER NOT NULL PRIMARY KEY, Name STRING)"
+        );
+
+        db.run(
+            "CREATE TABLE IF NOT EXISTS Schedules(id INTEGER NOT NULL PRIMARY KEY, Content STRING, StudentID INTEGER)"
         );
 
         // hardcode for the first iteration: add courses manually
@@ -699,9 +707,28 @@ module.exports = {
 
         for (var i = 0; i < courseInfo.length; i++) {
             currCourse = new Course(courseInfo[i][0], courseInfo[i][1], courseInfo[i][2], courseInfo[i][3], courseInfo[i][4], courseInfo[i][5], courseInfo[i][6], courseInfo[i][7], courseInfo[i][8], courseInfo[i][9], courseInfo[i][10], courseInfo[i][11]);
-            courseStatus.set(currCourse, 0);
-            preferCourse.set(currCourse, 0);
+            student.courseStatus.set(currCourse, 0);
+            student.preferCourse.set(currCourse, 0);
         }
+
+        let sql = `INSERT INTO Students (Name) VALUES (?);`;
+
+        db.run(sql, [student.name], function (err) {
+            if (err) {
+                return console.log(err.message);
+            }
+            console.log("A new Student has been initialized!");
+        });
+
+        let sql2 = `SELECT * FROM Students WHERE Name = ?;`;
+
+        db.get(sql2, [student.name], (err, row) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            student.id = row.id;
+        });
+
 
         // close the database
         db.close(err => {

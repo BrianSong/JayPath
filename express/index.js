@@ -7,6 +7,7 @@ const sqlite3 = require("sqlite3").verbose();
 const filter = require("./filter");
 const initial = require("./initial");
 var Student = require('./model/Student');
+var Schedule = require('./model/Schedule');
 
 var course_node = require("./course_node");
 var one_semester = require("./one_semester");
@@ -23,8 +24,10 @@ app.use(cors());
 // Initialize all course status to 0.
 let courseStatus = new Map();
 let preferCourse = new Map();
-initial.initilization(courseStatus, preferCourse);
-let student = new Student(0, courseStatus, null);
+let randomStudentName = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+let student = new Student(-1, randomStudentName, courseStatus, preferCourse);
+initial.initilization(student);
+
 
 let term = "Fall";
 let semesters_left = 8;
@@ -69,7 +72,7 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses1", (req, res) => {
     console.log("First path: ");
-    for(let c of rslt[0]){
+    for (let c of rslt[0]) {
         console.log("courseId； " + c.id);
     }
     res.send(rslt[0]);
@@ -97,25 +100,27 @@ app.get("/api/:field/courses", (req, res) => {
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
 
-    for(let s of one_schedule_list){
+    for (let s of one_schedule_list) {
         let curr_path = [];
-        for(let node of s){
+        for (let node of s) {
             let node_status = node.get_status;
-            for(let k of node_status.keys()){
+            for (let k of node_status.keys()) {
                 let course = node_status.get(k);
                 let flag = true;
-                for(let c of curr_path){
-                    if(c.id == course.id){
+                for (let c of curr_path) {
+                    if (c.id == course.id) {
                         flag = false;
                     }
                 }
-                if(flag){
+                if (flag) {
                     curr_path.push(course);
                 }
             }
         }
         rslt.push(curr_path);
     }
+    console.log("Below is the rslt!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(rslt);
     res.send(rslt);
 });
 
@@ -159,10 +164,10 @@ app.post("/api/user_info", (req, res) => {
 // API for student's current semester and semester he/she wants to enroll in
 app.post("/api/semesters_info", (req, res) => {
     let val = parseInt(req.body[0]);
-    if(val > 100){//spring
+    if (val > 100) {//spring
         term = "Fall";
         semesters_left = 8 - (val % 100);
-    }else{//fall
+    } else {//fall
         term = "Spring";
         semesters_left = 8 - (val % 100);
     }
@@ -214,22 +219,22 @@ app.post("/api/courses_prioritized", (req, res) => {
     console.log("schedule length: " + one_schedule_list.length);
     //console.log(one_schedule_list[0][0]);
 
-    for(let s of one_schedule_list){
+    for (let s of one_schedule_list) {
         let curr_path = [];
-        for(let node of s){
+        for (let node of s) {
             let node_status = node.get_status;
-            for(let k of node_status.keys()){
-                if(node_status.get(k) == 0){
+            for (let k of node_status.keys()) {
+                if (node_status.get(k) == 0) {
                     continue;
                 }
                 let course = k;
                 let flag = true;
-                for(let c of curr_path){
-                    if(c.id == course.id){
+                for (let c of curr_path) {
+                    if (c.id == course.id) {
                         flag = false;
                     }
                 }
-                if(flag){
+                if (flag) {
                     curr_path.push(course);
                 }
             }
