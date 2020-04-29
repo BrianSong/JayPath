@@ -30,7 +30,8 @@ class Final extends Component {
     /* focus area = this.props.valueFromParent
     path # = this.props.valueFromParent2 */
     callAPI() {
-        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule)) 
+        console.log(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
+        fetch(''.concat('http://localhost:5000/api','/courses')) 
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
@@ -75,7 +76,7 @@ class Final extends Component {
                     class="row"
                     tabindex="0"
                     type="button" disabled>
-                        <div class="title">
+                        <div class="title1">
                         {d.CourseNumber}{": "}{d.CourseTitle}
                         </div>
                         <div class="small_icon_container">
@@ -93,7 +94,7 @@ class Final extends Component {
                     class="row"
                     tabindex="0"
                     type="button" disabled>
-                        <div class="title">
+                        <div class="title1">
                         {d.CourseNumber}{": "}{d.CourseTitle}
                         </div>
                         <div class="small_icon_container">
@@ -133,13 +134,9 @@ class Final extends Component {
                 <div class="schoolyear_Box">
                     {this.renderRedirect()}
                     <div class="hh1">{l.year}</div>
-                    <div class="text1">
-                        <div class="hh2">{l.semester1}</div>
-                    </div>
+                    <div class="hh2">{l.semester1}</div>
                     <div class="box1">{l.details1}</div>
-                    <div class="text1">
-                        <div class="hh3">{l.semester2}</div>
-                    </div>
+                    <div class="hh3">{l.semester2}</div>
                     <div class="box2">{l.details2}</div>
                 </div>
             );
@@ -151,10 +148,11 @@ class Final extends Component {
             <div class="wrapper">
                 <div class = "center111">
                     <header id="header">
-                        <a href="#" class="logo">
-                            <img src={Jay} style={{width: 80, height: 80, float: "left"}} />
-                            Jaypath <span>{this.state.numSchedule}</span>
-                        </a>
+                        <div class="logo">
+                            <img src={Jay} style={{height: "7vmin", float: "left"}} />
+                            <h>Jaypath</h>
+                            <span>{this.state.numSchedule}</span>
+                        </div>
                         <ul></ul> 
                         <ul>
                         <li id="li1"><a id="a1" href="/final1">Path 1</a></li>
@@ -185,12 +183,14 @@ class Final extends Component {
                         </div>
                     </div>
 
+                
+
                     <div class="container2">
                         {list}
                     </div>
                 </div>
 
-                <Link to="/">
+                <Link to="/" style={{ textDecoration: 'none' }}>
                     <div class="link_container">
                     <button class="button_r" type="button">
                         <div class="icon_container"><i class="iconfont">&#xe7f9;</i></div>
