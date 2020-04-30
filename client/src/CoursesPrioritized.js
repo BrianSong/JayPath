@@ -21,7 +21,7 @@ class CoursesPrioritized extends Component {
     // function to get course list from server
     callAPI() {
       console.log("fetching from api");
-      fetch("http://localhost:5000/api/courses") // to be changed
+      fetch("https://blooming-island-92131.herokuapp.com/api/courses") // to be changed
         .then(res => res.json())
         .then(res => this.setState({ allCourses: res }))
         .catch(err => err);
@@ -31,7 +31,7 @@ class CoursesPrioritized extends Component {
     sendAPI(data) {
       console.log("posting to api");
       console.log(JSON.stringify(data));
-      fetch('http://localhost:5000/api/courses_prioritized', {
+      fetch('https://blooming-island-92131.herokuapp.com/api/courses_prioritized', {
         // mode: 'no-cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },

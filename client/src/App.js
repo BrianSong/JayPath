@@ -72,7 +72,7 @@ class CoursesTaken extends Component {
 
   // grabs all valid courses from one api
   callAPI() {
-    fetch("http://localhost:5000/api/courses") // apis
+    fetch("https://blooming-island-92131.herokuapp.com/api/courses") // apis
       .then(res => res.json())
       .then(res => this.setState({ allCourses: res }))
       .catch(err => err);
@@ -80,7 +80,7 @@ class CoursesTaken extends Component {
 
   // posts the input courses to another apis
   sendAPI(data) {
-    fetch('http://localhost:5000/api/user_info', {
+    fetch('https://blooming-island-92131.herokuapp.com/api/user_info', {
       // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -270,7 +270,7 @@ class SemestersTaken extends Component {
     console.log("posting to api");
     const sem_num = [].concat(this.state.value)
     console.log(JSON.stringify(sem_num));
-    fetch('http://localhost:5000/api/semesters_info', {
+    fetch('https://blooming-island-92131.herokuapp.com/api/semesters_info', {
       // mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
