@@ -55,7 +55,9 @@ class Final extends Component {
     }
 
     componentWillUnmount() {
-    this.timer = null; // here...
+        clearInterval(this.timer);
+        this.timer = null; 
+        console.log('cleared');
     }
       
     /* If empty schedule returned, redirect to the failing page*/
