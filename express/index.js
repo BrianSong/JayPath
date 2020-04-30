@@ -5,6 +5,7 @@ const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
 // const schedule = require("./schedule");
 const filter = require("./filter");
+const store_schedule = require("./store_schedule");
 const initial = require("./initial");
 var Student = require('./model/Student');
 var Schedule = require('./model/Schedule');
@@ -90,7 +91,7 @@ app.get("/api/:field/courses1", (req, res) => {
                 if (node_status.get(k) == 0) {
                     continue;
                 }
-                if (user_semester[0].get_status.get(k) == 1){
+                if (user_semester[0].get_status.get(k) == 1) {
                     continue;
                 }
                 let course = k;
@@ -108,11 +109,12 @@ app.get("/api/:field/courses1", (req, res) => {
         }
         rslt.push(curr_path);
     }
-    for(let l of rslt){
-        while(l.length < 24){
+    for (let l of rslt) {
+        while (l.length < 24) {
             l.splice(0, 0, dummy);
         }
     }
+    store_schedule(student, JSON.stringify(rslt[0]));
     res.send(rslt[0]);
 });
 
@@ -136,7 +138,7 @@ app.get("/api/:field/courses2", (req, res) => {
                 if (node_status.get(k) == 0) {
                     continue;
                 }
-                if (user_semester[0].get_status.get(k) == 1){
+                if (user_semester[0].get_status.get(k) == 1) {
                     continue;
                 }
                 let course = k;
@@ -154,12 +156,13 @@ app.get("/api/:field/courses2", (req, res) => {
         }
         rslt.push(curr_path);
     }
-    for(let l of rslt){
-        while(l.length < 24){
+    for (let l of rslt) {
+        while (l.length < 24) {
             l.splice(0, 0, dummy);
         }
     }
     console.log(rslt[1]);
+    store_schedule(student, JSON.stringify(rslt[0]));
     res.send(rslt[1]);
 });
 
@@ -183,7 +186,7 @@ app.get("/api/:field/courses3", (req, res) => {
                 if (node_status.get(k) == 0) {
                     continue;
                 }
-                if (user_semester[0].get_status.get(k) == 1){
+                if (user_semester[0].get_status.get(k) == 1) {
                     continue;
                 }
                 let course = k;
@@ -201,12 +204,14 @@ app.get("/api/:field/courses3", (req, res) => {
         }
         rslt.push(curr_path);
     }
-    for(let l of rslt){
-        while(l.length < 24){
+    for (let l of rslt) {
+        while (l.length < 24) {
             l.splice(0, 0, dummy);
         }
     }
+
     console.log(rslt[2]);
+    store_schedule(student, JSON.stringify(rslt[0]));
     res.send(rslt[2]);
 });
 
