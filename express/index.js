@@ -219,6 +219,7 @@ app.post("/api/courses_prioritized", (req, res) => {
     console.log("schedule length: " + one_schedule_list.length);
     //console.log(one_schedule_list[0][0]);
 
+    let dummy;
     for (let s of one_schedule_list) {
         let curr_path = [];
         for (let node of s) {
@@ -228,6 +229,7 @@ app.post("/api/courses_prioritized", (req, res) => {
                     continue;
                 }
                 let course = k;
+                dummy = course;
                 let flag = true;
                 for (let c of curr_path) {
                     if (c.id == course.id) {
@@ -240,6 +242,11 @@ app.post("/api/courses_prioritized", (req, res) => {
             }
         }
         rslt.push(curr_path);
+    }
+    for(let l of rslt){
+        while(l.length < 24){
+            l.splice(0, 0, dummy);
+        }
     }
     // console.log("?? :" + rslt[0][0].CourseTitle);
 });

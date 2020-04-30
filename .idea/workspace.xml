@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a56939c9-6483-478f-ab53-b7c2122a1444" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/JayPath.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/JayPath.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/express/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/express/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/client/node_modules/" />
@@ -35,38 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/express/test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/express/one_schedule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2850">
-              <caret line="150" selection-start-line="150" selection-end-line="150" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/express/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="81" column="3" lean-forward="true" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/Final.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+            <state relative-caret-position="356">
+              <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -130,6 +102,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -140,19 +113,12 @@
             <path>
               <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
               <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2020-spring-group-JayPath" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2020-spring-group-JayPath" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="express" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -217,7 +183,8 @@
       <workItem from="1588053250330" duration="3543000" />
       <workItem from="1588058108555" duration="599000" />
       <workItem from="1588079206877" duration="628000" />
-      <workItem from="1588080187556" duration="3680000" />
+      <workItem from="1588080187556" duration="4325000" />
+      <workItem from="1588262802057" duration="486000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1582684655530</created>
@@ -394,11 +361,18 @@
       <option name="project" value="LOCAL" />
       <updated>1588083052149</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="debugged api output">
+      <created>1588084142083</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1588084142083</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60094000" />
+    <option name="totallyTimeSpent" value="61225000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -413,7 +387,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17919463" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -426,7 +400,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.43435755" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.273743" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30307263" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -491,7 +465,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/client" />
     </ignored-roots>
-    <MESSAGE value="first commit" />
     <MESSAGE value="??" />
     <MESSAGE value="Added focus Area API" />
     <MESSAGE value="Re-initialize response array for every get request" />
@@ -516,7 +489,8 @@
     <MESSAGE value="modified backend api" />
     <MESSAGE value="modified backend api..." />
     <MESSAGE value="removed debugging messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed debugging messages" />
+    <MESSAGE value="debugged api output" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugged api output" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -629,14 +603,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/express/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
+        <state relative-caret-position="513">
           <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/express/one_schedule.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2850">
+        <state relative-caret-position="413">
           <caret line="150" selection-start-line="150" selection-end-line="150" />
         </state>
       </provider>
@@ -648,10 +622,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/express/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="81" column="3" lean-forward="true" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
+        <state relative-caret-position="356">
+          <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
         </state>
       </provider>
     </entry>
