@@ -49,13 +49,17 @@ class Final extends Component {
 
     componentDidMount() {
         this.getParentpProps();
-        this.callAPI();
+        this.timer = setInterval(()=> this.callAPI(), 1000);
         document.getElementById('li'.concat(this.props.numSchedule)).className = "active1";
         document.getElementById('a'.concat(this.props.numSchedule)).className = "active1_a";
     }
 
-    
-    
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.timer = null; 
+        console.log('cleared');
+    }
+      
     /* If empty schedule returned, redirect to the failing page*/
     renderRedirect = () => {
         if (this.state.schedule.length == 0) {
