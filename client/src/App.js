@@ -443,7 +443,7 @@ class SemestersTaken extends Component {
         question: "What is your focus area in computer science?",
         // later on may want to add componentDidMount() to read focus areas from the DB
         left: [
-          {name: 'Robotics', redirect: '/rob', class: 'button1'},
+          {name: 'Robotics', redirect: '/r', class: 'button1'},
           {name: 'Big Data', redirect: '/bd', class: 'button2'},
           {name: 'Information Security', redirect:'/is', class: 'button5'}
         ],
