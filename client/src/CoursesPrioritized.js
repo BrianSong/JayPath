@@ -62,9 +62,9 @@ class CoursesPrioritized extends Component {
 
     // Use your imagination to render suggestions.
     renderSuggestion = (suggestion, { query, isHighlighted }) => (
-      <span>
-        {suggestion.CourseTitle}
-      </span>
+      <div class="span1">
+      {suggestion.CourseTitle}
+    </div>
     );
 
     onChange = (event, { newValue }) => {
