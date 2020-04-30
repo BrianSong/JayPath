@@ -9,8 +9,9 @@ const store_schedule = require("./store_schedule");
 const initial = require("./initial");
 var Student = require('./model/Student');
 var Schedule = require('./model/Schedule');
+var CourseNode = require('./model/CourseNode');
 
-var course_node = require("./course_node");
+// var course_node = require("./course_node");
 var one_semester = require("./one_semester");
 var all_semesters = require("./all_semesters");
 var one_schedule = require("./one_schedule");
@@ -75,7 +76,7 @@ app.get("/api/:field/courses1", (req, res) => {
     console.log("First path: ");
     rslt = [];
     field = req.params.field;
-    let user_semester = [new course_node(courseStatus)];
+    let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
@@ -122,7 +123,7 @@ app.get("/api/:field/courses2", (req, res) => {
     console.log("Second path: ");
     rslt = [];
     field = req.params.field;
-    let user_semester = [new course_node(courseStatus)];
+    let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
@@ -170,7 +171,7 @@ app.get("/api/:field/courses3", (req, res) => {
     field = req.params.field;
     console.log("Third path: ");
     rslt = [];
-    let user_semester = [new course_node(courseStatus)];
+    let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
@@ -220,7 +221,7 @@ app.get("/api/:field/courses", (req, res) => {
     // send candidate courses to backend
     let field = String(req.params.field);
     let rslt = [];
-    let user_semester = [new course_node(courseStatus)];
+    let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
