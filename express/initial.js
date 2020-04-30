@@ -712,29 +712,29 @@ module.exports = {
         }
 
         let sql = `INSERT INTO Students (Name) VALUES (?);`;
-
-        db.run(sql, [student.name], function (err) {
-            if (err) {
-                return console.log(err.message);
-            }
-            console.log("A new Student has been initialized!");
-        });
-
         let sql2 = `SELECT * FROM Students WHERE Name = ?;`;
 
-        db.get(sql2, [student.name], (err, row) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            student.id = row.id;
+        db.serialize(() => {
+            db.run(sql, [student.name], function (err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+                console.log("A new Student has been initialized!");
+            })
+                .get(sql2, [student.name], (err, row) => {
+                    if (err) {
+                        return console.error(err.message);
+                    }
+                    student_ID = row.id;
+                });
         });
-
 
         // close the database
         db.close(err => {
             if (err) {
                 console.error(err.message);
             }
+            student.id = student_ID;
             console.log("Close database for initialization!");
         });
     },
