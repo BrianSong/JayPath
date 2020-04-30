@@ -27,8 +27,8 @@ console.log();
 
 // Test case 2: all_semesters
 let all_semesters_list = all_semesters.get_all_semesters(user_semester_list, field, term, semesters_left);
-console.log("one_schedule_list length: " + one_schedule_list.length);
-console.log("one_schedule_list first element length: " + one_schedule_list[0].length);
+console.log("all_semesters_list length: " + all_semesters_list.length);
+console.log("all_semesters_list first element length: " + one_schedule_list[0].length);
 console.log();
 
 // Test case 3: one_schedule_list
