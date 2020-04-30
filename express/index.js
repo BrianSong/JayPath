@@ -72,20 +72,140 @@ app.get("/api/courses", (req, res) => {
 
 app.get("/api/:field/courses1", (req, res) => {
     console.log("First path: ");
-    for (let c of rslt[0]) {
-        console.log("courseId； " + c.id);
+    rslt = [];
+    field = req.params.field;
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
+    console.log("schedule length: " + one_schedule_list.length);
+    //console.log(one_schedule_list[0][0]);
+
+    let dummy;
+    for (let s of one_schedule_list) {
+        let curr_path = [];
+        for (let node of s) {
+            let node_status = node.get_status;
+            for (let k of node_status.keys()) {
+                if (node_status.get(k) == 0) {
+                    continue;
+                }
+                if (user_semester[0].get_status.get(k) == 1){
+                    continue;
+                }
+                let course = k;
+                dummy = course;
+                let flag = true;
+                for (let c of curr_path) {
+                    if (c.id == course.id) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    curr_path.push(course);
+                }
+            }
+        }
+        rslt.push(curr_path);
+    }
+    for(let l of rslt){
+        while(l.length < 24){
+            l.splice(0, 0, dummy);
+        }
     }
     res.send(rslt[0]);
 });
 
 app.get("/api/:field/courses2", (req, res) => {
     console.log("Second path: ");
+    rslt = [];
+    field = req.params.field;
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
+    console.log("schedule length: " + one_schedule_list.length);
+    //console.log(one_schedule_list[0][0]);
+
+    let dummy;
+    for (let s of one_schedule_list) {
+        let curr_path = [];
+        for (let node of s) {
+            let node_status = node.get_status;
+            for (let k of node_status.keys()) {
+                if (node_status.get(k) == 0) {
+                    continue;
+                }
+                if (user_semester[0].get_status.get(k) == 1){
+                    continue;
+                }
+                let course = k;
+                dummy = course;
+                let flag = true;
+                for (let c of curr_path) {
+                    if (c.id == course.id) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    curr_path.push(course);
+                }
+            }
+        }
+        rslt.push(curr_path);
+    }
+    for(let l of rslt){
+        while(l.length < 24){
+            l.splice(0, 0, dummy);
+        }
+    }
     console.log(rslt[1]);
     res.send(rslt[1]);
 });
 
 app.get("/api/:field/courses3", (req, res) => {
+    field = req.params.field;
     console.log("Third path: ");
+    rslt = [];
+    let user_semester = [new course_node(courseStatus)];
+    console.log("user_semester status: " + user_semester[0].get_status);
+    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
+    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
+    console.log("schedule length: " + one_schedule_list.length);
+    //console.log(one_schedule_list[0][0]);
+
+    let dummy;
+    for (let s of one_schedule_list) {
+        let curr_path = [];
+        for (let node of s) {
+            let node_status = node.get_status;
+            for (let k of node_status.keys()) {
+                if (node_status.get(k) == 0) {
+                    continue;
+                }
+                if (user_semester[0].get_status.get(k) == 1){
+                    continue;
+                }
+                let course = k;
+                dummy = course;
+                let flag = true;
+                for (let c of curr_path) {
+                    if (c.id == course.id) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    curr_path.push(course);
+                }
+            }
+        }
+        rslt.push(curr_path);
+    }
+    for(let l of rslt){
+        while(l.length < 24){
+            l.splice(0, 0, dummy);
+        }
+    }
     console.log(rslt[2]);
     res.send(rslt[2]);
 });
@@ -211,47 +331,6 @@ app.post("/api/courses_prioritized", (req, res) => {
         }
         console.log("Close the courses connection.");
     });
-    rslt = [];
-    let user_semester = [new course_node(courseStatus)];
-    console.log("user_semester status: " + user_semester[0].get_status);
-    let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
-    let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
-    console.log("schedule length: " + one_schedule_list.length);
-    //console.log(one_schedule_list[0][0]);
-
-    let dummy;
-    for (let s of one_schedule_list) {
-        let curr_path = [];
-        for (let node of s) {
-            let node_status = node.get_status;
-            for (let k of node_status.keys()) {
-                if (node_status.get(k) == 0) {
-                    continue;
-                }
-                if (user_semester[0].get_status.get(k) == 1){
-                    continue;
-                }
-                let course = k;
-                dummy = course;
-                let flag = true;
-                for (let c of curr_path) {
-                    if (c.id == course.id) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    curr_path.push(course);
-                }
-            }
-        }
-        rslt.push(curr_path);
-    }
-    for(let l of rslt){
-        while(l.length < 24){
-            l.splice(0, 0, dummy);
-        }
-    }
-    // console.log("?? :" + rslt[0][0].CourseTitle);
 });
 
 
