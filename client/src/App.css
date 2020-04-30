@@ -851,6 +851,22 @@ button200 li {
 }
 
 
+
+.loading_text {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 15px;
+  color: #607D8B;
+}
+
+.loader {
+  height: 20vw;
+  display: table-cell;
+  vertical-align: middle;
+  margin-left: 35%;
+}
+
+
 .icon_container {
   position: relative;
   display: flex;

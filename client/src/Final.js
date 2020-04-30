@@ -9,6 +9,8 @@ import R from "./assets/robotics_icon.png";
 import IS from "./assets/info_icon.png";
 import CB from "./assets/bio_icon.png";
 import E from "./assets/elective.png";
+import loader from "./assets/loading.gif"
+
 
 import {BrowserRouter as Route,Router,Link,Redirect} from "react-router-dom";
 
@@ -23,7 +25,8 @@ class Final extends Component {
             schedule: [""],
             semesters: -2,
             focus_area: '',
-            numSchedule: 0
+            numSchedule: 0,
+            loading: true
         };
     }
 
@@ -35,6 +38,9 @@ class Final extends Component {
             .then(res => res.json())
             .then(res => this.setState({
                 schedule: res
+            }))
+            .then(res => this.setState({
+                loading: false
             }))
             .catch(err => err);
     }
@@ -147,6 +153,8 @@ class Final extends Component {
             );
         });
 
+
+
         
         return (
             <div class="wrapper">
@@ -190,8 +198,15 @@ class Final extends Component {
                 
                     
                     <div class="container2">
-                        {list}
+                        {!this.state.loading && list}
                     </div>
+
+                    <div>{this.state.loading && 
+                    <div style={{alignItems:"center"}}>
+                        <div class = "loading_text">Please wait while we are generating your path.</div>
+                        <img src = {loader} class = "loader" /> 
+                        </div> 
+                        }
                 </div>
 
                 <div class="link_container">
@@ -202,6 +217,7 @@ class Final extends Component {
                         
                     </Link>
                 </div>
+            </div>
             </div>
             
         );
