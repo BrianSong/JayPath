@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 module.exports = {
     store: function store(student, schedule) {
-        let db = new sqlite3.Database("../db/JayPath.db", err => {
+        let db = new sqlite3.Database("db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
             }

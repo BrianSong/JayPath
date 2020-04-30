@@ -11,16 +11,13 @@ var Student = require('./model/Student');
 var Schedule = require('./model/Schedule');
 var CourseNode = require('./model/CourseNode');
 
-// var course_node = require("./course_node");
 var one_semester = require("./one_semester");
 var all_semesters = require("./all_semesters");
 var one_schedule = require("./one_schedule");
 let rslt = [];
 
-
 app.use(express.json());
 app.use(cors());
-
 
 // Initilization for database.
 // Initialize all course status to 0.
@@ -30,17 +27,16 @@ let randomStudentName = Math.random().toString(36).replace(/[^a-z]+/g, '').subst
 let student = new Student(-1, randomStudentName, courseStatus, preferCourse);
 initial.initilization(student);
 
-
+// Initialize other user input
+let field = "nlp";
 let term = "Fall";
 let semesters_left = 8;
-let field = "nlp";
-
 
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {
     // Open the database
     console.log(student.id);
-    let db = new sqlite3.Database("../db/JayPath.db", err => {
+    let db = new sqlite3.Database("db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
         }
@@ -72,149 +68,127 @@ app.get("/api/courses", (req, res) => {
 
 });
 
-
 app.get("/api/:field/courses1", (req, res) => {
     console.log("First path: ");
-    rslt = [];
     field = req.params.field;
     let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
-    console.log("schedule length: " + one_schedule_list.length);
-    //console.log(one_schedule_list[0][0]);
+    console.log("first schedule length: " + one_schedule_list[0].length);
+    console.log("second schedule length: " + one_schedule_list[1].length);
+    console.log("third schedule length: " + one_schedule_list[2].length);
 
+    let curr_path = [];
     let dummy;
-    for (let s of one_schedule_list) {
-        let curr_path = [];
-        for (let node of s) {
-            let node_status = node.get_status;
-            for (let k of node_status.keys()) {
-                if (node_status.get(k) == 0) {
-                    continue;
-                }
-                if (user_semester[0].get_status.get(k) == 1) {
-                    continue;
-                }
-                let course = k;
-                dummy = course;
-                let flag = true;
-                for (let c of curr_path) {
-                    if (c.id == course.id) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    curr_path.push(course);
-                }
+    for (let course_node of one_schedule_list[0]) {
+        let course_node_status = course_node.get_status;
+        for (let course_key of course_node_status.keys()) {
+            // skip when the course is not in the schedule
+            if (course_node_status.get(course_key) == 0) { continue; }
+            // skip when the user has taken the course before
+            if (user_semester[0].get_status.get(course_key) == 1) { continue; }
+
+            let new_course = course_key;
+            dummy = new_course;
+            // make the new course doesn't appear in the current path
+            let flag = true;
+            for (let old_course of curr_path) {
+                if (old_course.id == new_course.id) { flag = false; }
             }
-        }
-        rslt.push(curr_path);
-    }
-    for (let l of rslt) {
-        while (l.length < 24) {
-            l.splice(0, 0, dummy);
+
+            // add the new course into the current path
+            if (flag) { curr_path.push(new_course); }
         }
     }
-    store_schedule.store(student, JSON.stringify(rslt[0]));
-    res.send(rslt[0]);
+
+    // add dummy courses at the begging of the current path for display purpose
+    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+
+    store_schedule.store(student, JSON.stringify(curr_path));
+    res.send(curr_path);
 });
 
 app.get("/api/:field/courses2", (req, res) => {
     console.log("Second path: ");
-    rslt = [];
     field = req.params.field;
     let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
-    console.log("schedule length: " + one_schedule_list.length);
-    //console.log(one_schedule_list[0][0]);
+    console.log("first schedule length: " + one_schedule_list[0].length);
+    console.log("second schedule length: " + one_schedule_list[1].length);
+    console.log("third schedule length: " + one_schedule_list[2].length);
 
+    let curr_path = [];
     let dummy;
-    for (let s of one_schedule_list) {
-        let curr_path = [];
-        for (let node of s) {
-            let node_status = node.get_status;
-            for (let k of node_status.keys()) {
-                if (node_status.get(k) == 0) {
-                    continue;
-                }
-                if (user_semester[0].get_status.get(k) == 1) {
-                    continue;
-                }
-                let course = k;
-                dummy = course;
-                let flag = true;
-                for (let c of curr_path) {
-                    if (c.id == course.id) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    curr_path.push(course);
-                }
+    for (let course_node of one_schedule_list[1]) {
+        let course_node_status = course_node.get_status;
+        for (let course_key of course_node_status.keys()) {
+            // skip when the course is not in the schedule
+            if (course_node_status.get(course_key) == 0) { continue; }
+            // skip when the user has taken the course before
+            if (user_semester[0].get_status.get(course_key) == 1) { continue; }
+
+            let new_course = course_key;
+            dummy = new_course;
+            // make the new course doesn't appear in the current path
+            let flag = true;
+            for (let old_course of curr_path) {
+                if (old_course.id == new_course.id) { flag = false; }
             }
-        }
-        rslt.push(curr_path);
-    }
-    for (let l of rslt) {
-        while (l.length < 24) {
-            l.splice(0, 0, dummy);
+
+            // add the new course into the current path
+            if (flag) { curr_path.push(new_course); }
         }
     }
-    console.log(rslt[1]);
-    store_schedule.store(student, JSON.stringify(rslt[0]));
-    res.send(rslt[1]);
+
+    // add dummy courses at the begging of the current path for display purpose
+    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+
+    store_schedule.store(student, JSON.stringify(curr_path));
+    res.send(curr_path);
 });
 
 app.get("/api/:field/courses3", (req, res) => {
-    field = req.params.field;
     console.log("Third path: ");
-    rslt = [];
+    field = req.params.field;
     let user_semester = [new CourseNode(courseStatus)];
     console.log("user_semester status: " + user_semester[0].get_status);
     let all_semesters_list = all_semesters.get_all_semesters(user_semester, field, term, semesters_left);
     let one_schedule_list = one_schedule.get_schedule(all_semesters_list, preferCourse);
-    console.log("schedule length: " + one_schedule_list.length);
-    //console.log(one_schedule_list[0][0]);
+    console.log("first schedule length: " + one_schedule_list[0].length);
+    console.log("second schedule length: " + one_schedule_list[1].length);
+    console.log("third schedule length: " + one_schedule_list[2].length);
 
+    let curr_path = [];
     let dummy;
-    for (let s of one_schedule_list) {
-        let curr_path = [];
-        for (let node of s) {
-            let node_status = node.get_status;
-            for (let k of node_status.keys()) {
-                if (node_status.get(k) == 0) {
-                    continue;
-                }
-                if (user_semester[0].get_status.get(k) == 1) {
-                    continue;
-                }
-                let course = k;
-                dummy = course;
-                let flag = true;
-                for (let c of curr_path) {
-                    if (c.id == course.id) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    curr_path.push(course);
-                }
+    for (let course_node of one_schedule_list[2]) {
+        let course_node_status = course_node.get_status;
+        for (let course_key of course_node_status.keys()) {
+            // skip when the course is not in the schedule
+            if (course_node_status.get(course_key) == 0) { continue; }
+            // skip when the user has taken the course before
+            if (user_semester[0].get_status.get(course_key) == 1) { continue; }
+
+            let new_course = course_key;
+            dummy = new_course;
+            // make the new course doesn't appear in the current path
+            let flag = true;
+            for (let old_course of curr_path) {
+                if (old_course.id == new_course.id) { flag = false; }
             }
-        }
-        rslt.push(curr_path);
-    }
-    for (let l of rslt) {
-        while (l.length < 24) {
-            l.splice(0, 0, dummy);
+
+            // add the new course into the current path
+            if (flag) { curr_path.push(new_course); }
         }
     }
 
-    console.log(rslt[2]);
-    store_schedule.store(student, JSON.stringify(rslt[0]));
-    res.send(rslt[2]);
+    // add dummy courses at the begging of the current path for display purpose
+    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+
+    store_schedule.store(student, JSON.stringify(curr_path));
+    res.send(curr_path);
 });
 
 app.get("/api/:field/courses", (req, res) => {
@@ -254,7 +228,7 @@ app.get("/api/:field/courses", (req, res) => {
 app.post("/api/user_info", (req, res) => {
     let courses_to_add = req.body;
     // Open and connect to database
-    let db = new sqlite3.Database("../db/JayPath.db", err => {
+    let db = new sqlite3.Database("db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
         }
@@ -307,7 +281,7 @@ app.post("/api/courses_prioritized", (req, res) => {
     let prefer_to_take = req.body;
 
     // Open and connect to database
-    let db = new sqlite3.Database("../db/JayPath.db", err => {
+    let db = new sqlite3.Database("db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
         }
