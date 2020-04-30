@@ -28,7 +28,7 @@ let courseStatus = new Map();
 let preferCourse = new Map();
 let randomStudentName = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
 let student = new Student(-1, randomStudentName, courseStatus, preferCourse);
-initial.initilization(student, courseStatus, preferCourse);
+initial.initilization(student);
 
 
 let term = "Fall";
