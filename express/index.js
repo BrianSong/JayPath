@@ -114,7 +114,7 @@ app.get("/api/:field/courses1", (req, res) => {
             l.splice(0, 0, dummy);
         }
     }
-    store_schedule(student, JSON.stringify(rslt[0]));
+    store_schedule.store(student, JSON.stringify(rslt[0]));
     res.send(rslt[0]);
 });
 
@@ -162,7 +162,7 @@ app.get("/api/:field/courses2", (req, res) => {
         }
     }
     console.log(rslt[1]);
-    store_schedule(student, JSON.stringify(rslt[0]));
+    store_schedule.store(student, JSON.stringify(rslt[0]));
     res.send(rslt[1]);
 });
 
@@ -211,7 +211,7 @@ app.get("/api/:field/courses3", (req, res) => {
     }
 
     console.log(rslt[2]);
-    store_schedule(student, JSON.stringify(rslt[0]));
+    store_schedule.store(student, JSON.stringify(rslt[0]));
     res.send(rslt[2]);
 });
 
