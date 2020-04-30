@@ -228,7 +228,7 @@ app.post("/api/courses_prioritized", (req, res) => {
                 if (node_status.get(k) == 0) {
                     continue;
                 }
-                if (user_semester[0].get_status(k) == 1){
+                if (user_semester[0].get_status.get(k) == 1){
                     continue;
                 }
                 let course = k;

@@ -37,8 +37,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/express/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+            <state relative-caret-position="378">
+              <caret line="232" column="17" lean-forward="true" selection-start-line="232" selection-start-column="17" selection-end-line="232" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/express/initial.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="728" column="29" selection-start-line="728" selection-start-column="29" selection-end-line="728" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -368,11 +377,18 @@
       <option name="project" value="LOCAL" />
       <updated>1588084142083</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="debugeed display error">
+      <created>1588264371766</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1588264371766</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61225000" />
+    <option name="totallyTimeSpent" value="61872000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -387,7 +403,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -400,7 +416,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.43435755" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30307263" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.21927375" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -465,7 +481,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/client" />
     </ignored-roots>
-    <MESSAGE value="??" />
     <MESSAGE value="Added focus Area API" />
     <MESSAGE value="Re-initialize response array for every get request" />
     <MESSAGE value="Added course list in NLP page" />
@@ -490,7 +505,8 @@
     <MESSAGE value="modified backend api..." />
     <MESSAGE value="removed debugging messages" />
     <MESSAGE value="debugged api output" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugged api output" />
+    <MESSAGE value="debugeed display error" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugeed display error" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -575,13 +591,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/CB.js" />
     <entry file="file://$PROJECT_DIR$/client/src/IS.js" />
-    <entry file="file://$PROJECT_DIR$/express/initial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="437" column="20" selection-start-line="437" selection-start-column="17" selection-end-line="437" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/serviceWorker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-969">
@@ -631,10 +640,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/express/initial.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="728" column="29" selection-start-line="728" selection-start-column="29" selection-end-line="728" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/express/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+        <state relative-caret-position="378">
+          <caret line="232" column="17" lean-forward="true" selection-start-line="232" selection-start-column="17" selection-end-line="232" selection-end-column="17" />
         </state>
       </provider>
     </entry>
