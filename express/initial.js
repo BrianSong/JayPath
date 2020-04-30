@@ -3,7 +3,7 @@ var Course = require('./model/Course');
 module.exports = {
     initilization: function initilization(student) {
         // open the database
-        let db = new sqlite3.Database("../db/JayPath.db", err => {
+        let db = new sqlite3.Database("db/JayPath.db", err => {
             if (err) {
                 console.error(err.message);
             }
