@@ -33,3 +33,11 @@ User is given more details on a course once his/her cursor hovers on that course
 - Front-end adds in an additional question page and a divider section to navigate to different recommended schedules. 
 - Back-end algorithm uses a weighting scheme to limit the computational complexity.
 
+## Retrospective
+(On iteration 5)
+We encountered multiple strange issues when attempting to deploy our React front-end to Heroku. On one person's machine, the React folder could not be pushed to the Heroku master branch, on another person's machine the deployment was successful yet Heroku reported an application failure. We spent a decent amount of time and it seemed that the issue was caused by an unsupported React Library. There seemed to be no work-around for to avoid usage of that library, so we went ahead and deployed our front-end application on AWS Amplify. 
+
+With network delay (after back-end deployment) and an enhanced back-end algorithm, we realized that the user may not be able to view the schedule recommendations right away. Hence we had to put in an additional loading feature. In general, deployment process involved many issues we failed to foresee, so it seems to be a good idea to deploy ealier on our next project. 
+
+(Overall retrospective)
+Looking back at our initial design, our project idea changed a lot along the way. There were questions that were necessary to add in and features that couldn't be realized due to the sheer amount of work required from databases. 
