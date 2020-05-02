@@ -103,7 +103,7 @@ app.get("/api/:field/courses1", (req, res) => {
     }
 
     // add dummy courses at the begging of the current path for display purpose
-    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+    while (curr_path.length < 24 && curr_path.length > 0) { curr_path.splice(0, 0, dummy); }
 
     store_schedule.store(student, JSON.stringify(curr_path));
     res.send(curr_path);
@@ -144,7 +144,7 @@ app.get("/api/:field/courses2", (req, res) => {
     }
 
     // add dummy courses at the begging of the current path for display purpose
-    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+    while (curr_path.length < 24 && curr_path.length > 0) { curr_path.splice(0, 0, dummy); }
 
     store_schedule.store(student, JSON.stringify(curr_path));
     res.send(curr_path);
@@ -185,7 +185,7 @@ app.get("/api/:field/courses3", (req, res) => {
     }
 
     // add dummy courses at the begging of the current path for display purpose
-    while (curr_path.length < 24) { curr_path.splice(0, 0, dummy); }
+    while (curr_path.length < 24 && curr_path.length > 0) { curr_path.splice(0, 0, dummy); }
 
     store_schedule.store(student, JSON.stringify(curr_path));
     res.send(curr_path);
