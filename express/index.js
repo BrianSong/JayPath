@@ -35,7 +35,6 @@ let semesters_left = 8;
 // The frontend will sent req to this URL for information of courses so that the user can select which course they have taken.
 app.get("/api/courses", (req, res) => {
     // Open the database
-    console.log(student.id);
     let db = new sqlite3.Database("db/JayPath.db", err => {
         if (err) {
             console.error(err.message);
