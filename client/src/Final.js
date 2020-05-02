@@ -34,8 +34,8 @@ class Final extends Component {
     path # = this.props.valueFromParent2 */
     callAPI() {
         this.setState({loading: true})
-        console.log(''.concat('https://blooming-island-92131.herokuapp.com/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
-        fetch(''.concat('https://blooming-island-92131.herokuapp.com/api', this.props.valueFromParent,'/courses',this.props.numSchedule)) 
+        console.log(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule));
+        fetch(''.concat('http://localhost:5000/api', this.props.valueFromParent,'/courses',this.props.numSchedule)) 
             .then(res => res.json())
             .then(res => this.setState({schedule: res}))
             .then(() => this.setState({ loading: false }))
@@ -57,7 +57,7 @@ class Final extends Component {
         document.getElementById('a'.concat(this.props.numSchedule)).className = "active1_a";
     }
 
-      
+
     /* If empty schedule returned, redirect to the failing page*/
     renderRedirect = () => {
         if (this.state.schedule.length == 0) {
@@ -121,21 +121,21 @@ class Final extends Component {
 
                 // if both semesters in the column are completed
                 if (i * 2 + 1 < this.state.semesters) {
-                    list0[i] = {details1: img0, details2: img0, 
+                    list0[i] = {details1: img0, details2: img0,
                     semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                     year: year_hash[i]};
                     console.log(list0[i].details1);
                 } else if (i * 2 + 1 == this.state.semesters){ // 1/2 completed
-                    list0[i] = {details1: img0, details2: temp2, 
+                    list0[i] = {details1: img0, details2: temp2,
                         semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                         year: year_hash[i]};
                         console.log(list0[i].details1);
                 } else { // both display course recommendation as neither is completed
-                    list0[i] = {details1: temp1, details2: temp2, 
+                    list0[i] = {details1: temp1, details2: temp2,
                         semester1: 'Semester '.concat(i * 2 + 1), semester2: 'Semester '.concat(i * 2 + 2),
                         year: year_hash[i]};
                 }
-                
+
             }
 
             // maps list0 into html
@@ -155,7 +155,7 @@ class Final extends Component {
 
 
 
-            
+
             return (
                 <div class="wrapper">
                     <div class = "center111">
@@ -165,15 +165,15 @@ class Final extends Component {
                                 <h>Jaypath</h>
                                 <span>{this.state.numSchedule}</span>
                             </div>
-                            <ul></ul> 
+                            <ul></ul>
                             <ul>
                             <li id="li1"><a id="a1" href="/final1">Path 1</a></li>
                             <li id="li2"><a id="a2" href="/final2">Path 2</a></li>
                             <li id="li3"><a id="a3" href="/final3">Path 3</a></li>
-            
+
                             </ul>
                         </header>
-                        
+
                         <div class="message">
                             <div class="small_icon_container2">
                                 <img src={Core} class="small_icon"/>: core requirement
@@ -195,31 +195,31 @@ class Final extends Component {
                             </div>
                         </div>
 
-                    
-                        
+
+
                         <div class="container2">
                             {!this.state.loading && list}
                         </div>
 
-                        <div>{this.state.loading && 
+                        <div>{this.state.loading &&
                         <div style={{alignItems:"center"}}>
                             <div class = "loading_text">Please wait while we are generating your path.</div>
-                            <img src = {loader} class = "loader" /> 
-                            </div> 
+                            <img src = {loader} class = "loader" />
+                            </div>
                             } </div>
-                    
+
 
                     <div class="link_container">
                         <Link to="/" style={{ textDecoration: 'none'}}>
                             <button class="button_r">
                                 <div class="icon_container"><i class="iconfont">&#xe7f9;</i></div>
                             </button>
-                            
+
                         </Link>
                     </div>
                 </div>
                 </div>
-                
+
             );
     }
 }
