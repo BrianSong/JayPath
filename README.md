@@ -1,6 +1,6 @@
 # 2020-spring-group-JayPath
 
-Group project
+This application has been deployed online: https://master.d2w70sft0n5zlh.amplifyapp.com/
 
 ## Install Node and NPM
 
