@@ -6,24 +6,18 @@ This application has been deployed online: https://master.d2w70sft0n5zlh.amplify
 
 ## Problem Statement
 
-> Write a few sentences that describes the problem you are trying to solve. In other words, justify why this software project is needed.
-
 Choosing what courses to take for a coming semester and not knowing how to plan ahead for successful graduation can be stressful. The problem is further complicated by all kinds of restrictions on course scheduling, including considering different prerequisites and spring/fall offerings. Students need a personalized course planning system recommending which courses to take each semester that is tailored to his/her academic interests.
 
 
 ## Potential Clients
-> Who are affected by this problem (and would benefit from the proposed solution)? I.e. the potential users of the software you are going to build.
 
 Undergraduate students at Johns Hopkins University or newly enrolled students who are planning on completing a bachelor degree in computer science and want to explore various academic interests.
 
 ## Proposed Solution
-> Write a few sentences that describes how a software solution will solve the problem described above.
 
 A web-based application will be used to solve this problem. Our application takes inputs from users (e.g., major, year of study, courses already taken, areas of focus, expected graduation year) and aligns with the university’s graduation requirement and course offerings and information, and then it will use our built-in intelligence algorithm to find course schedules that fit best to the user's need and display each through a calendar view.
 
 ## Functional Requirements
-> List the (functional) requirements that software needs to have in order to solve the problem stated above. It is useful to write the requirements in form of **User Stories** and group them into those that are essential (must have), and those which are non-essential (but nice to have).
-
 
 ### Must have
 As a CS student, I want to specify my areas of focus/preference in my major, so that the relevant courses will be prioritized.
@@ -49,14 +43,12 @@ As a student, when getting course recommendations, I want to be able to rearrang
 As a student, I want to be able to import and extract course schedules as files so that I can easily share my schedule with my friends.
 
 ## Software Architecture
-> Will this be a Web/desktop/mobile (all, or some other kind of) application? Would it conform to the Client-Server software architecture?
 
 This will be a web application, and it would conform to the Client-Server software architecture. The client (student) sends his/her background information (major/minor, courses taken, focus areas) through the web interface (front end) to the server and the server sends responses (recommended course plans) to the client (student) based on information stored in the database (graduation requirement, course prerequisites, course availability and course history). 
 
 # OO Design
 
 ![](docs/assets/oose_ood_update.jpg)
-
 
 # Wireframe
 The first and second page will remain the same as Iteration 2, where the user is first asked to input the courses he/she has taken.
@@ -74,30 +66,6 @@ The user clicks on one of the focus areas and is then taken to the final recomme
 ![](assets/it5_42.jpg)
 User is given more details on a course once his/her cursor hovers on that course. In the event that there does NOT exist a schedule to allow the user to graduate in 4 years, the user is taken to the following page. 
 ![](assets/it4_3.JPG)
-
-
-## Iteration Backlog
-- As a student , I want to see multiple recommended schedules so that I can choose one based on my personal preferences. 
-- As a student, I want my schedule to contain more courses from my focus area so that I take the most value out of my time in college. 
-- As a student, I want to view the application on different devices with the same level of comfort. 
-- As a student, I would like to see the focus areas each of my recommended class belongs to, so that I get a better idea of what I will learn. 
-- NICE TO HAVE: as a student, I want to input my preferred courses so that my schedule can fit my preferences better. 
-
-## Tasks
-- Front-end works towards responsive design. 
-- Front-end adds in an additional question page and a divider section to navigate to different recommended schedules. 
-- Back-end algorithm uses a weighting scheme to limit the computational complexity.
-
-## Retrospective
-(On iteration 5)
-We encountered multiple strange issues when attempting to deploy our React front-end to Heroku. On one person's machine, the React folder could not be pushed to the Heroku master branch, on another person's machine the deployment was successful yet Heroku reported an application failure. We spent a decent amount of time and it seemed that the issue was caused by an unsupported React Library. There seemed to be no work-around for to avoid usage of that library, so we went ahead and deployed our front-end application on AWS Amplify. 
-
-With network delay (after back-end deployment) and an enhanced back-end algorithm, we realized that the user may not be able to view the schedule recommendations right away. Hence we had to put in an additional loading feature. In general, deployment process involved many issues we failed to foresee, so it seems to be a good idea to deploy ealier on our next project. 
-
-(Overall retrospective)
-Looking back at our initial design, our project idea changed a lot along the way. There were questions that were necessary to add in and features that couldn't be realized due to the sheer amount of work required from databases.  
-In particular, looking back at our first original project proposal, we finished all of our MUST-HAVE and some of our NICE-TO-HAVE. However, there still exists some NICE-TO-HAVE that we have no time to implement. Like the authetication and admin feature. But those are not very important to our project and we think we did a good job overall.
-If we can do it again, we think we will plan better in each iteration and deploy our application earlier.
 
 ## Install Node and NPM
 
