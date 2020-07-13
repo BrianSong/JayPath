@@ -20,27 +20,27 @@ A web-based application will be used to solve this problem. Our application take
 ## Functional Requirements
 
 ### Must have
-As a CS student, I want to specify my areas of focus/preference in my major, so that the relevant courses will be prioritized.
-As a student, I want to input the courses I have taken so that the application knows my current progress.
-As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.
-As a student, I want to receive a schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.
-As a student, I want to see multiple recommended schedules so that I get the flexibility to choose between them.
-As a student, I want to view the recommended schedule broken into 8 semesters so that I understand the sequence to be followed.
-As a student, I want to get my course recommendations displayed in calendar view to get better/more convenient user experience.
-As a student, I want to view schedules planned out for different focus areas, so that I can compare, contrast and re-consider the focus area that fits me the most.
-As a student, I want to see my progress in meeting the degree requirements, so that I know my current position in the entire plan.  
+As a CS student, I want to specify my areas of focus/preference in my major, so that the relevant courses will be prioritized.  
+As a student, I want to input the courses I have taken so that the application knows my current progress.  
+As a student, I want to receive a schedule that fits into the school’s spring/fall course offerings, so that the schedule is correct and practical.  
+As a student, I want to receive a schedule that doesn’t contain time conflicts, so that I can directly use it as my plan.  
+As a student, I want to see multiple recommended schedules so that I get the flexibility to choose between them.  
+As a student, I want to view the recommended schedule broken into 8 semesters so that I understand the sequence to be followed.  
+As a student, I want to get my course recommendations displayed in calendar view to get better/more convenient user experience.  
+As a student, I want to view schedules planned out for different focus areas, so that I can compare, contrast and re-consider the focus area that fits me the most.  
+As a student, I want to see my progress in meeting the degree requirements, so that I know my current position in the entire plan.    
 
 ### Nice to have
-As a student, I want to prioritize schedules with the greatest flexibility, so that I can safely graduate even if unexpected circumstances arise over my last semester.
-As a student, I want to prioritize certain courses that I find particularly interesting in my final recommended schedules.
-As a student who has taken many relevant courses, I want to get warnings on courses I might have missed inputting, so that my input is more accurate.
-As a student, I want to see the degree requirements themselves in this application, so that I can be confident with the plans.
-As a student, I want to log in/out of this application, so that I can save the previously input information.
-As an admin, I want to monitor major graduation requirements, so that the software can modify schedules accordingly.
-As an admin, I want to add/delete courses based on school offerings so that students can obtain correct schedules.  
-As a student, I want to open a mode called "multiple major mode" so that I can get my recommendation if I decide to take the multiple major option.  
-As a student, when getting course recommendations, I want to be able to rearrange/modify the recommended schedule in the application so that I can customize it based on my own preferences.  
-As a student, I want to be able to import and extract course schedules as files so that I can easily share my schedule with my friends.
+As a student, I want to prioritize schedules with the greatest flexibility, so that I can safely graduate even if unexpected circumstances arise over my last semester.  
+As a student, I want to prioritize certain courses that I find particularly interesting in my final recommended schedules.  
+As a student who has taken many relevant courses, I want to get warnings on courses I might have missed inputting, so that my input is more accurate.  
+As a student, I want to see the degree requirements themselves in this application, so that I can be confident with the plans.  
+As a student, I want to log in/out of this application, so that I can save the previously input information.  
+As an admin, I want to monitor major graduation requirements, so that the software can modify schedules accordingly.  
+As an admin, I want to add/delete courses based on school offerings so that students can obtain correct schedules.      
+As a student, I want to open a mode called "multiple major mode" so that I can get my recommendation if I decide to take the multiple major option.    
+As a student, when getting course recommendations, I want to be able to rearrange/modify the recommended schedule in the application so that I can customize it based on my own preferences.    
+As a student, I want to be able to import and extract course schedules as files so that I can easily share my schedule with my friends.  
 
 ## Software Architecture
 
